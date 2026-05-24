@@ -1,0 +1,41 @@
+{
+  "version": "aomi-git-stage-v1",
+  "platform": "community",
+  "app": {
+    "slug": "community-smoke-20260524",
+    "display_name": "Community Smoke 20260524",
+    "config_path": "Cargo.toml"
+  },
+  "source": {
+    "git_root": "/private/tmp/aomi-launch-smoke-20260524/community-smoke-20260524",
+    "source_path": ".",
+    "branch": "main",
+    "commit": "2aa2baa247e324b66d6c274fe7dd42370260e048",
+    "tree": "51b8423f92514a7b7a3adb169ee72f3f640fea33",
+    "digest": "sha256:7da2c5174cd946fb97b07d5fffcacc4a38b82fd614f8389bc1b116d56103eb4f",
+    "dirty": false
+  },
+  "publish": {
+    "source_repo": "aomi-labs/community-apps",
+    "app_release_tag": "latest",
+    "publish_branch": "publish",
+    "app_path": "apps/community-smoke-20260524",
+    "expected_release_tag": "apps-community-smoke-20260524-2aa2baa247e3",
+    "release_tag_convention": "apps-{app_slug}-{short_commit}",
+    "visibility": "public",
+    "review_policy": "community-review",
+    "idempotency_key": "sha256:eb37e3969bf3f5e6e929c979e6d589dbbbb81da2823b258fd7ddf9e935435828"
+  },
+  "files": [
+    {
+      "path": "Cargo.toml",
+      "sha256": "sha256:beab456ed2b37b2353fffc2b7db26f4c2fd669ace74a35a7c349200dea84365c",
+      "bytes": 246
+    },
+    {
+      "path": "src/lib.rs",
+      "sha256": "sha256:fbc847eea512306fbb50fb466b35081db20e94309bcd4fe57ff26fd3b793402b",
+      "bytes": 914
+    }
+  ]
+}
