@@ -7,20 +7,20 @@
     "config_path": "Cargo.toml"
   },
   "source": {
-    "git_root": "https://github.com/casterkay/Agentex",
-    "source_path": "aomi/agentex-app",
-    "branch": "main",
-    "commit": "fdc4402e8bf5427a3f37322bd6befddecb1ffd1c",
-    "tree": "919f5d687af07550f9fdd9701739c67a3351c165",
-    "digest": "sha256:9abae35bd3b87afa0ceada8f856147879d013c3a94cfee0b25925eb826b8ca7c",
-    "dirty": true
+    "git_root": "https://github.com/casterkay/community-apps",
+    "source_path": "apps/agentex",
+    "branch": "publish-agentex-app",
+    "commit": "9c629a9d808e2211bee48922d24c6c6ee114a22d",
+    "tree": "d46a9fa63f4974e7234a6bb240cc3e9d09f2c942",
+    "digest": "sha256:bf2138930755ffa3d5257985770500468d39bb4e0d4bd43034d42859fa9a8924",
+    "dirty": false
   },
   "publish": {
     "source_repo": "aomi-labs/community-apps",
     "app_release_tag": "latest",
     "publish_branch": "publish",
     "app_path": "apps/agentex",
-    "expected_release_tag": "apps-agentex-fdc4402e8bf5",
+    "expected_release_tag": "apps-agentex-9c629a9d808e",
     "release_tag_convention": "apps-{app_slug}-{short_commit}",
     "visibility": "public",
     "review_policy": "community-review",
@@ -34,8 +34,8 @@
     },
     {
       "path": "src/client.rs",
-      "sha256": "sha256:d79f35625b099c844f9e578d245f60461fbe0d2586475df698cb58b1bc797cd9",
-      "bytes": 11513
+      "sha256": "sha256:e2cbe35ca6bbc2ff05e6cdba7a8d563d9941e7e04fe61cbd2cfbdbb5590f3d15",
+      "bytes": 11218
     },
     {
       "path": "src/lib.rs",
@@ -44,8 +44,8 @@
     },
     {
       "path": "src/tool.rs",
-      "sha256": "sha256:761c2b289a023ddacb8be6c04f3db0b2762617c210d148e041c5b78f2be70a9e",
-      "bytes": 18623
+      "sha256": "sha256:30f62ee9b582aae53f57128dd695e26d484817559b223942e566835d27816628",
+      "bytes": 22233
     }
   ]
 }

@@ -290,7 +290,6 @@ mod tests {
 
     #[test]
     fn authenticated_host_identity_headers_include_signature() {
-        let previous_secret = std::env::var("AGENTEX_HOST_IDENTITY_SECRET").ok();
         std::env::set_var("AGENTEX_HOST_IDENTITY_SECRET", "host-secret");
 
         let headers = build_authenticated_headers(
@@ -311,11 +310,5 @@ mod tests {
         assert_eq!(headers.get("x-agentex-agent-registry"), Some(&"eip155:8453:0xregistry".to_string()));
         assert_eq!(headers.get("x-agentex-agent-id"), Some(&"1".to_string()));
         assert!(headers.contains_key("x-agentex-identity-signature"));
-
-        if let Some(secret) = previous_secret {
-            std::env::set_var("AGENTEX_HOST_IDENTITY_SECRET", secret);
-        } else {
-            std::env::remove_var("AGENTEX_HOST_IDENTITY_SECRET");
-        }
     }
 }

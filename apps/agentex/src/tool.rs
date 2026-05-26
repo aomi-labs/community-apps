@@ -6,6 +6,28 @@ use serde_json::{json, Value};
 use crate::client::{host_handoff, AgentexApp, AuthenticatedHostIdentity};
 
 const APP_NAME: &str = "agentex";
+const AGENT_REGISTRY_PATHS: &[&[&str]] = &[
+    &["agent", "agentRegistry"],
+    &["agent", "agent_registry"],
+    &["identity", "agentRegistry"],
+    &["identity", "agent_registry"],
+    &["agentRegistry"],
+    &["agent_registry"],
+];
+const AGENT_ID_PATHS: &[&[&str]] = &[
+    &["agent", "agentId"],
+    &["agent", "agent_id"],
+    &["identity", "agentId"],
+    &["identity", "agent_id"],
+    &["agentId"],
+    &["agent_id"],
+];
+const THREAD_ID_PATHS: &[&[&str]] = &[
+    &["aomi", "threadId"],
+    &["aomi", "thread_id"],
+    &["threadId"],
+    &["thread_id"],
+];
 
 #[derive(Debug, Clone, Deserialize, PartialEq, Eq, Serialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
@@ -180,6 +202,9 @@ pub struct RecordExperienceFeedbackArgs {
     /// Optional concise buyer note.
     #[serde(default)]
     pub note: Option<String>,
+    /// Explicit confirmation required before recording public feedback.
+    #[serde(default)]
+    pub confirm: bool,
 }
 
 macro_rules! service_tool {
@@ -192,7 +217,11 @@ macro_rules! service_tool {
             const NAME: &'static str = $name;
             const DESCRIPTION: &'static str = $description;
 
-            fn run(app: &AgentexApp, args: Self::Args, _ctx: DynToolCallCtx) -> Result<Value, String> {
+            fn run(
+                app: &AgentexApp,
+                args: Self::Args,
+                _ctx: DynToolCallCtx,
+            ) -> Result<Value, String> {
                 app.post_tool(Self::NAME, &args)
             }
         }
@@ -247,7 +276,11 @@ impl DynAomiTool for PrepareExperienceSale {
     fn run(app: &AgentexApp, args: Self::Args, ctx: DynToolCallCtx) -> Result<Value, String> {
         let args = PrepareExperienceSaleArgs {
             trade_context: normalize_trade_context(args.trade_context, &ctx)?,
-            seller_agent: Some(resolve_host_agent(args.seller_agent.as_ref(), "seller_agent", &ctx)?),
+            seller_agent: Some(resolve_host_agent(
+                args.seller_agent.as_ref(),
+                "seller_agent",
+                &ctx,
+            )?),
             price_amount: args.price_amount,
             payment_asset: args.payment_asset,
             out_dir: args.out_dir,
@@ -269,7 +302,11 @@ impl DynAomiTool for PublishExperienceSale {
     fn run(app: &AgentexApp, args: Self::Args, ctx: DynToolCallCtx) -> Result<Value, String> {
         let args = PublishExperienceSaleArgs {
             trade_context: normalize_trade_context(args.trade_context, &ctx)?,
-            seller_agent: Some(resolve_host_agent(args.seller_agent.as_ref(), "seller_agent", &ctx)?),
+            seller_agent: Some(resolve_host_agent(
+                args.seller_agent.as_ref(),
+                "seller_agent",
+                &ctx,
+            )?),
             key: args.key,
             decoder_id: args.decoder_id,
             seller_nonce: args.seller_nonce,
@@ -308,7 +345,11 @@ impl DynAomiTool for PurchaseExperienceAccess {
     fn run(app: &AgentexApp, args: Self::Args, ctx: DynToolCallCtx) -> Result<Value, String> {
         let args = PurchaseExperienceAccessArgs {
             listing_path: args.listing_path,
-            buyer_agent: Some(resolve_host_agent(args.buyer_agent.as_ref(), "buyer_agent", &ctx)?),
+            buyer_agent: Some(resolve_host_agent(
+                args.buyer_agent.as_ref(),
+                "buyer_agent",
+                &ctx,
+            )?),
             filecoin_pay_reference: args.filecoin_pay_reference,
             escrow_id: args.escrow_id,
             key_envelope: args.key_envelope,
@@ -332,20 +373,31 @@ impl DynAomiTool for VerifyAndStoreExperience {
     const DESCRIPTION: &'static str =
         "Verify decrypted content and store it in Agentex buyer state after confirmation.";
 
-    fn run(app: &AgentexApp, args: Self::Args, _ctx: DynToolCallCtx) -> Result<Value, String> {
+    fn run(app: &AgentexApp, args: Self::Args, ctx: DynToolCallCtx) -> Result<Value, String> {
         if !args.confirm {
             return Ok(host_handoff(Self::NAME, json!(args)));
         }
-        app.post_tool(Self::NAME, &args)
+        let host_identity = authenticated_host_identity(&ctx, true)?;
+        app.post_tool_as_host(Self::NAME, &args, &host_identity)
     }
 }
 
-service_tool!(
-    RecordExperienceFeedback,
-    RecordExperienceFeedbackArgs,
-    "record_experience_feedback",
-    "Record buyer feedback after verified experience delivery."
-);
+pub struct RecordExperienceFeedback;
+
+impl DynAomiTool for RecordExperienceFeedback {
+    type App = AgentexApp;
+    type Args = RecordExperienceFeedbackArgs;
+    const NAME: &'static str = "record_experience_feedback";
+    const DESCRIPTION: &'static str = "Record buyer feedback after verified experience delivery.";
+
+    fn run(app: &AgentexApp, args: Self::Args, ctx: DynToolCallCtx) -> Result<Value, String> {
+        if !args.confirm {
+            return Ok(host_handoff(Self::NAME, json!(args)));
+        }
+        let host_identity = authenticated_host_identity(&ctx, true)?;
+        app.post_tool_as_host(Self::NAME, &args, &host_identity)
+    }
+}
 
 fn normalize_trade_context(
     mut trade_context: AomiTradeContext,
@@ -371,8 +423,15 @@ fn resolve_host_agent(
     Ok(host)
 }
 
-fn authenticated_host_identity(ctx: &DynToolCallCtx, require_agent: bool) -> Result<AuthenticatedHostIdentity, String> {
-    let agent = if require_agent { Some(host_agent(ctx)?) } else { optional_host_agent(ctx) };
+fn authenticated_host_identity(
+    ctx: &DynToolCallCtx,
+    require_agent: bool,
+) -> Result<AuthenticatedHostIdentity, String> {
+    let agent = if require_agent {
+        Some(host_agent(ctx)?)
+    } else {
+        optional_host_agent(ctx)
+    };
     Ok(AuthenticatedHostIdentity {
         session_id: ctx.session_id.clone(),
         thread_id: host_thread_id(ctx),
@@ -382,30 +441,10 @@ fn authenticated_host_identity(ctx: &DynToolCallCtx, require_agent: bool) -> Res
 }
 
 fn host_agent(ctx: &DynToolCallCtx) -> Result<AgentRef, String> {
-    let agent_registry = attribute_string_any(
-        ctx,
-        &[
-            &["agent", "agentRegistry"],
-            &["agent", "agent_registry"],
-            &["identity", "agentRegistry"],
-            &["identity", "agent_registry"],
-            &["agentRegistry"],
-            &["agent_registry"],
-        ],
-    )
-    .ok_or_else(|| "host session identity missing agent registry".to_string())?;
-    let agent_id = attribute_string_any(
-        ctx,
-        &[
-            &["agent", "agentId"],
-            &["agent", "agent_id"],
-            &["identity", "agentId"],
-            &["identity", "agent_id"],
-            &["agentId"],
-            &["agent_id"],
-        ],
-    )
-    .ok_or_else(|| "host session identity missing agent id".to_string())?;
+    let agent_registry = attribute_string_any(ctx, AGENT_REGISTRY_PATHS)
+        .ok_or_else(|| "host session identity missing agent registry".to_string())?;
+    let agent_id = attribute_string_any(ctx, AGENT_ID_PATHS)
+        .ok_or_else(|| "host session identity missing agent id".to_string())?;
 
     Ok(AgentRef {
         agent_registry,
@@ -414,28 +453,8 @@ fn host_agent(ctx: &DynToolCallCtx) -> Result<AgentRef, String> {
 }
 
 fn optional_host_agent(ctx: &DynToolCallCtx) -> Option<AgentRef> {
-    let agent_registry = attribute_string_any(
-        ctx,
-        &[
-            &["agent", "agentRegistry"],
-            &["agent", "agent_registry"],
-            &["identity", "agentRegistry"],
-            &["identity", "agent_registry"],
-            &["agentRegistry"],
-            &["agent_registry"],
-        ],
-    )?;
-    let agent_id = attribute_string_any(
-        ctx,
-        &[
-            &["agent", "agentId"],
-            &["agent", "agent_id"],
-            &["identity", "agentId"],
-            &["identity", "agent_id"],
-            &["agentId"],
-            &["agent_id"],
-        ],
-    )?;
+    let agent_registry = attribute_string_any(ctx, AGENT_REGISTRY_PATHS)?;
+    let agent_id = attribute_string_any(ctx, AGENT_ID_PATHS)?;
     Some(AgentRef {
         agent_registry,
         agent_id,
@@ -443,15 +462,7 @@ fn optional_host_agent(ctx: &DynToolCallCtx) -> Option<AgentRef> {
 }
 
 fn host_thread_id(ctx: &DynToolCallCtx) -> Option<String> {
-    attribute_string_any(
-        ctx,
-        &[
-            &["aomi", "threadId"],
-            &["aomi", "thread_id"],
-            &["threadId"],
-            &["thread_id"],
-        ],
-    )
+    attribute_string_any(ctx, THREAD_ID_PATHS)
 }
 
 fn attribute_string_any(ctx: &DynToolCallCtx, paths: &[&[&str]]) -> Option<String> {
@@ -463,6 +474,8 @@ mod tests {
     use super::*;
     use aomi_sdk::testing::TestCtxBuilder;
     use serde_json::json;
+    use std::io::{Read, Write};
+    use std::net::TcpListener;
 
     fn host_ctx(tool_name: &str) -> DynToolCallCtx {
         TestCtxBuilder::new(tool_name)
@@ -524,9 +537,86 @@ mod tests {
     #[test]
     fn resolves_host_agent_identity_when_arg_is_missing() {
         let ctx = host_ctx("purchase_experience_access");
-        let resolved = resolve_host_agent(None, "buyer_agent", &ctx).expect("host identity should be available");
+        let resolved = resolve_host_agent(None, "buyer_agent", &ctx)
+            .expect("host identity should be available");
 
         assert_eq!(resolved.agent_registry, "eip155:8453:0xhost");
         assert_eq!(resolved.agent_id, "42");
+    }
+
+    #[test]
+    fn verified_store_posts_with_host_identity() {
+        let (base_url, request) = capture_one_request();
+        std::env::set_var("AGENTEX_HOST_IDENTITY_SECRET", "host-secret");
+
+        let app = AgentexApp::new(base_url);
+        VerifyAndStoreExperience::run(
+            &app,
+            VerifyAndStoreExperienceArgs {
+                purchase_receipt_path: "demo/purchase.json".to_string(),
+                key: "experience-key".to_string(),
+                store_dir: None,
+                confirm: true,
+            },
+            host_ctx("verify_and_store_experience"),
+        )
+        .expect("confirmed store should post to Agentex service");
+
+        let request = request.join().expect("request capture should complete");
+        assert!(request.contains("POST /tool/verify_and_store_experience "));
+        assert!(request.contains("x-agentex-session-id: host-session"));
+        assert!(request.contains("x-agentex-thread-id: host-thread"));
+        assert!(request.contains("x-agentex-agent-registry: eip155:8453:0xhost"));
+        assert!(request.contains("x-agentex-agent-id: 42"));
+        assert!(request.contains("x-agentex-identity-signature: "));
+    }
+
+    #[test]
+    fn feedback_without_confirmation_returns_host_handoff() {
+        let app = AgentexApp::new("http://127.0.0.1:1");
+        let result = RecordExperienceFeedback::run(
+            &app,
+            RecordExperienceFeedbackArgs {
+                purchase_receipt_path: "demo/purchase.json".to_string(),
+                score: 0.8,
+                note: Some("useful".to_string()),
+                confirm: false,
+            },
+            host_ctx("record_experience_feedback"),
+        )
+        .expect("unconfirmed feedback should not call service");
+
+        assert_eq!(result["status"], "host_action_required");
+        assert_eq!(
+            result["SYSTEM_NEXT_ACTION"]["type"],
+            "record_experience_feedback"
+        );
+        assert_eq!(
+            result["SYSTEM_NEXT_ACTION"]["preserve_args"]["confirm"],
+            false
+        );
+    }
+
+    fn capture_one_request() -> (String, std::thread::JoinHandle<String>) {
+        let listener = TcpListener::bind("127.0.0.1:0").expect("test server should bind");
+        let addr = listener
+            .local_addr()
+            .expect("test server should expose address");
+        let handle = std::thread::spawn(move || {
+            let (mut stream, _) = listener
+                .accept()
+                .expect("test server should accept request");
+            let mut buffer = [0_u8; 8192];
+            let bytes = stream
+                .read(&mut buffer)
+                .expect("test server should read request");
+            stream
+                .write_all(
+                    b"HTTP/1.1 200 OK\r\ncontent-type: application/json\r\ncontent-length: 12\r\n\r\n{\"ok\":true}\n",
+                )
+                .expect("test server should write response");
+            String::from_utf8_lossy(&buffer[..bytes]).to_string()
+        });
+        (format!("http://{addr}"), handle)
     }
 }
