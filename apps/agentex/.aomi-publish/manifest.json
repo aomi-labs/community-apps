@@ -10,9 +10,9 @@
     "git_root": "https://github.com/casterkay/community-apps",
     "source_path": "apps/agentex",
     "branch": "publish-agentex-app",
-    "commit": "4ef329f35540d16bd966761047f712049eee977c",
-    "tree": "50df0a592a66f73419726f35942aa9dfd5d5d1bb",
-    "digest": "sha256:bf2138930755ffa3d5257985770500468d39bb4e0d4bd43034d42859fa9a8924",
+    "commit": "d21f3b967075c103ba74d474027e4703360746b8",
+    "tree": "69c051f4e717b7d96759996ef876d868e3ca4350",
+    "digest": "sha256:26bf472f1280669208804f399acf96b30ce813790ffd62bd04118be20824f3d8",
     "dirty": false
   },
   "publish": {
@@ -20,7 +20,7 @@
     "app_release_tag": "latest",
     "publish_branch": "publish",
     "app_path": "apps/agentex",
-    "expected_release_tag": "apps-agentex-4ef329f35540",
+    "expected_release_tag": "apps-agentex-d21f3b967075",
     "release_tag_convention": "apps-{app_slug}-{short_commit}",
     "visibility": "public",
     "review_policy": "community-review",
@@ -29,13 +29,13 @@
   "files": [
     {
       "path": "Cargo.toml",
-      "sha256": "sha256:5e233fc828d2214da3aa005c73076dc4d9d9416c6c82ac4767979eae272559f8",
-      "bytes": 356
+      "sha256": "sha256:186fc9a5807b8c9aad5be75a80c8b9b67ce942f9c4c77bea086e41c49afd8473",
+      "bytes": 364
     },
     {
       "path": "src/client.rs",
-      "sha256": "sha256:e2cbe35ca6bbc2ff05e6cdba7a8d563d9941e7e04fe61cbd2cfbdbb5590f3d15",
-      "bytes": 11218
+      "sha256": "sha256:ee842652577af3978d38213671cd5d617a7ff7d48408b63fcbf0452bd2dafb6c",
+      "bytes": 15817
     },
     {
       "path": "src/lib.rs",
@@ -44,8 +44,8 @@
     },
     {
       "path": "src/tool.rs",
-      "sha256": "sha256:30f62ee9b582aae53f57128dd695e26d484817559b223942e566835d27816628",
-      "bytes": 22233
+      "sha256": "sha256:012d5c03003a60df1d2bc2cfdb9a2b365a4a84e17267313610ced10191227df1",
+      "bytes": 23535
     }
   ]
 }
