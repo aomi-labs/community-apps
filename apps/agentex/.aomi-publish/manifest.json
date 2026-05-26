@@ -1,0 +1,51 @@
+{
+  "version": "aomi-git-stage-v1",
+  "platform": "community",
+  "app": {
+    "slug": "agentex",
+    "display_name": "Agentex",
+    "config_path": "Cargo.toml"
+  },
+  "source": {
+    "git_root": "https://github.com/casterkay/Agentex",
+    "source_path": "aomi/agentex-app",
+    "branch": "main",
+    "commit": "fdc4402e8bf5427a3f37322bd6befddecb1ffd1c",
+    "tree": "919f5d687af07550f9fdd9701739c67a3351c165",
+    "digest": "sha256:9abae35bd3b87afa0ceada8f856147879d013c3a94cfee0b25925eb826b8ca7c",
+    "dirty": true
+  },
+  "publish": {
+    "source_repo": "aomi-labs/community-apps",
+    "app_release_tag": "latest",
+    "publish_branch": "publish",
+    "app_path": "apps/agentex",
+    "expected_release_tag": "apps-agentex-fdc4402e8bf5",
+    "release_tag_convention": "apps-{app_slug}-{short_commit}",
+    "visibility": "public",
+    "review_policy": "community-review",
+    "idempotency_key": "sha256:38c4d00c321592fe88c95fda758261b0be0d532a533bb3f6be2fd9420d03113f"
+  },
+  "files": [
+    {
+      "path": "Cargo.toml",
+      "sha256": "sha256:5e233fc828d2214da3aa005c73076dc4d9d9416c6c82ac4767979eae272559f8",
+      "bytes": 356
+    },
+    {
+      "path": "src/client.rs",
+      "sha256": "sha256:d79f35625b099c844f9e578d245f60461fbe0d2586475df698cb58b1bc797cd9",
+      "bytes": 11513
+    },
+    {
+      "path": "src/lib.rs",
+      "sha256": "sha256:b08560ed02412aa9f3a61049193115967ac8164e1f1363c6ee461b7b0c405f71",
+      "bytes": 1705
+    },
+    {
+      "path": "src/tool.rs",
+      "sha256": "sha256:761c2b289a023ddacb8be6c04f3db0b2762617c210d148e041c5b78f2be70a9e",
+      "bytes": 18623
+    }
+  ]
+}
