@@ -474,8 +474,10 @@ mod tests {
     use super::*;
     use aomi_sdk::testing::TestCtxBuilder;
     use serde_json::json;
+    use std::io::ErrorKind;
     use std::io::{Read, Write};
     use std::net::TcpListener;
+    use std::time::{Duration, Instant};
 
     fn host_ctx(tool_name: &str) -> DynToolCallCtx {
         TestCtxBuilder::new(tool_name)
@@ -547,6 +549,10 @@ mod tests {
     #[test]
     fn verified_store_posts_with_host_identity() {
         let (base_url, request) = capture_one_request();
+        let _env_guard = crate::client::TEST_ENV_LOCK
+            .lock()
+            .expect("env lock should not be poisoned");
+        let previous_secret = std::env::var("AGENTEX_HOST_IDENTITY_SECRET").ok();
         std::env::set_var("AGENTEX_HOST_IDENTITY_SECRET", "host-secret");
 
         let app = AgentexApp::new(base_url);
@@ -562,6 +568,7 @@ mod tests {
         )
         .expect("confirmed store should post to Agentex service");
 
+        restore_secret(previous_secret);
         let request = request.join().expect("request capture should complete");
         assert!(request.contains("POST /tool/verify_and_store_experience "));
         assert!(request.contains("x-agentex-session-id: host-session"));
@@ -599,13 +606,28 @@ mod tests {
 
     fn capture_one_request() -> (String, std::thread::JoinHandle<String>) {
         let listener = TcpListener::bind("127.0.0.1:0").expect("test server should bind");
+        listener
+            .set_nonblocking(true)
+            .expect("test server should support nonblocking accept");
         let addr = listener
             .local_addr()
             .expect("test server should expose address");
         let handle = std::thread::spawn(move || {
-            let (mut stream, _) = listener
-                .accept()
-                .expect("test server should accept request");
+            let deadline = Instant::now() + Duration::from_secs(2);
+            let (mut stream, _) = loop {
+                match listener.accept() {
+                    Ok(connection) => break connection,
+                    Err(error)
+                        if error.kind() == ErrorKind::WouldBlock && Instant::now() < deadline =>
+                    {
+                        std::thread::sleep(Duration::from_millis(10));
+                    }
+                    Err(error) => panic!("test server accept failed: {error}"),
+                }
+            };
+            stream
+                .set_read_timeout(Some(Duration::from_secs(2)))
+                .expect("test stream should support read timeout");
             let mut buffer = [0_u8; 8192];
             let bytes = stream
                 .read(&mut buffer)
@@ -618,5 +640,13 @@ mod tests {
             String::from_utf8_lossy(&buffer[..bytes]).to_string()
         });
         (format!("http://{addr}"), handle)
+    }
+
+    fn restore_secret(previous_secret: Option<String>) {
+        if let Some(secret) = previous_secret {
+            std::env::set_var("AGENTEX_HOST_IDENTITY_SECRET", secret);
+        } else {
+            std::env::remove_var("AGENTEX_HOST_IDENTITY_SECRET");
+        }
     }
 }
