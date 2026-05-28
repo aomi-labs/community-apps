@@ -1,0 +1,103 @@
+{
+  "app": {
+    "name": "gambit",
+    "display_name": "Gambit",
+    "platform": "community",
+    "git": "https://github.com/aomi-labs/community-apps",
+    "branch": null,
+    "public": true,
+    "access_token": null,
+    "server_tags": [
+      "staging"
+    ],
+    "config_path": "aomi.toml",
+    "source_path": "."
+  },
+  "source": {
+    "git_root": "/private/tmp/gambit-source",
+    "source_path": ".",
+    "branch": "main",
+    "commit": "4e7ace64432d539f07edc64f51d7b5ba2eb4272f",
+    "tree": "4df86b5d0bc663f2220252467bb91b7945aea847",
+    "digest": "sha256:bf9548bb2ce5ebceac3cec76387a4c835c6d9ab2a009e0ad20d231a17ecfb3d5",
+    "dirty": false
+  },
+  "platform": {
+    "name": "community",
+    "github_repo": "https://github.com/aomi-labs/community-apps",
+    "resolved_deploy_branch": null
+  },
+  "target": {
+    "branch": "publish",
+    "app_path": "apps/gambit",
+    "release_tag": "apps-gambit-4e7ace64432d",
+    "server_tags": [
+      "staging"
+    ]
+  },
+  "state": {
+    "pushed": false,
+    "deployed": false,
+    "activated": false
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "sha256:5900ccd15ec34cfa09f948f0a7f17268ca47bbf25ac461f16037b4bd526bb06e",
+      "bytes": 7
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "sha256:9657d1ca1346ee1af88e2992a253ecc5e75e06dc7abaf68eadef54b613904c4b",
+      "bytes": 662
+    },
+    {
+      "path": "aomi.toml",
+      "sha256": "sha256:e8fb4b3a65c6828efa0e67db08def209a1d4deec9cdd500e471fb91c7259771c",
+      "bytes": 135
+    },
+    {
+      "path": "src/auth.rs",
+      "sha256": "sha256:e08a4c51f658c58536bcc99150c13357621e7fb9ae5649326d95b6d36dcbe898",
+      "bytes": 862
+    },
+    {
+      "path": "src/client.rs",
+      "sha256": "sha256:0fb9ab1c2664b01323a80c1fdb6ef57f031390834c94e1d1d3e1662ca1f9f091",
+      "bytes": 5608
+    },
+    {
+      "path": "src/lib.rs",
+      "sha256": "sha256:01fd17ff1b3170ff4c390390b356d03d98b46ad97015e753b9ccc4b0f508ab0b",
+      "bytes": 4386
+    },
+    {
+      "path": "src/tool.rs",
+      "sha256": "sha256:fe55871d97aa24ed7edca45e9757f6cf2042942bbebd5a873fd5a9e93aef1ade",
+      "bytes": 23062
+    }
+  ],
+  "checks": [
+    {
+      "name": "git_clean",
+      "passed": true
+    },
+    {
+      "name": "platform_declared",
+      "passed": true,
+      "detail": "community"
+    },
+    {
+      "name": "git_declared",
+      "passed": true,
+      "detail": "https://github.com/aomi-labs/community-apps"
+    },
+    {
+      "name": "server_tags",
+      "passed": true,
+      "detail": "defaulted to [staging] (aomi.toml did not declare server_tags)"
+    }
+  ],
+  "errors": [],
+  "updated_at": 1779982746
+}

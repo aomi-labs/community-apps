@@ -1,0 +1,6 @@
+[app]
+name = "gambit"
+display_name = "Gambit"
+platform = "community"
+git = "https://github.com/aomi-labs/community-apps"
+public = true
