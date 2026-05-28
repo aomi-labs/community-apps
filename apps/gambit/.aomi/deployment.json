@@ -17,9 +17,9 @@
     "git_root": "/private/tmp/gambit-source",
     "source_path": ".",
     "branch": "main",
-    "commit": "4e7ace64432d539f07edc64f51d7b5ba2eb4272f",
-    "tree": "4df86b5d0bc663f2220252467bb91b7945aea847",
-    "digest": "sha256:bf9548bb2ce5ebceac3cec76387a4c835c6d9ab2a009e0ad20d231a17ecfb3d5",
+    "commit": "f14c04a441ae0de6e45052cea6cdc6c5525044ca",
+    "tree": "97baa1add90629e7e54a6176845f13ee352fcc0c",
+    "digest": "sha256:f56b025b2e4200ad6389196182388f004068b3d610fca670b295fc40785fcd8c",
     "dirty": false
   },
   "platform": {
@@ -30,7 +30,7 @@
   "target": {
     "branch": "publish",
     "app_path": "apps/gambit",
-    "release_tag": "apps-gambit-4e7ace64432d",
+    "release_tag": "apps-gambit-f14c04a441ae",
     "server_tags": [
       "staging"
     ]
@@ -43,13 +43,13 @@
   "files": [
     {
       "path": ".gitignore",
-      "sha256": "sha256:5900ccd15ec34cfa09f948f0a7f17268ca47bbf25ac461f16037b4bd526bb06e",
-      "bytes": 7
+      "sha256": "sha256:16dfa02b42c443afca2153894ebab3a2ffbf72775ff1cc3cd8e50d46e05ad0f9",
+      "bytes": 26
     },
     {
       "path": "Cargo.toml",
-      "sha256": "sha256:9657d1ca1346ee1af88e2992a253ecc5e75e06dc7abaf68eadef54b613904c4b",
-      "bytes": 662
+      "sha256": "sha256:f267f4fe688ce2de9a6a050ae02b55d14f47dea5588692013b3d09cac38a9181",
+      "bytes": 606
     },
     {
       "path": "aomi.toml",
@@ -58,8 +58,8 @@
     },
     {
       "path": "src/auth.rs",
-      "sha256": "sha256:e08a4c51f658c58536bcc99150c13357621e7fb9ae5649326d95b6d36dcbe898",
-      "bytes": 862
+      "sha256": "sha256:0c3db3c93e4cbc5a4430ffab7eeac30f007a3592195af98bb9201c371e83d1d3",
+      "bytes": 2769
     },
     {
       "path": "src/client.rs",
@@ -99,5 +99,5 @@
     }
   ],
   "errors": [],
-  "updated_at": 1779982746
+  "updated_at": 1779982945
 }
