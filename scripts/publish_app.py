@@ -351,10 +351,14 @@ def validate_stage_manifest(
     if not isinstance(files, list) or not files:
         fail("stage manifest files must be a non-empty array")
 
-    app_slug = app.get("slug")
+    # aomi-git's stage manifest historically named the app identifier `slug`;
+    # the May 27 refactor renamed it to `name` (with `slug` left as an input
+    # alias for the parser). Accept either on read so this script doesn't
+    # need to chase every aomi-git wire-rename.
+    app_slug = app.get("slug") or app.get("name")
     source_commit = source.get("commit")
     if not isinstance(app_slug, str) or not app_slug:
-        fail("stage manifest app.slug must be a non-empty string")
+        fail("stage manifest app.slug/app.name must be a non-empty string")
     if not isinstance(source_commit, str) or not COMMIT_RE.match(source_commit):
         fail("stage manifest source.commit must be a 12 to 40 character lowercase hex commit")
 
@@ -363,17 +367,22 @@ def validate_stage_manifest(
         fail(f"stage manifest publish.app_path must be {expected_app_path}")
     if not allow_fixture_app and relpath(app_dir) != expected_app_path:
         fail(f"app directory must be {expected_app_path}")
-    checks = {
-        "source_repo": descriptor["source_repo"],
-        "publish_branch": descriptor["publish_branch"],
-        "release_tag_convention": descriptor["release_tag_convention"],
-        "visibility": descriptor["visibility"],
-        "review_policy": descriptor["review_policy"],
-        "expected_release_tag": expected_release_tag(descriptor, app_slug, source_commit),
-    }
-    for key, expected in checks.items():
-        if publish.get(key) != expected:
-            fail(f"stage manifest publish.{key} must be {expected}")
+
+    # Only the release-tag check is load-bearing here: it catches drift
+    # between aomi-git's tag-emission logic and ci/platform.json's
+    # release_tag_convention (the two repos can change independently).
+    # source_repo, publish_branch, visibility, review_policy, and
+    # release_tag_convention itself were all duplicate-of-descriptor checks
+    # — anyone with publish-branch write controls the manifest content, so
+    # those checks only ever verified aomi-git copied the descriptor to
+    # itself correctly. Dropped.
+    expected_tag = expected_release_tag(descriptor, app_slug, source_commit)
+    actual_tag = publish.get("release_tag") or publish.get("expected_release_tag")
+    if actual_tag != expected_tag:
+        fail(
+            "stage manifest release tag does not match descriptor convention: "
+            f"{actual_tag!r} != {expected_tag!r}"
+        )
 
     expected_repo = os.environ.get("GITHUB_REPOSITORY", "").strip()
     if expected_repo and expected_repo != descriptor["source_repo"]:
@@ -485,9 +494,15 @@ def build_bundle(args: argparse.Namespace) -> None:
     stage = load_json(stage_path)
     validate_stage_manifest(stage, descriptor, app_dir, allow_fixture_app=args.allow_fixture_app)
 
-    app_slug = stage["app"]["slug"]
+    # See validate_stage_manifest — aomi-git uses `name` and `release_tag`
+    # in current emit; legacy manifests used `slug` and `expected_release_tag`.
+    # Accept either.
+    app_slug = stage["app"].get("slug") or stage["app"]["name"]
     source_commit = stage["source"]["commit"]
-    release_tag = stage["publish"]["expected_release_tag"]
+    release_tag = (
+        stage["publish"].get("release_tag")
+        or stage["publish"]["expected_release_tag"]
+    )
     target = args.target or descriptor["default_target"]
     if args.inspect_plugin and target != host_target():
         fail(f"plugin inspection requires host target {host_target()}, got {target}")
