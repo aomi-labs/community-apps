@@ -690,7 +690,11 @@ def detect_changed(args: argparse.Namespace) -> None:
     for app_dir_str in app_dirs:
         app_dir = REPO_ROOT / app_dir_str
         if not app_dir.is_dir():
-            fail(f"changed app directory does not exist: {app_dir_str}")
+            # The app was deleted in this push. There's nothing to publish,
+            # but it's not an error — apps come and go. Existing releases on
+            # GitHub are unchanged; the backend can keep loading them or be
+            # told to deactivate via the admin API separately.
+            continue
         stage_path = app_dir / ".aomi" / "deployment.json"
         if not stage_path.is_file():
             fail(f"{app_dir_str} is missing .aomi/deployment.json")

@@ -9,9 +9,9 @@ target — it's where releases get cut from.
 
 ## Contributing an app
 
-👉 **Read [`launch-aomi.md`](./launch-aomi.md) first.** It walks you through the
-full pipeline from "I have a Rust crate" to "my app is loaded on staging" in
-under 10 minutes.
+👉 **Read [`CONTRIBUTING.md`](./CONTRIBUTING.md) first.** It walks you through
+the full pipeline from "I have a Rust crate" to "my app is loaded on staging"
+in under 10 minutes.
 
 The short version:
 
@@ -33,17 +33,17 @@ emits, and hand-edited PRs will fail at validate time.
 ```
 community-apps/
 ├── README.md           ← you are here
-├── launch-aomi.md      ← E2E contributor guide
+├── CONTRIBUTING.md     ← E2E contributor guide
 ├── apps/               ← generated source per app; one dir per slug
 │   ├── alice-bot/
 │   ├── fanforge/
-│   └── ...
+│   └── gambit/
 ├── ci/
 │   └── platform.json   ← CI contract: required SDK version, build target, etc.
-├── scripts/
-│   └── publish_app.py  ← internal build script driven by Actions; not for contributors
-└── examples/
-    └── hello-ci/       ← fixture used by CI smoke tests
+├── fixtures/
+│   └── hello-ci/       ← buildable crate used by maintainers for ad-hoc dry-runs
+└── scripts/
+    └── publish_app.py  ← internal build script driven by Actions; not for contributors
 ```
 
 ## Publication contract

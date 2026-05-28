@@ -1,6 +1,0 @@
-[app]
-name = "tier2-smoke"
-display_name = "Tier 2 Smoke"
-platform = "community"
-git = "https://github.com/aomi-labs/community-apps"
-public = false
