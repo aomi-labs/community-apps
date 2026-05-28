@@ -73,28 +73,12 @@ The backend trusts a release only after `PluginFetcher` validates the release
 tag, exact SDK version, build target, and plugin SHA-256 hashes inside the
 tarball.
 
-## For CI maintainers
+## Build internals
 
-If you're maintaining the build script itself (not contributing an app), see
-[`scripts/publish_app.py`](./scripts/publish_app.py). It's driven by the
-[`Publish Aomi Apps`](./.github/workflows/publish-apps.yml) workflow on push
-to `publish`.
-
-Local dry-run for the build script:
-
-```bash
-python3 scripts/publish_app.py build \
-  --platform ci/platform.json \
-  --app-dir examples/hello-ci \
-  --target "$(rustc -vV | sed -n 's/^host: //p')" \
-  --dist-dir dist \
-  --allow-non-publish-branch \
-  --allow-fixture-app \
-  --allow-dirty
-```
-
-The production workflow does not pass any `--allow-*` flags; it runs from
-`publish` only, under `apps/<app_slug>/`, with committed staged source.
+CI is driven by [`scripts/publish_app.py`](./scripts/publish_app.py), invoked
+from [`.github/workflows/publish-apps.yml`](./.github/workflows/publish-apps.yml)
+on push to `publish`. Contributors don't run either directly — `aomi-git
+deploy` and the workflow handle it.
 
 ## Related
 
