@@ -107,6 +107,18 @@ def current_commit() -> str:
         return "uncommitted-local"
 
 
+def normalize_github_repo(value: str) -> str:
+    repo = value.strip()
+    if repo.startswith("git@github.com:"):
+        repo = repo.removeprefix("git@github.com:")
+    elif repo.startswith("https://github.com/"):
+        repo = repo.removeprefix("https://github.com/")
+    elif repo.startswith("http://github.com/"):
+        repo = repo.removeprefix("http://github.com/")
+    repo = repo.removesuffix(".git").strip("/")
+    return repo.lower()
+
+
 def validate_platform_descriptor(descriptor: dict[str, Any]) -> None:
     required = [
         "name",
@@ -116,7 +128,6 @@ def validate_platform_descriptor(descriptor: dict[str, Any]) -> None:
         "release_tag_convention",
         "visibility",
         "review_policy",
-        "bundle_contract",
         "required_sdk_version",
         "default_target",
     ]
@@ -126,8 +137,6 @@ def validate_platform_descriptor(descriptor: dict[str, Any]) -> None:
     convention = descriptor["release_tag_convention"]
     if "{app_slug}" not in convention or "{short_commit}" not in convention:
         fail("release_tag_convention must contain {app_slug} and {short_commit}")
-    if descriptor["bundle_contract"] != "aomi-plugin-bundle-v1":
-        fail("bundle_contract must be aomi-plugin-bundle-v1")
 
 
 def expected_release_tag(descriptor: dict[str, Any], app_slug: str, source_commit: str) -> str:
@@ -137,6 +146,16 @@ def expected_release_tag(descriptor: dict[str, Any], app_slug: str, source_commi
         .replace("{app_slug}", app_slug)
         .replace("{short_commit}", short_commit)
     )
+
+
+def deployment_app_slug(deployment: dict[str, Any]) -> str:
+    app = deployment.get("app")
+    if not isinstance(app, dict):
+        fail("deployment manifest app must be an object")
+    value = app.get("name") or app.get("slug")
+    if not isinstance(value, str) or not value:
+        fail("deployment manifest app.name must be a non-empty string")
+    return value
 
 
 def app_dir_from_path(path: str, prefix: str) -> str | None:
@@ -332,55 +351,52 @@ def validate_runtime_manifest(manifest: dict[str, Any], sdk_version: str) -> str
     return manifest["name"]
 
 
-def validate_stage_manifest(
+def validate_deployment_manifest(
     stage: dict[str, Any],
     descriptor: dict[str, Any],
     app_dir: pathlib.Path,
     *,
     allow_fixture_app: bool,
 ) -> None:
-    if stage.get("platform") != descriptor["name"]:
-        fail(f"stage manifest platform must be {descriptor['name']}")
+    platform = stage.get("platform")
+    if not isinstance(platform, dict):
+        fail("deployment manifest platform must be an object")
+    if platform.get("name") != descriptor["name"]:
+        fail(f"deployment manifest platform.name must be {descriptor['name']}")
+    github_repo = platform.get("github_repo")
+    if not isinstance(github_repo, str) or normalize_github_repo(github_repo) != normalize_github_repo(
+        descriptor["source_repo"]
+    ):
+        fail(f"deployment manifest platform.github_repo must resolve to {descriptor['source_repo']}")
 
-    app = stage.get("app")
     source = stage.get("source")
-    publish = stage.get("publish")
+    target = stage.get("target")
     files = stage.get("files")
-    if not isinstance(app, dict) or not isinstance(source, dict) or not isinstance(publish, dict):
-        fail("stage manifest must contain app, source, and publish objects")
+    if not isinstance(source, dict) or not isinstance(target, dict):
+        fail("deployment manifest must contain source and target objects")
     if not isinstance(files, list) or not files:
-        fail("stage manifest files must be a non-empty array")
+        fail("deployment manifest files must be a non-empty array")
 
-    # aomi-git's stage manifest historically named the app identifier `slug`;
-    # the May 27 refactor renamed it to `name` (with `slug` left as an input
-    # alias for the parser). Accept either on read so this script doesn't
-    # need to chase every aomi-git wire-rename.
-    app_slug = app.get("slug") or app.get("name")
+    app_slug = deployment_app_slug(stage)
     source_commit = source.get("commit")
-    if not isinstance(app_slug, str) or not app_slug:
-        fail("stage manifest app.slug/app.name must be a non-empty string")
     if not isinstance(source_commit, str) or not COMMIT_RE.match(source_commit):
-        fail("stage manifest source.commit must be a 12 to 40 character lowercase hex commit")
+        fail("deployment manifest source.commit must be a 12 to 40 character lowercase hex commit")
 
     expected_app_path = f"{descriptor['app_path_prefix'].strip('/')}/{app_slug}"
-    if publish.get("app_path") != expected_app_path:
-        fail(f"stage manifest publish.app_path must be {expected_app_path}")
+    if target.get("app_path") != expected_app_path:
+        fail(f"deployment manifest target.app_path must be {expected_app_path}")
     if not allow_fixture_app and relpath(app_dir) != expected_app_path:
         fail(f"app directory must be {expected_app_path}")
-
     # Only the release-tag check is load-bearing here: it catches drift
     # between aomi-git's tag-emission logic and ci/platform.json's
-    # release_tag_convention (the two repos can change independently).
-    # source_repo, publish_branch, visibility, review_policy, and
-    # release_tag_convention itself were all duplicate-of-descriptor checks
-    # — anyone with publish-branch write controls the manifest content, so
-    # those checks only ever verified aomi-git copied the descriptor to
-    # itself correctly. Dropped.
+    # release_tag_convention. The other deployment fields are either
+    # descriptor echoes or runtime activation state and are not worth coupling
+    # this CI to.
     expected_tag = expected_release_tag(descriptor, app_slug, source_commit)
-    actual_tag = publish.get("release_tag") or publish.get("expected_release_tag")
+    actual_tag = target.get("release_tag")
     if actual_tag != expected_tag:
         fail(
-            "stage manifest release tag does not match descriptor convention: "
+            "deployment manifest target.release_tag does not match descriptor convention: "
             f"{actual_tag!r} != {expected_tag!r}"
         )
 
@@ -391,7 +407,7 @@ def validate_stage_manifest(
     seen_paths: set[str] = set()
     for entry in files:
         if not isinstance(entry, dict):
-            fail("stage manifest files entries must be objects")
+            fail("deployment manifest files entries must be objects")
         rel = entry.get("path")
         sha = entry.get("sha256")
         byte_count = entry.get("bytes")
@@ -425,12 +441,10 @@ def validate_bundle_manifest(
     commit: str,
     plugins_dir: pathlib.Path,
 ) -> None:
-    expected_keys = {"version", "app_release_tag", "sdk_version", "target", "commit", "plugins"}
+    expected_keys = {"app_release_tag", "sdk_version", "target", "commit", "plugins"}
     missing = expected_keys - set(manifest)
     if missing:
         fail(f"bundle manifest missing fields: {', '.join(sorted(missing))}")
-    if manifest["version"] != descriptor["bundle_contract"]:
-        fail("bundle manifest version must be aomi-plugin-bundle-v1")
     if manifest["app_release_tag"] != release_tag:
         fail("bundle manifest app_release_tag does not match release tag")
     if manifest["sdk_version"] != descriptor["required_sdk_version"]:
@@ -490,19 +504,13 @@ def build_bundle(args: argparse.Namespace) -> None:
         fail("app directory must be inside the repository")
 
     ensure_clean_app(app_dir, args.allow_dirty)
-    stage_path = app_dir / ".aomi-publish" / "manifest.json"
+    stage_path = app_dir / ".aomi" / "deployment.json"
     stage = load_json(stage_path)
-    validate_stage_manifest(stage, descriptor, app_dir, allow_fixture_app=args.allow_fixture_app)
+    validate_deployment_manifest(stage, descriptor, app_dir, allow_fixture_app=args.allow_fixture_app)
 
-    # See validate_stage_manifest — aomi-git uses `name` and `release_tag`
-    # in current emit; legacy manifests used `slug` and `expected_release_tag`.
-    # Accept either.
-    app_slug = stage["app"].get("slug") or stage["app"]["name"]
+    app_slug = deployment_app_slug(stage)
     source_commit = stage["source"]["commit"]
-    release_tag = (
-        stage["publish"].get("release_tag")
-        or stage["publish"]["expected_release_tag"]
-    )
+    release_tag = stage["target"]["release_tag"]
     target = args.target or descriptor["default_target"]
     if args.inspect_plugin and target != host_target():
         fail(f"plugin inspection requires host target {host_target()}, got {target}")
@@ -564,7 +572,6 @@ def build_bundle(args: argparse.Namespace) -> None:
         copied.rename(final_plugin)
 
     bundle_manifest = {
-        "version": descriptor["bundle_contract"],
         "app_release_tag": release_tag,
         "sdk_version": sdk_version,
         "target": target,
@@ -598,7 +605,6 @@ def build_bundle(args: argparse.Namespace) -> None:
     shutil.copy2(manifest_path, standalone_manifest)
 
     release_metadata = {
-        "contract": descriptor["bundle_contract"],
         "platform": descriptor["name"],
         "app_slug": app_slug,
         "visibility": descriptor["visibility"],
@@ -606,14 +612,14 @@ def build_bundle(args: argparse.Namespace) -> None:
         "source": stage["source"],
         "publish": {
             "repo": descriptor["source_repo"],
-            "branch": descriptor["publish_branch"],
-            "path": stage["publish"]["app_path"],
+            "branch": stage["target"]["branch"],
+            "path": stage["target"]["app_path"],
             "commit": current_commit(),
             "release_tag": release_tag,
         },
         "sdk_version": sdk_version,
         "targets": [target],
-        "stage_manifest_sha256": sha256_prefixed_file(stage_path),
+        "deployment_manifest_sha256": sha256_prefixed_file(stage_path),
         "created_by": os.environ.get("GITHUB_ACTOR", "repo-ci"),
         "status": {
             "ci": "candidate-release-built",
@@ -685,11 +691,11 @@ def detect_changed(args: argparse.Namespace) -> None:
         app_dir = REPO_ROOT / app_dir_str
         if not app_dir.is_dir():
             fail(f"changed app directory does not exist: {app_dir_str}")
-        stage_path = app_dir / ".aomi-publish" / "manifest.json"
+        stage_path = app_dir / ".aomi" / "deployment.json"
         if not stage_path.is_file():
-            fail(f"{app_dir_str} is missing .aomi-publish/manifest.json")
+            fail(f"{app_dir_str} is missing .aomi/deployment.json")
         stage = load_json(stage_path)
-        validate_stage_manifest(stage, descriptor, app_dir, allow_fixture_app=False)
+        validate_deployment_manifest(stage, descriptor, app_dir, allow_fixture_app=False)
         valid_app_dirs.append(app_dir_str)
 
     apps_json = json.dumps(valid_app_dirs)

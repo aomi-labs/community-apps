@@ -1,14 +1,14 @@
 {
-  "mode": "git-transport",
-  "platform": "community",
   "app": {
     "name": "tier2-smoke",
     "display_name": "Tier 2 Smoke",
     "platform": "community",
     "git": "https://github.com/aomi-labs/community-apps",
-    "branch": null,
-    "public": false,
-    "access_token": null,
+    "branch": "publish",
+    "public": true,
+    "server_tags": [
+      "staging"
+    ],
     "config_path": "aomi.toml",
     "source_path": "."
   },
@@ -21,11 +21,23 @@
     "digest": "sha256:96987262280df30c833e527873bc3cecb8c56f7ca5eceff748331bb613fc8378",
     "dirty": false
   },
-  "publish": {
-    "source_repo": "aomi-labs/community-apps",
-    "publish_branch": "publish",
+  "platform": {
+    "name": "community",
+    "github_repo": "https://github.com/aomi-labs/community-apps",
+    "resolved_deploy_branch": null
+  },
+  "target": {
+    "branch": "publish",
     "app_path": "apps/tier2-smoke",
-    "release_tag": "apps-tier2-smoke-e658b531abea"
+    "release_tag": "apps-tier2-smoke-e658b531abea",
+    "server_tags": [
+      "staging"
+    ]
+  },
+  "state": {
+    "pushed": true,
+    "deployed": true,
+    "activated": false
   },
   "files": [
     {
@@ -48,5 +60,8 @@
       "sha256": "sha256:5e0470d4edddb750c5f817879d19a0354c43f09c4167f4bcbf529c881e231b2c",
       "bytes": 884
     }
-  ]
+  ],
+  "checks": [],
+  "errors": [],
+  "updated_at": 1779976073
 }

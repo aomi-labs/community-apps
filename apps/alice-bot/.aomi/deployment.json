@@ -1,0 +1,57 @@
+{
+  "app": {
+    "name": "alice-bot",
+    "display_name": "Alice Bot",
+    "platform": "community",
+    "git": "https://github.com/aomi-labs/community-apps",
+    "branch": "publish",
+    "public": true,
+    "server_tags": [
+      "staging"
+    ],
+    "config_path": "source/alice-bot/Cargo.toml",
+    "source_path": "source/alice-bot"
+  },
+  "source": {
+    "git_root": "/Users/cecilia/Code/community-apps",
+    "source_path": "source/alice-bot",
+    "branch": "publish",
+    "commit": "88f108e0e57ba42fd61c036ccc0ba45726a86405",
+    "tree": "b86c453dfb12d207fc1306fccf6742ad642e2295",
+    "digest": "sha256:8af5027704997b1acfef79777df96457c11c69ccb4da56e30fdea69a2418e8d8",
+    "dirty": false
+  },
+  "platform": {
+    "name": "community",
+    "github_repo": "https://github.com/aomi-labs/community-apps",
+    "resolved_deploy_branch": null
+  },
+  "target": {
+    "branch": "publish",
+    "app_path": "apps/alice-bot",
+    "release_tag": "apps-alice-bot-88f108e0e57b",
+    "server_tags": [
+      "staging"
+    ]
+  },
+  "state": {
+    "pushed": true,
+    "deployed": true,
+    "activated": false
+  },
+  "files": [
+    {
+      "path": "Cargo.toml",
+      "sha256": "sha256:b53b7b1115030af0535c953d416b3324510f8e01928609f2b026cc1a8b7f1974",
+      "bytes": 257
+    },
+    {
+      "path": "src/lib.rs",
+      "sha256": "sha256:bee0cf55d68e9936548a34154be9089ccdc1983534ff79b74d81f5f8068f142f",
+      "bytes": 1098
+    }
+  ],
+  "checks": [],
+  "errors": [],
+  "updated_at": 1779975246
+}
