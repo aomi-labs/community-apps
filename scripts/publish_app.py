@@ -117,7 +117,6 @@ def validate_platform_descriptor(descriptor: dict[str, Any]) -> None:
         "visibility",
         "review_policy",
         "bundle_contract",
-        "stage_manifest_version",
         "required_sdk_version",
         "default_target",
     ]
@@ -129,8 +128,6 @@ def validate_platform_descriptor(descriptor: dict[str, Any]) -> None:
         fail("release_tag_convention must contain {app_slug} and {short_commit}")
     if descriptor["bundle_contract"] != "aomi-plugin-bundle-v1":
         fail("bundle_contract must be aomi-plugin-bundle-v1")
-    if descriptor["stage_manifest_version"] != "aomi-git-stage-v1":
-        fail("stage_manifest_version must be aomi-git-stage-v1")
 
 
 def expected_release_tag(descriptor: dict[str, Any], app_slug: str, source_commit: str) -> str:
@@ -342,8 +339,6 @@ def validate_stage_manifest(
     *,
     allow_fixture_app: bool,
 ) -> None:
-    if stage.get("version") != descriptor["stage_manifest_version"]:
-        fail("stage manifest version is not aomi-git-stage-v1")
     if stage.get("platform") != descriptor["name"]:
         fail(f"stage manifest platform must be {descriptor['name']}")
 
