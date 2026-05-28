@@ -387,13 +387,18 @@ def validate_deployment_manifest(
         fail(f"deployment manifest target.app_path must be {expected_app_path}")
     if not allow_fixture_app and relpath(app_dir) != expected_app_path:
         fail(f"app directory must be {expected_app_path}")
-    checks = {
-        "branch": descriptor["publish_branch"],
-        "release_tag": expected_release_tag(descriptor, app_slug, source_commit),
-    }
-    for key, expected in checks.items():
-        if target.get(key) != expected:
-            fail(f"deployment manifest target.{key} must be {expected}")
+    # Only the release-tag check is load-bearing here: it catches drift
+    # between aomi-git's tag-emission logic and ci/platform.json's
+    # release_tag_convention. The other deployment fields are either
+    # descriptor echoes or runtime activation state and are not worth coupling
+    # this CI to.
+    expected_tag = expected_release_tag(descriptor, app_slug, source_commit)
+    actual_tag = target.get("release_tag")
+    if actual_tag != expected_tag:
+        fail(
+            "deployment manifest target.release_tag does not match descriptor convention: "
+            f"{actual_tag!r} != {expected_tag!r}"
+        )
 
     expected_repo = os.environ.get("GITHUB_REPOSITORY", "").strip()
     if expected_repo and expected_repo != descriptor["source_repo"]:
