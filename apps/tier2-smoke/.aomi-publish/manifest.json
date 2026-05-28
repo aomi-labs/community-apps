@@ -16,16 +16,16 @@
     "git_root": "/private/tmp/aomi-smoke-1779959415",
     "source_path": ".",
     "branch": "main",
-    "commit": "6b4586f5237490784e93c92d54d7c3778bff49f2",
-    "tree": "8f9c5598f2126cbb41d38aa3379742c9ded4973d",
-    "digest": "sha256:22b4c05c1e6464a15c68c5f462b652145762fe829cae172526db1b14ef25823f",
+    "commit": "e658b531abeaf0071e2549a14db0d933799b061c",
+    "tree": "8bf910c2be43bdfbd231e10fe4cb7ee528c25bd5",
+    "digest": "sha256:96987262280df30c833e527873bc3cecb8c56f7ca5eceff748331bb613fc8378",
     "dirty": false
   },
   "publish": {
     "source_repo": "aomi-labs/community-apps",
     "publish_branch": "publish",
     "app_path": "apps/tier2-smoke",
-    "release_tag": "apps-tier2-smoke-6b4586f52374"
+    "release_tag": "apps-tier2-smoke-e658b531abea"
   },
   "files": [
     {
@@ -35,7 +35,7 @@
     },
     {
       "path": "Cargo.toml",
-      "sha256": "sha256:c75c65947f7baadde385a179f8c3652c8a173ce32aa39dfae853dad9dd6b621b",
+      "sha256": "sha256:f2af366bdc27d780256eb467257d4814569130f8b4503e248941542339876f88",
       "bytes": 223
     },
     {
