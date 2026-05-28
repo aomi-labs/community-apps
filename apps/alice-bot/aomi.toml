@@ -1,0 +1,7 @@
+[app]
+name = "alice-bot"
+display_name = "Alice Bot"
+platform = "community"
+git = "https://github.com/aomi-labs/community-apps"
+public = true
+server_tags = ["staging"]
