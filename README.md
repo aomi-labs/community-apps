@@ -58,7 +58,7 @@ need to memorize them.
 | Build contract file | `apps/<app_slug>/.aomi/deployment.json` (written by `aomi-git deploy`) |
 | Release tag convention | `apps-{app_slug}-{short_commit}` |
 | Runtime bundle contract | `aomi-plugin-bundle-v1` |
-| Required SDK version | see [`ci/platform.json`](./ci/platform.json) |
+| Required SDK version | see [`platform.json`](./platform.json) |
 
 `short_commit` is the first 12 characters of your source commit recorded by
 `aomi-git`.

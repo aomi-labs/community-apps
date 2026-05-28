@@ -100,7 +100,7 @@ access_token = "ghp_xxxxxxx"    # ❌ rejected at parse — never commit secrets
 
 ### `Cargo.toml`
 
-Pin the SDK to the exact version this repo's CI expects. Check `ci/platform.json`
+Pin the SDK to the exact version this repo's CI expects. Check `platform.json`
 in this repo for the current `required_sdk_version`:
 
 ```toml
@@ -113,7 +113,7 @@ edition = "2024"
 crate-type = ["cdylib"]
 
 [dependencies]
-aomi-sdk   = "=0.1.20"          # match ci/platform.json's required_sdk_version
+aomi-sdk   = "=0.1.20"          # match platform.json's required_sdk_version
 serde      = { version = "1", features = ["derive"] }
 serde_json = "1"
 ```
@@ -254,7 +254,7 @@ Until you do this, your app exists in the DB but won't load on prod backends
 | `dirty files outside owned publish path` | your community-apps clone has uncommitted changes to files NOT under `apps/<slug>/` | `git -C /path/to/community-apps stash` |
 | `activation endpoint ... returned 409 Conflict` | your `target_tags` aren't a subset of the backend's `AOMI_SERVER_TAGS` | match your env to the backend you're activating against |
 | `activation endpoint ... returned 502 Bad Gateway` | release tarball doesn't exist yet (CI race) or backend can't reach GitHub | retry after CI finishes |
-| `sdk_version mismatch` | your `aomi-sdk` Cargo dep doesn't match `ci/platform.json`'s `required_sdk_version` | pin `aomi-sdk = "=0.1.X"` to the right version |
+| `sdk_version mismatch` | your `aomi-sdk` Cargo dep doesn't match `platform.json`'s `required_sdk_version` | pin `aomi-sdk = "=0.1.X"` to the right version |
 
 ## Quick reference
 
@@ -265,7 +265,7 @@ Until you do this, your app exists in the DB but won't load on prod backends
 | `/api/control/platforms` | what platforms (`community`, `krexa`, …) the backend recognizes |
 | `/api/control/server-tags` | what server tags the backend matches (`[staging]` vs `[prod]`) |
 | `/api/control/apps/status` | full registry — your app should show `loaded: true` after activation |
-| `ci/platform.json` | CI contract — `required_sdk_version`, `release_tag_convention`, etc. |
+| `platform.json` | CI contract — `required_sdk_version`, `release_tag_convention`, etc. |
 
 For the contract behind all of this, see ADR 0004, 0009, and 0010 in the
 [aomi-launch-my-agent](https://github.com/aomi-labs/aomi-launch-my-agent)
