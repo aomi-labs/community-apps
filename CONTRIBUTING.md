@@ -77,19 +77,33 @@ public       = true                     # visible to all backend users
 # server_tags = ["staging"]
 ```
 
-**You don't need `access_token` for community-apps.** This repo is public,
-so the backend can fetch your release tarball without auth. Omit the field
-entirely.
+#### About `access_token`
 
-If you ever publish to a **private** platform repo, you'd add an
-`access_token` line pointing at an env var (never a literal token — that's
-rejected at parse so committed configs can't leak secrets):
+`aomi-git` works by pushing your code into a managed platform repository under
+the `aomi-labs` GitHub org (`community-apps` for this platform; other
+platforms have their own repos). At activation time, the Aomi backend
+**fetches your release tarball from that platform repo on GitHub**. So
+whether you need an `access_token` depends on one question: is the platform
+repo public or private?
 
-```toml
-# only needed for private platform repos — community-apps is public, skip this
-access_token = "$MY_GH_TOKEN"   # ✅ env-var ref
-access_token = "ghp_xxxxxxx"    # ❌ rejected at parse — never commit secrets
-```
+- **community-apps is public.** The backend can fetch your release tarball
+  from `github.com/aomi-labs/community-apps/releases` anonymously. **Omit the
+  `access_token` field entirely** — you don't need one to publish here.
+- **Private platform repos** (e.g. `krexa-hosted-apps`) require a GitHub PAT
+  with read access to releases. You declare it in `aomi.toml` as a reference
+  to an env var — never the token itself. Literal tokens are rejected at
+  parse so a committed config can never leak a secret:
+
+  ```toml
+  # only needed for private platform repos — community-apps is public, skip this
+  access_token = "$MY_GH_TOKEN"   # ✅ env-var ref — resolved at deploy time
+  access_token = "ghp_xxxxxxx"    # ❌ rejected at parse — never commit secrets
+  ```
+
+  Per [ADR 0009 amended](https://github.com/aomi-labs/aomi-launch-my-agent),
+  the token is **transient**: passed once in the activation request body,
+  used once by the backend to download the tarball, never persisted, never
+  logged, never written to disk.
 
 ### `Cargo.toml`
 
