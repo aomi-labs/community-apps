@@ -1,0 +1,98 @@
+{
+  "app": {
+    "name": "agentex",
+    "display_name": "Agentex",
+    "platform": "community",
+    "git": "https://github.com/aomi-labs/community-apps",
+    "branch": null,
+    "public": true,
+    "access_token": null,
+    "server_tags": [
+      "staging"
+    ],
+    "config_path": "aomi.toml",
+    "source_path": "."
+  },
+  "source": {
+    "git_root": "/Users/tcai/Projects/Agentex/tmp/agentex-aomi-source",
+    "source_path": ".",
+    "branch": "main",
+    "commit": "659f8c7a845dfbf3054daf335fdf45e77f036dcf",
+    "tree": "e750fb082e8bd62f4e0ec513babb392ff96e809c",
+    "digest": "sha256:854752e975f16387d7eda2d1ed84f3638ff5f0ddba3741c428f5e0995c6095db",
+    "dirty": false
+  },
+  "platform": {
+    "name": "community",
+    "github_repo": "https://github.com/aomi-labs/community-apps",
+    "resolved_deploy_branch": null
+  },
+  "target": {
+    "branch": "publish",
+    "app_path": "apps/agentex",
+    "release_tag": "apps-agentex-659f8c7a845d",
+    "server_tags": [
+      "staging"
+    ]
+  },
+  "state": {
+    "pushed": false,
+    "deployed": false,
+    "activated": false
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "sha256:336a2a618540cd70e3a7c812f60ec532d4311e2dc11be9c4d44df2383ccd114d",
+      "bytes": 15
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "sha256:a865a8e0abcb5890862610614e185e38efd04a2896f88c6be281e2668923ac0b",
+      "bytes": 364
+    },
+    {
+      "path": "aomi.toml",
+      "sha256": "sha256:e961de64db685b662a0f52076dc8dbc5f21f86bfdf830854f655b46ee3c84ab4",
+      "bytes": 137
+    },
+    {
+      "path": "src/client.rs",
+      "sha256": "sha256:ee842652577af3978d38213671cd5d617a7ff7d48408b63fcbf0452bd2dafb6c",
+      "bytes": 15817
+    },
+    {
+      "path": "src/lib.rs",
+      "sha256": "sha256:b08560ed02412aa9f3a61049193115967ac8164e1f1363c6ee461b7b0c405f71",
+      "bytes": 1705
+    },
+    {
+      "path": "src/tool.rs",
+      "sha256": "sha256:012d5c03003a60df1d2bc2cfdb9a2b365a4a84e17267313610ced10191227df1",
+      "bytes": 23535
+    }
+  ],
+  "checks": [
+    {
+      "name": "git_clean",
+      "passed": true
+    },
+    {
+      "name": "platform_declared",
+      "passed": true,
+      "detail": "community"
+    },
+    {
+      "name": "git_declared",
+      "passed": true,
+      "detail": "https://github.com/aomi-labs/community-apps"
+    },
+    {
+      "name": "server_tags",
+      "passed": true,
+      "detail": "defaulted to [staging] (aomi.toml did not declare server_tags)"
+    }
+  ],
+  "errors": [],
+  "updated_at": 1780016370
+}
