@@ -34,26 +34,39 @@ aomi.toml + src/         ──[1]──▶  apps/<slug>/                  ─[2
 
 ## Prerequisites
 
-You need:
+### Two clones, one writes code, one transits
+
+Before anything, get clear on the two repos involved. You'll have **both
+checked out at the same time** but you only touch one:
+
+| Directory | Who edits | What for |
+|---|---|---|
+| `your-app-source/` (somewhere of your choosing) | **You.** Write Rust, commit, push to a remote if you want. | Authoring your app's code. |
+| `community-apps/` (a clone of *this* repo) | **`aomi-git` only.** Never hand-edit. | Transit point — `aomi-git deploy` copies your source into it, commits, and pushes to the `publish` branch. |
+
+You can put `your-app-source/` anywhere — your home dir, `~/code/`, GitHub fork,
+whatever. It just needs to be a git repo (the CLI uses its commit hash to compute
+the release tag).
+
+### Install
 
 - **Rust nightly** (the SDK builds on `2024` edition)
 - **`gh` (GitHub CLI)** logged into an account with read access to `aomi-labs`
-- **`aomi-git`** — the deploy CLI. Install from the SDK:
+- **`aomi-git`** — the deploy CLI, shipped from the SDK:
 
   ```bash
   cargo install --git https://github.com/aomi-labs/aomi-sdk --features cli aomi-sdk
-  # or build from a local checkout:
-  git clone https://github.com/aomi-labs/aomi-sdk
-  cargo build -p aomi-sdk --features cli --bin aomi-git
-  # binary at ./target/debug/aomi-git
+  # binary lands at ~/.cargo/bin/aomi-git
   ```
 
-- A **local clone of this repo** (`community-apps`) that you can push to. This
-  is where `aomi-git` stages your source. You don't commit by hand — the CLI
-  does it for you.
+  (Alternative, for hacking on the CLI itself: `git clone …/aomi-sdk && cargo build -p aomi-sdk --features cli --bin aomi-git`. Binary at `./target/debug/aomi-git`.)
+
+- A **local clone of community-apps** somewhere you can push from. The CLI
+  needs a place to stage your files before pushing — pick any path. **You
+  never edit anything inside this clone by hand.**
 
   ```bash
-  git clone https://github.com/aomi-labs/community-apps
+  git clone https://github.com/aomi-labs/community-apps   # anywhere on disk
   ```
 
 You do NOT need an activation token to contribute. See "Activation" below.
