@@ -228,16 +228,30 @@ operator.
 
 ### When is CI done?
 
-`aomi-git deploy` prints a Next-steps block at the end that links the two
-URLs you need to watch:
+Run `aomi-git status` from your source repo. It reads your
+`.aomi/deployment.json` and polls GitHub for you, reporting both signals in
+one place:
 
-1. **CI build status** — `https://github.com/aomi-labs/community-apps/actions`.
-   Wait for the run triggered by your push to go green (~1–3 min).
-2. **Release availability** — once CI succeeds, your release appears at
-   `https://github.com/aomi-labs/community-apps/releases/tag/apps-<slug>-<short-commit>`.
-   This is the artifact the backend will fetch.
+```
+$ aomi-git status
+Publication status
+  repo          : aomi-labs/community-apps
+  release_tag   : apps-my-bot-abc1234
+  branch        : publish
+  local state   : pushed=true deployed=true activated=false
+  ci            : ⏳ running — publish-apps
+                  https://github.com/aomi-labs/community-apps/actions/runs/...
+  release       : pending (not built yet)
+```
 
-When both are green, you're ready to request activation.
+When `ci` is green and `release` shows **✓ published … ready to activate**,
+you're ready to request activation. (`aomi-git status apps-<slug>-<commit>`
+checks a specific tag; otherwise it uses the latest deploy's tag.)
+
+You can still watch the underlying pages directly if you prefer —
+`https://github.com/aomi-labs/community-apps/actions` for CI and
+`.../releases/tag/apps-<slug>-<short-commit>` for the release — but
+`aomi-git status` rolls both up.
 
 ### Requesting activation
 
