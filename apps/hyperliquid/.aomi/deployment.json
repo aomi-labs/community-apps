@@ -1,0 +1,93 @@
+{
+  "app": {
+    "name": "hyperliquid",
+    "display_name": "Hyperliquid Trading Intelligence",
+    "platform": "community",
+    "git": "https://github.com/aomi-labs/community-apps",
+    "branch": null,
+    "public": true,
+    "access_token": null,
+    "server_tags": [
+      "staging"
+    ],
+    "config_path": "app/aomi.toml",
+    "source_path": "app"
+  },
+  "source": {
+    "git_root": "/Users/victorkanu/Desktop/aomi-hyperliquid-sample",
+    "source_path": "app",
+    "branch": "main",
+    "commit": "c65d616cd9ccb5f373567a2eb39f41b956fa4494",
+    "tree": "1a78dda7991865d77ab19ed6572fecf4d755e417",
+    "digest": "sha256:a7412cc59065dca7c2692028abdb688f8f0d5ed5021696ead83468969cb581ba",
+    "dirty": false
+  },
+  "platform": {
+    "name": "community",
+    "github_repo": "https://github.com/aomi-labs/community-apps",
+    "resolved_deploy_branch": null
+  },
+  "target": {
+    "branch": "publish",
+    "app_path": "apps/hyperliquid",
+    "release_tag": "apps-hyperliquid-c65d616cd9cc",
+    "server_tags": [
+      "staging"
+    ]
+  },
+  "state": {
+    "pushed": false,
+    "deployed": false,
+    "activated": false
+  },
+  "files": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "sha256:6a4ddac98d12f9c23cd14b4a733bad28e9b78a369b644b442ae56dad7dbc9997",
+      "bytes": 37975
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "sha256:73b8c3efd387b35d5a1793a67e9a52c82d87b5c8d0ca215b2e26cd4b4471c633",
+      "bytes": 395
+    },
+    {
+      "path": "aomi.toml",
+      "sha256": "sha256:50caf8da51ac0a8dae8109213d56198425bb49840bd87d8cc1894d50294f6bea",
+      "bytes": 192
+    },
+    {
+      "path": "src/lib.rs",
+      "sha256": "sha256:3c3db6057e29362ee114c3673fac9cc9dcb4523cd463150f25df619cb753a3bc",
+      "bytes": 1753
+    },
+    {
+      "path": "src/tool.rs",
+      "sha256": "sha256:d5f8e85ba0dab4c8ee7f6c43d5e518cc226ef03660e01c475d6a1244d8073e63",
+      "bytes": 8900
+    }
+  ],
+  "checks": [
+    {
+      "name": "git_clean",
+      "passed": true
+    },
+    {
+      "name": "platform_declared",
+      "passed": true,
+      "detail": "community"
+    },
+    {
+      "name": "git_declared",
+      "passed": true,
+      "detail": "https://github.com/aomi-labs/community-apps"
+    },
+    {
+      "name": "server_tags",
+      "passed": true,
+      "detail": "[staging] (from aomi.toml)"
+    }
+  ],
+  "errors": [],
+  "updated_at": 1780049359
+}
