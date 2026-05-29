@@ -1,0 +1,130 @@
+{
+  "app": {
+    "name": "my-aomi-bots",
+    "display_name": "My Aomi Bots",
+    "platform": "community",
+    "git": "https://github.com/aomi-labs/community-apps",
+    "branch": null,
+    "public": true,
+    "access_token": null,
+    "server_tags": [
+      "staging"
+    ],
+    "config_path": "aomi.toml",
+    "source_path": "."
+  },
+  "source": {
+    "git_root": "/Users/cecilia/Code/my-aomi-bots",
+    "source_path": ".",
+    "branch": "main",
+    "commit": "a5a81b6b8be1ef17b9bdd16481e8212ce41a3364",
+    "tree": "b23ad3555e413a94220374c5a239eaa0ff829d54",
+    "digest": "sha256:b511b751ba0585b5a2f3bcde1703cc75980426549e317713d9c947ed30e2b21f",
+    "dirty": false
+  },
+  "platform": {
+    "name": "community",
+    "github_repo": "https://github.com/aomi-labs/community-apps",
+    "resolved_deploy_branch": null
+  },
+  "target": {
+    "branch": "publish",
+    "app_path": "apps/my-aomi-bots",
+    "release_tag": "apps-my-aomi-bots-a5a81b6b8be1",
+    "server_tags": [
+      "staging"
+    ]
+  },
+  "state": {
+    "pushed": false,
+    "deployed": false,
+    "activated": false
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "sha256:29a8546e056e0a047851c87ab1e48c7c06fdfcc71c8b5ff01fe9b9cc2e3e678d",
+      "bytes": 27
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "sha256:3bae9419c04e59a2abd04e059137e976576f137444566eb86036e00361018c73",
+      "bytes": 1047
+    },
+    {
+      "path": "README.md",
+      "sha256": "sha256:260e5a9259b32972e9a29b9161b75992d3da638a5ec695edb9c644faf98cd9e8",
+      "bytes": 2530
+    },
+    {
+      "path": "aomi.toml",
+      "sha256": "sha256:0cc99f8417ede83c935cfa6e9e3e594338da30e6ac612718eb125d1db6e67cec",
+      "bytes": 599
+    },
+    {
+      "path": "src/client.rs",
+      "sha256": "sha256:d4d6241515eed2b3fc0f2a41b626e3f3c834294dbbe0e61a3bfa77605ed29945",
+      "bytes": 8878
+    },
+    {
+      "path": "src/lib.rs",
+      "sha256": "sha256:96e237c11bdb67a7956699970c99f9c1dd0e0fc0c300cc93c74c1651da378b8b",
+      "bytes": 2108
+    },
+    {
+      "path": "src/tools.rs",
+      "sha256": "sha256:155e9100572cb916748e53303086425128aea70a942325c45f5c4822edcc38f9",
+      "bytes": 4817
+    }
+  ],
+  "stages": [
+    {
+      "stage": "workspace",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "git_clean",
+          "passed": true,
+          "severity": "error",
+          "detail": "working tree clean"
+        }
+      ]
+    },
+    {
+      "stage": "manifest",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "platform_declared",
+          "passed": true,
+          "severity": "error",
+          "detail": "community"
+        },
+        {
+          "name": "git_declared",
+          "passed": true,
+          "severity": "error",
+          "detail": "https://github.com/aomi-labs/community-apps"
+        }
+      ],
+      "resolved": {
+        "defaulted": true,
+        "server_tags": [
+          "staging"
+        ]
+      }
+    },
+    {
+      "stage": "platform",
+      "status": "skipped",
+      "detail": "requires backend preflight (--backend / AOMI_BACKEND_URL)"
+    },
+    {
+      "stage": "backend",
+      "status": "skipped",
+      "detail": "requires backend preflight (--backend / AOMI_BACKEND_URL)"
+    }
+  ],
+  "errors": [],
+  "updated_at": 1780055903
+}
