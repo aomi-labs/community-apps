@@ -19,8 +19,8 @@ sequenceDiagram
     participant BE as Aomi backend
 
     You->>Src: write aomi.toml + src/
-    You->>CLI: aomi-git deploy --platform-repo-dir <clone>
-    CLI->>Repo: stage apps/<slug>/, commit, push
+    You->>CLI: aomi-git deploy
+    CLI->>Repo: clone (cached), stage apps/<slug>/, commit, push
     Repo->>CI: trigger
     CI->>Repo: upload release apps-<slug>-<short-commit>
     You->>Ops: release tag
@@ -33,7 +33,10 @@ sequenceDiagram
 ## Prerequisites
 
 - **Rust nightly** (the SDK builds on `2024` edition)
-- **`gh` (GitHub CLI)** logged into an account with read access to `aomi-labs`
+- **`git`** on `PATH` — `aomi-git` shells out to it for the transit clone
+- **`gh` (GitHub CLI)** logged into an account with read access to `aomi-labs`.
+  Used implicitly: `git`'s credential helper picks up the `gh auth` token when
+  cloning the public platform repo.
 - **`aomi-git`** — the deploy CLI, shipped from the SDK:
 
   ```bash
@@ -53,7 +56,7 @@ Your app lives in its own repo, separate from this one. The minimum layout:
 my-cool-app/
 ├── aomi.toml
 ├── Cargo.toml
-├── .gitignore       (must include .aomi/ and target/)
+├── .gitignore       (must include .aomi/, target/, and Cargo.lock)
 └── src/
     └── lib.rs       (#[no_mangle] aomi_plugin_entry via dyn_aomi_app! macro)
 ```
@@ -121,7 +124,7 @@ cleanest reference.
 
 ---
 
-## 2. Sanity check: build + dry-run preflight
+## 2. Sanity check: build + dry-run
 
 ```bash
 # from your source repo:
@@ -129,64 +132,52 @@ cargo check                    # ensure your plugin compiles
 cargo test                     # if you have any tests
 ```
 
-Then run the dry-run with online preflight, pointing at staging:
+Then dry-run against staging. Dry-run does the offline plan **and** the online
+preflight (backend reachability, branch contract, server-tag subset check) —
+it's the single "show me what would happen" command:
 
 ```bash
 AOMI_BACKEND_URL=https://staging-api.aomi.dev \
-  aomi-git deploy --dry-run --preflight
+  aomi-git deploy --dry-run
 ```
 
-This produces `.aomi/deployment.json` next to your `aomi.toml`. Read it. You
-should see all checks pass:
+You should see all four pipeline stages pass:
 
-```jsonc
-{
-  "checks": [
-    { "name": "git_clean",                "passed": true },
-    { "name": "platform_declared",        "passed": true, "detail": "community" },
-    { "name": "git_declared",             "passed": true, "detail": "https://github.com/aomi-labs/community-apps" },
-    { "name": "server_tags",              "passed": true, "detail": "defaulted to [staging] (aomi.toml did not declare server_tags)" },
-    { "name": "backend_reachable",        "passed": true, "detail": "found 2 platforms" },
-    { "name": "platform_resolved",        "passed": true, "detail": "community -> aomi-labs/community-apps" },
-    { "name": "branch_matches_contract",  "passed": true, "detail": "publish == publish" },
-    { "name": "git_url_matches_platform", "passed": true, "detail": "aomi-labs/community-apps" },
-    { "name": "server_tags_match",        "passed": true, "detail": "target [staging] subset of server [staging]" }
-  ]
-}
+```text
+Preflight
+  [ok]   workspace git_clean
+  [ok]   manifest  platform_declared, git_declared  ·  defaulted=true server_tags=[staging]
+  [ok]   platform  platform_resolved, branch_matches_contract, git_url_matches_platform  ·  deployment_branch=publish github_repo=aomi-labs/community-apps name=community
+  [ok]   backend   backend_reachable, server_tags_match
 ```
 
-If any check fails, fix the underlying issue (usually your `aomi.toml`) before
-running deploy.
+The same plan also lands in `.aomi/deployment.json` next to your `aomi.toml`
+(read it if you need machine-readable detail or want to inspect resolved
+facts).
+
+If any stage fails, fix the underlying issue (usually your `aomi.toml`)
+before running deploy. Warnings (`[warn]`) are advisory and don't block —
+a common one is `git_url_matches_platform` when you're deploying from a fork.
 
 ---
 
-## 3. Deploy: stage source into community-apps + push
+## 3. Deploy
 
-This is the step where `community-apps` enters the picture. Up to here you've
-been working entirely in your own source repo. Now `aomi-git` needs a
-**transit clone** of community-apps to stage your files into before pushing.
-
-### Two clones, one writes code, one transits
-
-| Directory | Who edits | What for |
-|---|---|---|
-| Your source repo | **You.** Write Rust, commit. | Authoring. |
-| A local clone of `community-apps` | **`aomi-git` only.** Never hand-edit. | Transit — the CLI copies your source in, commits, pushes. |
+From your source repo:
 
 ```bash
-# anywhere on disk — your home dir, ~/code/, /tmp, whatever:
-git clone https://github.com/aomi-labs/community-apps
+aomi-git deploy
 ```
 
-Then, from **your source repo**, point the CLI at that clone:
-
-```bash
-aomi-git deploy --platform-repo-dir /path/to/community-apps
-```
+That's it. `aomi-git` manages a transit clone of `community-apps` for you
+under `~/.aomi/transit/aomi-labs-community-apps/` (you never touch it — it's a
+CLI-managed cache). On first deploy it clones; on subsequent deploys it
+fetches and resets. Auth flows through your normal `git` credential helper, so
+if `gh auth login` works, this works.
 
 What this does:
 
-1. Snapshots your source tree under `apps/<slug>/` in the community-apps clone
+1. Snapshots your source tree into the transit clone under `apps/<slug>/`
 2. Writes `apps/<slug>/.aomi/deployment.json` (the build contract for CI)
 3. Commits and pushes to the `publish` branch
 4. The community-apps CI auto-fires:
@@ -201,6 +192,18 @@ You can watch CI here:
 > the release tarball doesn't exist yet when push completes. That's expected.
 > The platform operator will activate once CI has uploaded the release.
 
+### Escape hatch: `--platform-dir`
+
+If you need to manage the clone yourself (air-gapped CI, custom auth, or
+debugging the staged tree before push), pass a directory you control:
+
+```bash
+aomi-git deploy --platform-dir /path/to/your/community-apps-clone
+```
+
+This skips the transit cache entirely. You're responsible for keeping that
+clone in sync with `origin/publish`. Most contributors should never need this.
+
 ---
 
 ## 4. Activation
@@ -214,9 +217,25 @@ green and the release tag exists on GitHub, ping the platform operator with:
 They run:
 
 ```bash
+AOMI_APP_ACTIVATION_TOKEN=<platform-token> \
+AOMI_BACKEND_URL=https://staging-api.aomi.dev \
+  aomi-git activate --target-tag staging
+```
+
+That's the whole command. `aomi-git activate` reads `.aomi/deployment.json`
+from the source repo (left there by `aomi-git deploy`) and pulls the release
+tag, platform, source repo, commit/tree/digest, display name, and visibility
+from it. The operator only needs to supply the target tag.
+
+For activations that can't see the source repo's `.aomi/deployment.json` (e.g.
+re-activating an older release tag, or running from a fresh machine), every
+field can be passed explicitly:
+
+```bash
 aomi-git activate apps-<slug>-<short-commit> \
-  --backend-url https://staging-api.aomi.dev \
-  --source-repo aomi-labs/community-apps \
+  --backend https://staging-api.aomi.dev \
+  --platform community \
+  --git aomi-labs/community-apps \
   --target-tag staging \
   --visibility public
 ```
@@ -242,8 +261,8 @@ If you *are* the platform operator and have the token in your env as
 Once your app is verified on staging:
 
 1. Edit `aomi.toml`: `server_tags = ["prod"]`
-2. Re-run `aomi-git deploy --platform-repo-dir <community-apps>` — this
-   creates a new release tag (different source commit) targeting prod
+2. Re-run `aomi-git deploy` — this creates a new release tag (different
+   source commit) targeting prod
 3. Ask the platform operator to activate against `api.aomi.dev` with
    `--target-tag prod`
 
@@ -256,9 +275,10 @@ Until you do this, your app exists in the DB but won't load on prod backends
 
 | Error | Cause | Fix |
 |---|---|---|
-| `git tree is dirty` | uncommitted files in your source repo (often `.aomi/deployment.json` from a previous dry-run) | commit, or add `.aomi/` and `target/` to `.gitignore` |
+| `git tree is dirty` | uncommitted files in your source repo (often `.aomi/deployment.json` from a previous dry-run) | commit, or add `.aomi/`, `target/`, and `Cargo.lock` to `.gitignore` |
 | `aomi.toml [app].access_token must be \`$ENV_VAR_NAME\`` | you put a literal token in `aomi.toml` | use `"$ENV_VAR_NAME"`; never commit secrets |
-| `dirty files outside owned publish path` | your community-apps clone has uncommitted changes to files NOT under `apps/<slug>/` | `git -C /path/to/community-apps stash` |
+| `git clone ... exited 128` | `aomi-git` couldn't fetch the platform repo into its transit cache (auth or network) | `gh auth login`; if still wedged, `rm -rf ~/.aomi/transit/aomi-labs-community-apps/` and retry |
+| `failed to refresh transit clone` | transit cache got into a weird state (interrupted clone, manual edits) | `rm -rf ~/.aomi/transit/aomi-labs-community-apps/` and re-run `aomi-git deploy` |
 | `activation endpoint ... returned 409 Conflict` | your `target_tags` aren't a subset of the backend's `AOMI_SERVER_TAGS` | match your env to the backend you're activating against |
 | `activation endpoint ... returned 502 Bad Gateway` | release tarball doesn't exist yet (CI race) or backend can't reach GitHub | retry after CI finishes |
 | `sdk_version mismatch` | your `aomi-sdk` Cargo dep doesn't match `platform.json`'s `required_sdk_version` | pin `aomi-sdk = "=0.1.X"` to the right version |

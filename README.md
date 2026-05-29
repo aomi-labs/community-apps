@@ -17,8 +17,9 @@ The short version:
 
 1. Author your app in your own source repo with an `aomi.toml` declaring
    `platform = "community"` and `git = "https://github.com/aomi-labs/community-apps"`.
-2. Run `aomi-git deploy --platform-repo-dir /path/to/this/repo`. It stages your
-   source under `apps/<slug>/`, commits, and pushes to the `publish` branch.
+2. Run `aomi-git deploy`. It auto-manages a transit clone of this repo under
+   `~/.aomi/transit/`, stages your source into `apps/<slug>/`, commits, and
+   pushes to the `publish` branch — no flags, no clone management.
 3. GitHub Actions builds the cdylib and uploads a release tarball tagged
    `apps-<slug>-<short-source-commit>`.
 4. Ping the platform operator with your release tag; they activate it against
@@ -54,7 +55,6 @@ need to memorize them.
 | Staged app path | `apps/<app_slug>/` |
 | Build contract file | `apps/<app_slug>/.aomi/deployment.json` (written by `aomi-git deploy`) |
 | Release tag convention | `apps-{app_slug}-{short_commit}` |
-| Runtime bundle contract | `aomi-plugin-bundle-v1` |
 | Required SDK version | see [`platform.json`](./platform.json) |
 
 `short_commit` is the first 12 characters of your source commit recorded by
