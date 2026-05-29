@@ -89,11 +89,16 @@ public       = true                     # visible to all backend users
 # server_tags = ["staging"]
 ```
 
-**Reject literal tokens in `aomi.toml`.** If your app needs a GitHub PAT to
-fetch private dependencies, declare it as an env-var *reference*, not the
-token itself:
+**You don't need `access_token` for community-apps.** This repo is public,
+so the backend can fetch your release tarball without auth. Omit the field
+entirely.
+
+If you ever publish to a **private** platform repo, you'd add an
+`access_token` line pointing at an env var (never a literal token — that's
+rejected at parse so committed configs can't leak secrets):
 
 ```toml
+# only needed for private platform repos — community-apps is public, skip this
 access_token = "$MY_GH_TOKEN"   # ✅ env-var ref
 access_token = "ghp_xxxxxxx"    # ❌ rejected at parse — never commit secrets
 ```
