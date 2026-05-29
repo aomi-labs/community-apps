@@ -1,34 +1,32 @@
 # Launching an Aomi App
 
-This is the end-to-end guide for getting a new app into this repo and live on
-the Aomi runtime. If you read three things, read these:
+End-to-end guide for shipping a new app into community-apps and getting it loaded on the Aomi runtime.
 
-1. You write code in **your** source repo. You don't hand-edit anything under
-   `apps/<slug>/` in this repo — that path is generated for you by `aomi-git`.
-2. The release tag (`apps-<slug>-<short-commit>`) is derived from your source
-   commit. Once your code is good, the rest of the pipeline is deterministic.
-3. Activation is what makes the backend actually load your release. The
-   activation token is held by the platform operator — you don't need it to
-   contribute.
+1. **Author** your app in your own source repo: a Rust `cdylib` crate + `aomi.toml`.
+2. **Deploy** with `aomi-git deploy` — stages your source into `apps/<slug>/` of a community-apps clone and pushes to `publish`.
+3. **CI** builds the cdylib and publishes a GitHub release tagged `apps-<slug>-<short-commit>`.
+4. **Activate**: hand the release tag to the platform operator; they run `aomi-git activate` and the backend fetches + loads.
 
-The full pipeline is:
+```mermaid
+sequenceDiagram
+    autonumber
+    actor You
+    participant Src as your source repo
+    participant CLI as aomi-git
+    participant Repo as community-apps
+    participant CI as publish CI
+    participant Ops as platform ops
+    participant BE as Aomi backend
 
+    You->>Src: write aomi.toml + src/
+    You->>CLI: aomi-git deploy --platform-repo-dir <clone>
+    CLI->>Repo: stage apps/<slug>/, commit, push
+    Repo->>CI: trigger
+    CI->>Repo: upload release apps-<slug>-<short-commit>
+    You->>Ops: release tag
+    Ops->>BE: aomi-git activate
+    BE->>BE: fetch + validate + load
 ```
-your source repo                   community-apps (this repo)               aomi backend
-─────────────────                  ──────────────────────────               ────────────
-aomi.toml + src/         ──[1]──▶  apps/<slug>/                  ─[2]──▶   release
-   ▲                               .aomi/deployment.json                      │
-   │ aomi-git deploy                publish-apps CI                          [3] activate
-   │                                                                          │
-   └────────  PR review ◀──────────────────────────────────────────────────────┘
-              & merge
-```
-
-1. `aomi-git deploy` copies your source into `apps/<slug>/` and pushes a commit
-2. GitHub Actions builds the cdylib and uploads a release tarball
-3. The platform operator runs `aomi-git activate <release-tag>` against the
-   target backend. The backend fetches the tarball, validates the SDK contract,
-   loads the plugin.
 
 ---
 
