@@ -222,26 +222,53 @@ clone in sync with `origin/publish`. Most contributors should never need this.
 
 ## 4. Activation
 
-You **don't need the activation token** to contribute. After your CI run is
-green and the release tag exists on GitHub, ping the platform operator with:
+You **don't need the activation token** to contribute. Once your CI run is
+green and the release tag exists on GitHub, hand off to the platform
+operator.
 
-- the release tag (`apps-<slug>-<short-commit>`)
-- the target environment (staging or prod)
+### When is CI done?
 
-They run:
+`aomi-git deploy` prints a Next-steps block at the end that links the two
+URLs you need to watch:
+
+1. **CI build status** — `https://github.com/aomi-labs/community-apps/actions`.
+   Wait for the run triggered by your push to go green (~1–3 min).
+2. **Release availability** — once CI succeeds, your release appears at
+   `https://github.com/aomi-labs/community-apps/releases/tag/apps-<slug>-<short-commit>`.
+   This is the artifact the backend will fetch.
+
+When both are green, you're ready to request activation.
+
+### Requesting activation
+
+Post in the `#aomi-apps` Discord channel and tag `@platform-ops`. Include:
+
+- **Release tag:** `apps-<slug>-<short-commit>` (printed by `aomi-git deploy`,
+  also in your `.aomi/deployment.json`)
+- **Target environment:** `staging` for the first activation, `prod` later
+  after staging is verified
+- **Your GitHub handle** so we can confirm the activated app back to you
+
+A `@platform-ops` member runs the activate, then confirms by linking your
+app at `https://staging-api.aomi.dev/api/control/apps/status`.
+
+### If you are the operator yourself
+
+With `AOMI_APP_ACTIVATION_TOKEN` exported, run from the source repo:
 
 ```bash
 AOMI_APP_ACTIVATION_TOKEN=<platform-token> \
 AOMI_BACKEND_URL=https://staging-api.aomi.dev \
-  aomi-git activate --target-tag staging
+  aomi-git activate
 ```
 
 That's the whole command. `aomi-git activate` reads `.aomi/deployment.json`
-from the source repo (left there by `aomi-git deploy`) and pulls the release
-tag, platform, source repo, commit/tree/digest, display name, and visibility
-from it. The operator only needs to supply the target tag.
+(left there by `aomi-git deploy`) and pulls release tag, platform, source
+repo, source provenance, display name, visibility, **and target tags** from
+it. The target tags come from the build's `server_tags` (see "How target tags
+work" below) — you don't normally pass `--target-tag` at all.
 
-For activations that can't see the source repo's `.aomi/deployment.json` (e.g.
+For activations that can't see the source repo's `deployment.json` (e.g.
 re-activating an older release tag, or running from a fresh machine), every
 field can be passed explicitly:
 
@@ -257,14 +284,30 @@ aomi-git activate apps-<slug>-<short-commit> \
 …and confirm with you that your app appears in
 `https://staging-api.aomi.dev/api/control/apps/status`.
 
-If you *are* the platform operator and have the token in your env as
-`AOMI_APP_ACTIVATION_TOKEN`, you can run the activate yourself.
+### How target tags work
 
-### Why this is the model
+`aomi.toml [app].server_tags` is the **build's declared scope** — the set of
+backend tiers the contributor signed off on shipping to. `aomi-git deploy`
+copies this into `.aomi/deployment.json`, where it travels with the release.
+
+At activate time the operator can **narrow** but cannot **widen**:
+
+- If you declared `server_tags = ["staging"]` in aomi.toml, the operator can
+  only activate to staging. An attempt to widen to prod is rejected with a
+  multi-line error pointing back at the source repo.
+- If you declared `server_tags = ["staging", "prod"]`, the operator can
+  activate to either (or both). They'll typically start with `--target-tag
+  staging`, verify, then re-run with `--target-tag prod`.
+
+This makes the contributor's word at build time a contract, not advisory. If
+you want your app on prod, you have to say so in your aomi.toml first — no
+operator can do it for you.
+
+### Why activation is held by `@platform-ops`, not contributors
 
 - The activation token authorizes `community` writes against the backend.
   Anyone with it can mint or replace ANY community app row. We keep it with
-  the platform operator until per-contributor tokens land.
+  `@platform-ops` until per-contributor tokens land.
 - This repo's CI does not call activate. The PR review and CI run prove your
   release is buildable and well-formed; activation is a separate trust step.
 
@@ -274,14 +317,20 @@ If you *are* the platform operator and have the token in your env as
 
 Once your app is verified on staging:
 
-1. Edit `aomi.toml`: `server_tags = ["prod"]`
+1. Edit `aomi.toml`: change `server_tags = ["staging"]` to either
+   `["prod"]` (prod-only) or `["staging", "prod"]` (both tiers loadable
+   from this release).
 2. Re-run `aomi-git deploy` — this creates a new release tag (different
-   source commit) targeting prod
-3. Ask the platform operator to activate against `api.aomi.dev` with
-   `--target-tag prod`
+   source commit) carrying the wider declared scope.
+3. Post in `#aomi-apps` Discord, tag `@platform-ops`, and ask for activation
+   against `https://api.aomi.dev`. The operator runs
+   `aomi-git activate` and the new release lands on prod backends.
 
-Until you do this, your app exists in the DB but won't load on prod backends
-(by design — see ADR 0010 in aomi-launch-my-agent).
+Why the re-deploy? Per the target-tag rule, the operator can only activate
+to scopes the build itself declared in `aomi.toml`. Promoting to prod
+requires you (the contributor) to re-deploy with prod in `server_tags`
+first — the operator can't widen the scope on your behalf. By design — see
+ADR 0010 in aomi-launch-my-agent.
 
 ---
 
