@@ -1,0 +1,6 @@
+[app]
+name         = "limi"
+display_name = "Limi"
+platform     = "community"
+git          = "https://github.com/aomi-labs/community-apps"
+public       = true
