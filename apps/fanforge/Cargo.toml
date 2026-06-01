@@ -2,7 +2,7 @@
 name = "fanforge"
 version = "0.1.0"
 edition = "2024"
-description = "FanForge — Aomi plugin wrapping Zora creator economy for non-crypto-native music creators"
+description = "FanForge — Aomi plugin for creator fan economies on Zora"
 
 [lib]
 crate-type = ["cdylib"]

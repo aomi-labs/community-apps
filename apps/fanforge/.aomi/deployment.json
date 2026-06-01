@@ -10,16 +10,16 @@
     "server_tags": [
       "staging"
     ],
-    "config_path": "aomi.toml",
-    "source_path": "."
+    "config_path": "plugin/aomi.toml",
+    "source_path": "plugin"
   },
   "source": {
-    "git_root": "/private/tmp/fanforge-source",
-    "source_path": ".",
+    "git_root": "/home/ty/Work/hackathons/fanforge",
+    "source_path": "plugin",
     "branch": "main",
-    "commit": "8595161d20fcdb914b933e9bb2115c86ff4ffff1",
-    "tree": "85a30f2732e4b12fadff01337e152883b970aaf3",
-    "digest": "sha256:0364828c226ab95d62ee7ca150aa00d84a02ff62b21a8081c27bada2bb5e47be",
+    "commit": "acb66e93f94d168f282fba3d77595cbfe9bc94c1",
+    "tree": "f0c0f639241d97c485e342f546d965989bc71a18",
+    "digest": "sha256:f7b09090862b196c99f3dd29da82259fe2f94d98e8b61cdeadfbfe92c8293196",
     "dirty": false
   },
   "platform": {
@@ -30,7 +30,7 @@
   "target": {
     "branch": "publish",
     "app_path": "apps/fanforge",
-    "release_tag": "apps-fanforge-8595161d20fc",
+    "release_tag": "apps-fanforge-acb66e93f94d",
     "server_tags": [
       "staging"
     ]
@@ -42,57 +42,79 @@
   },
   "files": [
     {
-      "path": ".gitignore",
-      "sha256": "sha256:5900ccd15ec34cfa09f948f0a7f17268ca47bbf25ac461f16037b4bd526bb06e",
-      "bytes": 7
-    },
-    {
       "path": "Cargo.toml",
-      "sha256": "sha256:71f0c937e5ab0df55b53afb92a82d1afa8cfe9f7af651f3faf88fa0d92f63bf0",
-      "bytes": 509
+      "sha256": "sha256:1b9cc40b6aae1d090b6172efeccc28dadad8b4a96b47806b3cfdace872cc79e0",
+      "bytes": 476
     },
     {
       "path": "aomi.toml",
-      "sha256": "sha256:50e1e25ffff21b1b4ffd3881d21fedc910de9dc0ea3df1f9e406b0fd74d5fe16",
-      "bytes": 139
+      "sha256": "sha256:6a2525cc8d72edfb96733b72259f2a23a30babf6a63da6547ff3d50934b7f58c",
+      "bytes": 166
     },
     {
       "path": "src/client.rs",
-      "sha256": "sha256:4d793cee3f49fc3bddb7e5b67d9f4101b28afe885aecdb34f6e2b150158e975c",
-      "bytes": 11084
+      "sha256": "sha256:dc13da515e4477af653fb6db5041d22c7f13d48accb274a5e9f638abe4bc9980",
+      "bytes": 10487
     },
     {
       "path": "src/lib.rs",
-      "sha256": "sha256:98c50caad34f174d6ddc975767d479f2ce0bbf472a12218ed5a5a767a40b61d0",
-      "bytes": 3250
+      "sha256": "sha256:514f445e8978408ec242daf3392777be1103bc517ddf853227b5d0a7bcb04254",
+      "bytes": 3376
     },
     {
       "path": "src/tool.rs",
-      "sha256": "sha256:4e59dd866128a9268c9132bd03c8600d65fc9937eb14541a9ec3f6296bde10bb",
-      "bytes": 21092
+      "sha256": "sha256:ff8a6350d6948d3f565c34c14695abdd3ca8df936fca7326a31ae957e14f5d50",
+      "bytes": 26251
     }
   ],
-  "checks": [
+  "stages": [
     {
-      "name": "git_clean",
-      "passed": true
+      "stage": "workspace",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "git_clean",
+          "passed": true,
+          "severity": "error",
+          "detail": "working tree clean"
+        }
+      ]
     },
     {
-      "name": "platform_declared",
-      "passed": true,
-      "detail": "community"
+      "stage": "manifest",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "platform_declared",
+          "passed": true,
+          "severity": "error",
+          "detail": "community"
+        },
+        {
+          "name": "git_declared",
+          "passed": true,
+          "severity": "error",
+          "detail": "https://github.com/aomi-labs/community-apps"
+        }
+      ],
+      "resolved": {
+        "defaulted": true,
+        "server_tags": [
+          "staging"
+        ]
+      }
     },
     {
-      "name": "git_declared",
-      "passed": true,
-      "detail": "https://github.com/aomi-labs/community-apps"
+      "stage": "platform",
+      "status": "skipped",
+      "detail": "requires backend preflight (--backend / AOMI_BACKEND_URL)"
     },
     {
-      "name": "server_tags",
-      "passed": true,
-      "detail": "defaulted to [staging] (aomi.toml did not declare server_tags)"
+      "stage": "backend",
+      "status": "skipped",
+      "detail": "requires backend preflight (--backend / AOMI_BACKEND_URL)"
     }
   ],
   "errors": [],
-  "updated_at": 1779982572
+  "updated_at": 1780355752
 }

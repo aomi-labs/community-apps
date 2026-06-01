@@ -3,6 +3,11 @@ use aomi_sdk::*;
 use serde_json::{Value, json};
 
 // ── Tool 1: fanforge_launch_fan_coin ──────────────────────────────────────────
+//
+// Route chain (no internal tools needed):
+//   LaunchFanCoin  (wallet from ctx, IPFS pin, Zora calldata)
+//     → stage_tx + enforce(simulate_batch → commit_txs binds "tx_hash")
+//     → after: fanforge_finalize_launch
 
 pub(crate) struct LaunchFanCoin;
 
@@ -10,12 +15,12 @@ impl DynAomiTool for LaunchFanCoin {
     type App = FanForgeApp;
     type Args = LaunchFanCoinArgs;
     const NAME: &'static str = "fanforge_launch_fan_coin";
-    const DESCRIPTION: &'static str = "Launch a creator fan coin on Zora for a music creator. Takes the creator's name, ticker, and description — handles everything on-chain invisibly. Returns the live Zora link and coin address. Use when the creator says they want to launch a coin, start a fan economy, or monetize their fanbase.";
+    const DESCRIPTION: &'static str = "Launch a creator coin on Zora for any creator with a fanbase — music artists, TikTokers, YouTubers, producers, designers, or anyone who wants to turn fan loyalty into a real economy. Takes a coin name, ticker (3–5 letters), and a short description. Handles everything invisibly. Returns the live Zora link. Use when a creator says they want to launch a coin, start a fan economy, or monetize their audience.";
 
     fn run_with_routes(
         _app: &FanForgeApp,
         args: Self::Args,
-        _ctx: DynToolCallCtx,
+        ctx: DynToolCallCtx,
     ) -> Result<ToolReturn, String> {
         let ticker = args.ticker.trim().to_uppercase();
         if ticker.len() < 3
@@ -23,76 +28,30 @@ impl DynAomiTool for LaunchFanCoin {
             || !ticker.chars().all(|c| c.is_ascii_uppercase())
         {
             return Err(format!(
-                "ticker_invalid: '{}' must be 3–5 letters (e.g. TEMI, VIBES)",
+                "ticker_invalid: '{}' must be 3–5 letters (e.g. TEMI, VIBES, MVMNT)",
                 ticker
             ));
         }
 
-        ToolReturn::route(json!({
-            "status": "setting_up",
-            "message": "Checking your fan economy wallet…"
-        }))
-        .next(|next| {
-            next.add::<host::GetAccountInfo>(json!({ "chain_id": 8453 }))
-                .bind_as("creator_wallet");
-        })
-        .after_named(
-            "fanforge_build_coin_tx",
-            json!({
-                "name": args.name,
-                "ticker": ticker,
-                "description": args.description,
-                "image_url": args.image_url,
-                "creator_telegram_id": args.creator_telegram_id,
-            }),
-        )
-        .awaits("creator_wallet")
-        .try_build()
-    }
-}
+        // Get wallet address from Aomi session context (set when creator connects wallet)
+        let creator_address = ctx
+            .attribute_string(&["domain", "evm", "address"])
+            .ok_or("wallet_not_connected: your fan economy wallet isn't linked yet — connect your wallet to continue")?;
 
-// ── Tool 1b (internal): fanforge_build_coin_tx ────────────────────────────────
-
-pub(crate) struct BuildCoinTx;
-
-impl DynAomiTool for BuildCoinTx {
-    type App = FanForgeApp;
-    type Args = BuildCoinTxArgs;
-    const NAME: &'static str = "fanforge_build_coin_tx";
-    const DESCRIPTION: &'static str = "Internal tool — called automatically after wallet lookup during coin launch. Uploads coin metadata to IPFS, fetches Zora transaction calldata, and stages the on-chain deployment. Do not call directly.";
-
-    fn run_with_routes(
-        _app: &FanForgeApp,
-        args: Self::Args,
-        _ctx: DynToolCallCtx,
-    ) -> Result<ToolReturn, String> {
-        // Extract the creator wallet address from the route-injected get_account_info result
-        let creator_address = args
-            .creator_wallet
-            .as_str()
-            .or_else(|| args.creator_wallet.get("address").and_then(Value::as_str))
-            .or_else(|| {
-                args.creator_wallet
-                    .get("account")
-                    .and_then(|a| a.get("address"))
-                    .and_then(Value::as_str)
-            })
-            .ok_or("wallet_error: could not read your fan economy wallet address")?;
-
-        // Build metadata JSON and upload to IPFS
+        // Upload coin metadata to IPFS via Pinata
         let metadata_json = json!({
             "name": args.name,
             "description": args.description,
-            "symbol": args.ticker,
+            "symbol": ticker,
             "image": args.image_url.as_deref().unwrap_or(""),
         });
         let metadata_uri = ipfs_pin_json(&metadata_json)?;
 
-        // Fetch transaction calldata from Zora's REST API
+        // Fetch pre-built transaction calldata from Zora's REST API
         let zora_req = json!({
             "creator": creator_address,
             "name": args.name,
-            "symbol": args.ticker,
+            "symbol": ticker,
             "metadata": { "type": "RAW_URI", "uri": metadata_uri },
             "currency": "CREATOR_COIN",
             "chainId": 8453,
@@ -103,12 +62,12 @@ impl DynAomiTool for BuildCoinTx {
             .get("calls")
             .and_then(Value::as_array)
             .and_then(|arr| arr.first())
-            .ok_or("zora_error: Zora API returned no transaction calldata")?;
+            .ok_or("zora_error: Zora returned no transaction calldata")?;
 
         let to = call
             .get("to")
             .and_then(Value::as_str)
-            .ok_or("zora_error: missing transaction target address")?;
+            .ok_or("zora_error: missing transaction target")?;
         let data = call
             .get("data")
             .and_then(Value::as_str)
@@ -117,11 +76,12 @@ impl DynAomiTool for BuildCoinTx {
         let predicted_address = calldata_resp
             .get("predictedCoinAddress")
             .and_then(Value::as_str)
-            .unwrap_or("");
+            .unwrap_or("")
+            .to_string();
 
         ToolReturn::route(json!({
             "status": "deploying",
-            "message": "Deploying your fan coin — please approve in your wallet.",
+            "message": "Your fan coin is being deployed — approve in your wallet.",
         }))
         .next(|next| {
             next.add::<host::StageTx>(json!({
@@ -134,24 +94,24 @@ impl DynAomiTool for BuildCoinTx {
                 enforce.add::<host::SimulateBatch>(json!({}));
                 enforce
                     .add::<host::CommitTxs>(json!({ "aa_preference": "auto" }))
-                    .bind_as("transaction_hash");
+                    .bind_as("tx_hash");
             });
         })
         .after_named(
             "fanforge_finalize_launch",
             json!({
                 "name": args.name,
-                "ticker": args.ticker,
+                "ticker": ticker,
                 "creator_telegram_id": args.creator_telegram_id,
                 "predicted_coin_address": predicted_address,
             }),
         )
-        .awaits("transaction_hash")
+        .awaits("tx_hash")
         .try_build()
     }
 }
 
-// ── Tool 1c (internal): fanforge_finalize_launch ──────────────────────────────
+// ── Tool 1b (internal): fanforge_finalize_launch ──────────────────────────────
 
 pub(crate) struct FinalizeLaunch;
 
@@ -159,35 +119,21 @@ impl DynAomiTool for FinalizeLaunch {
     type App = FanForgeApp;
     type Args = FinalizeLaunchArgs;
     const NAME: &'static str = "fanforge_finalize_launch";
-    const DESCRIPTION: &'static str = "Internal tool — called automatically after the fan coin transaction is confirmed. Saves the coin record and returns the live Zora link. Do not call directly.";
+    const DESCRIPTION: &'static str = "Internal tool — fires automatically after the wallet confirms the fan coin transaction. Records the coin in the database and returns the live Zora link. Do not call directly.";
 
     fn run(
         _app: &FanForgeApp,
         args: Self::Args,
         _ctx: DynToolCallCtx,
     ) -> Result<Value, String> {
-        // Unwrap the tx hash from whatever commit_txs returns
-        let tx_hash = args
-            .transaction_hash
-            .as_str()
-            .or_else(|| {
-                args.transaction_hash
-                    .get("hash")
-                    .and_then(Value::as_str)
-            })
-            .or_else(|| {
-                args.transaction_hash
-                    .get("transactionHash")
-                    .and_then(Value::as_str)
-            })
-            .unwrap_or("pending");
+        let tx_hash = args.tx_hash.as_deref().unwrap_or("pending");
 
         let zora_url = format!(
             "https://zora.co/coin/base:{}",
             args.predicted_coin_address.to_lowercase()
         );
 
-        // Best-effort: store coin in Supabase (don't fail the launch if DB is unavailable)
+        // Best-effort Supabase write — don't fail the launch if DB is temporarily down
         let _ = supabase_post(
             "creator_coins",
             &json!({
@@ -207,7 +153,7 @@ impl DynAomiTool for FinalizeLaunch {
             "zora_url": zora_url,
             "coin_address": args.predicted_coin_address,
             "message": format!(
-                "Your {} fan coin (${}) is live! Share this link with your fans: {}",
+                "Your {} coin (${}) is live! Share this with your fans: {}",
                 args.name, args.ticker, zora_url
             ),
         }))
@@ -222,7 +168,7 @@ impl DynAomiTool for GetFanLeaderboard {
     type App = FanForgeApp;
     type Args = GetFanLeaderboardArgs;
     const NAME: &'static str = "fanforge_get_fan_leaderboard";
-    const DESCRIPTION: &'static str = "Get the ranked leaderboard of top fans holding a creator's Zora coin. Returns wallet addresses (truncated), balances, and percentage of total supply held. Use when the creator asks who their top fans are, wants to see holder rankings, or is deciding who gets a reward.";
+    const DESCRIPTION: &'static str = "Get the ranked leaderboard of top fans holding a creator's Zora coin. Returns handles, balances, and percentage of supply held. Use when the creator asks who their top fans are, wants to see holder rankings, or is deciding who gets a reward or shoutout.";
 
     fn run(_app: &FanForgeApp, args: Self::Args, _ctx: DynToolCallCtx) -> Result<Value, String> {
         let limit = args.limit.unwrap_or(10).min(50);
@@ -234,7 +180,7 @@ impl DynAomiTool for GetFanLeaderboard {
 
         let resp = zora_get(&path)?;
 
-        // Response shape: { zora20Token: { tokenBalances: { edges: [{ node: { balance, ownerAddress, ownerProfile } }] } } }
+        // Response: { zora20Token: { tokenBalances: { edges: [{ node: { balance, ownerAddress, ownerProfile } }] } } }
         let edges = resp
             .get("zora20Token")
             .and_then(|t| t.get("tokenBalances"))
@@ -263,7 +209,7 @@ impl DynAomiTool for GetFanLeaderboard {
                     .and_then(Value::as_str)
                     .unwrap_or(&wallet_short)
                     .to_string();
-                // balance is raw (18 decimals) — convert to human-readable coins
+                // balance is raw (18 decimals) — convert to human-readable
                 let balance_coins = node
                     .get("balance")
                     .and_then(Value::as_str)
@@ -274,8 +220,8 @@ impl DynAomiTool for GetFanLeaderboard {
 
                 json!({
                     "rank": i + 1,
-                    "wallet_short": wallet_short,
                     "handle": handle,
+                    "wallet_short": wallet_short,
                     "balance": format!("{:.2}", balance_coins),
                 })
             })
@@ -297,7 +243,7 @@ impl DynAomiTool for CreateFanMission {
     type App = FanForgeApp;
     type Args = CreateFanMissionArgs;
     const NAME: &'static str = "fanforge_create_fan_mission";
-    const DESCRIPTION: &'static str = "Create a fan mission that unlocks exclusive content for holders meeting a minimum coin balance. Stores the mission and makes it ready for distribution. Use when the creator wants to reward fans who hold a certain amount of their coin with exclusive content (unreleased tracks, early access, etc.).";
+    const DESCRIPTION: &'static str = "Create a fan mission that unlocks exclusive content for anyone holding above a minimum coin balance. Use when the creator wants to reward loyal fans with exclusive content — unreleased tracks, early access, behind-the-scenes, merch discounts, stream invites, or anything fans would value.";
 
     fn run(_app: &FanForgeApp, args: Self::Args, _ctx: DynToolCallCtx) -> Result<Value, String> {
         if args.threshold <= 0.0 {
@@ -305,25 +251,24 @@ impl DynAomiTool for CreateFanMission {
         }
 
         let expires_at = args.expires_at.unwrap_or_else(|| {
-            // Default 30 days from now
             let now = std::time::SystemTime::now()
                 .duration_since(std::time::UNIX_EPOCH)
                 .unwrap_or_default()
                 .as_secs();
-            let thirty_days = now + 30 * 24 * 3600;
-            format!("{}", thirty_days)
+            format!("{}", now + 30 * 24 * 3600)
         });
 
-        let mission_row = json!({
-            "coin_address": args.coin_address,
-            "title": args.title,
-            "content_url": args.content_url,
-            "threshold": args.threshold,
-            "expires_at": expires_at,
-            "status": "active",
-        });
-
-        let result = supabase_post("fan_missions", &mission_row)?;
+        let result = supabase_post(
+            "fan_missions",
+            &json!({
+                "coin_address": args.coin_address,
+                "title": args.title,
+                "content_url": args.content_url,
+                "threshold": args.threshold,
+                "expires_at": expires_at,
+                "status": "active",
+            }),
+        )?;
 
         let mission_id = result
             .as_array()
@@ -338,7 +283,10 @@ impl DynAomiTool for CreateFanMission {
             "title": args.title,
             "threshold": args.threshold,
             "status": "active",
-            "message": "Mission created. Use fanforge_distribute_rewards to deliver content to eligible fans.",
+            "message": format!(
+                "Mission created. Fans holding {} or more coins can unlock: {}",
+                args.threshold, args.title
+            ),
         }))
     }
 }
@@ -351,24 +299,25 @@ impl DynAomiTool for DistributeRewards {
     type App = FanForgeApp;
     type Args = DistributeRewardsArgs;
     const NAME: &'static str = "fanforge_distribute_rewards";
-    const DESCRIPTION: &'static str = "Distribute exclusive content to all fans who meet the mission's holding threshold. Checks current coin holders, filters by the minimum balance, and delivers the content URL to every eligible fan who hasn't received it yet. Use after creating a mission or when the creator asks to send rewards to fans.";
+    const DESCRIPTION: &'static str = "Deliver exclusive content to every fan who meets the mission's minimum holding threshold and hasn't received it yet. Idempotent — safe to run multiple times. Use after creating a mission or when the creator wants to send rewards to qualifying fans now.";
 
     fn run(_app: &FanForgeApp, args: Self::Args, _ctx: DynToolCallCtx) -> Result<Value, String> {
-        // 1. Load the mission from Supabase
+        // Load mission
         let missions = supabase_get(
             "fan_missions",
             &format!("id=eq.{}&select=*", urlencode(&args.mission_id)),
         )?;
-
         let mission = missions
             .as_array()
             .and_then(|a| a.first())
             .cloned()
             .ok_or_else(|| format!("mission_not_found: no mission with id {}", args.mission_id))?;
 
-        let status = mission.get("status").and_then(Value::as_str).unwrap_or("");
-        if status != "active" {
-            return Err(format!("mission_not_active: mission status is '{status}'"));
+        if mission.get("status").and_then(Value::as_str).unwrap_or("") != "active" {
+            return Err(format!(
+                "mission_not_active: mission status is '{}'",
+                mission.get("status").and_then(Value::as_str).unwrap_or("unknown")
+            ));
         }
 
         let coin_address = mission
@@ -381,13 +330,14 @@ impl DynAomiTool for DistributeRewards {
             .and_then(Value::as_f64)
             .unwrap_or(0.0);
 
-        // 2. Get current leaderboard (all holders)
+        // Fetch current holders from Zora
         let path = format!(
             "/coinHolders?address={}&chainId=8453&count=100",
             urlencode(&coin_address)
         );
         let holders_resp = zora_get(&path)?;
-        // Response shape: { zora20Token: { tokenBalances: { edges: [{ node: { balance, ownerAddress } }] } } }
+
+        // Response: { zora20Token: { tokenBalances: { edges: [{ node: { balance, ownerAddress } }] } } }
         let edges = holders_resp
             .get("zora20Token")
             .and_then(|t| t.get("tokenBalances"))
@@ -396,10 +346,13 @@ impl DynAomiTool for DistributeRewards {
             .cloned()
             .unwrap_or_default();
 
-        // 3. Load already-distributed wallets for this mission
+        // Load wallets that already received this mission's content
         let distributed = supabase_get(
             "reward_distributions",
-            &format!("mission_id=eq.{}&select=recipient_wallet", urlencode(&args.mission_id)),
+            &format!(
+                "mission_id=eq.{}&select=recipient_wallet",
+                urlencode(&args.mission_id)
+            ),
         )?;
         let already_sent: std::collections::HashSet<String> = distributed
             .as_array()
@@ -409,7 +362,6 @@ impl DynAomiTool for DistributeRewards {
             .map(String::from)
             .collect();
 
-        // 4. Filter eligible wallets (balance >= threshold, not yet delivered)
         let mut newly_dispatched = 0u32;
         let mut eligible_count = 0u32;
 
@@ -419,7 +371,7 @@ impl DynAomiTool for DistributeRewards {
                 .get("ownerAddress")
                 .and_then(Value::as_str)
                 .unwrap_or("");
-            // balance is raw (18 decimals) — convert to coins for threshold comparison
+            // balance is raw 18-decimal — convert to coins for threshold comparison
             let balance: f64 = node
                 .get("balance")
                 .and_then(Value::as_str)
@@ -428,7 +380,7 @@ impl DynAomiTool for DistributeRewards {
                 .map(|b| b / 1e18)
                 .unwrap_or(0.0);
 
-            if balance < threshold {
+            if balance < threshold || wallet.is_empty() {
                 continue;
             }
             eligible_count += 1;
@@ -437,11 +389,13 @@ impl DynAomiTool for DistributeRewards {
                 continue;
             }
 
-            let dist_row = json!({
-                "mission_id": args.mission_id,
-                "recipient_wallet": wallet,
-            });
-            if supabase_post("reward_distributions", &dist_row).is_ok() {
+            // DB-level UNIQUE(mission_id, recipient_wallet) prevents duplicates
+            if supabase_post(
+                "reward_distributions",
+                &json!({ "mission_id": args.mission_id, "recipient_wallet": wallet }),
+            )
+            .is_ok()
+            {
                 newly_dispatched += 1;
             }
         }
@@ -453,7 +407,8 @@ impl DynAomiTool for DistributeRewards {
             "already_received": eligible_count.saturating_sub(newly_dispatched),
             "status": "complete",
             "message": format!(
-                "{newly_dispatched} fans just unlocked the content. {} had already received it.",
+                "{} fans just unlocked the content. {} had already received it.",
+                newly_dispatched,
                 eligible_count.saturating_sub(newly_dispatched)
             ),
         }))
@@ -468,32 +423,28 @@ impl DynAomiTool for GetCreatorRecap {
     type App = FanForgeApp;
     type Args = GetCreatorRecapArgs;
     const NAME: &'static str = "fanforge_get_creator_recap";
-    const DESCRIPTION: &'static str = "Generate a plain-English weekly recap for the creator showing how their fan coin and community are growing. Returns a summary and a ready-to-copy Twitter post. Use when the creator asks how their coin is doing, wants a weekly update, or asks for something to post on social media.";
+    const DESCRIPTION: &'static str = "Generate a plain-English recap of how a creator's fan coin and community are growing — holder count, market cap, active missions, trading volume. Also produces a ready-to-copy social post. Use when the creator asks how their coin is doing, wants a weekly update, or needs content to post.";
 
     fn run(_app: &FanForgeApp, args: Self::Args, _ctx: DynToolCallCtx) -> Result<Value, String> {
         let days = args.days.unwrap_or(7);
 
-        // Fetch current coin data
         let coin_path = format!(
             "/coin?address={}&chain=8453",
             urlencode(&args.coin_address)
         );
         let coin_data = zora_get(&coin_path)?;
 
-        // Response shape: { zora20Token: { name, symbol, uniqueHolders, marketCap, volume24h, ... } }
+        // Response: { zora20Token: { name, symbol, uniqueHolders, marketCap, volume24h, ... } }
         let token = coin_data
             .get("zora20Token")
             .cloned()
-            .unwrap_or_else(|| serde_json::json!({}));
+            .unwrap_or_else(|| json!({}));
 
         let coin_name = token
             .get("name")
             .and_then(Value::as_str)
             .unwrap_or("your coin");
-        let ticker = token
-            .get("symbol")
-            .and_then(Value::as_str)
-            .unwrap_or("");
+        let ticker = token.get("symbol").and_then(Value::as_str).unwrap_or("");
         let holders = token
             .get("uniqueHolders")
             .and_then(Value::as_u64)
@@ -507,26 +458,30 @@ impl DynAomiTool for GetCreatorRecap {
             .and_then(Value::as_str)
             .unwrap_or("0");
 
-        // Fetch missions activity from Supabase
         let missions = supabase_get(
             "fan_missions",
-            &format!("coin_address=eq.{}&status=eq.active&select=id,title", urlencode(&args.coin_address)),
-        ).unwrap_or(json!([]));
+            &format!(
+                "coin_address=eq.{}&status=eq.active&select=id,title",
+                urlencode(&args.coin_address)
+            ),
+        )
+        .unwrap_or(json!([]));
         let active_missions = missions.as_array().map(|a| a.len()).unwrap_or(0);
 
         let summary = format!(
-            "Over the last {days} days, your fan economy is alive. \
-             ${ticker} has {holders} fans holding your coin. \
-             You have {active_missions} active mission{} unlocking exclusive content for your top supporters. \
-             Market cap: ${market_cap}. 24h trading volume: ${volume_24h}.",
+            "Over the last {days} days, your fan economy is growing. \
+             ${ticker} now has {holders} fan{} holding your coin. \
+             You have {active_missions} active mission{} delivering exclusive content to your top supporters. \
+             Market cap: ${market_cap}. 24h volume: ${volume_24h}.",
+            if holders == 1 { "" } else { "s" },
             if active_missions == 1 { "" } else { "s" }
         );
 
-        let twitter_post = format!(
-            "my fan coin ${ticker} now has {holders} holders 🎵\n\
-             if you're holding, you already know what's inside 🔐\n\
-             new mission drops soon for my top fans\n\
-             link in bio to join the movement",
+        let social_post = format!(
+            "my coin ${ticker} now has {holders} holders 🔥\n\
+             holding = access. you already know what's inside 🔐\n\
+             new mission dropping soon for my real ones\n\
+             link in bio to join"
         );
 
         ok(json!({
@@ -536,7 +491,180 @@ impl DynAomiTool for GetCreatorRecap {
             "active_missions": active_missions,
             "days_covered": days,
             "summary": summary,
-            "twitter_post": twitter_post,
+            "social_post": social_post,
         }))
+    }
+}
+
+// ── Unit tests ────────────────────────────────────────────────────────────────
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use aomi_sdk::testing::{run_tool, TestCtxBuilder};
+    use serde_json::json;
+
+    fn ctx(name: &str) -> DynToolCallCtx {
+        TestCtxBuilder::new(name).build()
+    }
+
+    fn ctx_with_wallet(name: &str) -> DynToolCallCtx {
+        // Simulate a connected wallet in the Aomi session context
+        TestCtxBuilder::new(name)
+            .attribute("domain", json!({ "evm": { "address": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266" } }))
+            .build()
+    }
+
+    // ── LaunchFanCoin ─────────────────────────────────────────────────────────
+
+    #[test]
+    fn launch_rejects_ticker_too_short() {
+        let result = run_tool::<LaunchFanCoin>(
+            &FanForgeApp,
+            json!({ "creator_telegram_id": "1", "name": "X", "ticker": "AB", "description": "d" }),
+            ctx_with_wallet("fanforge_launch_fan_coin"),
+        );
+        assert!(result.is_err());
+        assert!(result.unwrap_err().contains("ticker_invalid"));
+    }
+
+    #[test]
+    fn launch_rejects_ticker_too_long() {
+        let result = run_tool::<LaunchFanCoin>(
+            &FanForgeApp,
+            json!({ "creator_telegram_id": "1", "name": "X", "ticker": "TOOLONG", "description": "d" }),
+            ctx_with_wallet("fanforge_launch_fan_coin"),
+        );
+        assert!(result.is_err());
+        assert!(result.unwrap_err().contains("ticker_invalid"));
+    }
+
+    #[test]
+    fn launch_rejects_ticker_with_digits() {
+        let result = run_tool::<LaunchFanCoin>(
+            &FanForgeApp,
+            json!({ "creator_telegram_id": "1", "name": "X", "ticker": "TEM1", "description": "d" }),
+            ctx_with_wallet("fanforge_launch_fan_coin"),
+        );
+        assert!(result.is_err());
+        assert!(result.unwrap_err().contains("ticker_invalid"));
+    }
+
+    #[test]
+    fn launch_rejects_missing_wallet() {
+        // No wallet in context — should fail before any HTTP call
+        let result = run_tool::<LaunchFanCoin>(
+            &FanForgeApp,
+            json!({ "creator_telegram_id": "1", "name": "Temi Coin", "ticker": "TEMI", "description": "d" }),
+            ctx("fanforge_launch_fan_coin"), // no wallet injected
+        );
+        assert!(result.is_err());
+        assert!(result.unwrap_err().contains("wallet_not_connected"));
+    }
+
+    // ── CreateFanMission ──────────────────────────────────────────────────────
+
+    #[test]
+    fn mission_rejects_zero_threshold() {
+        let result = run_tool::<CreateFanMission>(
+            &FanForgeApp,
+            json!({
+                "coin_address": "0x493e88b9ba3a479c03c28af366adff4457d58d94",
+                "title": "Early Access",
+                "content_url": "https://example.com/track.mp3",
+                "threshold": 0.0,
+            }),
+            ctx("fanforge_create_fan_mission"),
+        );
+        assert!(result.is_err());
+        assert!(result.unwrap_err().contains("threshold_invalid"));
+    }
+
+    #[test]
+    fn mission_rejects_negative_threshold() {
+        let result = run_tool::<CreateFanMission>(
+            &FanForgeApp,
+            json!({
+                "coin_address": "0x493e88b9ba3a479c03c28af366adff4457d58d94",
+                "title": "Early Access",
+                "content_url": "https://example.com/track.mp3",
+                "threshold": -50.0,
+            }),
+            ctx("fanforge_create_fan_mission"),
+        );
+        assert!(result.is_err());
+        assert!(result.unwrap_err().contains("threshold_invalid"));
+    }
+
+    // ── GetFanLeaderboard response parsing ────────────────────────────────────
+
+    #[test]
+    fn leaderboard_parses_zora_response_shape() {
+        let zora_response = json!({
+            "zora20Token": {
+                "tokenBalances": {
+                    "edges": [
+                        {
+                            "node": {
+                                "balance": "1000000000000000000000",
+                                "ownerAddress": "0xabc123def456abc123def456abc123def456abc1",
+                                "ownerProfile": { "handle": "superfan", "__typename": "GraphQLAccountProfile" }
+                            }
+                        },
+                        {
+                            "node": {
+                                "balance": "500000000000000000000",
+                                "ownerAddress": "0x9999888877776666555544443333222211110000",
+                                "ownerProfile": { "handle": "0x9999...0000", "__typename": "GraphQLWalletProfile" }
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+
+        let edges = zora_response
+            .get("zora20Token")
+            .and_then(|t| t.get("tokenBalances"))
+            .and_then(|tb| tb.get("edges"))
+            .and_then(Value::as_array)
+            .cloned()
+            .unwrap_or_default();
+
+        assert_eq!(edges.len(), 2);
+
+        let node0 = edges[0].get("node").unwrap();
+        let balance_coins: f64 = node0
+            .get("balance").and_then(Value::as_str).unwrap()
+            .parse::<f64>().unwrap() / 1e18;
+        assert!((balance_coins - 1000.0).abs() < 0.01);
+
+        let handle = node0.get("ownerProfile").unwrap()
+            .get("handle").and_then(Value::as_str).unwrap();
+        assert_eq!(handle, "superfan");
+    }
+
+    // ── FinalizeLaunch tx_hash type ───────────────────────────────────────────
+
+    #[test]
+    fn finalize_handles_missing_tx_hash() {
+        // tx_hash = None should fall back to "pending"
+        let ctx = TestCtxBuilder::new("fanforge_finalize_launch").build();
+        let result = run_tool::<FinalizeLaunch>(
+            &FanForgeApp,
+            json!({
+                "name": "Temi Coin",
+                "ticker": "TEMI",
+                "creator_telegram_id": "12345",
+                "predicted_coin_address": "0x493e88b9ba3a479c03c28af366adff4457d58d94",
+                "tx_hash": null,
+            }),
+            ctx,
+        );
+        // Will fail on Supabase (no connection in tests) but the tx_hash handling
+        // should not be the cause — check the error is DB-related, not type-related
+        if let Err(e) = &result {
+            assert!(!e.contains("tx_hash"), "tx_hash handling should not error: {e}");
+        }
     }
 }

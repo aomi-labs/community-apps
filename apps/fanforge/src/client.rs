@@ -219,25 +219,7 @@ pub(crate) struct LaunchFanCoinArgs {
     pub image_url: Option<String>,
 }
 
-/// Args for the internal BuildCoinTx tool (called via route after get_account_info).
-#[derive(Debug, Deserialize, JsonSchema)]
-pub(crate) struct BuildCoinTxArgs {
-    /// Coin display name (e.g. "Temi's Fan Coin").
-    pub name: String,
-    /// Ticker symbol, already normalized to 3–5 uppercase letters (e.g. "TEMI").
-    pub ticker: String,
-    /// Plain-English description of the coin.
-    pub description: String,
-    /// Optional HTTPS or IPFS URL for the coin's cover art.
-    #[serde(default)]
-    pub image_url: Option<String>,
-    /// Creator's Telegram ID.
-    pub creator_telegram_id: String,
-    /// Injected by the Aomi route system from the get_account_info result.
-    pub creator_wallet: Value,
-}
-
-/// Args for the internal FinalizeLaunch tool (called via route after commit_txs).
+/// Args for the internal FinalizeLaunch tool (fired by route after commit_txs confirms).
 #[derive(Debug, Deserialize, JsonSchema)]
 pub(crate) struct FinalizeLaunchArgs {
     /// Coin display name.
@@ -248,8 +230,10 @@ pub(crate) struct FinalizeLaunchArgs {
     pub creator_telegram_id: String,
     /// Predicted coin address from the Zora API (deterministic pre-deploy address).
     pub predicted_coin_address: String,
-    /// Injected by the Aomi route system from the commit_txs result.
-    pub transaction_hash: Value,
+    /// Transaction hash injected by the Aomi runtime after commit_txs confirms.
+    /// Plain hex string e.g. "0xabc...". None if the runtime hasn't set it yet.
+    #[serde(default)]
+    pub tx_hash: Option<String>,
 }
 
 #[derive(Debug, Deserialize, JsonSchema)]
