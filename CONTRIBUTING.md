@@ -5,7 +5,7 @@ End-to-end guide for shipping a new app into community-apps and getting it loade
 1. **Author** your app in your own source repo: a Rust `cdylib` crate + `aomi.toml`.
 2. **Deploy** with `aomi-git deploy` — stages your source into `apps/<slug>/` of a community-apps clone and pushes to `publish`.
 3. **CI** builds the cdylib and publishes a GitHub release tagged `apps-<slug>-<short-commit>`.
-4. **Activate**: hand the release tag to the platform operator; they run `aomi-git activate` and the backend fetches + loads.
+4. **Request activation** with `aomi-git activate --request` — it posts your app + release tag to the ops Discord channel and pings ops. Ops mint a token scoped to your release and run `aomi-git activate`; the backend fetches + loads.
 
 ```mermaid
 sequenceDiagram
@@ -23,8 +23,8 @@ sequenceDiagram
     CLI->>Repo: clone (cached), stage apps/<slug>/, commit, push
     Repo->>CI: trigger
     CI->>Repo: upload release apps-<slug>-<short-commit>
-    You->>Ops: release tag
-    Ops->>BE: aomi-git activate
+    You->>Ops: aomi-git activate --request (Discord ping)
+    Ops->>BE: mint token scoped to release + aomi-git activate
     BE->>BE: fetch + validate + load
 ```
 
@@ -255,23 +255,34 @@ You can still watch the underlying pages directly if you prefer —
 
 ### Requesting activation
 
-Post in the `#aomi-apps` Discord channel and tag `@platform-ops`. Include:
+You don't post manually anymore — `aomi-git` does it for you. Once CI is green
+and the release exists, from your source repo:
 
-- **Release tag:** `apps-<slug>-<short-commit>` (printed by `aomi-git deploy`,
-  also in your `.aomi/deployment.json`)
-- **Target environment:** `staging` for the first activation, `prod` later
-  after staging is verified
-- **Your GitHub handle** so we can confirm the activated app back to you
+```bash
+aomi-git activate --request
+```
 
-A `@platform-ops` member runs the activate, then confirms by linking your
-app at `https://staging-api.aomi.dev/api/control/apps/status`.
+This reads your `.aomi/deployment.json` and posts an **Activation requested**
+message — app, repo, **release tag**, and target tags — into the
+`✅-activation-requests` Discord channel, pinging the **@ops** role. So requests
+land in one place instead of scattered DMs. Preview it first without posting:
+
+```bash
+aomi-git activate --request --dry-run
+```
+
+An `@ops` member reads the release tag, mints an activation token **scoped to
+that exact release**, runs `aomi-git activate`, then confirms your app at
+`https://staging-api.aomi.dev/api/control/apps/status`.
 
 ### If you are the operator yourself
 
-With `AOMI_APP_ACTIVATION_TOKEN` exported, run from the source repo:
+Mint a token scoped to the release tag (ops side:
+`admin-cli platforms mint-token --platform community --initial-release-tag <tag>`),
+export it, and run from the source repo:
 
 ```bash
-AOMI_APP_ACTIVATION_TOKEN=<platform-token> \
+AOMI_APP_ACTIVATION_TOKEN=<the scoped activation token> \
 AOMI_BACKEND_URL=https://staging-api.aomi.dev \
   aomi-git activate
 ```
@@ -317,11 +328,14 @@ This makes the contributor's word at build time a contract, not advisory. If
 you want your app on prod, you have to say so in your aomi.toml first — no
 operator can do it for you.
 
-### Why activation is held by `@platform-ops`, not contributors
+### Why activation is held by `@ops`, not contributors
 
-- The activation token authorizes `community` writes against the backend.
-  Anyone with it can mint or replace ANY community app row. We keep it with
-  `@platform-ops` until per-contributor tokens land.
+- Activating writes to the backend's `community` app registry. Ops hold the
+  tokens; you request one with `aomi-git activate --request`.
+- Ops now mint a **per-contributor token pinned to your release tag** — it can
+  only activate that one release, so even if it leaked it couldn't touch any
+  other app. (A single shared master used to gate all of `community`; it still
+  works as a fallback, but new requests get a scoped token.)
 - This repo's CI does not call activate. The PR review and CI run prove your
   release is buildable and well-formed; activation is a separate trust step.
 
@@ -336,9 +350,9 @@ Once your app is verified on staging:
    from this release).
 2. Re-run `aomi-git deploy` — this creates a new release tag (different
    source commit) carrying the wider declared scope.
-3. Post in `#aomi-apps` Discord, tag `@platform-ops`, and ask for activation
-   against `https://api.aomi.dev`. The operator runs
-   `aomi-git activate` and the new release lands on prod backends.
+3. Run `aomi-git activate --request` again — the new release tag posts to the
+   `✅-activation-requests` channel. Ops mint a token for that tag and run
+   `aomi-git activate` against `https://api.aomi.dev`, landing it on prod.
 
 Why the re-deploy? Per the target-tag rule, the operator can only activate
 to scopes the build itself declared in `aomi.toml`. Promoting to prod
