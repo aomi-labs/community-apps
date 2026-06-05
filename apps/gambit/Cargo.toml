@@ -8,7 +8,7 @@ description = "Gambit — multi-source football betting intelligence plugin for 
 crate-type = ["cdylib"]
 
 [dependencies]
-aomi-sdk   = "=0.1.21"
+aomi-sdk   = "=3.0.0"
 base64     = "0.22"
 chrono     = { version = "0.4", features = ["serde"] }
 hmac       = "0.12"
