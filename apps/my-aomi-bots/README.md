@@ -23,18 +23,19 @@ before wiring real trades.
 
 ```
 my-aomi-bots/
-├── aomi.toml         # platform manifest — slug, platform, target_tags
-├── Cargo.toml        # cdylib + aomi-sdk pinned to platform.json's required_sdk_version
-├── src/
-│   ├── lib.rs        # dyn_aomi_app! registration + preamble
-│   ├── client.rs     # HTTP client, Trader scaffold, arg structs, action builders
-│   └── tools.rs      # one impl DynAomiTool per tool
-└── .gitignore        # /target, /.aomi/, Cargo.lock
+|-- aomi.toml         # platform manifest: slug, platform, server_tags
+|-- Cargo.toml        # cdylib + aomi-sdk pinned to platform.json's required_sdk_version
+|-- src/
+|   |-- lib.rs        # dyn_aomi_app! registration + preamble
+|   |-- client.rs     # HTTP client, Trader scaffold, arg structs, action builders
+|   `-- tools.rs      # one impl DynAomiTool per tool
+`-- .gitignore        # /target, /.aomi/, Cargo.lock
 ```
 
 ## Publishing
 
-Authoring lives here; publishing goes through the `aomi-build` CLI.
+Authoring lives in the source repo; publishing goes through the backend via
+`aomi-build`.
 
 ```bash
 # 1. Compile check
@@ -45,16 +46,21 @@ AOMI_BACKEND_URL=https://staging-api.aomi.dev \
   AOMI_APP_SOURCE_ID=<your-app-source-id> \
   aomi-build deploy --platform community --dry-run
 
-# 3. Ask the backend to open/update the community platform PR
+# 3. Ask the backend to stage this app in community-apps
 AOMI_BACKEND_URL=https://staging-api.aomi.dev \
   AOMI_APP_SOURCE_ID=<your-app-source-id> \
   AOMI_APP_ACTIVATION_TOKEN=<platform-or-app-token> \
   aomi-build deploy --platform community
 ```
 
-After the platform PR merges to `publish`, CI builds the cdylib and uploads a
-release tarball. Activation runs through `aomi-build activate` once the release
-is ready.
+The backend writes `apps/<installation-id>/my-aomi-bots/.aomi/deployment.json`
+and pushes a candidate branch. This repo's release-builder CI validates that
+backend manifest, builds the cdylib, and uploads release artifacts tagged
+`apps-<installation-id>-my-aomi-bots-<short-source-commit>`.
+
+Activation also runs through the backend: `aomi-build activate` tells the
+backend which PR, branch, commit, or release tag to load, and the backend
+fetches the desired artifact from its deployment record.
 
 See [`community-apps/CONTRIBUTING.md`](https://github.com/aomi-labs/community-apps/blob/main/CONTRIBUTING.md)
 for the full pipeline walkthrough.
