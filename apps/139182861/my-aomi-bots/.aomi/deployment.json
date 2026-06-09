@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "id": "dep_139182861_a5a81b6b8be1",
+  "app": {
+    "name": "my-aomi-bots",
+    "display_name": "My Aomi Bots",
+    "platform": "community",
+    "public": true,
+    "server_tags": [],
+    "config_path": "aomi.toml"
+  },
+  "source": {
+    "installation_id": 139182861,
+    "repository_id": 1253291574,
+    "repository_link": "ceciliaz030/my-aomi-bots",
+    "owner_repo_name": "ceciliaz030/my-aomi-bots",
+    "ref": {
+      "kind": "branch",
+      "value": "main"
+    },
+    "commit": "a5a81b6b8be1ef17b9bdd16481e8212ce41a3364"
+  },
+  "platform": {
+    "name": "community",
+    "github_repo": "aomi-labs/community-apps",
+    "deployment_branch": "publish",
+    "source_branch": "ceciliaz030/my-aomi-bots/139182861/a5a81b6b8be1"
+  },
+  "target": {
+    "app_path": "apps/139182861/my-aomi-bots",
+    "release_tag": "apps-139182861-my-aomi-bots-a5a81b6b8be1",
+    "target": "x86_64-unknown-linux-gnu"
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "sha256:29a8546e056e0a047851c87ab1e48c7c06fdfcc71c8b5ff01fe9b9cc2e3e678d",
+      "bytes": 27
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "sha256:3bae9419c04e59a2abd04e059137e976576f137444566eb86036e00361018c73",
+      "bytes": 1047
+    },
+    {
+      "path": "README.md",
+      "sha256": "sha256:260e5a9259b32972e9a29b9161b75992d3da638a5ec695edb9c644faf98cd9e8",
+      "bytes": 2530
+    },
+    {
+      "path": "aomi.toml",
+      "sha256": "sha256:0cc99f8417ede83c935cfa6e9e3e594338da30e6ac612718eb125d1db6e67cec",
+      "bytes": 599
+    },
+    {
+      "path": "src/client.rs",
+      "sha256": "sha256:d4d6241515eed2b3fc0f2a41b626e3f3c834294dbbe0e61a3bfa77605ed29945",
+      "bytes": 8878
+    },
+    {
+      "path": "src/lib.rs",
+      "sha256": "sha256:96e237c11bdb67a7956699970c99f9c1dd0e0fc0c300cc93c74c1651da378b8b",
+      "bytes": 2108
+    },
+    {
+      "path": "src/tools.rs",
+      "sha256": "sha256:155e9100572cb916748e53303086425128aea70a942325c45f5c4822edcc38f9",
+      "bytes": 4817
+    }
+  ]
+}
