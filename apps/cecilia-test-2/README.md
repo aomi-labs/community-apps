@@ -34,7 +34,7 @@ my-aomi-bots/
 
 ## Publishing
 
-Authoring lives here; publishing goes through the `aomi-git` CLI.
+Authoring lives here; publishing goes through the `aomi-build` CLI.
 
 ```bash
 # 1. Compile check
@@ -42,15 +42,19 @@ cargo check
 
 # 2. Dry-run preflight against staging
 AOMI_BACKEND_URL=https://staging-api.aomi.dev \
-  aomi-git deploy --dry-run --preflight
+  AOMI_APP_SOURCE_ID=<your-app-source-id> \
+  aomi-build deploy --platform community --dry-run
 
-# 3. Stage + push to the community publish repo
-aomi-git deploy --platform-repo-dir /path/to/community-apps
+# 3. Ask the backend to open/update the community platform PR
+AOMI_BACKEND_URL=https://staging-api.aomi.dev \
+  AOMI_APP_SOURCE_ID=<your-app-source-id> \
+  AOMI_APP_ACTIVATION_TOKEN=<platform-or-app-token> \
+  aomi-build deploy --platform community
 ```
 
-CI builds the cdylib and uploads a release tarball. Activation against the
-backend is held by the community platform operator — ping them with the
-release tag once CI is green.
+After the platform PR merges to `publish`, CI builds the cdylib and uploads a
+release tarball. Activation runs through `aomi-build activate` once the release
+is ready.
 
 See [`community-apps/CONTRIBUTING.md`](https://github.com/aomi-labs/community-apps/blob/main/CONTRIBUTING.md)
 for the full pipeline walkthrough.

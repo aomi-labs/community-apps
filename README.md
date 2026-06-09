@@ -3,9 +3,9 @@
 This repo hosts the **source for community Aomi apps**. If you're a contributor
 who wants to ship an app on the Aomi runtime, you're in the right place.
 
-You **do not hand-edit `apps/<your-slug>/`**. That directory is generated for
-you by the `aomi-git` CLI from your own source repo. This repo is the publishing
-target — it's where releases get cut from.
+You **do not hand-edit `apps/<your-slug>/`**. That directory is populated by
+the hosted deploy flow from your own source repo. This repo is the platform
+publishing target — it's where releases get cut from.
 
 ## Contributing an app
 
@@ -16,18 +16,19 @@ in under 10 minutes.
 The short version:
 
 1. Author your app in your own source repo with an `aomi.toml` declaring
-   `platform = "community"` and `git = "https://github.com/aomi-labs/community-apps"`.
-2. Run `aomi-git deploy`. It auto-manages a transit clone of this repo under
-   `~/.aomi/transit/`, stages your source into `apps/<slug>/`, commits, and
-   pushes to the `publish` branch — no flags, no clone management.
-3. GitHub Actions builds the cdylib and uploads a release tarball tagged
-   `apps-<slug>-<short-source-commit>`.
-4. Ping the platform operator with your release tag; they activate it against
-   the backend.
+   `platform = "community"`.
+2. Install the Aomi GitHub App on that source repo so the backend has an
+   `app_source_id`.
+3. Run `aomi-build deploy`. It sends a source-bound deploy request to the
+   backend; the backend reads your source repo through the GitHub App and opens
+   or updates a PR into this platform repo.
+4. Once the platform PR merges to `publish`, GitHub Actions builds the cdylib
+   and uploads a release tarball tagged `apps-<slug>-<short-source-commit>`.
+5. Run `aomi-build status`, then `aomi-build activate` once the release is ready.
 
 If you opened a PR by hand-editing `apps/<slug>/` directly, **please redo via
-`aomi-git deploy`** — the publish CI validates the file shapes that `aomi-git`
-emits, and hand-edited PRs will fail at validate time.
+`aomi-build deploy`** — the publish CI validates the backend-generated file
+shapes, and hand-edited PRs will fail at validate time.
 
 ## Repo layout
 
@@ -53,12 +54,12 @@ need to memorize them.
 |---|---|
 | Publication branch | `publish` |
 | Staged app path | `apps/<app_slug>/` |
-| Build contract file | `apps/<app_slug>/.aomi/deployment.json` (written by `aomi-git deploy`) |
+| Build contract file | `apps/<app_slug>/.aomi/deployment.json` (written by `aomi-build deploy`) |
 | Release tag convention | `apps-{app_slug}-{short_commit}` |
 | Required SDK version | see [`platform.json`](./platform.json) |
 
 `short_commit` is the first 12 characters of your source commit recorded by
-`aomi-git`.
+`aomi-build`.
 
 Each release contains:
 
@@ -80,7 +81,7 @@ operator and read by CI on every push.
 |---|---|---|
 | `name` | Platform tier label (`community`). Match in your `aomi.toml` as `platform = "community"`. | Operator on platform bring-up |
 | `source_repo` | This repo (`aomi-labs/community-apps`). CI verifies your `aomi.toml`'s `git` resolves here. | Operator |
-| `publish_branch` | The branch `aomi-git deploy` pushes to. Protected against force-push and deletion. | Operator |
+| `publish_branch` | The branch the backend targets for platform PRs and release builds. Protected against force-push and deletion. | Operator |
 | `app_path_prefix` | Where staged apps land (`apps`). Combined with your slug → `apps/<slug>/`. | Operator |
 | `release_tag_convention` | Pattern for GitHub release tags built from your source commit. | Operator |
 | `visibility` | `public` for this repo — release tarballs are world-readable. | Operator |
@@ -99,12 +100,12 @@ update your app's pin to match before your next deploy.
 The publish workflow at
 [`.github/workflows/publish-apps.yml`](./.github/workflows/publish-apps.yml)
 runs on push to `publish` and drives a small Python script tucked under
-`.github/scripts/` that no contributor (or anyone) runs by hand — `aomi-git
-deploy` and the workflow handle everything.
+`.github/scripts/` that no contributor (or anyone) runs by hand — the backend
+deploy path and the workflow handle everything.
 
 ## Related
 
 - [`aomi-sdk`](https://github.com/aomi-labs/aomi-sdk) — the SDK and the
-  `aomi-git` deploy CLI
+  `aomi-build` deploy CLI
 - [`aomi-launch-my-agent`](https://github.com/aomi-labs/aomi-launch-my-agent) —
   ADRs for the deploy/activate contract (especially 0004, 0009, 0010)
