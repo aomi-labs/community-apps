@@ -236,8 +236,7 @@ def plugin_file_name(app_name: str, target: str) -> str:
     return f"{app_name.replace('-', '_')}.{lib_ext(target)}"
 
 
-def validate_file_manifest(app_dir: pathlib.Path, manifest: dict[str, Any]) -> None:
-    files = manifest.get("files")
+def validate_file_manifest(app_dir: pathlib.Path, files: Any) -> None:
     if not isinstance(files, list) or not files:
         fail("deployment manifest files must be a non-empty array")
     seen: set[str] = set()
@@ -266,6 +265,27 @@ def validate_file_manifest(app_dir: pathlib.Path, manifest: dict[str, Any]) -> N
             fail(f"staged file byte count mismatch for {path}")
 
 
+def deployment_app_record(
+    manifest: dict[str, Any], app_name: str, expected_app_path: str
+) -> dict[str, Any] | None:
+    platform = manifest.get("platform")
+    apps = platform.get("apps") if isinstance(platform, dict) else None
+    if apps is None:
+        return None
+    if not isinstance(apps, list):
+        fail("deployment manifest platform.apps must be an array")
+    matches = [
+        app
+        for app in apps
+        if isinstance(app, dict)
+        and str(app.get("name", "")).lower() == app_name
+        and app.get("path") == expected_app_path
+    ]
+    if len(matches) != 1:
+        fail(f"deployment manifest must contain one platform.apps entry for {expected_app_path}")
+    return matches[0]
+
+
 def load_deployment(app_dir: pathlib.Path, ctx: dict[str, str], target: str) -> dict[str, str]:
     path = app_dir / ".aomi" / "deployment.json"
     manifest = load_json(path)
@@ -278,37 +298,54 @@ def load_deployment(app_dir: pathlib.Path, ctx: dict[str, str], target: str) -> 
     if not APP_RE.match(app_name):
         fail(f"invalid app directory name: {app_name}")
 
-    manifest_app = get_str(manifest, ("app", "name"))
-    if manifest_app.lower() != app_name:
-        fail(f"deployment manifest app.name must be {app_name}")
-
-    source_commit = get_str(manifest, ("source", "commit")).lower()
-    if not COMMIT_RE.match(source_commit) or not source_commit.startswith(ctx["short_commit"]):
-        fail("deployment manifest source.commit does not match branch short commit")
-
-    source_repo = get_str(manifest, ("source", "repository_link"), required=False)
-    if source_repo and normalize_repo(source_repo) != ctx["owner_repo"]:
-        fail("deployment manifest source.repository_link does not match branch owner/repo")
-
-    platform_name = get_str(manifest, ("platform", "name"))
-    if platform_name != "community":
-        fail("deployment manifest platform.name must be community")
-
-    app_path = get_str(manifest, ("target", "app_path"))
     expected_app_path = f"apps/{installation_id}/{app_name}"
-    if app_path != expected_app_path:
-        fail(f"deployment manifest target.app_path must be {expected_app_path}")
+    manifest_installation_id = manifest.get("source", {}).get("installation_id")
+    if str(manifest_installation_id) != installation_id:
+        fail(f"deployment manifest source.installation_id must be {installation_id}")
 
-    release_tag = get_str(manifest, ("target", "release_tag"))
+    app_record = deployment_app_record(manifest, app_name, expected_app_path)
+    if app_record is None:
+        manifest_app = get_str(manifest, ("app", "name"))
+        if manifest_app.lower() != app_name:
+            fail(f"deployment manifest app.name must be {app_name}")
+        source_commit = get_str(manifest, ("source", "commit")).lower()
+        source_repo = get_str(manifest, ("source", "repository_link"), required=False)
+        platform_name = get_str(manifest, ("platform", "name"))
+        app_path = get_str(manifest, ("target", "app_path"))
+        release_tag = get_str(manifest, ("target", "release_tag"))
+        manifest_target = get_str(manifest, ("target", "target"), required=False)
+        files = manifest.get("files")
+    else:
+        source_commit = get_str(manifest, ("source", "commit_hash")).lower()
+        source_repo = get_str(manifest, ("source", "owner_repo_name"), required=False)
+        if source_repo is None:
+            source_repo = get_str(manifest, ("source", "repository_link"), required=False)
+        platform_name = get_str(manifest, ("platform", "platform"))
+        app_path = get_str(app_record, ("path",))
+        release_tag = get_str(app_record, ("release_tag",))
+        manifest_target = get_str(app_record, ("target",), required=False)
+        files = app_record.get("files")
+
+    if not COMMIT_RE.match(source_commit) or not source_commit.startswith(ctx["short_commit"]):
+        fail("deployment manifest source commit does not match branch short commit")
+
+    if source_repo and normalize_repo(source_repo) != ctx["owner_repo"]:
+        fail("deployment manifest source repo does not match branch owner/repo")
+
+    if platform_name != "community":
+        fail("deployment manifest platform must be community")
+
+    if app_path != expected_app_path:
+        fail(f"deployment manifest app path must be {expected_app_path}")
+
     expected_tag = f"apps-{installation_id}-{app_name}-{ctx['short_commit']}"
     if release_tag != expected_tag:
-        fail(f"deployment manifest target.release_tag must be {expected_tag}")
+        fail(f"deployment manifest release_tag must be {expected_tag}")
 
-    manifest_target = get_str(manifest, ("target", "target"), required=False)
     if manifest_target and manifest_target != target:
-        fail(f"deployment manifest target.target must be {target}")
+        fail(f"deployment manifest target must be {target}")
 
-    validate_file_manifest(app_dir, manifest)
+    validate_file_manifest(app_dir, files)
     return {
         "app_name": app_name,
         "installation_id": installation_id,

@@ -221,7 +221,7 @@ It uses `publish` as the baseline, detects changed app directories under
 For each valid app, CI:
 
 1. Confirms the staged app path matches `apps/<installation-id>/<app>`.
-2. Confirms `deployment.json.target.release_tag` matches
+2. Confirms the app record release tag matches
    `apps-<installation-id>-<app>-<short-source-commit>`.
 3. Confirms source commit, repository, platform, target triple, file hashes,
    and file byte counts.
@@ -362,7 +362,7 @@ original build did not include prod in `server_tags`.
 | `deploy requires an activation token` | the backend deploy endpoint requires platform/app authority | export `AOMI_APP_ACTIVATION_TOKEN` or request one from ops |
 | `candidate release workflow must run on ... branches` | candidate branch does not match the backend branch shape | deploy through the backend instead of pushing by hand |
 | `candidate app dir must be apps/<installation-id>/<app>` | staged path does not match the backend contract | redeploy through the backend |
-| `deployment manifest target.release_tag must be ...` | manifest release tag does not match the candidate branch | redeploy through the backend |
+| `deployment manifest release_tag must be ...` | manifest release tag does not match the candidate branch | redeploy through the backend |
 | `sdk_version mismatch` | your `aomi-sdk` Cargo dep does not match `platform.json`'s `required_sdk_version` | pin the exact SDK version required by `platform.json` |
 | `... returned 502` | release tarball does not exist yet or the backend cannot reach GitHub | retry after CI finishes |
 
