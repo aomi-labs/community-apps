@@ -48,8 +48,8 @@
     },
     {
       "path": "Cargo.toml",
-      "sha256": "sha256:71f0c937e5ab0df55b53afb92a82d1afa8cfe9f7af651f3faf88fa0d92f63bf0",
-      "bytes": 509
+      "sha256": "sha256:911d025d465a7a7a7f392f9bac15f77b750a38a64d4f844031fef37bbdaa4bc3",
+      "bytes": 508
     },
     {
       "path": "aomi.toml",
@@ -93,6 +93,8 @@
       "detail": "defaulted to [staging] (aomi.toml did not declare server_tags)"
     }
   ],
-  "errors": [],
+  "errors": [
+
+  ],
   "updated_at": 1779982572
 }

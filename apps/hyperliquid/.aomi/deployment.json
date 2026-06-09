@@ -43,13 +43,13 @@
   "files": [
     {
       "path": "Cargo.lock",
-      "sha256": "sha256:6a4ddac98d12f9c23cd14b4a733bad28e9b78a369b644b442ae56dad7dbc9997",
-      "bytes": 37975
+      "sha256": "sha256:0a7663dfdc50ce435c0981e016608aff2e2b5aa8084e8b8af374c31fd75b205f",
+      "bytes": 37974
     },
     {
       "path": "Cargo.toml",
-      "sha256": "sha256:73b8c3efd387b35d5a1793a67e9a52c82d87b5c8d0ca215b2e26cd4b4471c633",
-      "bytes": 395
+      "sha256": "sha256:86e9200c6d8bc590687e4c75cacd2a54ee97ef82e3f8350067dda151767e867b",
+      "bytes": 394
     },
     {
       "path": "aomi.toml",
@@ -88,6 +88,8 @@
       "detail": "[staging] (from aomi.toml)"
     }
   ],
-  "errors": [],
+  "errors": [
+
+  ],
   "updated_at": 1780049359
 }

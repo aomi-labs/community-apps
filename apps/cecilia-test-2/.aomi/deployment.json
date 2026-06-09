@@ -38,13 +38,13 @@
     },
     {
       "path": "Cargo.toml",
-      "sha256": "sha256:3bae9419c04e59a2abd04e059137e976576f137444566eb86036e00361018c73",
-      "bytes": 1047
+      "sha256": "sha256:30a799cddf32fcff461dd2e9948787641d0f87edf74a3d03e567d7f72b8bab36",
+      "bytes": 1046
     },
     {
       "path": "README.md",
-      "sha256": "sha256:260e5a9259b32972e9a29b9161b75992d3da638a5ec695edb9c644faf98cd9e8",
-      "bytes": 2530
+      "sha256": "sha256:aea4c5893f4d683dce7c6c9d42b931a8163537d3419a12b43f42cd2469e8e0da",
+      "bytes": 2717
     },
     {
       "path": "aomi.toml",

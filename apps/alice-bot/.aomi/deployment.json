@@ -42,8 +42,8 @@
   "files": [
     {
       "path": "Cargo.toml",
-      "sha256": "sha256:b53b7b1115030af0535c953d416b3324510f8e01928609f2b026cc1a8b7f1974",
-      "bytes": 257
+      "sha256": "sha256:7dbbf53085b115b69998fb0d243ea4fd8e0f9e86c556b8d9416455c0f45654ef",
+      "bytes": 256
     },
     {
       "path": "src/lib.rs",
@@ -51,7 +51,11 @@
       "bytes": 1098
     }
   ],
-  "checks": [],
-  "errors": [],
+  "checks": [
+
+  ],
+  "errors": [
+
+  ],
   "updated_at": 1779975246
 }

@@ -3,28 +3,30 @@
 End-to-end guide for shipping a new app into community-apps and getting it loaded on the Aomi runtime.
 
 1. **Author** your app in your own source repo: a Rust `cdylib` crate + `aomi.toml`.
-2. **Deploy** with `aomi-git deploy` — stages your source into `apps/<slug>/` of a community-apps clone and pushes to `publish`.
-3. **CI** builds the cdylib and publishes a GitHub release tagged `apps-<slug>-<short-commit>`.
-4. **Request activation** with `aomi-git activate --request` — it posts your app + release tag to the ops Discord channel and pings ops. Ops mint a token scoped to your release and run `aomi-git activate`; the backend fetches + loads.
+2. **Deploy** with `aomi-build deploy` — sends a source-bound request to the backend.
+3. **Platform PR + CI** — the backend copies source into this repo, opens or updates a platform PR, and the `publish` workflow builds a GitHub release tagged `apps-<slug>-<short-commit>` after merge.
+4. **Request onboarding + activation** with `aomi-build request` if you need source access or an activation token. Once CI's release exists, `aomi-build activate` fetches + loads it.
 
 ```mermaid
 sequenceDiagram
     autonumber
     actor You
     participant Src as your source repo
-    participant CLI as aomi-git
+    participant CLI as aomi-build
     participant Repo as community-apps
     participant CI as publish CI
     participant Ops as platform ops
     participant BE as Aomi backend
 
     You->>Src: write aomi.toml + src/
-    You->>CLI: aomi-git deploy
-    CLI->>Repo: clone (cached), stage apps/<slug>/, commit, push
-    Repo->>CI: trigger
+    You->>CLI: aomi-build deploy
+    CLI->>BE: POST /api/platforms/community/deploy
+    BE->>Src: fetch source via GitHub App app_source_id
+    BE->>Repo: open/update platform PR with apps/<slug>/
+    Repo->>CI: merge to publish triggers workflow
     CI->>Repo: upload release apps-<slug>-<short-commit>
-    You->>Ops: aomi-git activate --request (Discord ping)
-    Ops->>BE: mint token scoped to release + aomi-git activate
+    You->>Ops: aomi-build request (Discord ping)
+    Ops->>BE: issue token + aomi-build activate
     BE->>BE: fetch + validate + load
 ```
 
@@ -33,18 +35,23 @@ sequenceDiagram
 ## Prerequisites
 
 - **Rust nightly** (the SDK builds on `2024` edition)
-- **`git`** on `PATH` — `aomi-git` shells out to it for the transit clone
+- **`git`** on `PATH` — `aomi-build` uses it to resolve local source refs
 - **`gh` (GitHub CLI)** logged into an account with read access to `aomi-labs`.
-  Used implicitly: `git`'s credential helper picks up the `gh auth` token when
-  cloning the public platform repo.
-- **`aomi-git`** — the deploy CLI, shipped from the SDK:
+  It is still useful for opening PRs and checking GitHub status directly.
+- **`aomi-build`** — the deploy CLI, shipped from the SDK:
 
   ```bash
   cargo install --git https://github.com/aomi-labs/aomi-sdk --features cli aomi-sdk
-  # binary lands at ~/.cargo/bin/aomi-git
+  # binary lands at ~/.cargo/bin/aomi-build
   ```
+- **Connected source repo** — install the Aomi GitHub App on your source repo
+  and get the resulting `app_source_id`. `aomi-build deploy` sends this id to
+  the backend with `--app-source-id` or `AOMI_APP_SOURCE_ID`.
+- **Backend credentials** — real deploy and activate calls need a backend URL
+  and activation token. Use `aomi-build request` if you need ops to issue one.
 
-You do NOT need an activation token to contribute. See "Activation" below.
+You can still run an offline dry-run without credentials; the real backend
+deploy requires the credentials above.
 
 ---
 
@@ -77,33 +84,16 @@ public       = true                     # visible to all backend users
 # server_tags = ["staging"]
 ```
 
-#### About `access_token`
+#### Source access
 
-`aomi-git` works by pushing your code into a managed platform repository under
-the `aomi-labs` GitHub org (`community-apps` for this platform; other
-platforms have their own repos). At activation time, the Aomi backend
-**fetches your release tarball from that platform repo on GitHub**. So
-whether you need an `access_token` depends on one question: is the platform
-repo public or private?
+Do not put GitHub tokens in `aomi.toml`. Hosted deploys are source-bound:
 
-- **community-apps is public.** The backend can fetch your release tarball
-  from `github.com/aomi-labs/community-apps/releases` anonymously. **Omit the
-  `access_token` field entirely** — you don't need one to publish here.
-- **Private platform repos** (e.g. `krexa-hosted-apps`) require a GitHub PAT
-  with read access to releases. You declare it in `aomi.toml` as a reference
-  to an env var — never the token itself. Literal tokens are rejected at
-  parse so a committed config can never leak a secret:
+- The Aomi GitHub App installation creates an `app_source` row for your source repo.
+- `aomi-build deploy --app-source-id <id>` tells the backend which connected source to read.
+- The backend mints short-lived GitHub App tokens server-side for source reads and platform writes.
 
-  ```toml
-  # only needed for private platform repos — community-apps is public, skip this
-  access_token = "$MY_GH_TOKEN"   # ✅ env-var ref — resolved at deploy time
-  access_token = "ghp_xxxxxxx"    # ❌ rejected at parse — never commit secrets
-  ```
-
-  Per [ADR 0009 amended](https://github.com/aomi-labs/aomi-launch-my-agent),
-  the token is **transient**: passed once in the activation request body,
-  used once by the backend to download the tarball, never persisted, never
-  logged, never written to disk.
+For community apps, `aomi.toml` should describe the app and target platform;
+source repo credentials stay outside the app manifest.
 
 ### `Cargo.toml`
 
@@ -120,7 +110,7 @@ edition = "2024"
 crate-type = ["cdylib"]
 
 [dependencies]
-aomi-sdk   = "=0.1.20"          # match platform.json's required_sdk_version
+aomi-sdk   = "=3.0.0"          # match platform.json's required_sdk_version
 serde      = { version = "1", features = ["derive"] }
 serde_json = "1"
 ```
@@ -152,22 +142,13 @@ it's the single "show me what would happen" command:
 
 ```bash
 AOMI_BACKEND_URL=https://staging-api.aomi.dev \
-  aomi-git deploy --dry-run
+  AOMI_APP_SOURCE_ID=<your-app-source-id> \
+  aomi-build deploy --platform community --dry-run
 ```
 
-You should see all four pipeline stages pass:
-
-```text
-Preflight
-  [ok]   workspace git_clean
-  [ok]   manifest  platform_declared, git_declared  ·  defaulted=true server_tags=[staging]
-  [ok]   platform  platform_resolved, branch_matches_contract, git_url_matches_platform  ·  deployment_branch=publish github_repo=aomi-labs/community-apps name=community
-  [ok]   backend   backend_reachable, server_tags_match
-```
-
-The same plan also lands in `.aomi/deployment.json` next to your `aomi.toml`
-(read it if you need machine-readable detail or want to inspect resolved
-facts).
+With backend credentials, dry-run posts `dry_run: true` and validates source
+resolution, archive fetch, and manifests without writing this platform repo.
+Without credentials it prints the request it would send.
 
 If any stage fails, fix the underlying issue (usually your `aomi.toml`)
 before running deploy. Warnings (`[warn]`) are advisory and don't block —
@@ -180,21 +161,29 @@ a common one is `git_url_matches_platform` when you're deploying from a fork.
 From your source repo:
 
 ```bash
-aomi-git deploy
+aomi-build deploy
 ```
 
-That's it. `aomi-git` manages a transit clone of `community-apps` for you
-under `~/.aomi/transit/aomi-labs-community-apps/` (you never touch it — it's a
-CLI-managed cache). On first deploy it clones; on subsequent deploys it
-fetches and resets. Auth flows through your normal `git` credential helper, so
-if `gh auth login` works, this works.
+For explicit, repeatable CI/local usage:
+
+```bash
+AOMI_BACKEND_URL=https://staging-api.aomi.dev \
+  AOMI_APP_SOURCE_ID=<your-app-source-id> \
+  AOMI_APP_ACTIVATION_TOKEN=<platform-or-app-token> \
+  aomi-build deploy --platform community
+```
+
+`aomi-build` does not clone `community-apps` or push to `publish`. It sends
+the repo-scoped deploy request to the backend. The backend reads your source
+repo through the GitHub App, stages files under `apps/<slug>/` in the platform
+repo, and opens or updates a platform PR.
 
 What this does:
 
-1. Snapshots your source tree into the transit clone under `apps/<slug>/`
-2. Writes `apps/<slug>/.aomi/deployment.json` (the build contract for CI)
-3. Commits and pushes to the `publish` branch
-4. The community-apps CI auto-fires:
+1. Resolves the selected source ref to an exact commit
+2. Fetches your source repo archive through the GitHub App
+3. Writes `apps/<slug>/` plus `.aomi/deployment.json` in a platform PR
+4. After that PR merges to `publish`, the community-apps CI auto-fires:
    - validates the staged source against `apps/<slug>/.aomi/deployment.json`
    - runs `cargo build --release` for the cdylib
    - uploads a release tarball under tag `apps-<slug>-<short-source-commit>`
@@ -202,117 +191,105 @@ What this does:
 You can watch CI here:
 <https://github.com/aomi-labs/community-apps/actions>
 
-> **Auto-activate will 502** if you set `AOMI_APP_ACTIVATION_TOKEN`, because
-> the release tarball doesn't exist yet when push completes. That's expected.
-> The platform operator will activate once CI has uploaded the release.
-
-### Escape hatch: `--platform-dir`
-
-If you need to manage the clone yourself (air-gapped CI, custom auth, or
-debugging the staged tree before push), pass a directory you control:
-
-```bash
-aomi-git deploy --platform-dir /path/to/your/community-apps-clone
-```
-
-This skips the transit cache entirely. You're responsible for keeping that
-clone in sync with `origin/publish`. Most contributors should never need this.
+> **`deploy` does not activate.** It creates/updates the platform PR.
+> Activation is a separate step that must run *after* CI uploads the release —
+> so the platform operator (or you, once you hold a token) runs `aomi-build
+> activate` once the release tag exists.
 
 ---
 
 ## 4. Activation
 
-You **don't need the activation token** to contribute. Once your CI run is
-green and the release tag exists on GitHub, hand off to the platform
-operator.
+Once your platform PR is merged, CI is green, and the release tag exists on
+GitHub, activate with your scoped token or hand off to the platform operator.
 
 ### When is CI done?
 
-Run `aomi-git status` from your source repo. It reads your
+Run `aomi-build status` from your source repo. It reads your
 `.aomi/deployment.json` and polls GitHub for you, reporting both signals in
 one place:
 
 ```
-$ aomi-git status
+$ aomi-build status
 Publication status
   repo          : aomi-labs/community-apps
   release_tag   : apps-my-bot-abc1234
   branch        : publish
-  local state   : pushed=true deployed=true activated=false
+  local state   : deployed=true activated=false
   ci            : ⏳ running — publish-apps
                   https://github.com/aomi-labs/community-apps/actions/runs/...
   release       : pending (not built yet)
 ```
 
 When `ci` is green and `release` shows **✓ published … ready to activate**,
-you're ready to request activation. (`aomi-git status apps-<slug>-<commit>`
+you're ready to request activation. (`aomi-build status apps-<slug>-<commit>`
 checks a specific tag; otherwise it uses the latest deploy's tag.)
 
 You can still watch the underlying pages directly if you prefer —
 `https://github.com/aomi-labs/community-apps/actions` for CI and
 `.../releases/tag/apps-<slug>-<short-commit>` for the release — but
-`aomi-git status` rolls both up.
+`aomi-build status` rolls both up.
 
-### Requesting activation
+### Requesting onboarding + activation
 
-You don't post manually anymore — `aomi-git` does it for you. Once CI is green
-and the release exists, from your source repo:
-
-```bash
-aomi-git activate --request
-```
-
-This reads your `.aomi/deployment.json` and posts an **Activation requested**
-message — app, repo, **release tag**, and target tags — into the
-`✅-activation-requests` Discord channel, pinging the **@ops** role. So requests
-land in one place instead of scattered DMs. Preview it first without posting:
+You don't DM ops manually — `aomi-build request` posts the ask for you. Run it
+once to get repo access and an activation token (you can do this even before
+your first deploy):
 
 ```bash
-aomi-git activate --request --dry-run
+aomi-build request --email you@example.com --git-account your-gh-handle
 ```
 
-An `@ops` member reads the release tag, mints an activation token **scoped to
-that exact release**, runs `aomi-git activate`, then confirms your app at
-`https://staging-api.aomi.dev/api/control/apps/status`.
+This posts an **onboarding/activation request** — your GitHub account, app, and
+email — into the `✅-activation-requests` Discord channel, pinging the **@ops**
+role, so asks land in one place instead of scattered DMs. Preview it first
+without posting:
+
+```bash
+aomi-build request --email you@example.com --git-account your-gh-handle --dry-run
+```
+
+An `@ops` member grants your GitHub account access to the platform repo (if
+needed) and issues you a release-scoped activation token out-of-band — the
+token is **never** part of the request. Once your CI release exists, ops (or
+you, with the token) run `aomi-build activate`, then confirm your app at
+`aomi-build status --backend https://staging-api.aomi.dev`.
 
 ### If you are the operator yourself
 
-Mint a token scoped to the release tag (ops side:
-`admin-cli platforms mint-token --platform community --initial-release-tag <tag>`),
-export it, and run from the source repo:
+Mint a release-pinned token for the tag (ops side: `POST
+/api/admin/platforms/community/activation-tokens` with the release tag, or the
+equivalent admin CLI), export it, and run from the source repo:
 
 ```bash
 AOMI_APP_ACTIVATION_TOKEN=<the scoped activation token> \
 AOMI_BACKEND_URL=https://staging-api.aomi.dev \
-  aomi-git activate
+  aomi-build activate
 ```
 
-That's the whole command. `aomi-git activate` reads `.aomi/deployment.json`
-(left there by `aomi-git deploy`) and pulls release tag, platform, source
-repo, source provenance, display name, visibility, **and target tags** from
-it. The target tags come from the build's `server_tags` (see "How target tags
-work" below) — you don't normally pass `--target-tag` at all.
+That's the whole command. `aomi-build activate` reads `.aomi/deployment.json`
+(left there by `aomi-build deploy`) and activates the recorded platform PR,
+branch, or commit. The backend derives release tags from the platform
+artifact; you normally do not pass `--release-tag`.
 
 For activations that can't see the source repo's `deployment.json` (e.g.
 re-activating an older release tag, or running from a fresh machine), every
 field can be passed explicitly:
 
 ```bash
-aomi-git activate apps-<slug>-<short-commit> \
+aomi-build activate apps-<slug>-<short-commit> \
   --backend https://staging-api.aomi.dev \
   --platform community \
-  --git aomi-labs/community-apps \
-  --target-tag staging \
-  --visibility public
+  --release-tag apps-<slug>-<short-commit> \
+  --target-tag staging
 ```
 
-…and confirm with you that your app appears in
-`https://staging-api.aomi.dev/api/control/apps/status`.
+…and confirm with `aomi-build status --backend https://staging-api.aomi.dev`.
 
 ### How target tags work
 
 `aomi.toml [app].server_tags` is the **build's declared scope** — the set of
-backend tiers the contributor signed off on shipping to. `aomi-git deploy`
+backend tiers the contributor signed off on shipping to. `aomi-build deploy`
 copies this into `.aomi/deployment.json`, where it travels with the release.
 
 At activate time the operator can **narrow** but cannot **widen**:
@@ -331,7 +308,7 @@ operator can do it for you.
 ### Why activation is held by `@ops`, not contributors
 
 - Activating writes to the backend's `community` app registry. Ops hold the
-  tokens; you request one with `aomi-git activate --request`.
+  tokens; you request one with `aomi-build request`.
 - Ops now mint a **per-contributor token pinned to your release tag** — it can
   only activate that one release, so even if it leaked it couldn't touch any
   other app. (A single shared master used to gate all of `community`; it still
@@ -348,11 +325,12 @@ Once your app is verified on staging:
 1. Edit `aomi.toml`: change `server_tags = ["staging"]` to either
    `["prod"]` (prod-only) or `["staging", "prod"]` (both tiers loadable
    from this release).
-2. Re-run `aomi-git deploy` — this creates a new release tag (different
+2. Re-run `aomi-build deploy` — this creates a new release tag (different
    source commit) carrying the wider declared scope.
-3. Run `aomi-git activate --request` again — the new release tag posts to the
-   `✅-activation-requests` channel. Ops mint a token for that tag and run
-   `aomi-git activate` against `https://api.aomi.dev`, landing it on prod.
+3. Ask ops to activate the new release on prod — or run `aomi-build activate
+   --target-tag prod` yourself if you hold a token for it — against
+   `https://api.aomi.dev`. Per the target-tag rule the wider scope must come
+   from this re-deploy; ops can't widen it on your behalf.
 
 Why the re-deploy? Per the target-tag rule, the operator can only activate
 to scopes the build itself declared in `aomi.toml`. Promoting to prod
@@ -367,12 +345,13 @@ ADR 0010 in aomi-launch-my-agent.
 | Error | Cause | Fix |
 |---|---|---|
 | `git tree is dirty` | uncommitted files in your source repo (often `.aomi/deployment.json` from a previous dry-run) | commit, or add `.aomi/`, `target/`, and `Cargo.lock` to `.gitignore` |
-| `aomi.toml [app].access_token must be \`$ENV_VAR_NAME\`` | you put a literal token in `aomi.toml` | use `"$ENV_VAR_NAME"`; never commit secrets |
-| `git clone ... exited 128` | `aomi-git` couldn't fetch the platform repo into its transit cache (auth or network) | `gh auth login`; if still wedged, `rm -rf ~/.aomi/transit/aomi-labs-community-apps/` and retry |
-| `failed to refresh transit clone` | transit cache got into a weird state (interrupted clone, manual edits) | `rm -rf ~/.aomi/transit/aomi-labs-community-apps/` and re-run `aomi-git deploy` |
-| `activation endpoint ... returned 409 Conflict` | your `target_tags` aren't a subset of the backend's `AOMI_SERVER_TAGS` | match your env to the backend you're activating against |
-| `activation endpoint ... returned 502 Bad Gateway` | release tarball doesn't exist yet (CI race) or backend can't reach GitHub | retry after CI finishes |
-| `sdk_version mismatch` | your `aomi-sdk` Cargo dep doesn't match `platform.json`'s `required_sdk_version` | pin `aomi-sdk = "=0.1.X"` to the right version |
+| `deploy needs --app-source-id` | the CLI does not know which GitHub App-connected source repo to deploy | pass `--app-source-id` or set `AOMI_APP_SOURCE_ID` |
+| `deploy requires an activation token` | the backend deploy endpoint requires platform/app authority | export `AOMI_APP_ACTIVATION_TOKEN` or request one from ops |
+| `... returned 409` — `collides with an already-installed plugin` | another app already uses your plugin **name** on the backend (the runtime plugin namespace is global today) | rename your app/plugin and re-deploy |
+| `... returned 409` — target tags | your `target_tags` aren't a subset of the backend's `AOMI_SERVER_TAGS` | match your env to the backend you're activating against |
+| `... returned 422` — `incompatible` / `rebuild` | the built bundle is invalid for this backend (e.g. an SDK mismatch baked into the release) | rebuild against the right `required_sdk_version` and re-deploy |
+| `... returned 502` | release tarball doesn't exist yet (CI race) or the backend can't reach GitHub | retry after CI finishes |
+| `sdk_version mismatch` | your `aomi-sdk` Cargo dep doesn't match `platform.json`'s `required_sdk_version` | pin `aomi-sdk = "=3.0.0"` to the right version |
 
 ## Quick reference
 
@@ -380,9 +359,9 @@ ADR 0010 in aomi-launch-my-agent.
 |---|---|
 | `https://staging-api.aomi.dev` | staging backend — first stop for any new app |
 | `https://api.aomi.dev` | production backend — after staging is green |
-| `/api/control/platforms` | what platforms (`community`, `krexa`, …) the backend recognizes |
-| `/api/control/server-tags` | what server tags the backend matches (`[staging]` vs `[prod]`) |
-| `/api/control/apps/status` | full registry — your app should show `loaded: true` after activation |
+| `/api/platforms` | what platforms (`community`, `krexa`, …) the backend recognizes |
+| `/api/platforms/server-tags` | what server tags the backend matches (`[staging]` vs `[prod]`) |
+| `aomi-build status` | local deployment state plus backend app load check |
 | `platform.json` | CI contract — `required_sdk_version`, `release_tag_convention`, etc. |
 
 For the contract behind all of this, see ADR 0004, 0009, and 0010 in the
