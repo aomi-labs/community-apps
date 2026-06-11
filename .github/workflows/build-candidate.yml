@@ -20,7 +20,15 @@ jobs:
   build:
     name: Build candidate release
     if: github.actor == 'aomi-build[bot]'
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+          - runner: macos-14
+            target: aarch64-apple-darwin
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -42,12 +50,12 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: "1.91"
-          targets: x86_64-unknown-linux-gnu
+          targets: ${{ matrix.target }}
 
       - uses: Swatinem/rust-cache@v2
         if: steps.detect.outputs.apps != '[]'
         with:
-          key: candidate-${{ github.ref_name }}-x86_64-unknown-linux-gnu
+          key: candidate-${{ github.ref_name }}-${{ matrix.target }}
 
       - name: Build and publish candidate releases
         if: steps.detect.outputs.apps != '[]'
@@ -57,5 +65,5 @@ jobs:
           python3 .github/scripts/build_candidate.py release \
             --base origin/publish \
             --head "${{ github.sha }}" \
-            --target x86_64-unknown-linux-gnu \
+            --target "${{ matrix.target }}" \
             --dist-dir dist
