@@ -349,8 +349,8 @@ def load_deployment(app_dir: pathlib.Path, ctx: dict[str, str], target: str) -> 
     if release_tag != expected_tag:
         fail(f"deployment manifest release_tag must be {expected_tag}")
 
-    # The backend manifest records the default candidate target. The release
-    # builder matrix is authoritative for the concrete assets emitted here.
+    if manifest_target and manifest_target != target:
+        fail(f"deployment manifest target must be {target}")
 
     validate_file_manifest(app_dir, files)
     return {
