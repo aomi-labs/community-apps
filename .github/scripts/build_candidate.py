@@ -20,6 +20,7 @@ BRANCH_RE = re.compile(
     r"^(?P<owner>[A-Za-z0-9_.-]+)/(?P<repo>[A-Za-z0-9_.-]+)/(?P<installation_id>[0-9]+)/(?P<short_commit>[0-9a-fA-F]{7,40})$"
 )
 APP_RE = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
+# Backend deploys are repo-keyed: apps/<installation>/<repo-key>/<app>.
 REPO_KEY_RE = re.compile(r"^r[0-9a-f]{10}$")
 COMMIT_RE = re.compile(r"^[0-9a-f]{7,40}$")
 SHA256_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
