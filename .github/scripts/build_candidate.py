@@ -20,6 +20,7 @@ BRANCH_RE = re.compile(
     r"^(?P<owner>[A-Za-z0-9_.-]+)/(?P<repo>[A-Za-z0-9_.-]+)/(?P<installation_id>[0-9]+)/(?P<short_commit>[0-9a-fA-F]{7,40})$"
 )
 APP_RE = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
+REPO_KEY_RE = re.compile(r"^r[0-9a-f]{10}$")
 COMMIT_RE = re.compile(r"^[0-9a-f]{7,40}$")
 SHA256_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 
@@ -132,7 +133,10 @@ def changed_app_dirs(base: str, head: str) -> list[str]:
     for path in changed_paths(base, head):
         parts = pathlib.PurePosixPath(path).parts
         if len(parts) >= 3 and parts[0] == "apps" and parts[1].isdigit():
-            dirs.add("/".join(parts[:3]))
+            if len(parts) >= 4 and REPO_KEY_RE.match(parts[2]):
+                dirs.add("/".join(parts[:4]))
+            else:
+                dirs.add("/".join(parts[:3]))
     return sorted(dirs)
 
 
@@ -290,15 +294,25 @@ def load_deployment(app_dir: pathlib.Path, ctx: dict[str, str], target: str) -> 
     path = app_dir / ".aomi" / "deployment.json"
     manifest = load_json(path)
     parts = app_dir.relative_to(REPO_ROOT).parts
-    if len(parts) != 3 or parts[0] != "apps":
-        fail(f"candidate app dir must be apps/<installation-id>/<app>, got {relpath(app_dir)}")
-    installation_id, app_name = parts[1], parts[2]
+    if len(parts) == 4 and parts[0] == "apps" and REPO_KEY_RE.match(parts[2]):
+        installation_id, repo_key, app_name = parts[1], parts[2], parts[3]
+    elif len(parts) == 3 and parts[0] == "apps":
+        installation_id, repo_key, app_name = parts[1], None, parts[2]
+    else:
+        fail(
+            "candidate app dir must be apps/<installation-id>/<app> or "
+            f"apps/<installation-id>/<repo-key>/<app>, got {relpath(app_dir)}"
+        )
     if installation_id != ctx["installation_id"]:
         fail(f"{relpath(app_dir)} installation id does not match branch")
     if not APP_RE.match(app_name):
         fail(f"invalid app directory name: {app_name}")
 
-    expected_app_path = f"apps/{installation_id}/{app_name}"
+    expected_app_path = (
+        f"apps/{installation_id}/{repo_key}/{app_name}"
+        if repo_key
+        else f"apps/{installation_id}/{app_name}"
+    )
     manifest_installation_id = manifest.get("source", {}).get("installation_id")
     if str(manifest_installation_id) != installation_id:
         fail(f"deployment manifest source.installation_id must be {installation_id}")
@@ -338,7 +352,11 @@ def load_deployment(app_dir: pathlib.Path, ctx: dict[str, str], target: str) -> 
     if app_path != expected_app_path:
         fail(f"deployment manifest app path must be {expected_app_path}")
 
-    expected_tag = f"apps-{installation_id}-{app_name}-{ctx['short_commit']}"
+    expected_tag = (
+        f"apps-{installation_id}-{repo_key}-{app_name}-{ctx['short_commit']}"
+        if repo_key
+        else f"apps-{installation_id}-{app_name}-{ctx['short_commit']}"
+    )
     if release_tag != expected_tag:
         fail(f"deployment manifest release_tag must be {expected_tag}")
 
@@ -352,6 +370,7 @@ def load_deployment(app_dir: pathlib.Path, ctx: dict[str, str], target: str) -> 
         "source_commit": source_commit,
         "release_tag": release_tag,
         "deployment_manifest": relpath(path),
+        "app_path": expected_app_path,
     }
 
 
@@ -420,7 +439,7 @@ def build_release(app_dir: pathlib.Path, ctx: dict[str, str], target: str, dist_
         "platform": "community",
         "app": {
             "name": app_name,
-            "path": f"apps/{info['installation_id']}/{app_name}",
+            "path": info["app_path"],
             "package": package_name,
         },
         "source": {
