@@ -12,11 +12,11 @@ the backend-generated record and publishes candidate release artifacts.
 2. **Deploy** with `aomi-build deploy`. The CLI sends a source-bound request to
    the backend.
 3. **Backend staging** fetches your source through the GitHub App, writes
-   `apps/<installation-id>/<app>/.aomi/deployment.json`, and opens or updates a
+   `apps/<installation-id>/<repo-key>/<app>/.aomi/deployment.json`, and opens or updates a
    platform PR.
 4. **Release-builder CI** runs on the backend candidate branch, validates the
    backend manifest, builds the cdylib, and publishes a GitHub release tagged
-   `apps-<installation-id>-<app>-<short-source-commit>`.
+   `apps-<installation-id>-<repo-key>-<app>-<short-source-commit>`.
 5. **Activation** calls the backend. The backend resolves the requested PR,
    branch, commit, or release tags against its deployment record and fetches the
    desired artifacts.
@@ -36,9 +36,9 @@ sequenceDiagram
     CLI->>BE: POST /api/platforms/community/deploy
     BE->>Src: fetch source via GitHub App app_source_id
     BE->>Repo: push candidate branch + open/update PR
-    BE->>Repo: write apps/<installation-id>/<app>/.aomi/deployment.json
+    BE->>Repo: write apps/<installation-id>/<repo-key>/<app>/.aomi/deployment.json
     Repo->>CI: candidate branch push by aomi-build[bot]
-    CI->>Repo: upload release apps-<installation-id>-<app>-<short-commit>
+    CI->>Repo: upload release apps-<installation-id>-<repo-key>-<app>-<short-commit>
     You->>CLI: aomi-build activate
     CLI->>BE: POST /api/platforms/community/apps/activate
     BE->>Repo: fetch selected release artifact
@@ -87,7 +87,7 @@ my-cool-app/
 
 ```toml
 [app]
-name         = "my-cool-app"            # slug used under apps/<installation-id>/
+name         = "my-cool-app"            # app slug; staged under apps/<installation-id>/<repo-key>/
 display_name = "My Cool App"            # human-readable
 platform     = "community"              # must be "community" for this repo
 git          = "https://github.com/aomi-labs/community-apps"
@@ -190,12 +190,18 @@ The backend deploy handler does the platform work:
 1. Resolves the selected source ref to an exact commit.
 2. Fetches the source repo archive through the GitHub App.
 3. Parses each requested `aomi.toml`.
-4. Copies app source into `apps/<installation-id>/<app>/`.
-5. Generates `apps/<installation-id>/<app>/.aomi/deployment.json` from the
+4. Copies app source into `apps/<installation-id>/<repo-key>/<app>/`.
+5. Generates `apps/<installation-id>/<repo-key>/<app>/.aomi/deployment.json` from the
    backend deploy record.
 6. Pushes a candidate branch named
    `<source-owner>/<source-repo>/<installation-id>/<short-source-commit>`.
 7. Opens or updates a platform PR against `publish`.
+
+`<repo-key>` is a short, stable key the backend derives from your source repo
+(for example `r14902bb079`). It namespaces both the staged path and the release
+tag so one GitHub App installation can host multiple source repos — or the same
+app name from different repos — without collisions. The candidate branch keeps
+its `<source-owner>/<source-repo>/<installation-id>/<short-source-commit>` shape.
 
 The generated `deployment.json` records the backend's view of the release:
 app metadata, source repository, source commit, platform, staged app path,
@@ -215,14 +221,14 @@ runs when `aomi-build[bot]` pushes a candidate branch shaped like:
 ```
 
 It uses `publish` as the baseline, detects changed app directories under
-`apps/<installation-id>/<app>/`, and validates each backend-generated
+`apps/<installation-id>/<repo-key>/<app>/`, and validates each backend-generated
 `.aomi/deployment.json`.
 
 For each valid app, CI:
 
-1. Confirms the staged app path matches `apps/<installation-id>/<app>`.
+1. Confirms the staged app path matches `apps/<installation-id>/<repo-key>/<app>`.
 2. Confirms the app record release tag matches
-   `apps-<installation-id>-<app>-<short-source-commit>`.
+   `apps-<installation-id>-<repo-key>-<app>-<short-source-commit>`.
 3. Confirms source commit, repository, platform, target triple, file hashes,
    and file byte counts.
 4. Builds the app as a Rust `cdylib`.
@@ -260,8 +266,8 @@ CI state, can fast-forward the live branch when required, and derives app paths
 and release tags from the backend candidate branch:
 
 ```
-apps/<installation-id>/<app>
-apps-<installation-id>-<app>-<short-source-commit>
+apps/<installation-id>/<repo-key>/<app>
+apps-<installation-id>-<repo-key>-<app>-<short-source-commit>
 ```
 
 For commit or explicit release-tag activation, the release tags must be
@@ -281,7 +287,7 @@ state plus GitHub CI/release status for the release tag:
 $ aomi-build status
 Publication status
   repo          : aomi-labs/community-apps
-  release_tag   : apps-123456-my-bot-abc1234
+  release_tag   : apps-123456-r1a2b3c4d5e-my-bot-abc1234
   branch        : owner/repo/123456/abc1234
   local state   : deployed=true activated=false
   ci            : running - build-candidate
@@ -321,10 +327,10 @@ If activating from a fresh machine or an older release, pass the target
 explicitly:
 
 ```bash
-aomi-build activate apps-123456-my-cool-app-abc1234 \
+aomi-build activate apps-123456-r1a2b3c4d5e-my-cool-app-abc1234 \
   --backend https://staging-api.aomi.dev \
   --platform community \
-  --release-tag apps-123456-my-cool-app-abc1234 \
+  --release-tag apps-123456-r1a2b3c4d5e-my-cool-app-abc1234 \
   --target-tag staging
 ```
 
@@ -361,7 +367,7 @@ original build did not include prod in `server_tags`.
 | `deploy needs --app-source-id` | the CLI does not know which GitHub App-connected source repo to deploy | pass `--app-source-id` or set `AOMI_APP_SOURCE_ID` |
 | `deploy requires an activation token` | the backend deploy endpoint requires platform/app authority | export `AOMI_APP_ACTIVATION_TOKEN` or request one from ops |
 | `candidate release workflow must run on ... branches` | candidate branch does not match the backend branch shape | deploy through the backend instead of pushing by hand |
-| `candidate app dir must be apps/<installation-id>/<app>` | staged path does not match the backend contract | redeploy through the backend |
+| `candidate app dir must be apps/<installation-id>/<repo-key>/<app>` | staged path does not match the backend contract | redeploy through the backend |
 | `deployment manifest release_tag must be ...` | manifest release tag does not match the candidate branch | redeploy through the backend |
 | `sdk_version mismatch` | your `aomi-sdk` Cargo dep does not match `platform.json`'s `required_sdk_version` | pin the exact SDK version required by `platform.json` |
 | `... returned 502` | release tarball does not exist yet or the backend cannot reach GitHub | retry after CI finishes |
