@@ -19,7 +19,7 @@ concurrency:
 jobs:
   build:
     name: Build candidate release
-    if: github.actor == 'aomi-build[bot]'
+    if: github.actor == 'aomi-build[bot]' || github.actor == 'aomi-build-staging[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
