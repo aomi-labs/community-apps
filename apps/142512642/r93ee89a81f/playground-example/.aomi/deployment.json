@@ -6,10 +6,7 @@
     "repository_id": 1281278947,
     "repository_link": "h4n0/test-aomi-0",
     "owner_repo_name": "h4n0/test-aomi-0",
-    "ref": {
-      "kind": "branch",
-      "value": "main"
-    },
+    "ref": "30a35726c3dd49fdf07ea66eb327f1e56ee966c9",
     "commit_hash": "30a35726c3dd49fdf07ea66eb327f1e56ee966c9",
     "aomi_toml_paths": [
       "aomi.toml"
