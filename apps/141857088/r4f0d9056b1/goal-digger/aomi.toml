@@ -1,0 +1,7 @@
+[app]
+name         = "goal-digger"
+display_name = "Goal Digger — World Cup Trading Brain"
+platform     = "community"
+git          = "https://github.com/victorchimakanu/goal-digger-agent"
+public       = true
+server_tags  = ["staging"]
