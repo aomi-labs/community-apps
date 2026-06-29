@@ -1,0 +1,217 @@
+{
+  "id": "dep_141780080_re11d026f7e_b41e3b9a4639",
+  "status": "",
+  "source": {
+    "installation_id": 141780080,
+    "repository_id": 1284417203,
+    "repository_link": "phoebe-aomi/community-apps-emmascloud",
+    "owner_repo_name": "phoebe-aomi/community-apps-emmascloud",
+    "ref": "b41e3b9a46392efed641b3d84b8ffad37ab94eb0",
+    "commit_hash": "b41e3b9a46392efed641b3d84b8ffad37ab94eb0",
+    "aomi_toml_paths": [
+      "apps/alphascout/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "source_branch": "phoebe-aomi/community-apps-emmascloud/141780080/b41e3b9a4639",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "alphascout",
+        "path": "apps/141780080/re11d026f7e/alphascout",
+        "aomi_toml_path": "apps/alphascout/aomi.toml",
+        "release_tag": "apps-141780080-re11d026f7e-alphascout-b41e3b9a4639",
+        "target": "x86_64-unknown-linux-gnu",
+        "files": [
+          {
+            "path": ".aomi/deployment.json",
+            "sha256": "sha256:8d10b7f88882836beaec325d97b7c2d25dc790a0d10c4676374186374b8fad56",
+            "bytes": 7968
+          },
+          {
+            "path": ".ci-trigger",
+            "sha256": "sha256:df3d3647f450ac2bc8e5c3587150dc4fb55265eb0289c5d520cf84029ecf1fcd",
+            "bytes": 7
+          },
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:74ebf7d0a45a8102cafb47f9656c5fd5b5056c56411eef5a6eff16874cef8f97",
+            "bytes": 69
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:fd96395df485f9720b0fd2f5f075b9cbca970af30ad61ee5322414530d8bdd9c",
+            "bytes": 73
+          },
+          {
+            "path": "Dockerfile",
+            "sha256": "sha256:4dc4ac5f76cdda716b00f9fcbeae1551ea557ae4e43590682592e7d5dd58af8e",
+            "bytes": 109
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:d57475cf330eba52ab0f6c910bec85207499d898d2f6421cf9c8a0a9c2fe72d9",
+            "bytes": 799
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:3c25d1c087c0542387e425e8c94174574febdc4a29a17dbd8a0fed35e3a2331f",
+            "bytes": 183
+          },
+          {
+            "path": "apps/telegram-bot/index.js",
+            "sha256": "sha256:6fd6972989d4f5e2f7e6a6ac1a57b81baece1c2d9a5002afe57718c45bb26d55",
+            "bytes": 971
+          },
+          {
+            "path": "apps/telegram-bot/package-lock.json",
+            "sha256": "sha256:13576dfe66ec574fee5c39cf3d05c1741bff2af47fda4d5c3dadc55f6c4b2188",
+            "bytes": 18136
+          },
+          {
+            "path": "apps/telegram-bot/package.json",
+            "sha256": "sha256:048718200cc7b1ef48b51bc1df9cf9a677faac5f73fe3dda84c8888eb189b6ca",
+            "bytes": 348
+          },
+          {
+            "path": "assets/screenshots/alphascout backend.png",
+            "sha256": "sha256:24359cc08cb8253ff93011c2232b4e46d2a5ae4af177fce2f2acba0248f5b7aa",
+            "bytes": 26944
+          },
+          {
+            "path": "assets/screenshots/alphascout bot 1.png",
+            "sha256": "sha256:47283c293f9d11e9f6f1636b35a2686be0ce4b7d81b8005f55e5c01da0f067f5",
+            "bytes": 78332
+          },
+          {
+            "path": "assets/screenshots/alphascout bot.png",
+            "sha256": "sha256:c8901bcb1524050109c205bfa729389712d3f3cc107aa90f460a1c799c2abf00",
+            "bytes": 42442
+          },
+          {
+            "path": "crates/alphascout-agent/.env.example",
+            "sha256": "sha256:1435beece86a3ba31080331b51e1b52a4fa8460a17777c3bfdba63213bf3b93d",
+            "bytes": 143
+          },
+          {
+            "path": "crates/alphascout-agent/cargo.toml",
+            "sha256": "sha256:36657ef185323ee82723f6cc94a236f0ae595aab24868d11c9d6946766429715",
+            "bytes": 682
+          },
+          {
+            "path": "crates/alphascout-agent/src/ai/llm.rs",
+            "sha256": "sha256:7b2c2942e318804809b1451b015ad0ac0f8171a8290442c800fc77208ed2670c",
+            "bytes": 910
+          },
+          {
+            "path": "crates/alphascout-agent/src/ai/mod.rs",
+            "sha256": "sha256:a7b45bc2a44eb4a7acf2605308a2b548fa813a86c2c38aa2925b5b551a02fb29",
+            "bytes": 45
+          },
+          {
+            "path": "crates/alphascout-agent/src/ai/router.rs",
+            "sha256": "sha256:b49b23ea17852643874c1d6ce1032a2abcf286c3dfacbfb984d96f028ec55006",
+            "bytes": 416
+          },
+          {
+            "path": "crates/alphascout-agent/src/ai/thesis.rs",
+            "sha256": "sha256:5606833ca9740e16fa3cf7d740c9ab6c1d388df5140e94dd3deff0fdf4c2c2e9",
+            "bytes": 302
+          },
+          {
+            "path": "crates/alphascout-agent/src/alerts.rs",
+            "sha256": "sha256:39bf7ea2d471083e35480ad4d944501e062460f1c5787b8c298ac379328f82ba",
+            "bytes": 248
+          },
+          {
+            "path": "crates/alphascout-agent/src/aomi/bridge.rs",
+            "sha256": "sha256:350f579862530953ca8c2d84d748e34520a97847b1cc7d8dcad435a474542208",
+            "bytes": 1507
+          },
+          {
+            "path": "crates/alphascout-agent/src/aomi/executor.rs",
+            "sha256": "sha256:4887d66d85725650250808d07176de5b2d1ef4a1443bedd937d61d3604ac959b",
+            "bytes": 132
+          },
+          {
+            "path": "crates/alphascout-agent/src/aomi/mod.rs",
+            "sha256": "sha256:c51d7c03add2986345ea46dae5c2843aae0902864a3f4313ca779b0155026adb",
+            "bytes": 50
+          },
+          {
+            "path": "crates/alphascout-agent/src/aomi/reasoning.rs",
+            "sha256": "sha256:0766c3b1a748990db8d0e52f0549dea219a6a4068140614766d07afe41984ace",
+            "bytes": 549
+          },
+          {
+            "path": "crates/alphascout-agent/src/aomi/tools.rs",
+            "sha256": "sha256:306de97be876f4033eb51a5a303e733cdee95a1a375d11bea66d7c2b3baccda0",
+            "bytes": 492
+          },
+          {
+            "path": "crates/alphascout-agent/src/base.rs",
+            "sha256": "sha256:e2decbc759e2316034c7d58fcd016f05a323e54cbab2cfcf4fde0b59e041c867",
+            "bytes": 187
+          },
+          {
+            "path": "crates/alphascout-agent/src/engine.rs",
+            "sha256": "sha256:47f27981088732a24c5a9bff90c19a14b23e920001697246cad538d1e5cd9120",
+            "bytes": 122
+          },
+          {
+            "path": "crates/alphascout-agent/src/lib.rs",
+            "sha256": "sha256:e827ad84424cf06603104a1518cfc06558d2e7ff8868d306458181d66b1e9a3d",
+            "bytes": 812
+          },
+          {
+            "path": "crates/alphascout-agent/src/main.rs",
+            "sha256": "sha256:bf416ae2c2a3e6e7f9b6e3984c0174a95dcd2ba9d668b50713ca73094b8df64e",
+            "bytes": 1388
+          },
+          {
+            "path": "crates/alphascout-agent/src/market/analyzer.rs",
+            "sha256": "sha256:7265dcac331dce39a56254cbc6b51079cd632378881032f16ded71f10118e938",
+            "bytes": 1494
+          },
+          {
+            "path": "crates/alphascout-agent/src/market/limitless.rs",
+            "sha256": "sha256:e938e8aeb0f0b79966442b3819aecd839970ef96c5dd8926599569fcae3d61e0",
+            "bytes": 628
+          },
+          {
+            "path": "crates/alphascout-agent/src/market/mod.rs",
+            "sha256": "sha256:b336c415b3357b35736abc58e689f2ff3d8863dc977e84d95af19979df4584a6",
+            "bytes": 37
+          },
+          {
+            "path": "crates/alphascout-agent/src/tool.rs",
+            "sha256": "sha256:4f6c89cf383c24774bfdecac187757d69288496f5c8d3adf07eedecfbfd7500e",
+            "bytes": 1228
+          },
+          {
+            "path": "crates/alphascout-agent/src/wallet.rs",
+            "sha256": "sha256:5ce00115f301da45b966962404c2d15410654407fc4dd0ee1d6ee8c93792fb89",
+            "bytes": 230
+          },
+          {
+            "path": "test-rust/Cargo.toml",
+            "sha256": "sha256:9aef16c0c754f3ca3c8a74a480b2a71c5067856db2045938acde63ebbb23e980",
+            "bytes": 80
+          },
+          {
+            "path": "test-rust/src/main.rs",
+            "sha256": "sha256:c8e0583694bb1e0188dbe28fe0d65ac1130723c55f968b6262b906c147f72549",
+            "bytes": 45
+          }
+        ]
+      }
+    ]
+  }
+}
