@@ -1,0 +1,7 @@
+[app]
+name         = "zerodrift"
+display_name = "ZeroDrift"
+platform     = "community"
+git          = "https://github.com/phoebe-aomi/ZeroDrift"
+public       = true
+server_tags  = ["staging"]
