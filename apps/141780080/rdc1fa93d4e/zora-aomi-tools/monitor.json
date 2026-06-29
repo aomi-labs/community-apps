@@ -1,0 +1,10 @@
+[
+  {
+    "name": "My Coin",
+    "address": "0xF5735B760e2194521377A24a5c1e830aFa83aCDB",
+    "chain": 8453,
+    "holder_delta_threshold": 1,
+    "volume_spike_pct": 10.0
+  }
+]
+  

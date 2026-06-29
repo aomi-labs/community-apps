@@ -1,0 +1,117 @@
+### zora-aomi-tools — REST Client
+### VS Code extension: humao.rest-client
+### Click "Send Request" above any request to run it individually.
+
+@base = http://localhost:3001
+@wallet = 0x1234567890abcdef1234567890abcdef12345678
+@coin = 0x445e9c0a296068dc4257767b5ed354b77cf513de
+@top_n = 5
+@count = 10
+
+# ─────────────────────────────────────────────────────────────────────────────
+# HEALTH
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Health check
+GET {{base}}/health
+
+# ─────────────────────────────────────────────────────────────────────────────
+# REST — Creator-level endpoints (aggregated across all of a wallet's coins)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Creator stats  →  name, avatar, totalMints, volumeEth, uniqueHolders, growth30D
+GET {{base}}/api/creator/{{wallet}}
+
+###
+
+### Volume over time  →  [{ date, volume }]
+GET {{base}}/api/creator/{{wallet}}/volume
+
+###
+
+### Top buyers  →  [{ rank, wallet, percentage, amountEth }]
+GET {{base}}/api/creator/{{wallet}}/top-buyers?top_n={{top_n}}
+
+###
+
+### Collectors  →  [{ rank, wallet, coinsHeld, firstPurchase, totalSpentEth, badge }]
+GET {{base}}/api/creator/{{wallet}}/collectors?count={{count}}
+
+###
+
+### Collections  →  [{ id, name, priceEth, volumeEth, holders, thumbnail }]
+GET {{base}}/api/creator/{{wallet}}/collections?count=20
+
+# ─────────────────────────────────────────────────────────────────────────────
+# GRAPHQL — individual queries
+# ─────────────────────────────────────────────────────────────────────────────
+
+### GraphQL — creatorStats
+POST {{base}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ creatorStats(wallet: \"{{wallet}}\") { wallet name avatar totalMints volumeEth uniqueHolders growth30D } }"
+}
+
+###
+
+### GraphQL — volumeData
+POST {{base}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ volumeData(wallet: \"{{wallet}}\") { date volume } }"
+}
+
+###
+
+### GraphQL — topBuyers
+POST {{base}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ topBuyers(wallet: \"{{wallet}}\", topN: {{top_n}}) { rank wallet percentage amountEth } }"
+}
+
+###
+
+### GraphQL — collectors
+POST {{base}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ collectors(wallet: \"{{wallet}}\", count: {{count}}) { rank wallet coinsHeld firstPurchase totalSpentEth badge } }"
+}
+
+###
+
+### GraphQL — collections
+POST {{base}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ collections(wallet: \"{{wallet}}\", count: 20) { id name priceEth volumeEth holders thumbnail } }"
+}
+
+###
+
+### GraphQL — full dashboard (all fields in one round-trip)
+POST {{base}}/graphql
+Content-Type: application/json
+
+{
+  "query": "query CreatorDashboard($wallet: String!) { creatorStats(wallet: $wallet) { wallet name avatar totalMints volumeEth uniqueHolders growth30D } volumeData(wallet: $wallet) { date volume } topBuyers(wallet: $wallet, topN: 5) { rank wallet percentage amountEth } collectors(wallet: $wallet, count: 10) { rank wallet coinsHeld firstPurchase totalSpentEth badge } collections(wallet: $wallet, count: 20) { id name priceEth volumeEth holders thumbnail } }",
+  "variables": {
+    "wallet": "{{wallet}}"
+  }
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DIRECT ZORA TOOLS — coin-contract level (via the CLI, not the HTTP server)
+# Run these in your terminal, not through this file:
+#
+#   cargo run -- holder-count {{coin}}
+#   cargo run -- 24h-volume   {{coin}}
+#   cargo run -- top-buyers   {{coin}} 5
+# ─────────────────────────────────────────────────────────────────────────────

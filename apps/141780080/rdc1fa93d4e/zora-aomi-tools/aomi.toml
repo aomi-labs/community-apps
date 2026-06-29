@@ -1,0 +1,7 @@
+[app]
+name         = "zora-aomi-tools"
+display_name = "Zora Wrapped"
+platform     = "community"
+git          = "https://github.com/phoebe-aomi/zora-wrapped_backend"
+public       = true
+server_tags  = ["staging"]
