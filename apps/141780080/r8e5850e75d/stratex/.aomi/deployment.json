@@ -1,0 +1,77 @@
+{
+  "id": "dep_141780080_r8e5850e75d_f402b71f96d9",
+  "status": "",
+  "source": {
+    "installation_id": 141780080,
+    "repository_id": 1284415927,
+    "repository_link": "phoebe-aomi/stratex",
+    "owner_repo_name": "phoebe-aomi/stratex",
+    "ref": "f402b71f96d9c8398d89cfcdf1897fd385d30c37",
+    "commit_hash": "f402b71f96d9c8398d89cfcdf1897fd385d30c37",
+    "aomi_toml_paths": [
+      "backend/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "source_branch": "phoebe-aomi/stratex/141780080/f402b71f96d9",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "stratex",
+        "path": "apps/141780080/r8e5850e75d/stratex",
+        "aomi_toml_path": "backend/aomi.toml",
+        "release_tag": "apps-141780080-r8e5850e75d-stratex-f402b71f96d9",
+        "target": "x86_64-unknown-linux-gnu",
+        "files": [
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:2e9829fe661c12c5e197c87cfda359823cc0d833c1aa0f90ff4cd1dc413baef3",
+            "bytes": 39680
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:59c2b584eb85adb2874297a3489184651abbec0ef5eb289334dcfeced614cd97",
+            "bytes": 394
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:752ec390fd5e5547fa62044eda49f8fa30b84c6a13309c8cafdb9ef42ae8fde1",
+            "bytes": 132
+          },
+          {
+            "path": "src/avantis.rs",
+            "sha256": "sha256:b2c203c7c350ef88af6e6cae3a12d78c64998c581e1a3a7f1f90994e0875b61c",
+            "bytes": 5729
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:3590fcbc82ae5cd29367c77e1c957d4df96b58db5daa0d69246b7fbebf1a61e7",
+            "bytes": 6991
+          },
+          {
+            "path": "src/tools.rs",
+            "sha256": "sha256:2480a34047ee8098b334d73af1c431fe1af8f8b348db20190afd8014407921df",
+            "bytes": 8000
+          },
+          {
+            "path": "src/types.rs",
+            "sha256": "sha256:2390f6ab031435517e1243e687fe318ff1cacf91c75b396a54ae859c4f76d618",
+            "bytes": 3638
+          },
+          {
+            "path": "src/x.jpg",
+            "sha256": "sha256:5c6662b7057d0320be75dca88aa86291c7b4af943cc394d292cc5c7dff88fe19",
+            "bytes": 37152
+          }
+        ]
+      }
+    ]
+  }
+}
