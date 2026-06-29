@@ -138,6 +138,7 @@ def changed_app_dirs(base: str, head: str) -> list[str]:
             and parts[0] == "apps"
             and parts[1].isdigit()
             and REPO_KEY_RE.match(parts[2])
+            and not parts[3].startswith(".")
         ):
             dirs.add("/".join(parts[:4]))
     return sorted(dirs)
