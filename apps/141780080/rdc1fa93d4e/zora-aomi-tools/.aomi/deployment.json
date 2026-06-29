@@ -1,0 +1,192 @@
+{
+  "id": "dep_141780080_rdc1fa93d4e_944b75ac063b",
+  "status": "",
+  "source": {
+    "installation_id": 141780080,
+    "repository_id": 1284416717,
+    "repository_link": "phoebe-aomi/zora-wrapped_backend",
+    "owner_repo_name": "phoebe-aomi/zora-wrapped_backend",
+    "ref": "944b75ac063b7097ca373d872a69537788356487",
+    "commit_hash": "944b75ac063b7097ca373d872a69537788356487",
+    "aomi_toml_paths": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "source_branch": "phoebe-aomi/zora-wrapped_backend/141780080/944b75ac063b",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "zora-aomi-tools",
+        "path": "apps/141780080/rdc1fa93d4e/zora-aomi-tools",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-141780080-rdc1fa93d4e-zora-aomi-tools-944b75ac063b",
+        "target": "x86_64-unknown-linux-gnu",
+        "files": [
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:cebe12291bba79efb836930ad9f56eb248087dee4652d78fc4263cf5212ec4dc",
+            "bytes": 260
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:30feea9d8ee1b0a03ad755e9adacc270de30305a99b2f40df30792aef77874cc",
+            "bytes": 72500
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:4b806ffef17260f156e1b2a6db8fd8d188ebdd88c3e2e710c0ef3b92d7313f8b",
+            "bytes": 913
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:a3b9e99f4b11e64221c54365034f026c758840f57a0d712d3c46382edaa2f5fb",
+            "bytes": 4213
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:4face2c54e1019eec0528c56b4859c213d28449cbdf0c0d89ff6a1a07eae0299",
+            "bytes": 212
+          },
+          {
+            "path": "api_tester.html",
+            "sha256": "sha256:7754e96b683f49a297a787b962eadc50a93b7d6f3235d8bc7fbc2ed0a398fe67",
+            "bytes": 18148
+          },
+          {
+            "path": "endpoints.http",
+            "sha256": "sha256:426ddf11ff157d0aad9df12bf1d00a32caf0f38177ccea871dcbc22aa351f88c",
+            "bytes": 4864
+          },
+          {
+            "path": "monitor.json",
+            "sha256": "sha256:cd251ff92d54ddecaa8c0c09c9da270a270e6e043ab69e255362488b4de76bf3",
+            "bytes": 179
+          },
+          {
+            "path": "railway.toml",
+            "sha256": "sha256:5c6e6d0e7f0609fd3cefbee1e55178ae5e600d1e0f9940df979a00fd47dc83a1",
+            "bytes": 43
+          },
+          {
+            "path": "run_real_api_tests.rs",
+            "sha256": "sha256:c0cce6e1ff7f10b0182148561a158542b90b09b5ccec94ea3dbc5b00b810b703",
+            "bytes": 2403
+          },
+          {
+            "path": "rust-toolchain.toml",
+            "sha256": "sha256:e31ab6fae1e84390ef2914cdb9af0660d358e6009900de86f64d79abcf1f7949",
+            "bytes": 28
+          },
+          {
+            "path": "src/agent/mod.rs",
+            "sha256": "sha256:c060e0064d32d83f99f6ea10acd7936273803f5f40e570f0419ed543248044c1",
+            "bytes": 228
+          },
+          {
+            "path": "src/agent/monitor.rs",
+            "sha256": "sha256:f1191976de72794b510e7750caf3d74a409a45af71e4d5133b9e72c9f7c16c07",
+            "bytes": 10826
+          },
+          {
+            "path": "src/agent/nlp.rs",
+            "sha256": "sha256:7f819b831c6458a20004f8e84f63abcd61ef9697bfe612d950c91f3c0c29cc1c",
+            "bytes": 8095
+          },
+          {
+            "path": "src/aomi.rs",
+            "sha256": "sha256:c22e030f3b0642ca2ae2662f006810fc50caa97d56adc5b1f6dda149d88ce19a",
+            "bytes": 5379
+          },
+          {
+            "path": "src/aomi_tests.rs",
+            "sha256": "sha256:1f98f8bd2aa47c82b837bf2b1602337e35c46d8825bee1bbb1ee0ba38a4b37e0",
+            "bytes": 10094
+          },
+          {
+            "path": "src/bin/agent.rs",
+            "sha256": "sha256:e8bd26b82a266f624725916a7a00f474989b7b33cac2c44c8590788ad1c3ae7b",
+            "bytes": 1041
+          },
+          {
+            "path": "src/bin/agent_demo.rs",
+            "sha256": "sha256:6babb322a4f7608cb0371296715b633514e1b454fdc0bc1dd08727beee1c6919",
+            "bytes": 4492
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:4b3e0a3bab97eb8c068b44f36e4c4b629712970ee2d28ac4fca3999de4da85e5",
+            "bytes": 9369
+          },
+          {
+            "path": "src/frontend.rs",
+            "sha256": "sha256:39d6f287021193c32a8c3c6289d3b51d426c73dd25c5bdad7aef4c8051821f3a",
+            "bytes": 9282
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:eb5b1a13f5745e340c18df84bf06f1bde1c89b9cd9cab6016526c094d090b32c",
+            "bytes": 517
+          },
+          {
+            "path": "src/main.rs",
+            "sha256": "sha256:22777ee18999af15c91e8644553b027c0983d5a3a7983736cc3dbc30dcadb0f8",
+            "bytes": 9656
+          },
+          {
+            "path": "src/runtime.rs",
+            "sha256": "sha256:43f057c6ae95266b7cc2645923173da39ebfd652f7a3b363399ea88b8e159b14",
+            "bytes": 287
+          },
+          {
+            "path": "src/server.rs",
+            "sha256": "sha256:da86794c79bf30405329141f6db1fccc502b05df6c11259ec3fecd0532e73aee",
+            "bytes": 7995
+          },
+          {
+            "path": "src/tools/get_24h_volume.rs",
+            "sha256": "sha256:46b65ec6441a3b975c758caf5ee89690bf0babd4ae3940ff2c0aa5ed398f0d7a",
+            "bytes": 652
+          },
+          {
+            "path": "src/tools/get_holder_count.rs",
+            "sha256": "sha256:427fdee67ac66a55397dbbe2f976cc36eeb456356954d8932f57bd863ed8f905",
+            "bytes": 594
+          },
+          {
+            "path": "src/tools/get_top_buyers.rs",
+            "sha256": "sha256:9eab8033b9d499213425b9c610bf667af9bdd67717f16d3625562e022b273048",
+            "bytes": 5711
+          },
+          {
+            "path": "src/tools/message_recent_buyer.rs",
+            "sha256": "sha256:bfac7178c2640b2c666d1bb94c24214d935108a45999e55dc6246ebb2e434d3f",
+            "bytes": 1326
+          },
+          {
+            "path": "src/tools/mod.rs",
+            "sha256": "sha256:7ad0e52f5a1b5adfcd4bde95fd49ac60191445ffe9355d858507fbe441e9c801",
+            "bytes": 289
+          },
+          {
+            "path": "src/types.rs",
+            "sha256": "sha256:291d64a621c9b60fde374c5e8fe84b3c40eb49930782c15941041f09b136f8ca",
+            "bytes": 2056
+          },
+          {
+            "path": "test_endpoints.json",
+            "sha256": "sha256:98383adad593a922f15e6dae6465901d8090c1107a4afe8585e9525a4b78fdcb",
+            "bytes": 177
+          }
+        ]
+      }
+    ]
+  }
+}
