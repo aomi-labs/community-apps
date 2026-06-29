@@ -1,0 +1,8 @@
+[app]
+name = "alphascout"
+display_name = "AlphaScout"
+platform = "community"
+git = "https://github.com/phoebe-aomi/community-apps-emmascloud"
+public = true
+
+server_tags = ["staging"]
