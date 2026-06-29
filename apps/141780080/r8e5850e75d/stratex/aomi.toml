@@ -1,0 +1,6 @@
+[app]
+name = "stratex"
+display_name = "StratEx"
+platform = "community"
+git = "https://github.com/phoebe-aomi/StratEx"
+public = true
