@@ -1,16 +1,13 @@
 {
-  "id": "dep_141857088_r4f0d9056b1_bfbf12d7c90f",
+  "id": "dep_141857088_r4f0d9056b1_f86173477deb",
   "status": "",
   "source": {
     "installation_id": 141857088,
     "repository_id": 1272244364,
     "repository_link": "victorchimakanu/goal-digger-agent",
     "owner_repo_name": "victorchimakanu/goal-digger-agent",
-    "ref": {
-      "kind": "branch",
-      "value": "main"
-    },
-    "commit_hash": "bfbf12d7c90f5884f3ff994b406f4fe923611337",
+    "ref": "f86173477deb0f3bcd8310ce13595a708d963f89",
+    "commit_hash": "f86173477deb0f3bcd8310ce13595a708d963f89",
     "aomi_toml_paths": [
       "aomi.toml"
     ]
@@ -19,7 +16,7 @@
     "platform": "community",
     "repository": "aomi-labs/community-apps",
     "deploy_branch": "publish",
-    "source_branch": "victorchimakanu/goal-digger-agent/141857088/bfbf12d7c90f",
+    "source_branch": "victorchimakanu/goal-digger-agent/141857088/f86173477deb",
     "commit_hash": null,
     "pr_number": null,
     "pr_url": null,
@@ -30,7 +27,7 @@
         "name": "goal-digger",
         "path": "apps/141857088/r4f0d9056b1/goal-digger",
         "aomi_toml_path": "aomi.toml",
-        "release_tag": "apps-141857088-r4f0d9056b1-goal-digger-bfbf12d7c90f",
+        "release_tag": "apps-141857088-r4f0d9056b1-goal-digger-f86173477deb",
         "target": "x86_64-unknown-linux-gnu",
         "files": [
           {
@@ -40,7 +37,7 @@
           },
           {
             "path": "Cargo.toml",
-            "sha256": "sha256:c542e91b888da8e687c4a3b9c7568d0bff10f512cb9e3768f1f0e314467dc155",
+            "sha256": "sha256:899d66005c21a526061e0f2496e806528d109fe007a5f6e950638b0f1cda2fe1",
             "bytes": 449
           },
           {
