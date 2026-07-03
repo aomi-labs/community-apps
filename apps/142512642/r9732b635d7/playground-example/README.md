@@ -54,3 +54,5 @@ playground-example/
 
 You do **not** hand-edit the platform repo — everything goes through
 `aomi-build deploy`.
+
+Deployed via the aomi rollback e2e verification on 2026-07-03.
