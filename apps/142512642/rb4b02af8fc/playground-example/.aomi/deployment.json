@@ -1,0 +1,65 @@
+{
+  "id": "dep_142512642_rb4b02af8fc_e507bc5c1a82",
+  "status": "",
+  "sdk_version": "3.0.1",
+  "deployed_at": 1783090920,
+  "source": {
+    "installation_id": 142512642,
+    "repository_id": 1288398204,
+    "repository_link": "h4n0/my-aomi-playground-new",
+    "owner_repo_name": "h4n0/my-aomi-playground-new",
+    "ref": "e507bc5c1a822f61a8b6369f3491ed5db7761834",
+    "commit_hash": "e507bc5c1a822f61a8b6369f3491ed5db7761834",
+    "aomi_toml_paths": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "source_branch": "h4n0/my-aomi-playground-new/142512642/e507bc5c1a82",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "playground-example",
+        "path": "apps/142512642/rb4b02af8fc/playground-example",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-142512642-rb4b02af8fc-playground-example-e507bc5c1a82",
+        "sdk_version": "3.0.1",
+        "target": "x86_64-unknown-linux-gnu",
+        "files": [
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:29a8546e056e0a047851c87ab1e48c7c06fdfcc71c8b5ff01fe9b9cc2e3e678d",
+            "bytes": 27
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:fa5edc10a0fd53f645fb31b9469b3d553c12193cf4915e60b921362724027087",
+            "bytes": 765
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:9843936f49e0521b5b935505c0714da7537de85933377f1738ee7c7423d946f0",
+            "bytes": 1759
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:7c9fa54a1f19d93c4f393cb6ea7d5274fe81eca2dae0da29758c20bc5cc80b49",
+            "bytes": 686
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:9486d3fd4a1a7c09f987ade29b2f7e5b4397fda0050cf0f70c4d1bc32528691e",
+            "bytes": 2825
+          }
+        ]
+      }
+    ]
+  }
+}
