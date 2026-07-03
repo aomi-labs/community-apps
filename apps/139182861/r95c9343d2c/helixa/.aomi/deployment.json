@@ -1,0 +1,77 @@
+{
+  "id": "dep_139182861_r95c9343d2c_b35f8805ba8b",
+  "status": "",
+  "source": {
+    "installation_id": 139182861,
+    "repository_id": 1288525615,
+    "repository_link": "ceciliaz030/helixa-aomi-app-v0",
+    "owner_repo_name": "ceciliaz030/helixa-aomi-app-v0",
+    "ref": "b35f8805ba8b54e4f8204375a81dc9761d41567c",
+    "commit_hash": "b35f8805ba8b54e4f8204375a81dc9761d41567c",
+    "aomi_toml_paths": [
+      "helixa/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "source_branch": "ceciliaz030/helixa-aomi-app-v0/139182861/b35f8805ba8b",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "helixa",
+        "path": "apps/139182861/r95c9343d2c/helixa",
+        "aomi_toml_path": "helixa/aomi.toml",
+        "release_tag": "apps-139182861-r95c9343d2c-helixa-b35f8805ba8b",
+        "target": "x86_64-unknown-linux-gnu",
+        "files": [
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:11da3fe9de5448e4c1e63fa93c1de21fc434cf3a0e605ca35d9a8d3f379ff344",
+            "bytes": 46290
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:cc59401687ba1fef83c2af19e8950e9ee6ef97754450b866a22d3ea533119061",
+            "bytes": 404
+          },
+          {
+            "path": "DEMO.md",
+            "sha256": "sha256:00abc2173b96741e12a8ccbe2d5a7b9d609f8f37bf68ee91768272aed668cfd4",
+            "bytes": 634
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:21e1ad0a62109f81b347b9496487c87d7a3ac3ac8ab7cadda5d9b38562ae4820",
+            "bytes": 699
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:8aae9bb48aeca8fb1d667ad909e25f8739c1bd7a9a60a1952563b9d67c73ad7a",
+            "bytes": 118
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:ce8a64ddfd87433fd9e87f40e9874dd8f2f01f91038e105531a8d61c94ef9044",
+            "bytes": 9039
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:125ffa30b729ff748f6c941829a29273c3feb85a8b9426ec8f91d275b6a93d15",
+            "bytes": 1589
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:666cdc88a9acf3c20f4ed6399a85a558997963fd3a895916c1df7256435e95f3",
+            "bytes": 4881
+          }
+        ]
+      }
+    ]
+  }
+}

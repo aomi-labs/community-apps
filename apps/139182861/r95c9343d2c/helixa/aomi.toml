@@ -1,0 +1,6 @@
+[app]
+name = "helixa"
+display_name = "Helixa AgentDNA"
+platform = "community"
+public = true
+server_tags = ["staging"]
