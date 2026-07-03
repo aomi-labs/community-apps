@@ -1,12 +1,13 @@
 {
   "id": "dep_142512642_r9732b635d7_a39969b63c83",
   "status": "",
+  "sdk_version": "3.0.1",
   "source": {
     "installation_id": 142512642,
     "repository_id": 1284174783,
     "repository_link": "h4n0/my-aomi-playground-1",
     "owner_repo_name": "h4n0/my-aomi-playground-1",
-    "ref": "a39969b63c83cac71b9309cb61b3cfc5e9be2592",
+    "ref": "a39969b63c83",
     "commit_hash": "a39969b63c83cac71b9309cb61b3cfc5e9be2592",
     "aomi_toml_paths": [
       "aomi.toml"
@@ -28,6 +29,7 @@
         "path": "apps/142512642/r9732b635d7/playground-example",
         "aomi_toml_path": "aomi.toml",
         "release_tag": "apps-142512642-r9732b635d7-playground-example-a39969b63c83",
+        "sdk_version": "3.0.1",
         "target": "x86_64-unknown-linux-gnu",
         "files": [
           {
