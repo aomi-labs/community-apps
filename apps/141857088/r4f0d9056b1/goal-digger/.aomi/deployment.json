@@ -1,16 +1,13 @@
 {
-  "id": "dep_141857088_r4f0d9056b1_bfbf12d7c90f",
+  "id": "dep_141857088_r4f0d9056b1_b83451e0fa3b",
   "status": "",
   "source": {
     "installation_id": 141857088,
     "repository_id": 1272244364,
     "repository_link": "victorchimakanu/goal-digger-agent",
     "owner_repo_name": "victorchimakanu/goal-digger-agent",
-    "ref": {
-      "kind": "branch",
-      "value": "main"
-    },
-    "commit_hash": "bfbf12d7c90f5884f3ff994b406f4fe923611337",
+    "ref": "b83451e0fa3b6499bcf3ea95f3e4f822aefe134c",
+    "commit_hash": "b83451e0fa3b6499bcf3ea95f3e4f822aefe134c",
     "aomi_toml_paths": [
       "aomi.toml"
     ]
@@ -19,7 +16,7 @@
     "platform": "community",
     "repository": "aomi-labs/community-apps",
     "deploy_branch": "publish",
-    "source_branch": "victorchimakanu/goal-digger-agent/141857088/bfbf12d7c90f",
+    "source_branch": "victorchimakanu/goal-digger-agent/141857088/b83451e0fa3b",
     "commit_hash": null,
     "pr_number": null,
     "pr_url": null,
@@ -30,7 +27,7 @@
         "name": "goal-digger",
         "path": "apps/141857088/r4f0d9056b1/goal-digger",
         "aomi_toml_path": "aomi.toml",
-        "release_tag": "apps-141857088-r4f0d9056b1-goal-digger-bfbf12d7c90f",
+        "release_tag": "apps-141857088-r4f0d9056b1-goal-digger-b83451e0fa3b",
         "target": "x86_64-unknown-linux-gnu",
         "files": [
           {
@@ -40,7 +37,7 @@
           },
           {
             "path": "Cargo.toml",
-            "sha256": "sha256:c542e91b888da8e687c4a3b9c7568d0bff10f512cb9e3768f1f0e314467dc155",
+            "sha256": "sha256:899d66005c21a526061e0f2496e806528d109fe007a5f6e950638b0f1cda2fe1",
             "bytes": 449
           },
           {
@@ -50,8 +47,8 @@
           },
           {
             "path": "aomi.toml",
-            "sha256": "sha256:8e1c282b0a54f4eea0eed4cd58e2592988a422a6cd8c289cb50e43e5ec4c53de",
-            "bytes": 236
+            "sha256": "sha256:de3358a1e89cbb1abbc3ed690daeb5b9f6b8a83dd59d29878d733a7d0b28fb9a",
+            "bytes": 232
           },
           {
             "path": "data/players.json",
@@ -65,13 +62,13 @@
           },
           {
             "path": "src/data.rs",
-            "sha256": "sha256:644db0f29933a1b06a7ee856bda2eef2ea8e7f326de1e367cffaa583c20c0ce2",
-            "bytes": 16267
+            "sha256": "sha256:58e1f1dbadcf1d0ed310e2b8b591c6e0e2e7219de91a2512d14dc1ff9aa06dcf",
+            "bytes": 17258
           },
           {
             "path": "src/lib.rs",
-            "sha256": "sha256:c641a2e21afa04d3ed841db052e1ee876f6af456a8100b39e340520c936cfdca",
-            "bytes": 2596
+            "sha256": "sha256:10f906d3afe4f8f50d1466511a362a0d0770a7f8ced6328d6e879b89ca9a9f82",
+            "bytes": 3059
           },
           {
             "path": "src/sim.rs",
@@ -80,8 +77,8 @@
           },
           {
             "path": "src/tool.rs",
-            "sha256": "sha256:5a2cbddb9f590edf4153884cdebc258f47fd141e1a8f1b24d788551c1c59c17c",
-            "bytes": 11871
+            "sha256": "sha256:38c8f6e21bcd4ae3e4e5ea25a99e7d128b5e330994d1bc85a18e742d4888691b",
+            "bytes": 11937
           }
         ]
       }
