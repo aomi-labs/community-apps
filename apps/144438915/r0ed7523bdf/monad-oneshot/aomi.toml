@@ -1,0 +1,7 @@
+[app]
+name = "monad-oneshot"
+display_name = "Monad One-Shot"
+platform = "community"
+git = "https://github.com/victorchimakanu/aomi-monad-oneshot"
+public = true
+server_tags = ["prod"]
