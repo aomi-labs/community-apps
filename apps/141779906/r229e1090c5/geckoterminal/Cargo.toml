@@ -1,0 +1,21 @@
+[package]
+name    = "geckoterminal"
+version = "0.1.0"
+edition = "2024"
+
+# Aomi plugins are dynamically loaded by the backend — they MUST be cdylib.
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# Pin EXACTLY to the backend's required_sdk_version (/api/platforms/server-tags).
+aomi-sdk = "=3.0.1"
+progenitor-client = "0.14"
+chrono = { version = "0.4", features = ["serde"] }
+# Match progenitor-client's reqwest version so curated tool layers can wrap
+# `Client::new_with_client(...)` with header-injecting middleware for auth.
+reqwest = { version = "0.13", default-features = false, features = ["json", "rustls"] }
+schemars = "1.0.4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
