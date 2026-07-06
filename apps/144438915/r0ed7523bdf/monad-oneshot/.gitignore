@@ -1,0 +1,23 @@
+/target/
+/.env
+/.env.*
+**/Cargo.lock.bak
+
+# never commit any local env file
+.env
+.env.*
+!.env.example
+
+/ui/node_modules/
+/ui/.next/
+/ui/out/
+/ui/.env
+/ui/.env.local
+/ui/.env*.local
+/ui/.vercel
+/ui/next-env.d.ts
+/ui/.turbo/
+
+.DS_Store
+*.log
+ui/tsconfig.tsbuildinfo

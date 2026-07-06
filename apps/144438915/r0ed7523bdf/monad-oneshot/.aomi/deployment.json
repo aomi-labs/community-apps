@@ -1,0 +1,192 @@
+{
+  "id": "dep_144438915_r0ed7523bdf_7601d95b9abd",
+  "status": "",
+  "source": {
+    "installation_id": 144438915,
+    "repository_id": 1291008084,
+    "repository_link": "victorchimakanu/aomi-monad-oneshot",
+    "owner_repo_name": "victorchimakanu/aomi-monad-oneshot",
+    "ref": "7601d95b9abd37ccbd7047509782331171e844b3",
+    "commit_hash": "7601d95b9abd37ccbd7047509782331171e844b3",
+    "aomi_toml_paths": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "source_branch": "victorchimakanu/aomi-monad-oneshot/144438915/7601d95b9abd",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "monad-oneshot",
+        "path": "apps/144438915/r0ed7523bdf/monad-oneshot",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-144438915-r0ed7523bdf-monad-oneshot-7601d95b9abd",
+        "target": "x86_64-unknown-linux-gnu",
+        "files": [
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:f0ecd73700b9ee689e2ac84e1ca9e6347a52860b7b964b410ff4ec006e081f1f",
+            "bytes": 264
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:26b7456b8325e34999b8bd748588e0d0637de70feef96451a4151bf677baad52",
+            "bytes": 35965
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:564eef52caabf9090e61b212d7abebb4f4892fc322d3c834a896fe9648c39f4a",
+            "bytes": 446
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:b00ba470303af67d785080d233b13ca862fc18aed382d0318b893b18450e7fe0",
+            "bytes": 8412
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:4ada2681a34f3f4fdd39503ca7d08cfc5d45295f4161c000a8bd72069cfd6a11",
+            "bytes": 183
+          },
+          {
+            "path": "src/abi.rs",
+            "sha256": "sha256:85cf16b2a4c5e20310cd2034a305ef4eb8239f4233444e4b565855c3290e98d0",
+            "bytes": 2740
+          },
+          {
+            "path": "src/chain.rs",
+            "sha256": "sha256:ba945e2168018fe24f6b5254e7de290181cc58629051ddd397c060f7b6ec06e6",
+            "bytes": 502
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:28dd5e599b79cd95a84e61390a6fdb60441a3bc3bcf4c91280040e3f30693ec3",
+            "bytes": 1487
+          },
+          {
+            "path": "src/rpc.rs",
+            "sha256": "sha256:3736a7124003b23bc497b55d23bfa8294972bbe38e0e4c7a6c17798a560f2b1b",
+            "bytes": 1314
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:6c813be159b723a3e4b88a01181a6b3b1b161d2082ba7216072b919c9abecb6f",
+            "bytes": 8585
+          },
+          {
+            "path": "ui/.env.example",
+            "sha256": "sha256:3a97011ad0a9082b0c27feb5f2f2f7890113d0f63f9242e3cb82e8c97ddce3a7",
+            "bytes": 211
+          },
+          {
+            "path": "ui/.npmrc",
+            "sha256": "sha256:c0a62ebcd53848d40382bc905f41904f1735b7358ffab2dbee7e01a3be9f3c39",
+            "bytes": 77
+          },
+          {
+            "path": "ui/app/globals.css",
+            "sha256": "sha256:117e28801eba0cd27877243e38ad069ef7e423060d9b549c7f2e0a50a08483fc",
+            "bytes": 17079
+          },
+          {
+            "path": "ui/app/layout.tsx",
+            "sha256": "sha256:d98f7ff01bafb7e543de212ecb7cc196c602f2c36204249169530b803fd2522a",
+            "bytes": 788
+          },
+          {
+            "path": "ui/app/page.tsx",
+            "sha256": "sha256:c218008304432ea9831b14470794360d74d2d52537cce29e7b66f483add6ca0e",
+            "bytes": 7511
+          },
+          {
+            "path": "ui/app/providers.tsx",
+            "sha256": "sha256:f4a844caca05758de332278ed3dfabd226cf05daec6f75ba445e550b552f74a6",
+            "bytes": 510
+          },
+          {
+            "path": "ui/components.json",
+            "sha256": "sha256:d50742e4d208a06eacf0e2ede4afe6dc3455f980fcb27921f079a86623f473c4",
+            "bytes": 514
+          },
+          {
+            "path": "ui/components/AomiMark.tsx",
+            "sha256": "sha256:b47b9f4e21c1ea199507b7a2ff5d97f50013dc165788b849a5fa6a2c6227ed69",
+            "bytes": 1263
+          },
+          {
+            "path": "ui/components/StarterChips.tsx",
+            "sha256": "sha256:202f47cc89cac778420f0312c2b6d3a32f389e562fb11e403e53a9b8e266f21a",
+            "bytes": 503
+          },
+          {
+            "path": "ui/components/banners.tsx",
+            "sha256": "sha256:a9c8f88014257b291c77b3c5d6ad66d460e155148c254d1fd20329160e893b60",
+            "bytes": 829
+          },
+          {
+            "path": "ui/components/chat.tsx",
+            "sha256": "sha256:2d8aa0cd3130deb179ed13c62c42309be1cedbf3563865e4867524a444a9e2a6",
+            "bytes": 3411
+          },
+          {
+            "path": "ui/components/header.tsx",
+            "sha256": "sha256:2ee3b1cb49d95be1b6c25c80513ad8a8eff9e30b3cb511b29c6f5ce38e45b054",
+            "bytes": 1520
+          },
+          {
+            "path": "ui/lib/aomi-chat.ts",
+            "sha256": "sha256:e5a25f434b7adbf48ea77713a92de0bf7e37cd42b4742ecd8038e1ba1a82192f",
+            "bytes": 3183
+          },
+          {
+            "path": "ui/lib/chains.ts",
+            "sha256": "sha256:b88b8b34cff0c4e8f0b1f9d8ed68d690cc09e5df76d17587e13b2b1440f10d32",
+            "bytes": 422
+          },
+          {
+            "path": "ui/lib/utils.ts",
+            "sha256": "sha256:7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+            "bytes": 166
+          },
+          {
+            "path": "ui/lib/wagmi.ts",
+            "sha256": "sha256:5b0e1266dcb713b7c88d8f5c4975aa454fa7ee40de09d07f8b56c42de4db92b0",
+            "bytes": 300
+          },
+          {
+            "path": "ui/next.config.mjs",
+            "sha256": "sha256:73f18ea67787ab9d40bedbf6600bc6f822dfc31347374a54677d67a36567b20b",
+            "bytes": 118
+          },
+          {
+            "path": "ui/package.json",
+            "sha256": "sha256:f928c8490d85b9c1468a5bee705b95e33bb16f1b4d93db18cbad8660610ba844",
+            "bytes": 646
+          },
+          {
+            "path": "ui/pnpm-lock.yaml",
+            "sha256": "sha256:8edac0d75cbb9c21b7dce61a823485a3ed2c47cbc299cb98c7a1ce366a960af9",
+            "bytes": 196449
+          },
+          {
+            "path": "ui/postcss.config.mjs",
+            "sha256": "sha256:dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde",
+            "bytes": 94
+          },
+          {
+            "path": "ui/tsconfig.json",
+            "sha256": "sha256:815ebf9c7a37f68fcf17816595bd0fdd3050964ef5dd71a97fe2209bf39a9e8b",
+            "bytes": 573
+          }
+        ]
+      }
+    ]
+  }
+}
