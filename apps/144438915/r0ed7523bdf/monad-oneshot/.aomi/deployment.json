@@ -1,13 +1,15 @@
 {
-  "id": "dep_144438915_r0ed7523bdf_7601d95b9abd",
+  "id": "dep_144438915_r0ed7523bdf_7bc5e5d3225e",
   "status": "",
+  "sdk_version": "3.0.2",
+  "deployed_at": 1783672662,
   "source": {
     "installation_id": 144438915,
     "repository_id": 1291008084,
     "repository_link": "victorchimakanu/aomi-monad-oneshot",
     "owner_repo_name": "victorchimakanu/aomi-monad-oneshot",
-    "ref": "7601d95b9abd37ccbd7047509782331171e844b3",
-    "commit_hash": "7601d95b9abd37ccbd7047509782331171e844b3",
+    "ref": "7bc5e5d3225eeeb90c2111b7410c5e2cac5fa978",
+    "commit_hash": "7bc5e5d3225eeeb90c2111b7410c5e2cac5fa978",
     "aomi_toml_paths": [
       "aomi.toml"
     ]
@@ -16,7 +18,7 @@
     "platform": "community",
     "repository": "aomi-labs/community-apps",
     "deploy_branch": "publish",
-    "source_branch": "victorchimakanu/aomi-monad-oneshot/144438915/7601d95b9abd",
+    "source_branch": "victorchimakanu/aomi-monad-oneshot/144438915/7bc5e5d3225e",
     "commit_hash": null,
     "pr_number": null,
     "pr_url": null,
@@ -27,7 +29,8 @@
         "name": "monad-oneshot",
         "path": "apps/144438915/r0ed7523bdf/monad-oneshot",
         "aomi_toml_path": "aomi.toml",
-        "release_tag": "apps-144438915-r0ed7523bdf-monad-oneshot-7601d95b9abd",
+        "release_tag": "apps-144438915-r0ed7523bdf-monad-oneshot-7bc5e5d3225e",
+        "sdk_version": "3.0.2",
         "target": "x86_64-unknown-linux-gnu",
         "files": [
           {
@@ -37,12 +40,12 @@
           },
           {
             "path": "Cargo.lock",
-            "sha256": "sha256:26b7456b8325e34999b8bd748588e0d0637de70feef96451a4151bf677baad52",
+            "sha256": "sha256:7c34fa5bd1261ba5ef6bfd5fb38aec1f7d05cef4649c2159faf301ce3ba3ba88",
             "bytes": 35965
           },
           {
             "path": "Cargo.toml",
-            "sha256": "sha256:564eef52caabf9090e61b212d7abebb4f4892fc322d3c834a896fe9648c39f4a",
+            "sha256": "sha256:52bc78983f030ad103d2663e9df4208c2dee1e15bbc84bc1a558cea94e3ccee9",
             "bytes": 446
           },
           {
