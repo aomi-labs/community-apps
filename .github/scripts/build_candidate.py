@@ -382,11 +382,15 @@ def read_plugin_secrets(plugin_path: pathlib.Path, sdk_version: str) -> list[dic
         ])
         output = run([str(bin_root / "bin" / "aomi-build"), "manifest", "--lib", str(plugin_path)])
         manifest = json.loads(output)
+        if not isinstance(manifest, dict):
+            raise ValueError(f"expected a JSON object, got {type(manifest).__name__}")
+        secrets = manifest.get("secrets") or []
+        if not isinstance(secrets, list):
+            raise ValueError(f"expected \"secrets\" to be a list, got {type(secrets).__name__}")
     except (Exception, SystemExit) as err:  # noqa: BLE001 - never fail the build over this
         print(f"::warning::could not read declared secrets for {plugin_path.name}: {err}")
         return []
-    secrets = manifest.get("secrets") or []
-    return secrets if isinstance(secrets, list) else []
+    return secrets
 
 
 def build_release(app_dir: pathlib.Path, ctx: dict[str, str], target: str, dist_root: pathlib.Path) -> dict[str, str]:
