@@ -1,6 +1,0 @@
-[app]
-name = "hello-world"
-display_name = "Hello World"
-platform = "community"
-git = "https://github.com/aomi-labs/community-apps"
-public = false

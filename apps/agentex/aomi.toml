@@ -1,6 +1,0 @@
-[app]
-name = "agentex"
-display_name = "Agentex"
-platform = "community"
-git = "https://github.com/aomi-labs/community-apps"
-public = true

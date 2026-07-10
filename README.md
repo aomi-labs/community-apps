@@ -1,137 +1,89 @@
-# Aomi Community Apps
+# Aomi [*]-apps Template
 
-This repo is the **community app release builder**. The Aomi backend stages app
-source here, this repo's GitHub Actions build candidate release artifacts, and
-the backend later chooses which artifacts to activate.
+This repository is a GitHub template for Aomi platform app release builders.
+Generate a new repository from it when you need an app artifact builder such as
+`boreal-apps`, `partner-apps`, or another `[*]-apps` platform repo.
 
-This repo is not the deployment control plane. The backend owns the
-`deployment.json` contract, source selection, release tag selection, build
-request, and activation request.
+The template intentionally ships with no staged apps. The `apps/` directory is
+kept only by `apps/.gitkeep`; backend deploy flows populate real app directories
+later.
 
-You **do not hand-edit `apps/<installation-id>/<app>/`**. That directory is
-populated by the hosted deploy flow from your own source repo.
+## After Creating A Repository From This Template
 
-## Contributing an app
+1. Rename every `[*]-apps` placeholder in the generated repo docs and
+   `platform.json` to the new GitHub repo name.
+2. Set `platform.json.name` to the platform slug that app manifests will use in
+   `aomi.toml`.
+3. Confirm `platform.json.source_repo` matches `<owner>/<repo>`.
+4. Confirm `platform.json.required_sdk_version` and `default_target` match the
+   backend/runtime you are deploying to.
+5. Mark the generated GitHub repository as a template too if it should itself be
+   reusable.
 
-Read [`CONTRIBUTING.md`](./CONTRIBUTING.md) first. It walks through the full
-pipeline from "I have a Rust crate" to "my app is loaded on staging".
-
-The short version:
-
-1. Author your app in your own source repo with an `aomi.toml` declaring
-   `platform = "community"`.
-2. Install the Aomi GitHub App on that source repo so the backend has an
-   `app_source_id`.
-3. Run `aomi-build deploy`. It sends a source-bound deploy request to the
-   backend.
-4. The backend fetches your source through the GitHub App, stages it under
-   `apps/<installation-id>/<app>/`, writes
-   `apps/<installation-id>/<app>/.aomi/deployment.json`, and opens or updates a
-   platform PR.
-5. The backend candidate branch push triggers this repo's release-builder
-   workflow. CI validates the backend-generated manifest, builds the cdylib,
-   and uploads release assets tagged
-   `apps-<installation-id>-<app>-<short-source-commit>`.
-6. Activation goes back through the backend. `aomi-build activate` or the
-   activation endpoint tells the backend which PR, branch, commit, or release
-   tags to activate; the backend resolves the desired artifact from its
-   deployment record and fetches it.
-
-If you opened a PR by hand-editing `apps/...` directly, redo it via
-`aomi-build deploy`. The release-builder workflow validates backend-generated
-file shapes, and hand-edited PRs will fail at validate time.
-
-## Repo layout
+## Repository Layout
 
 ```
-community-apps/
+[*]-apps/
 |-- README.md
 |-- CONTRIBUTING.md
 |-- platform.json
 |-- apps/
-|   `-- <installation-id>/
-|       `-- <app>/
-|           |-- .aomi/deployment.json
-|           |-- aomi.toml
-|           |-- Cargo.toml
-|           `-- src/
-|-- fixtures/
-|   `-- hello-world/
+|   `-- .gitkeep
 `-- .github/
     |-- workflows/build-candidate.yml
     `-- scripts/build_candidate.py
 ```
 
-## Release-builder contract
+When the backend stages an app, it writes directories shaped like:
 
-These facts are enforced by CI; they exist for reference. Contributors do not
-need to memorize them.
+```
+apps/<installation-id>/<repo-key>/<app>/
+|-- .aomi/deployment.json
+|-- aomi.toml
+|-- Cargo.toml
+`-- src/
+```
 
-| Field | Value |
+## Release Builder Contract
+
+This repository is only the artifact builder. The backend owns source access,
+deployment records, candidate branch creation, release tag selection, and
+activation.
+
+CI expects backend-generated candidate branches shaped like:
+
+```
+<source-owner>/<source-repo>/<installation-id>/<short-source-commit>
+```
+
+For each changed staged app under `apps/<installation-id>/<repo-key>/<app>/`,
+CI validates `.aomi/deployment.json`, builds the app as a Rust `cdylib`, and
+publishes release assets:
+
+- `aomi-plugins-<release-tag>-<target>.tar.gz`
+- `manifest.json`
+- `aomi-release.json`
+
+## Platform Descriptor
+
+`platform.json` is the static release-builder configuration for the generated
+platform repository.
+
+| Field | Meaning |
 |---|---|
-| Baseline branch | `publish` |
-| Candidate branch | `<source-owner>/<source-repo>/<installation-id>/<short-source-commit>` |
-| Staged app path | `apps/<installation-id>/<app>/` |
-| Deployment manifest | `apps/<installation-id>/<app>/.aomi/deployment.json` |
-| Release tag convention | `apps-<installation-id>-<app>-<short-source-commit>` |
-| Build target | `x86_64-unknown-linux-gnu` |
-| Required SDK version | see [`platform.json`](./platform.json) |
-
-`deployment.json` is generated by the backend from its deploy record. It
-records the app metadata, source repository and commit, platform target, release
-tag, build target, staged app path, and file hashes. CI validates it but does
-not define it.
-
-Each release contains:
-
-- `aomi-plugins-<release-tag>-<target>.tar.gz` - the runtime bundle
-- `manifest.json` - release metadata matching `plugins/manifest.json` inside
-  the tarball
-- `aomi-release.json` - provenance metadata for the candidate release
-
-The backend trusts a release only after it validates the requested release tag,
-exact SDK version, build target, and plugin SHA-256 hashes inside the tarball.
-
-## Platform descriptor (`platform.json`)
-
-`platform.json` at the repo root is the platform's static release-builder
-configuration. It tells CI what this builder is allowed to produce.
-
-| Field | Meaning | Touched by |
-|---|---|---|
-| `name` | Platform tier label (`community`). Match in your `aomi.toml` as `platform = "community"`. | Operator on platform bring-up |
-| `source_repo` | This repo (`aomi-labs/community-apps`). | Operator |
-| `publish_branch` | The protected baseline branch used by backend candidate PRs and CI diffs. | Operator |
-| `app_path_prefix` | Where staged apps land (`apps`). | Operator |
-| `release_tag_convention` | Pattern CI validates against the backend manifest. | Operator |
-| `visibility` | `public` for this repo; release tarballs are world-readable. | Operator |
-| `review_policy` | `community-review`; describes how PRs and contributions are vetted. | Operator |
-| `required_sdk_version` | The aomi-sdk version your app must pin in `Cargo.toml`. | Operator on SDK bumps |
-| `default_target` | Rust target triple CI builds for (`x86_64-unknown-linux-gnu`). | Operator |
-
-You do not edit `platform.json` for a deploy. Read `required_sdk_version` and
-pin it in your app's `Cargo.toml`.
-
-## Backend ownership
-
-The backend deploy handler is the source of truth for staged release metadata:
-
-- `POST /api/platforms/:platform/deploy` accepts `app_source_id`, `source_ref`,
-  `aomi_toml_paths`, and `dry_run`.
-- The backend reads source through the GitHub App installation.
-- The backend chooses the candidate branch, staged app path, and release tag.
-- The backend writes `.aomi/deployment.json` into each staged app directory
-  before committing the candidate branch.
-- The backend activation endpoint resolves PRs, branches, commits, or release
-  tags into the artifact set to load.
-
-The release-builder workflow at
-[`.github/workflows/build-candidate.yml`](./.github/workflows/build-candidate.yml)
-only validates the backend-generated record, builds the cdylib, and publishes
-GitHub release artifacts.
+| `name` | Platform slug. App manifests must use this value as `platform`. |
+| `source_repo` | GitHub repository name for this builder, for example `aomi-labs/[*]-apps`. |
+| `publish_branch` | Protected baseline branch used by backend candidate PRs and CI diffs. |
+| `app_path_prefix` | Directory where staged apps are written. |
+| `app_path_convention` | Expected staged app path shape. |
+| `release_tag_convention` | Expected release tag shape. |
+| `visibility` | Intended release visibility for this platform. |
+| `review_policy` | Human-readable review policy label. |
+| `required_sdk_version` | Exact `aomi-sdk` version app crates must pin. |
+| `default_target` | Rust target triple CI builds. |
 
 ## Related
 
 - [`aomi-sdk`](https://github.com/aomi-labs/aomi-sdk) - SDK and `aomi-build`
 - [`aomi-launch-my-agent`](https://github.com/aomi-labs/aomi-launch-my-agent) -
-  ADRs for the deploy/activate contract
+  deploy and activation contract notes

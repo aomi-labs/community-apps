@@ -1,6 +1,0 @@
-[app]
-name         = "fanforge"
-display_name = "FanForge"
-platform     = "community"
-git          = "https://github.com/aomi-labs/community-apps"
-public       = true

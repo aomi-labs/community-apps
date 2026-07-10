@@ -24,6 +24,7 @@ APP_RE = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
 REPO_KEY_RE = re.compile(r"^r[0-9a-f]{10}$")
 COMMIT_RE = re.compile(r"^[0-9a-f]{7,40}$")
 SHA256_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
+_PLATFORM_CONFIG: dict[str, Any] | None = None
 
 
 def fail(message: str) -> None:
@@ -84,6 +85,20 @@ def load_json(path: pathlib.Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         fail(f"{path} must contain a JSON object")
     return value
+
+
+def platform_config() -> dict[str, Any]:
+    global _PLATFORM_CONFIG
+    if _PLATFORM_CONFIG is None:
+        _PLATFORM_CONFIG = load_json(REPO_ROOT / "platform.json")
+    return _PLATFORM_CONFIG
+
+
+def platform_name() -> str:
+    value = platform_config().get("name")
+    if not isinstance(value, str) or not value.strip():
+        fail("platform.json must define a non-empty name")
+    return value.strip()
 
 
 def write_json(path: pathlib.Path, value: dict[str, Any]) -> None:
@@ -318,7 +333,7 @@ def load_deployment(app_dir: pathlib.Path, ctx: dict[str, str], target: str) -> 
             fail(f"deployment manifest app.name must be {app_name}")
         source_commit = get_str(manifest, ("source", "commit")).lower()
         source_repo = get_str(manifest, ("source", "repository_link"), required=False)
-        platform_name = get_str(manifest, ("platform", "name"))
+        manifest_platform = get_str(manifest, ("platform", "name"))
         app_path = get_str(manifest, ("target", "app_path"))
         release_tag = get_str(manifest, ("target", "release_tag"))
         manifest_target = get_str(manifest, ("target", "target"), required=False)
@@ -328,7 +343,7 @@ def load_deployment(app_dir: pathlib.Path, ctx: dict[str, str], target: str) -> 
         source_repo = get_str(manifest, ("source", "owner_repo_name"), required=False)
         if source_repo is None:
             source_repo = get_str(manifest, ("source", "repository_link"), required=False)
-        platform_name = get_str(manifest, ("platform", "platform"))
+        manifest_platform = get_str(manifest, ("platform", "platform"))
         app_path = get_str(app_record, ("path",))
         release_tag = get_str(app_record, ("release_tag",))
         manifest_target = get_str(app_record, ("target",), required=False)
@@ -340,8 +355,9 @@ def load_deployment(app_dir: pathlib.Path, ctx: dict[str, str], target: str) -> 
     if source_repo and normalize_repo(source_repo) != ctx["owner_repo"]:
         fail("deployment manifest source repo does not match branch owner/repo")
 
-    if platform_name != "community":
-        fail("deployment manifest platform must be community")
+    expected_platform = platform_name()
+    if manifest_platform != expected_platform:
+        fail(f"deployment manifest platform must be {expected_platform}")
 
     if app_path != expected_app_path:
         fail(f"deployment manifest app path must be {expected_app_path}")
@@ -426,7 +442,7 @@ def build_release(app_dir: pathlib.Path, ctx: dict[str, str], target: str, dist_
     shutil.copy2(manifest_path, standalone_manifest)
     release_metadata = {
         "schema_version": 1,
-        "platform": "community",
+        "platform": platform_name(),
         "app": {
             "name": app_name,
             "path": info["app_path"],
@@ -459,7 +475,7 @@ def build_release(app_dir: pathlib.Path, ctx: dict[str, str], target: str, dist_
     notes.write_text(
         "\n".join(
             [
-                "Aomi community candidate release.",
+                f"Aomi {platform_name()} candidate release.",
                 "",
                 f"- App: {app_name}",
                 f"- Release: {release_tag}",
