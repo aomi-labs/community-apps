@@ -364,6 +364,31 @@ def load_deployment(app_dir: pathlib.Path, ctx: dict[str, str], target: str) -> 
     }
 
 
+def read_plugin_secrets(plugin_path: pathlib.Path, sdk_version: str) -> list[dict[str, Any]]:
+    """Declared secret slots for a built plugin, via `aomi-build manifest`.
+
+    Installs the app's exact pinned aomi-sdk so the manifest reader matches the
+    ABI the plugin was built against. Returns [] for any SDK release that
+    predates the `manifest` subcommand -- a missing slot list must never fail a
+    build, it only means the app cannot be secret-gated.
+    """
+    try:
+        bin_root = pathlib.Path(tempfile.mkdtemp(prefix="aomi-build-cli-"))
+        run([
+            "cargo", "install", "aomi-sdk",
+            "--version", f"={sdk_version}",
+            "--features", "cli", "--bin", "aomi-build",
+            "--locked", "--root", str(bin_root),
+        ])
+        output = run([str(bin_root / "bin" / "aomi-build"), "manifest", "--lib", str(plugin_path)])
+        manifest = json.loads(output)
+    except (Exception, SystemExit) as err:  # noqa: BLE001 - never fail the build over this
+        print(f"::warning::could not read declared secrets for {plugin_path.name}: {err}")
+        return []
+    secrets = manifest.get("secrets") or []
+    return secrets if isinstance(secrets, list) else []
+
+
 def build_release(app_dir: pathlib.Path, ctx: dict[str, str], target: str, dist_root: pathlib.Path) -> dict[str, str]:
     info = load_deployment(app_dir, ctx, target)
     app_name = info["app_name"]
@@ -401,17 +426,16 @@ def build_release(app_dir: pathlib.Path, ctx: dict[str, str], target: str, dist_
     final_plugin = plugins_dir / plugin_file_name(app_name, target)
     shutil.copy2(built_lib, final_plugin)
     digest = sha256_file(final_plugin)
+    entry: dict[str, Any] = {"file": final_plugin.name, "sha256": digest}
+    secrets = read_plugin_secrets(final_plugin, sdk_version)
+    if secrets:
+        entry["secrets"] = secrets
     bundle_manifest = {
         "app_release_tag": release_tag,
         "sdk_version": sdk_version,
         "target": target,
         "commit": info["source_commit"],
-        "plugins": {
-            app_name: {
-                "file": final_plugin.name,
-                "sha256": digest,
-            }
-        },
+        "plugins": {app_name: entry},
     }
     manifest_path = plugins_dir / "manifest.json"
     write_json(manifest_path, bundle_manifest)
