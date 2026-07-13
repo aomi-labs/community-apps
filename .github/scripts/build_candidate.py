@@ -55,6 +55,32 @@ def run(
     return result.stdout.strip() if capture and result.stdout else ""
 
 
+def run_capture(
+    cmd: list[str],
+    *,
+    cwd: pathlib.Path | None = None,
+    env: dict[str, str] | None = None,
+) -> subprocess.CompletedProcess[str]:
+    """Like run(), but returns the CompletedProcess instead of raising on a
+    non-zero exit code.
+
+    Use this (instead of run()) when a caller needs to classify *why* a
+    command failed -- e.g. read_plugin_secrets distinguishing an older SDK
+    whose `aomi-build` lacks the `manifest` subcommand (a legitimate, expected
+    failure) from a transient/real failure (which must fail the build).
+    """
+    merged_env = os.environ.copy()
+    if env:
+        merged_env.update(env)
+    return subprocess.run(
+        cmd,
+        cwd=cwd or REPO_ROOT,
+        env=merged_env,
+        text=True,
+        capture_output=True,
+    )
+
+
 def git(args: list[str], *, capture: bool = True) -> str:
     return run(["git", *args], capture=capture)
 
@@ -364,32 +390,90 @@ def load_deployment(app_dir: pathlib.Path, ctx: dict[str, str], target: str) -> 
     }
 
 
+# Substrings that identify a CLI rejecting `manifest` as an unknown subcommand
+# (clap's phrasing has varied across versions) -- i.e. an older aomi-sdk that
+# predates this feature, as opposed to a real/transient failure.
+_UNSUPPORTED_MANIFEST_SUBCOMMAND_MARKERS = (
+    "unrecognized subcommand",
+    "no such subcommand",
+    "unexpected argument",
+    "wasn't expected",  # clap: "... which wasn't expected, or isn't valid in this context"
+)
+
+
+def is_unsupported_manifest_error(stderr: str) -> bool:
+    """True iff `stderr` looks like clap rejecting `manifest` as unknown,
+    i.e. the installed aomi-sdk predates the `manifest` subcommand.
+
+    Any other non-zero exit (network blip, panic, timeout, etc.) is a real
+    failure and must NOT be classified as "unsupported".
+    """
+    lowered = stderr.lower()
+    return any(marker in lowered for marker in _UNSUPPORTED_MANIFEST_SUBCOMMAND_MARKERS)
+
+
 def read_plugin_secrets(plugin_path: pathlib.Path, sdk_version: str) -> list[dict[str, Any]]:
     """Declared secret slots for a built plugin, via `aomi-build manifest`.
 
     Installs the app's exact pinned aomi-sdk so the manifest reader matches the
-    ABI the plugin was built against. Returns [] for any SDK release that
-    predates the `manifest` subcommand -- a missing slot list must never fail a
-    build, it only means the app cannot be secret-gated.
+    ABI the plugin was built against. Returns [] ONLY when the installed SDK
+    genuinely predates the `manifest` subcommand -- that is the sole
+    legitimate reason a build may ship without secret metadata. Any other
+    failure (a flaky `cargo install`, a transient `aomi-build manifest`
+    error, or malformed output from an SDK that DOES support `manifest`) must
+    fail the build rather than silently publish a release with no secret
+    metadata, which would permanently ungate an app that declares required
+    secrets.
     """
+    bin_root = pathlib.Path(tempfile.mkdtemp(prefix="aomi-build-cli-"))
+    # A failure here (network hiccup, flaky cargo install, etc.) is always a
+    # real failure -- an older SDK still installs fine, it just lacks the
+    # `manifest` subcommand (handled below). Let run() raise via fail().
+    run([
+        "cargo", "install", "aomi-sdk",
+        "--version", f"={sdk_version}",
+        "--features", "cli", "--bin", "aomi-build",
+        "--locked", "--root", str(bin_root),
+    ])
+
+    result = run_capture([str(bin_root / "bin" / "aomi-build"), "manifest", "--lib", str(plugin_path)])
+    if result.returncode != 0:
+        stderr = (result.stderr or "").strip()
+        if is_unsupported_manifest_error(stderr):
+            print(
+                f"::notice::{plugin_path.name}: installed aomi-sdk {sdk_version} has no "
+                "`manifest` subcommand (predates secret-declaration support); "
+                "this app cannot be secret-gated"
+            )
+            return []
+        fail(
+            f"aomi-build manifest failed for {plugin_path.name} (sdk {sdk_version}): "
+            f"{stderr or 'no stderr captured'}"
+        )
+
+    output = (result.stdout or "").strip()
     try:
-        bin_root = pathlib.Path(tempfile.mkdtemp(prefix="aomi-build-cli-"))
-        run([
-            "cargo", "install", "aomi-sdk",
-            "--version", f"={sdk_version}",
-            "--features", "cli", "--bin", "aomi-build",
-            "--locked", "--root", str(bin_root),
-        ])
-        output = run([str(bin_root / "bin" / "aomi-build"), "manifest", "--lib", str(plugin_path)])
         manifest = json.loads(output)
-        if not isinstance(manifest, dict):
-            raise ValueError(f"expected a JSON object, got {type(manifest).__name__}")
-        secrets = manifest.get("secrets") or []
-        if not isinstance(secrets, list):
-            raise ValueError(f"expected \"secrets\" to be a list, got {type(secrets).__name__}")
-    except (Exception, SystemExit) as err:  # noqa: BLE001 - never fail the build over this
-        print(f"::warning::could not read declared secrets for {plugin_path.name}: {err}")
+    except json.JSONDecodeError as err:
+        fail(
+            f"aomi-build manifest for {plugin_path.name} (sdk {sdk_version}) produced "
+            f"invalid JSON: {err}"
+        )
+
+    if not isinstance(manifest, dict):
+        fail(
+            f"aomi-build manifest for {plugin_path.name} (sdk {sdk_version}) returned "
+            f"{type(manifest).__name__}, expected a JSON object"
+        )
+
+    secrets = manifest.get("secrets")
+    if secrets is None:
         return []
+    if not isinstance(secrets, list):
+        fail(
+            f"aomi-build manifest for {plugin_path.name} (sdk {sdk_version}): \"secrets\" "
+            f"field is {type(secrets).__name__}, expected a list"
+        )
     return secrets
 
 
