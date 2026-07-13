@@ -390,26 +390,61 @@ def load_deployment(app_dir: pathlib.Path, ctx: dict[str, str], target: str) -> 
     }
 
 
-# Substrings that identify a CLI rejecting `manifest` as an unknown subcommand
-# (clap's phrasing has varied across versions) -- i.e. an older aomi-sdk that
-# predates this feature, as opposed to a real/transient failure.
-_UNSUPPORTED_MANIFEST_SUBCOMMAND_MARKERS = (
-    "unrecognized subcommand",
-    "no such subcommand",
-    "unexpected argument",
-    "wasn't expected",  # clap: "... which wasn't expected, or isn't valid in this context"
-)
-
-
+# NOTE: this is a stderr-text heuristic, not a structural check -- clap does
+# not give us a machine-readable "unknown subcommand" signal via exit code
+# alone, and we don't yet know the exact aomi-sdk version in which the
+# `manifest` subcommand shipped. Once that version is known/pinned, prefer
+# gating on `sdk_version` directly (e.g. `sdk_version < MANIFEST_MIN_VERSION`)
+# instead of sniffing clap's stderr wording, which is inherently fragile
+# across clap releases.
+# TODO(manifest-min-version): replace this stderr heuristic with a version
+# comparison once the introducing aomi-sdk version is known/released.
 def is_unsupported_manifest_error(stderr: str) -> bool:
-    """True iff `stderr` looks like clap rejecting `manifest` as unknown,
-    i.e. the installed aomi-sdk predates the `manifest` subcommand.
+    """True iff `stderr` looks like clap rejecting the `manifest` SUBCOMMAND
+    itself as unknown, i.e. the installed aomi-sdk predates the `manifest`
+    subcommand.
 
-    Any other non-zero exit (network blip, panic, timeout, etc.) is a real
-    failure and must NOT be classified as "unsupported".
+    This must be narrow: it is only "unsupported" when the rejected/unknown
+    token clap complains about is `manifest` itself. A flag-level rejection
+    on an SDK that DOES have the `manifest` subcommand -- e.g.
+    `error: unexpected argument '--lib' found` -- names `--lib`, not
+    `manifest`, and is a real manifest-contract bug that must fail the build,
+    not be silently treated as "old SDK, fall back to []".
+
+    Any other non-zero exit (network blip, panic, timeout, unrelated flag
+    rejection, etc.) is a real failure and must NOT be classified as
+    "unsupported".
     """
     lowered = stderr.lower()
-    return any(marker in lowered for marker in _UNSUPPORTED_MANIFEST_SUBCOMMAND_MARKERS)
+
+    # Modern clap (v4): subcommand plainly not registered.
+    #   error: unrecognized subcommand 'manifest'
+    if "unrecognized subcommand" in lowered and "manifest" in lowered:
+        return True
+
+    # Defensive: alternate wording for the same "no such subcommand" case.
+    if "no such subcommand" in lowered and "manifest" in lowered:
+        return True
+
+    # clap can also report an unregistered subcommand as an "unexpected
+    # argument" that names the subcommand itself, e.g.:
+    #   error: unexpected argument 'manifest' found
+    # This still names `manifest` as the rejected token -- unlike a
+    # flag-level rejection such as `error: unexpected argument '--lib' found`,
+    # which names `--lib` and must NOT match here.
+    if "unexpected argument" in lowered and "'manifest'" in lowered:
+        return True
+
+    # Older clap (v2/v3) phrasing that names the subcommand directly:
+    #   error: Found argument 'manifest' which wasn't expected, or isn't
+    #   valid in this context
+    # Requiring both the phrase AND the quoted `'manifest'` token (rather than
+    # a bare "wasn't expected" substring match) keeps this from matching a
+    # flag-level rejection phrased the same way for some other argument.
+    if "wasn't expected" in lowered and "'manifest'" in lowered:
+        return True
+
+    return False
 
 
 def read_plugin_secrets(plugin_path: pathlib.Path, sdk_version: str) -> list[dict[str, Any]]:

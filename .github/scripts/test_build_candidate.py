@@ -62,6 +62,19 @@ class ReadPluginSecretsTests(unittest.TestCase):
         with self.assertRaises(SystemExit):
             bc.read_plugin_secrets(pathlib.Path("/tmp/x.so"), "3.0.2")
 
+    def test_raises_on_flag_level_rejection_even_though_it_says_unexpected_argument(self):
+        # Regression for the P1 finding: an SDK whose `manifest` subcommand
+        # DOES exist but rejects our `--lib` flag is a real manifest-contract
+        # bug -- clap's message contains the substring "unexpected argument",
+        # but it names `--lib`, not `manifest`. This must fail the build, not
+        # be misclassified as "old SDK, fall back to []" (which would
+        # silently publish a release with no secret metadata).
+        bc.run_capture = lambda cmd, **kw: _completed(
+            returncode=2, stderr="error: unexpected argument '--lib' found"
+        )
+        with self.assertRaises(SystemExit):
+            bc.read_plugin_secrets(pathlib.Path("/tmp/x.so"), "3.0.2")
+
     def test_raises_when_manifest_json_is_malformed(self):
         # Not valid JSON at all from an SDK that DOES support `manifest`.
         bc.run_capture = lambda cmd, **kw: _completed(stdout="{not json")
@@ -96,6 +109,11 @@ class IsUnsupportedManifestErrorTests(unittest.TestCase):
         self.assertTrue(bc.is_unsupported_manifest_error("error: unrecognized subcommand 'manifest'"))
         self.assertTrue(bc.is_unsupported_manifest_error("error: no such subcommand: `manifest`"))
         self.assertTrue(bc.is_unsupported_manifest_error("error: unexpected argument 'manifest' found"))
+
+    def test_recognizes_older_clap_phrasing_that_names_the_subcommand(self):
+        # Older clap (v2/v3) phrasing that still names `manifest` as the
+        # rejected token -- this is the subcommand-missing case, not a flag
+        # rejection, so it must still classify as "unsupported".
         self.assertTrue(
             bc.is_unsupported_manifest_error(
                 "error: Found argument 'manifest' which wasn't expected, or isn't valid in this context"
@@ -106,6 +124,13 @@ class IsUnsupportedManifestErrorTests(unittest.TestCase):
         self.assertFalse(bc.is_unsupported_manifest_error("thread 'main' panicked at 'index out of bounds'"))
         self.assertFalse(bc.is_unsupported_manifest_error("error: connection reset by peer"))
         self.assertFalse(bc.is_unsupported_manifest_error(""))
+
+    def test_does_not_recognize_flag_level_rejection(self):
+        # P1 regression: `manifest` subcommand exists but rejects our `--lib`
+        # flag. clap's message contains "unexpected argument", but the named
+        # token is `--lib`, not `manifest` -- this is a real manifest-contract
+        # bug and must NOT be classified as "unsupported" (old SDK).
+        self.assertFalse(bc.is_unsupported_manifest_error("error: unexpected argument '--lib' found"))
 
 
 if __name__ == "__main__":
