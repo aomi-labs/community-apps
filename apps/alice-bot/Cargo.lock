@@ -14,9 +14,9 @@ dependencies = [
 
 [[package]]
 name = "aomi-sdk"
-version = "3.0.0"
+version = "3.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc4340e35155e8a90de95c8a23208b0398c0db9ba379c711b41b04906a6f524c"
+checksum = "db69d9031fb2c785baf03aa97f5089875379a95b55c71c3ad7596e23f5f9d295"
 dependencies = [
  "eyre",
  "libloading",
