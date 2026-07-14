@@ -19,17 +19,17 @@ struct PlaygroundApp;
 const BINANCE_API_KEY: Secret = Secret::new(
     "BINANCE_API_KEY",
     "Optional Binance API key for authenticated market/account integrations.",
-    false,
+    true,
 );
 const BINANCE_API_SECRET: Secret = Secret::new(
     "BINANCE_API_SECRET",
     "Optional Binance API secret for authenticated trading integrations.",
-    false,
+    true,
 );
 const BINANCE_BASE_URL: Secret = Secret::new(
     "BINANCE_BASE_URL",
     "Optional Binance REST base URL; defaults to https://api.binance.com.",
-    false,
+    true,
 );
 
 // ---------------------------------------------------------------------------
