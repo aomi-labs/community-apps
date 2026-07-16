@@ -1,13 +1,15 @@
 {
-  "id": "dep_141779906_r1dac12ad71_a9f5bc14cfa2",
+  "id": "dep_141779906_r1dac12ad71_93f2618a3d93",
   "status": "",
+  "sdk_version": "3.0.3",
+  "deployed_at": 1784171401,
   "source": {
     "installation_id": 141779906,
     "repository_id": 1283596683,
     "repository_link": "ceciliaz030/goal-digger-agent",
     "owner_repo_name": "ceciliaz030/goal-digger-agent",
-    "ref": "a9f5bc14cfa298d9e5e090e04b2812bf1a5d8284",
-    "commit_hash": "a9f5bc14cfa298d9e5e090e04b2812bf1a5d8284",
+    "ref": "93f2618a3d93c033a257b417a513e29184161bc4",
+    "commit_hash": "93f2618a3d93c033a257b417a513e29184161bc4",
     "aomi_toml_paths": [
       "aomi.toml"
     ]
@@ -16,7 +18,7 @@
     "platform": "community",
     "repository": "aomi-labs/community-apps",
     "deploy_branch": "publish",
-    "source_branch": "ceciliaz030/goal-digger-agent/141779906/a9f5bc14cfa2",
+    "source_branch": "ceciliaz030/goal-digger-agent/141779906/93f2618a3d93",
     "commit_hash": null,
     "pr_number": null,
     "pr_url": null,
@@ -27,7 +29,8 @@
         "name": "goal-digger",
         "path": "apps/141779906/r1dac12ad71/goal-digger",
         "aomi_toml_path": "aomi.toml",
-        "release_tag": "apps-141779906-r1dac12ad71-goal-digger-a9f5bc14cfa2",
+        "release_tag": "apps-141779906-r1dac12ad71-goal-digger-93f2618a3d93",
+        "sdk_version": "3.0.3",
         "target": "x86_64-unknown-linux-gnu",
         "files": [
           {
@@ -37,7 +40,7 @@
           },
           {
             "path": "Cargo.toml",
-            "sha256": "sha256:899d66005c21a526061e0f2496e806528d109fe007a5f6e950638b0f1cda2fe1",
+            "sha256": "sha256:bccf86cf8e10ed7d97266dc33c18ffbd4a30d8443b7ec0cbfcd0912fe7ce7323",
             "bytes": 449
           },
           {
