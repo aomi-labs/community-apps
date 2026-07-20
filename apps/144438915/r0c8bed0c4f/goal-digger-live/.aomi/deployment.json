@@ -1,0 +1,90 @@
+{
+  "id": "dep_144438915_r0c8bed0c4f_9ac17232bb6e",
+  "status": "",
+  "sdk_version": "3.0.3",
+  "deployed_at": 1784535479,
+  "source": {
+    "installation_id": 144438915,
+    "repository_id": 1296418741,
+    "repository_link": "victorchimakanu/goal-digger-live",
+    "owner_repo_name": "victorchimakanu/goal-digger-live",
+    "ref": "9ac17232bb6ec901197943f7e8a81eae7959f075",
+    "commit_hash": "9ac17232bb6ec901197943f7e8a81eae7959f075",
+    "aomi_toml_paths": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "source_branch": "victorchimakanu/goal-digger-live/144438915/9ac17232bb6e",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "goal-digger-live",
+        "path": "apps/144438915/r0c8bed0c4f/goal-digger-live",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-144438915-r0c8bed0c4f-goal-digger-live-9ac17232bb6e",
+        "sdk_version": "3.0.3",
+        "target": "x86_64-unknown-linux-gnu",
+        "files": [
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:2ebe6cb6f5289849dce5a8a6cdd77e06b1385302c862982f8e181c4782d19214",
+            "bytes": 19
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:bccf86cf8e10ed7d97266dc33c18ffbd4a30d8443b7ec0cbfcd0912fe7ce7323",
+            "bytes": 449
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:68bc09826d0eefacc78699dfce0717a1e1c9db7ff3a97c659acc3963df5f1046",
+            "bytes": 205
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:f28d7d5fffbb5f738ba297a68c1b645f4e12b4be8c5342796d9c2d6b947da2ca",
+            "bytes": 234
+          },
+          {
+            "path": "data/players.json",
+            "sha256": "sha256:49bebacd914032f24a2c4a9507601c68b4110cc064f09cb0667efbabdbb70aa7",
+            "bytes": 1891
+          },
+          {
+            "path": "data/teams.json",
+            "sha256": "sha256:ef8723e2a38bd5f9d3acdd02737baded5263f5e73d22c257b627259bfa06980f",
+            "bytes": 6228
+          },
+          {
+            "path": "src/data.rs",
+            "sha256": "sha256:35c76c30b078316ebc5b643112993082df8985a83d3ad2bbb6cff3789edb6c7a",
+            "bytes": 17480
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:39891f58f2bb511b5f80bc2fb173b0f31480c034db16c4f1842e3f921738331d",
+            "bytes": 3064
+          },
+          {
+            "path": "src/sim.rs",
+            "sha256": "sha256:318d9092c732b8f5c5bce59c7dfc7f1c8774b801e468024061bc2e25c297391e",
+            "bytes": 11469
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:38c8f6e21bcd4ae3e4e5ea25a99e7d128b5e330994d1bc85a18e742d4888691b",
+            "bytes": 11937
+          }
+        ]
+      }
+    ]
+  }
+}
