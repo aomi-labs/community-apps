@@ -1,0 +1,65 @@
+{
+  "id": "dep_142751037_rc0f056bd92_a896ff87e30b",
+  "status": "",
+  "sdk_version": "3.0.4",
+  "deployed_at": 1785155292,
+  "source": {
+    "installation_id": 142751037,
+    "repository_id": 1293787897,
+    "repository_link": "h4n0/my-aomi-playground-3.0.2",
+    "owner_repo_name": "h4n0/my-aomi-playground-3.0.2",
+    "ref": "a896ff87e30b489d2700f707701e8cd91d4642c5",
+    "commit_hash": "a896ff87e30b489d2700f707701e8cd91d4642c5",
+    "aomi_toml_paths": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "source_branch": "h4n0/my-aomi-playground-3.0.2/142751037/a896ff87e30b",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "han-test",
+        "path": "apps/142751037/rc0f056bd92/han-test",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-142751037-rc0f056bd92-han-test-a896ff87e30b",
+        "sdk_version": "3.0.4",
+        "target": "x86_64-unknown-linux-gnu",
+        "files": [
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:29a8546e056e0a047851c87ab1e48c7c06fdfcc71c8b5ff01fe9b9cc2e3e678d",
+            "bytes": 27
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:55f7a2b4e9c0290ecde04933cc7a99a76734392b0ed34eb5c771e2d6a0e83173",
+            "bytes": 862
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:5398345d430f70c391fc15e4b22fe2393eb5a981505cdb30dc4d392da03b3455",
+            "bytes": 2205
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:237f121848108ac6c972310c1747b57296274d1af33da0c0159b4068405ef783",
+            "bytes": 677
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:e634d0a4f63f3da547e8840ea81c983e8340e853ad46e4e20d761a28ea591249",
+            "bytes": 6339
+          }
+        ]
+      }
+    ]
+  }
+}
