@@ -134,6 +134,6 @@ export function parseRule(input: string): ParsedRule {
 
 export const EXAMPLE_RULES = [
   "Every day, put $20 into SOL",
-  "If SOL drops under $60, buy $50 of SOL",
+  "If SOL drops under $60, buy $15 of SOL",
   "Every hour, put $5 into SOL",
 ];
