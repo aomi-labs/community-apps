@@ -1,0 +1,66 @@
+{
+  "id": "dep_142751037_r4f9d5ea294_1089f4d55c01",
+  "status": "",
+  "sdk_version": "3.1.0",
+  "deployed_at": 1785861888,
+  "source": {
+    "installation_id": 142751037,
+    "repository_id": 1323095333,
+    "repository_link": "h4n0/my-imported-app",
+    "owner_repo_name": "h4n0/my-imported-app",
+    "ref": "1089f4d55c0161e6b1405dcd4b36b3a67be4d2da",
+    "commit_hash": "1089f4d55c0161e6b1405dcd4b36b3a67be4d2da",
+    "aomi_toml_paths": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "source_branch": "h4n0/my-imported-app/142751037/1089f4d55c01",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "playground-example",
+        "path": "apps/142751037/r4f9d5ea294/playground-example",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-142751037-r4f9d5ea294-playground-example-1089f4d55c01",
+        "sdk_version": "3.1.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "files": [
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:29a8546e056e0a047851c87ab1e48c7c06fdfcc71c8b5ff01fe9b9cc2e3e678d",
+            "bytes": 27
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:d56bb83c93d9a7e18060f2d46076793527f0c4333818134f651a4f62f97cb39b",
+            "bytes": 765
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:9843936f49e0521b5b935505c0714da7537de85933377f1738ee7c7423d946f0",
+            "bytes": 1759
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:7c9fa54a1f19d93c4f393cb6ea7d5274fe81eca2dae0da29758c20bc5cc80b49",
+            "bytes": 686
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:9486d3fd4a1a7c09f987ade29b2f7e5b4397fda0050cf0f70c4d1bc32528691e",
+            "bytes": 2825
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
