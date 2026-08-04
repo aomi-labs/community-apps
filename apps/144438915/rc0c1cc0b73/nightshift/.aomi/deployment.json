@@ -1,0 +1,225 @@
+{
+  "id": "dep_144438915_rc0c1cc0b73_d975149866da",
+  "status": "",
+  "sdk_version": "3.1.0",
+  "deployed_at": 1785846556,
+  "source": {
+    "installation_id": 144438915,
+    "repository_id": 1322698800,
+    "repository_link": "victorchimakanu/nightshift",
+    "owner_repo_name": "victorchimakanu/nightshift",
+    "ref": "d975149866da00c428eb5baaa191dd98860f0c9b",
+    "commit_hash": "d975149866da00c428eb5baaa191dd98860f0c9b",
+    "aomi_toml_paths": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "source_branch": "victorchimakanu/nightshift/144438915/d975149866da",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "nightshift",
+        "path": "apps/144438915/rc0c1cc0b73/nightshift",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-144438915-rc0c1cc0b73-nightshift-d975149866da",
+        "sdk_version": "3.1.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "files": [
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:58137ce7aa310418ac4af978377678731c03cc0a16862fa8ffd34bd73ee57f66",
+            "bytes": 168
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:ab1779c331b661a418a509085310d7095354c7ef1abbcba8e8f41074a48c2649",
+            "bytes": 37417
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:e2c33ef4eb06f4154cbeea9e560bc4bb9cd9554bf720a52916f8540cb5b6e033",
+            "bytes": 333
+          },
+          {
+            "path": "DIFFERENTIATION.md",
+            "sha256": "sha256:ae79119d43d4eaea40ea0ddb969e928ec9b0cf943d578890288f43da655e1848",
+            "bytes": 3760
+          },
+          {
+            "path": "PLUGIN.md",
+            "sha256": "sha256:75209403203be53c5395a5a702c4ca7581dd6f6b905c343410c3caa3d68f1cd8",
+            "bytes": 3083
+          },
+          {
+            "path": "POST.md",
+            "sha256": "sha256:bf6aec1f65f2e99ac7ae4cdf5bc9314961d4802f0929c24397744b6b9720f89b",
+            "bytes": 1114
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:a9ea8913a6df89e09cc7c27801643da292209e90a43c78aadb5b058d207de8d5",
+            "bytes": 2225
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:7501ddc3fae4a11c591d610482b593ef0057f5eca64ca64f342258e6eaacd604",
+            "bytes": 171
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:42116ff7fa6da1b4e1122ded3e0c534dfc3f838d65218223f73582f805037a13",
+            "bytes": 4683
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:5a2252a160dd8ddd498dd7b445a6f4b91aa3a667440c400ebc741286c5656bf3",
+            "bytes": 5072
+          },
+          {
+            "path": "src/tool/mod.rs",
+            "sha256": "sha256:a3fc9f5ef55d1d2b4b20833f70a9163aec087c3e89a013c1d0f8c5dbef3b3723",
+            "bytes": 2446
+          },
+          {
+            "path": "src/tool/quote.rs",
+            "sha256": "sha256:a9a43d45ed00fa238e764e742fd4f65cdbdc8a474d830bee49969196966e5db0",
+            "bytes": 1659
+          },
+          {
+            "path": "src/tool/stage.rs",
+            "sha256": "sha256:482fe87db51ed0eaa3f2c6bc7190022c084358980b474330de0eb6cbf0dd80e5",
+            "bytes": 3793
+          },
+          {
+            "path": "ui/README.md",
+            "sha256": "sha256:03abd54fd1181338c2976ace5e9cea994f454ddd8f57d1b1e53d8709f277d175",
+            "bytes": 5509
+          },
+          {
+            "path": "ui/next.config.mjs",
+            "sha256": "sha256:f215e6106c8350cced2ad62e6faafb85060db93b2a97675a723034a869fdadde",
+            "bytes": 209
+          },
+          {
+            "path": "ui/package-lock.json",
+            "sha256": "sha256:5837fe1c44735016297458001bc01d81a976771a6e19befb80fe4eb77aa5e0f0",
+            "bytes": 80309
+          },
+          {
+            "path": "ui/package.json",
+            "sha256": "sha256:068221e308ed9bd7909e2f710cfa49c4372f86656a8683ff932e045fca8e901f",
+            "bytes": 691
+          },
+          {
+            "path": "ui/postcss.config.mjs",
+            "sha256": "sha256:e32657baf631d7c5f4dc67b4b2ee0ec8e7d5b3c41860e09cddce7c0377cd80bc",
+            "bytes": 81
+          },
+          {
+            "path": "ui/public/aomi-mark.svg",
+            "sha256": "sha256:953c1a1da6b1aa6393439ba210c8b4279a041d80897b9216ac1c9e16ba1ed38c",
+            "bytes": 1044
+          },
+          {
+            "path": "ui/src/app/api/broadcast/route.ts",
+            "sha256": "sha256:fea6d8760a421efb168aa33743a6b874d6421a872554f3262852c4b3288245c7",
+            "bytes": 1582
+          },
+          {
+            "path": "ui/src/app/api/price/route.ts",
+            "sha256": "sha256:9a9d22690a7dd7e1ff73bbbd950dbbad08ea9ae059d2d73edb0d6fc646ef2518",
+            "bytes": 916
+          },
+          {
+            "path": "ui/src/app/api/quote/route.ts",
+            "sha256": "sha256:164e75d5c241ff89cff8413a33f5b25363978f90f889a2c57702a317742a0380",
+            "bytes": 1318
+          },
+          {
+            "path": "ui/src/app/api/swap/route.ts",
+            "sha256": "sha256:63af233abe38a3f5ade1296a90103b3218de58d678c38255275df347229fb207",
+            "bytes": 1604
+          },
+          {
+            "path": "ui/src/app/api/token/route.ts",
+            "sha256": "sha256:7e692688be33e064ce72c672f7cf079c5b7c4798aa961e15b3b11b06ee469d16",
+            "bytes": 943
+          },
+          {
+            "path": "ui/src/app/globals.css",
+            "sha256": "sha256:1840407492adbcf49baf3677c6dc62985163eeb8f710b772cb0ea69335bd6eb1",
+            "bytes": 3874
+          },
+          {
+            "path": "ui/src/app/layout.tsx",
+            "sha256": "sha256:09294a8d7b19036d90fafa8952150f5c3dcaaca49c50e18993cfdcc883a2bbaf",
+            "bytes": 1055
+          },
+          {
+            "path": "ui/src/app/page.tsx",
+            "sha256": "sha256:77fa92afd77e36cb0982060422d64485d78b012a363995b843a57e9e21afa4c5",
+            "bytes": 120
+          },
+          {
+            "path": "ui/src/components/DifferentPanel.tsx",
+            "sha256": "sha256:ebfaba645e846a8a82093d867f6a4504049e2a4497ab6482fb7bc8c0fa8f1950",
+            "bytes": 3539
+          },
+          {
+            "path": "ui/src/components/NightshiftApp.tsx",
+            "sha256": "sha256:73c04a6c3fd03c7d86357df5fc8b690806f078952149f48e37a7843b3a39f030",
+            "bytes": 40555
+          },
+          {
+            "path": "ui/src/components/ui.tsx",
+            "sha256": "sha256:c7e6bf40f0aadcbac13db8a41ba719ef4a08de1c71d8138299746e4a60cb705c",
+            "bytes": 5525
+          },
+          {
+            "path": "ui/src/lib/envelope.ts",
+            "sha256": "sha256:9c550fc880bc8d3b3fb94495d0c0df409a29643b6e4846a1ed29e59dc291abc0",
+            "bytes": 4151
+          },
+          {
+            "path": "ui/src/lib/format.ts",
+            "sha256": "sha256:76f012fc8836c3baa0ceb07418fbb48e7ea4d1363734bc841cdfd582a3454a82",
+            "bytes": 1303
+          },
+          {
+            "path": "ui/src/lib/jupiter.ts",
+            "sha256": "sha256:dcae30d46efee82b5d9ca75767ac19aa35a57c7c2620ee34aaa86eda8d140c04",
+            "bytes": 2098
+          },
+          {
+            "path": "ui/src/lib/rule.ts",
+            "sha256": "sha256:4c56e93e7a23f634039df292d8bfd3dddf9b75a9555522abe90426a8b807ffd2",
+            "bytes": 4242
+          },
+          {
+            "path": "ui/src/lib/tokens.ts",
+            "sha256": "sha256:36b95da89f062eefbfbb3e2f9a44d7299635ad9b2ead7dab8fc1a07c8acff415",
+            "bytes": 1775
+          },
+          {
+            "path": "ui/tailwind.config.ts",
+            "sha256": "sha256:182adcd81e9c88d167303734f84206f5ebfc91fb2efac00bef3e47ca7e75950e",
+            "bytes": 573
+          },
+          {
+            "path": "ui/tsconfig.json",
+            "sha256": "sha256:e641677ce572f8bc5b783f2ad47315db9ee0916d2561b6686dd5099fc2116602",
+            "bytes": 566
+          }
+        ]
+      }
+    ]
+  }
+}

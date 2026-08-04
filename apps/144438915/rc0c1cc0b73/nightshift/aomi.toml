@@ -1,0 +1,7 @@
+[app]
+name = "nightshift"
+display_name = "Nightshift"
+platform = "community"
+git = "https://github.com/victorchimakanu/nightshift"
+public = true
+server_tags = ["staging"]

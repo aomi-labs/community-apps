@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Aomi design tokens — ported verbatim from aomi-labs/design (tokens.css).
+ * Nightshift runs on the dark editorial surface only.
+ */
+:root {
+  /* Rosy pink — decorative brand pop (charts, badges) only. */
+  --aomi-pink-400: #e77ba6;
+  --aomi-pink-500: #df5d90;
+
+  /* Sky — the brand accent. */
+  --aomi-sky-100: #e2eef8;
+  --aomi-sky-200: #cfe1f3;
+  --aomi-sky-300: #aecbe8;
+  --aomi-sky-400: #7facd6;
+  --aomi-sky-500: #5288c2;
+
+  /* Cool neutral ramp (zinc). */
+  --aomi-cool-0: #ffffff;
+  --aomi-cool-50: #fafafa;
+  --aomi-cool-100: #f4f4f5;
+  --aomi-cool-150: #e9e9ec;
+  --aomi-cool-200: #e4e4e7;
+  --aomi-cool-300: #d4d4d8;
+  --aomi-cool-400: #a1a1aa;
+  --aomi-cool-500: #71717a;
+  --aomi-cool-600: #52525b;
+  --aomi-cool-650: #4a4a52;
+  --aomi-cool-700: #3f3f46;
+  --aomi-cool-750: #2e2e33;
+  --aomi-cool-800: #27272a;
+  --aomi-cool-850: #202024;
+  --aomi-cool-900: #18181b;
+  --aomi-cool-950: #09090b;
+
+  --aomi-success-500: #2e9e6b;
+  --aomi-warning-500: #d9982b;
+  --aomi-danger-500: #d2495b;
+  --aomi-info-500: #416cac;
+
+  --aomi-tracking-tight: -0.02em;
+  --aomi-tracking-wide: 0.04em;
+
+  /* ---- Dark semantic roles (the only surface Nightshift ships) ---- */
+  --aomi-bg: var(--aomi-cool-950);
+  --aomi-bg-subtle: var(--aomi-cool-900);
+  --aomi-surface: var(--aomi-cool-900);
+  --aomi-surface-raised: var(--aomi-cool-850);
+  --aomi-surface-2: var(--aomi-cool-750);
+  --aomi-overlay: rgba(0, 0, 0, 0.6);
+
+  --aomi-text: var(--aomi-cool-50);
+  --aomi-text-secondary: var(--aomi-cool-300);
+  --aomi-text-muted: var(--aomi-cool-400);
+  --aomi-text-subtle: var(--aomi-cool-500);
+  --aomi-text-on-brand: var(--aomi-cool-950);
+
+  --aomi-border: var(--aomi-cool-700);
+  --aomi-border-strong: var(--aomi-cool-600);
+  --aomi-hairline: var(--aomi-cool-800);
+
+  --aomi-primary: var(--aomi-cool-0);
+  --aomi-primary-hover: var(--aomi-cool-100);
+  --aomi-primary-active: var(--aomi-cool-200);
+
+  --aomi-accent: var(--aomi-sky-400);
+  --aomi-accent-hover: var(--aomi-sky-300);
+  --aomi-accent-active: var(--aomi-sky-200);
+  --aomi-accent-subtle: #28354a;
+  --aomi-accent-interactive: var(--aomi-sky-400);
+  --aomi-ring: var(--aomi-sky-400);
+
+  --aomi-danger: #e2687a;
+  --aomi-danger-strong: #c34255;
+  --aomi-success: #4cc38a;
+  --aomi-warning: #e0a94a;
+
+  --aomi-state-hover: var(--aomi-cool-650);
+
+  --aomi-glass-bg: rgba(13, 13, 15, 0.55);
+  --aomi-glass-border: rgba(255, 255, 255, 0.12);
+}
+
+* {
+  border-color: var(--aomi-border);
+}
+
+html,
+body {
+  background: var(--aomi-bg);
+  color: var(--aomi-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--aomi-accent-subtle);
+  color: var(--aomi-cool-50);
+}
+
+/* Thin scrollbars, brand-cool. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--aomi-cool-700) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--aomi-cool-700);
+  border-radius: 9999px;
+}
+
+/* A quiet field grid, like an engineering worksheet. */
+.field-grid {
+  background-image: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--aomi-cool-700) 22%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--aomi-cool-700) 22%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 44px 44px;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.live-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise var(--aomi-duration, 320ms) cubic-bezier(0.2, 0, 0, 1) both;
+}
