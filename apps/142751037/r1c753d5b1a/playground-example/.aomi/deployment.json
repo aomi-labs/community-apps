@@ -1,0 +1,66 @@
+{
+  "id": "dep_142751037_r1c753d5b1a_e113a7aa44dc",
+  "status": "",
+  "sdk_version": "3.1.0",
+  "deployed_at": 1785856628,
+  "source": {
+    "installation_id": 142751037,
+    "repository_id": 1293598679,
+    "repository_link": "h4n0/my-aomi-playground-abc",
+    "owner_repo_name": "h4n0/my-aomi-playground-abc",
+    "ref": "e113a7aa44dc220395378d739b4d2a1d93f175e4",
+    "commit_hash": "e113a7aa44dc220395378d739b4d2a1d93f175e4",
+    "aomi_toml_paths": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "source_branch": "h4n0/my-aomi-playground-abc/142751037/e113a7aa44dc",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "playground-example",
+        "path": "apps/142751037/r1c753d5b1a/playground-example",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-142751037-r1c753d5b1a-playground-example-e113a7aa44dc",
+        "sdk_version": "3.1.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "files": [
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:29a8546e056e0a047851c87ab1e48c7c06fdfcc71c8b5ff01fe9b9cc2e3e678d",
+            "bytes": 27
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:2d16b569ed27f8fe58a34e01803f0a57d306ac7ed59d9d9546aa5b558567c910",
+            "bytes": 765
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:9843936f49e0521b5b935505c0714da7537de85933377f1738ee7c7423d946f0",
+            "bytes": 1759
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:7c9fa54a1f19d93c4f393cb6ea7d5274fe81eca2dae0da29758c20bc5cc80b49",
+            "bytes": 686
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:9486d3fd4a1a7c09f987ade29b2f7e5b4397fda0050cf0f70c4d1bc32528691e",
+            "bytes": 2825
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
