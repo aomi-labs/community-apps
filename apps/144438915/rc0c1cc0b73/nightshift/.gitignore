@@ -1,0 +1,16 @@
+# Rust
+/target
+Cargo.lock.bak
+
+# Web dashboard (ui/)
+/ui/node_modules
+/ui/.next
+/ui/out
+/ui/build
+/ui/next-env.d.ts
+
+# misc
+*.tsbuildinfo
+.DS_Store
+.env*.local
+.vercel
