@@ -1,0 +1,83 @@
+{
+  "id": "dep_141779906_r229e1090c5_abbb14fde2be",
+  "status": "",
+  "sdk_version": "3.1.0",
+  "deployed_at": 1786215502,
+  "source": {
+    "project_id": 1647,
+    "installation_id": 141779906,
+    "repository_id": 1253291574,
+    "repository_link": "ceciliaz030/my-aomi-bots",
+    "ref": "abbb14fde2be66fcb61620bf370aeb76c5187104",
+    "commit_hash": "abbb14fde2be66fcb61620bf370aeb76c5187104",
+    "applications": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "ceciliaz030/my-aomi-bots/141779906/abbb14fde2be",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "my-aomi-bots",
+        "path": "apps/141779906/r229e1090c5/my-aomi-bots",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-141779906-r229e1090c5-my-aomi-bots-abbb14fde2be",
+        "sdk_version": "3.1.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "My Aomi Bots",
+        "is_public": true,
+        "files": [
+          {
+            "path": ".aomi/config.json",
+            "sha256": "sha256:15859bbf86295110b21699346e556d9601bc030e08c26aad2ba9076dee841e6c",
+            "bytes": 87
+          },
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:1b52ed14ce9bb3a8c8dca5a49d85e63dd60cd95cf94eb76c5f887bfbe84ac49a",
+            "bytes": 48
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:bf5a418ac22e78a9bc6a6dbbe832abf9b585adb3485854d749f096c578e99d50",
+            "bytes": 1050
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:5233109bc2d972b7e3206c24119d84dd61c58b95df1a7fbb934385de4918b593",
+            "bytes": 2772
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:aad47c10d5c5c21beb3e1509806a48bc4f6a5610f40b93f775c5219594ffa954",
+            "bytes": 463
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:d4d6241515eed2b3fc0f2a41b626e3f3c834294dbbe0e61a3bfa77605ed29945",
+            "bytes": 8878
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:96e237c11bdb67a7956699970c99f9c1dd0e0fc0c300cc93c74c1651da378b8b",
+            "bytes": 2108
+          },
+          {
+            "path": "src/tools.rs",
+            "sha256": "sha256:155e9100572cb916748e53303086425128aea70a942325c45f5c4822edcc38f9",
+            "bytes": 4817
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}

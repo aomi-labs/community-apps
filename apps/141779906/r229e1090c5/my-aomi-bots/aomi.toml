@@ -1,0 +1,9 @@
+[app]
+name         = "my-aomi-bots"            # slug — kebab-case, becomes the release tag
+display_name = "My Aomi Bots"            # human-readable
+public       = true                     # visible to all backend users
+
+# Optional: pin which class of backend can load this release.
+# Omit to default to ["staging"] — your release will only load on staging
+# backends. Set to ["prod"] for the production-tier release once tested.
+# server_tags = ["staging"]
