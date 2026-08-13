@@ -1,0 +1,80 @@
+# Aomi partner billing for the Agentic Somm app.
+#
+# Aomi checks the user's tool budget before invoking a priced tool, runs the
+# tool, and charges ONLY after a successful ToolReturn. A blocked call or an
+# error return is never charged — success-only is automatic and is not
+# configurable here. Charges accrue to the beneficiary below and settle over
+# x402 once accumulated debt reaches the partner threshold (default 100
+# credits = $1.00), not per call.
+#
+# UNITS: one credit is $0.01. `flat = 5.0` is five credits, i.e. $0.05.
+#
+# The V1 schema accepts ONLY `pricing = { flat = <credits> }`. It does not
+# accept flat_usd, charge_on, cost_plus_bps, tiered pricing, daily quotas, or
+# per-resource settlement cadence. Do not add fields the parser will reject.
+#
+# Every `[resources.X]` key must match a tool's Rust `const NAME` EXACTLY. A
+# mismatched key does not error — it silently fails to charge.
+#
+# These credit figures are mirrored in the Somm app repository as
+# PRICED_CAPABILITIES (src/lib/billing/toolPricing.ts), which derives the
+# direct-API route prices from them so a third-party caller and an Aomi caller
+# are quoted the same price for the same capability. A test there fails if the
+# two drift. Change both sides together.
+
+version = 1
+
+[[beneficiaries]]
+name = "somm_evm"
+type = "evm_address"
+chain = "eip155:84532"
+value = "0xdfBe3Ca3830dc4F93d70581f25F409fE7ea819B3"
+
+# ── Entry read ───────────────────────────────────────────────────────────────
+# The agent is instructed to call this first in every conversation, so it is
+# effectively a per-conversation entry fee. Priced lowest for that reason.
+
+[resources.get_idle_assets]
+pricing = { flat = 1.0 }
+beneficiary = "somm_evm"
+
+# ── Discovery ────────────────────────────────────────────────────────────────
+# Multichain aggregation with real upstream cost (DefiLlama, RPC fan-out).
+
+[resources.list_yields]
+pricing = { flat = 2.0 }
+beneficiary = "somm_evm"
+
+[resources.surface_opportunities]
+pricing = { flat = 2.0 }
+beneficiary = "somm_evm"
+
+[resources.get_ymax_position]
+pricing = { flat = 2.0 }
+beneficiary = "somm_evm"
+
+# ── Risk analysis ────────────────────────────────────────────────────────────
+# The most valuable read surface and the most expensive to produce.
+
+[resources.get_risk_snapshot]
+pricing = { flat = 5.0 }
+beneficiary = "somm_evm"
+
+[resources.assess_position]
+pricing = { flat = 5.0 }
+beneficiary = "somm_evm"
+
+# ── Deliberately unpriced ────────────────────────────────────────────────────
+# Omitted tools are free. Listed here so the omissions read as decisions:
+#
+#   somm_aurora_deposit            one user deposit walks deposit ->
+#   somm_aurora_submit_signature   submit_signature -> report_deposit, so
+#   somm_aurora_report_deposit     pricing these bills one action three times
+#
+#   get_intermediary               execution plumbing, not a product surface
+#   propose_intent                 UI render following already-paid reads;
+#                                  makes no HTTP call at all
+#   get_credit_balance             charging to check a balance is hostile
+#
+# No [[outcome]] block: outcome fees on EVM account-abstraction flows are a
+# separate billing track and need their own end-to-end review before use.
