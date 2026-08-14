@@ -1,0 +1,88 @@
+{
+  "id": "dep_142751037_r2c0be1ac1e_33d11a558534",
+  "status": "",
+  "sdk_version": "3.1.0",
+  "deployed_at": 1786718532,
+  "source": {
+    "project_id": 1655,
+    "installation_id": 142751037,
+    "repository_id": 1333954836,
+    "repository_link": "h4n0/somm-agent",
+    "ref": "33d11a5585342745e9f7fdcb625fa4649f814b6c",
+    "commit_hash": "33d11a5585342745e9f7fdcb625fa4649f814b6c",
+    "applications": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "h4n0/somm-agent/142751037/33d11a558534",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "somm-agent",
+        "path": "apps/142751037/r2c0be1ac1e/somm-agent",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-142751037-r2c0be1ac1e-somm-agent-33d11a558534",
+        "sdk_version": "3.1.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Agentic Somm",
+        "is_public": true,
+        "files": [
+          {
+            "path": ".aomi/config.json",
+            "sha256": "sha256:15859bbf86295110b21699346e556d9601bc030e08c26aad2ba9076dee841e6c",
+            "bytes": 87
+          },
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:44c92e3a70ad3307b7056871c2bdb096d8bfa9373f5bf06a79bb6324a20ff2fb",
+            "bytes": 8
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:1a3dc0593e2f53d5142711a66e4d1f920beb13ee70fa3749db52ce66b8fa79f6",
+            "bytes": 37963
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:6091e8167b4f1fa03c184a979c78637515f1f8f04c79e37b96c70e72f319fdc7",
+            "bytes": 393
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:56d75701e2c6fd8728692a33a152b0e7826e64b3d06ee778f97f8c514f478cb9",
+            "bytes": 2487
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:6886513f8cec181103e42e46543e0aad8a10760924aafb811ece6852107afdfa",
+            "bytes": 221
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:fb9020a05e9532e8740c8ab9fbc85c320449da481606f99bc570cd2eb50c782e",
+            "bytes": 2768
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:afd957d2c4deeb559edcd4071007e1bd038267f49a270c26301422f96b2df3e1",
+            "bytes": 1808
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:2a23cf0d610c2e5356b0e0b0c68a9beb744aeec45030b7bd6a88612e9c5e8be1",
+            "bytes": 9854
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
