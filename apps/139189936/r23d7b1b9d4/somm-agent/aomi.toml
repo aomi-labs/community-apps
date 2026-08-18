@@ -1,0 +1,7 @@
+[app]
+name = "somm-agent"
+display_name = "Agentic Somm"
+platform = "somm.finance"
+git = "https://github.com/PeggyJV/aurora-intents-yield"
+public = true
+# server_tags = ["staging"]  # uncomment to pin to a staging runtime
