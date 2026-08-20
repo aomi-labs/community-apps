@@ -3,6 +3,15 @@ use aomi_sdk::*;
 mod client;
 mod tool;
 
+/// API key for the deployed Somm app. The host gates app load until the user
+/// has ingested this slot, and injects the value into `DynToolCallCtx::secrets`
+/// at tool-call time.
+pub(crate) const SOMM_API_KEY: Secret = Secret::new(
+    "SOMM_API_KEY",
+    "Required somm API key.",
+    true,
+);
+
 const PREAMBLE: &str = r#"## Role
 You are the **Agentic Somm** yield agent. You help a user put **idle stablecoins
 to work** safely and **non-custodially**. You observe and recommend — you never
@@ -43,5 +52,6 @@ dyn_aomi_app!(
         tool::GetCreditBalance,
         tool::ProposeIntent,
     ],
+    secrets = [SOMM_API_KEY],
     namespaces = []
 );
