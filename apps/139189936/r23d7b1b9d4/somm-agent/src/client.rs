@@ -2,8 +2,9 @@
 //!
 //! Thin forwarder: every tool maps to one route on the deployed Somm app
 //! (`SOMM_API_BASE_URL`, e.g. https://agentic.somm.finance), authenticated with
-//! `Authorization: Bearer $SOMM_API_KEY`. This mirrors the TypeScript MCP proxy
-//! (`mcp/src/{client,contract}.ts`) one-to-one so the deployed agent and the
+//! `Authorization: Bearer <SOMM_API_KEY>`. The key is resolved per call from
+//! the host-injected secret vault (see `tool::api_key`), not from process env.
+//! This mirrors the TypeScript MCP proxy (`mcp/src/{client,contract}.ts`) one-to-one so the deployed agent and the
 //! local MCP server speak to the exact same endpoints.
 
 use std::time::Duration;
@@ -17,20 +18,18 @@ const DEFAULT_BASE_URL: &str = "https://agentic.somm.finance";
 pub struct SommApp {
     client: Client,
     base_url: String,
-    api_key: String,
 }
 
 impl Default for SommApp {
     fn default() -> Self {
         let base_url = std::env::var("SOMM_API_BASE_URL")
             .unwrap_or_else(|_| DEFAULT_BASE_URL.to_string());
-        let api_key = std::env::var("SOMM_API_KEY").unwrap_or_default();
-        Self::new(base_url, api_key)
+        Self::new(base_url)
     }
 }
 
 impl SommApp {
-    pub fn new(base_url: impl Into<String>, api_key: impl Into<String>) -> Self {
+    pub fn new(base_url: impl Into<String>) -> Self {
         let client = Client::builder()
             .timeout(Duration::from_secs(30))
             .build()
@@ -38,7 +37,6 @@ impl SommApp {
         Self {
             client,
             base_url: base_url.into().trim_end_matches('/').to_string(),
-            api_key: api_key.into(),
         }
     }
 
@@ -47,18 +45,18 @@ impl SommApp {
     }
 
     /// GET `path` (path may include a query string). Returns the parsed JSON body.
-    pub fn get(&self, path: &str) -> Result<Value, String> {
-        self.send(self.client.get(self.url(path)))
+    pub fn get(&self, path: &str, api_key: &str) -> Result<Value, String> {
+        self.send(self.client.get(self.url(path)), api_key)
     }
 
     /// POST `path` with a JSON body. Returns the parsed JSON body.
-    pub fn post(&self, path: &str, body: Value) -> Result<Value, String> {
-        self.send(self.client.post(self.url(path)).json(&body))
+    pub fn post(&self, path: &str, body: Value, api_key: &str) -> Result<Value, String> {
+        self.send(self.client.post(self.url(path)).json(&body), api_key)
     }
 
-    fn send(&self, req: reqwest::blocking::RequestBuilder) -> Result<Value, String> {
+    fn send(&self, req: reqwest::blocking::RequestBuilder, api_key: &str) -> Result<Value, String> {
         let resp = req
-            .bearer_auth(&self.api_key)
+            .bearer_auth(api_key)
             .header("Accept", "application/json")
             .send()
             .map_err(|e| format!("[somm] request failed: {e}"))?;

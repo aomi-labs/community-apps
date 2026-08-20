@@ -17,6 +17,17 @@ use serde_json::{json, Value};
 
 pub use crate::client::SommApp;
 
+/// Resolve the app's API key for this call: host-injected secret vault first,
+/// then the `SOMM_API_KEY` env var as a local/CLI fallback.
+fn api_key(ctx: &DynToolCallCtx) -> Result<String, String> {
+    resolve_secret_value(
+        ctx,
+        None,
+        crate::SOMM_API_KEY.name,
+        "SOMM_API_KEY is not set — add it in the app's settings to use this tool.",
+    )
+}
+
 // ─── get_idle_assets ─────────────────────────────────────────────────────────
 
 pub struct GetIdleAssets;
@@ -36,11 +47,11 @@ impl DynAomiTool for GetIdleAssets {
         "List the connected wallet's idle, uninvested holdings (balances, USD value, chain) \
          that could be put to work earning yield. Call this first to see what the user holds.";
 
-    fn run(app: &SommApp, args: Self::Args, _ctx: DynToolCallCtx) -> Result<Value, String> {
+    fn run(app: &SommApp, args: Self::Args, ctx: DynToolCallCtx) -> Result<Value, String> {
         if args.wallet.is_empty() {
             return Err("wallet (non-empty string) is required".to_string());
         }
-        app.get(&format!("/api/portfolio?wallet={}", args.wallet))
+        app.get(&format!("/api/portfolio?wallet={}", args.wallet), &api_key(&ctx)?)
     }
 }
 
@@ -60,8 +71,8 @@ impl DynAomiTool for GetRiskSnapshot {
         "Get the current venue/asset risk snapshot used to reason about where idle assets can \
          be deployed safely. Read-only context for recommendations.";
 
-    fn run(app: &SommApp, _args: Self::Args, _ctx: DynToolCallCtx) -> Result<Value, String> {
-        app.get("/api/risk/snapshot")
+    fn run(app: &SommApp, _args: Self::Args, ctx: DynToolCallCtx) -> Result<Value, String> {
+        app.get("/api/risk/snapshot", &api_key(&ctx)?)
     }
 }
 
@@ -91,7 +102,7 @@ impl DynAomiTool for AssessPosition {
         "Assess the risk of a specific candidate position (chain + protocol + asset + USD size) \
          before recommending it. Call before proposing an intent when the user asks about risk.";
 
-    fn run(app: &SommApp, args: Self::Args, _ctx: DynToolCallCtx) -> Result<Value, String> {
+    fn run(app: &SommApp, args: Self::Args, ctx: DynToolCallCtx) -> Result<Value, String> {
         if args.chain.is_empty() || args.project.is_empty() || args.symbol.is_empty() {
             return Err("chain, project, symbol (non-empty strings) are required".to_string());
         }
@@ -106,6 +117,7 @@ impl DynAomiTool for AssessPosition {
                 "symbol": args.symbol,
                 "amountUsd": args.amount_usd,
             }),
+            &api_key(&ctx)?,
         )
     }
 }
@@ -127,8 +139,8 @@ impl DynAomiTool for GetCreditBalance {
     const DESCRIPTION: &'static str =
         "Check the account's remaining paid-call credit balance. Warn the user when it is low.";
 
-    fn run(app: &SommApp, _args: Self::Args, _ctx: DynToolCallCtx) -> Result<Value, String> {
-        let body = app.get("/api/account")?;
+    fn run(app: &SommApp, _args: Self::Args, ctx: DynToolCallCtx) -> Result<Value, String> {
+        let body = app.get("/api/account", &api_key(&ctx)?)?;
         // balance may arrive as a number or a string; normalize to a decimal string.
         let bal_str = match body.get("balance") {
             None | Some(Value::Null) => "0".to_string(),
