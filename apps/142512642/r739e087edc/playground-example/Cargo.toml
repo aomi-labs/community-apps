@@ -17,5 +17,5 @@ serde      = { version = "1", features = ["derive"] }
 serde_json = "1"
 
 # Tools run inside a synchronous FFI boundary — there is no async runtime inside
-# the plugin. When you need HTTP, use reqwest's blocking client:
-# reqwest = { version = "0.12", features = ["blocking", "json", "rustls-tls"], default-features = false }
+# the plugin, so `swap` uses reqwest's blocking client to call the 0x Swap API.
+reqwest = { version = "0.12", features = ["blocking", "json", "rustls-tls"], default-features = false }
