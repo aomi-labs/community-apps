@@ -1,0 +1,73 @@
+{
+  "id": "dep_142512642_r739e087edc_5e7ba9351256",
+  "status": "",
+  "sdk_version": "4.0.0",
+  "deployed_at": 1787581039,
+  "source": {
+    "project_id": 1657,
+    "installation_id": 142512642,
+    "repository_id": 1341944564,
+    "repository_link": "h4n0/my-aomi-4.0",
+    "ref": "5e7ba9351256ac7d3100fc00a7ba33fe9ca50a20",
+    "commit_hash": "5e7ba9351256ac7d3100fc00a7ba33fe9ca50a20",
+    "applications": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "h4n0/my-aomi-4.0/142512642/5e7ba9351256",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "playground-example",
+        "path": "apps/142512642/r739e087edc/playground-example",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-142512642-r739e087edc-playground-example-5e7ba9351256",
+        "sdk_version": "4.0.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Playground Example",
+        "is_public": true,
+        "files": [
+          {
+            "path": ".aomi/config.json",
+            "sha256": "sha256:15859bbf86295110b21699346e556d9601bc030e08c26aad2ba9076dee841e6c",
+            "bytes": 87
+          },
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:efbde5aa15485a3467c2fffd0205826c152e703e12e167c105a13f06058650b3",
+            "bytes": 42
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:165f86a43d22bbe4110aaf56c085a8510bb49a7faa3abed3b7ea48167a59dd9c",
+            "bytes": 714
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:3af6084ac81fcd419fe5c8ab034821fc69ef78dfae1b04c7cdef9c2bdf5544e6",
+            "bytes": 1826
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:0fc60545daaa80f93a1d8100022335062fa01d055585feea7981ab0bede29944",
+            "bytes": 531
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:580d63a6200b4e7809e6d0aef3d6d496dd5455ee857a2b89208173628f7dad5a",
+            "bytes": 18964
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
