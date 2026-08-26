@@ -1,0 +1,73 @@
+{
+  "id": "dep_139182861_r30d7fec3ad_c1aee1603b7a",
+  "status": "",
+  "sdk_version": "4.0.0",
+  "deployed_at": 1787728728,
+  "source": {
+    "project_id": 1677,
+    "installation_id": 139182861,
+    "repository_id": 1347024739,
+    "repository_link": "ceciliaz030/risk-off-pilot",
+    "ref": "c1aee1603b7afe33447535402dcbea003175e73e",
+    "commit_hash": "c1aee1603b7afe33447535402dcbea003175e73e",
+    "applications": [
+      "aomi-app/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "ceciliaz030/risk-off-pilot/139182861/c1aee1603b7a",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "risk-off-pilot",
+        "path": "apps/139182861/r30d7fec3ad/risk-off-pilot",
+        "aomi_toml_path": "aomi-app/aomi.toml",
+        "release_tag": "apps-139182861-r30d7fec3ad-risk-off-pilot-c1aee1603b7a",
+        "sdk_version": "4.0.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Risk-Off Vault Operator",
+        "is_public": true,
+        "files": [
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:4905d02274d8af3dd05f81c4ff990ddc568e577aab79fcf06f33dc71bf92bad3",
+            "bytes": 88792
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:ec6f471e5e8a050175a1926a2f11572a5f6381ca00a7adb03228efe5e16ee9b8",
+            "bytes": 469
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:778e23ee3fa1fc044d0db6d6afea247e992048a523b28a92feff651401b9a083",
+            "bytes": 85
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:88c80bddc75326fdb9ccd84dc3523061a8dc972e69a863dc467b63af4fffc26b",
+            "bytes": 5282
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:29d7aef784e79892143e17a214c9d6c35090ce322b60f09bcbe05092f346414d",
+            "bytes": 3845
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:ae5a6a829c03a59b0d8d9a5694dd7e624aed18cf949b14883128b2ffd021669b",
+            "bytes": 26619
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
