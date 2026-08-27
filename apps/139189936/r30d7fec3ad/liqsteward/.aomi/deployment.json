@@ -1,0 +1,73 @@
+{
+  "id": "dep_139189936_r30d7fec3ad_a09e14bc6128",
+  "status": "",
+  "sdk_version": "4.0.0",
+  "deployed_at": 1787864248,
+  "source": {
+    "project_id": 1677,
+    "installation_id": 139189936,
+    "repository_id": 1347024739,
+    "repository_link": "ceciliaz030/risk-off-pilot",
+    "ref": "a09e14b",
+    "commit_hash": "a09e14bc61285af9f2cb8a05a0c27911b9fbb329",
+    "applications": [
+      "aomi-app/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "ceciliaz030/risk-off-pilot/139189936/a09e14bc6128",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "liqsteward",
+        "path": "apps/139189936/r30d7fec3ad/liqsteward",
+        "aomi_toml_path": "aomi-app/aomi.toml",
+        "release_tag": "apps-139189936-r30d7fec3ad-liqsteward-a09e14bc6128",
+        "sdk_version": "4.0.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "LiqSteward",
+        "is_public": true,
+        "files": [
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:1931f5b02556878a089a5e58f2f24c3057c5a7a9aced52259c9b844297013cd5",
+            "bytes": 88788
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:1dd08688e113185fc62935dd62ce55f2f6508e7561d83a88ab5eef55648ff366",
+            "bytes": 480
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:8f47f25f92421eed443987f4e7510d5927dca6a7cce52b5da1e65c85e21c4c47",
+            "bytes": 68
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:c78589bfcaee2b8e9568ab264be3969872b27c3e1f6b39d20f2568f7ed4b7e81",
+            "bytes": 6864
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:186cda768338682cdf515348c7e53ff1c9978854c5de9249fd76f49a83db8a0b",
+            "bytes": 5932
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:44c9c9f5ffe87965f3a3b8505718ba68d47a4e03d6a14397d367a8bae0dd8e16",
+            "bytes": 71434
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
