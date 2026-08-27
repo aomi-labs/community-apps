@@ -1,0 +1,4 @@
+[app]
+name = "liqsteward"
+display_name = "LiqSteward"
+public = true
