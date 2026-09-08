@@ -600,5 +600,3 @@ def verify_tarball(tarball: pathlib.Path, expected_manifest: dict[str, Any]) -> 
                 fail(f"tarball plugin missing for {name}")
             if sha256_file(plugin) != entry["sha256"]:
                 fail(f"tarball plugin checksum mismatch for {name}")
-
-
