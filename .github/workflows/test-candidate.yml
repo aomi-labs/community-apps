@@ -1,4 +1,4 @@
-name: Candidate Packaging Tests
+name: Deployment Workflow Tests
 on:
   pull_request:
     branches: [publish]
@@ -10,3 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - run: python3 -m unittest discover -s .github/scripts -p 'test_*.py' -v
+      - name: Validate workflow syntax
+        run: |
+          GOBIN=/tmp/aomi-workflow-tools go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.12
+          /tmp/aomi-workflow-tools/actionlint .github/workflows/deploy-project.yml .github/workflows/test-candidate.yml

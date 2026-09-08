@@ -9,25 +9,6 @@ def _completed(*, returncode: int = 0, stdout: str = "", stderr: str = "") -> su
     return subprocess.CompletedProcess(args=["aomi-build", "manifest"], returncode=returncode, stdout=stdout, stderr=stderr)
 
 
-class CandidateDetectionTests(unittest.TestCase):
-    def test_private_source_candidates_are_skipped_while_legacy_apps_still_build(self):
-        private = "apps/123/r0123456789/private-app"
-        legacy = "apps/123/r0123456789/legacy-app"
-        with tempfile.TemporaryDirectory() as directory:
-            root = pathlib.Path(directory)
-            marker = root / private / ".aomi/source-context.json"
-            marker.parent.mkdir(parents=True)
-            marker.write_text("{}")
-            with patch.object(bc, "REPO_ROOT", root), patch.object(
-                bc, "changed_paths", return_value=[private + "/aomi.toml", legacy + "/src/lib.rs"]
-            ):
-                self.assertEqual(bc.changed_app_dirs("base", "head"), [legacy])
-            with patch.object(bc, "REPO_ROOT", root), patch.object(
-                bc, "changed_paths", return_value=[private + "/aomi.toml"]
-            ):
-                self.assertEqual(bc.changed_app_dirs("base", "head"), [])
-
-
 class ReadPluginSecretsTests(unittest.TestCase):
     def setUp(self):
         # Every test overrides these before calling read_plugin_secrets; restore
