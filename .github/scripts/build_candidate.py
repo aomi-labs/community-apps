@@ -167,7 +167,9 @@ def changed_app_dirs(base: str, head: str) -> list[str]:
             and not parts[3].startswith(".")
         ):
             dirs.add("/".join(parts[:4]))
-    return sorted(dirs)
+    # Metadata-only candidates compile from a private full source snapshot.
+    # Never attempt to build their public projection as a standalone crate.
+    return sorted(directory for directory in dirs if not (REPO_ROOT / directory / ".aomi/source-context.json").is_file())
 
 
 def get_str(value: dict[str, Any], path: tuple[str, ...], *, required: bool = True) -> str | None:
