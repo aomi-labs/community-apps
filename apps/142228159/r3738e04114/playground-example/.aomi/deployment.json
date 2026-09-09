@@ -1,0 +1,58 @@
+{
+  "id": "dep_142228159_r3738e04114_7b25561889d6",
+  "status": "",
+  "sdk_version": "4.0.0",
+  "deployed_at": 1788974057,
+  "source": {
+    "project_id": 1662,
+    "installation_id": 142228159,
+    "repository_id": 1362947699,
+    "repository_link": "ceciliaz030/deployment-recovery-e2e-20260910",
+    "ref": "7b25561889d69b4a12525d47f005ce9523e58c32",
+    "commit_hash": "7b25561889d69b4a12525d47f005ce9523e58c32",
+    "applications": [
+      "apps/probe/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "ceciliaz030/deployment-recovery-e2e-20260910/142228159/7b25561889d6",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "playground-example",
+        "path": "apps/142228159/r3738e04114/playground-example",
+        "aomi_toml_path": "apps/probe/aomi.toml",
+        "release_tag": "apps-142228159-r3738e04114-playground-example-7b25561889d6",
+        "sdk_version": "4.0.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Playground Example",
+        "is_public": true,
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:19c5d60664d5bbbf1c3703bbb7e8302b58c83abd6a767225d74e9af36a47ff69",
+            "bytes": 254
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:0fc60545daaa80f93a1d8100022335062fa01d055585feea7981ab0bede29944",
+            "bytes": 531
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:9486d3fd4a1a7c09f987ade29b2f7e5b4397fda0050cf0f70c4d1bc32528691e",
+            "bytes": 2825
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
