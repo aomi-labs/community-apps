@@ -1,4 +1,6 @@
 import json, pathlib, subprocess, sys, unittest
+import tempfile
+from unittest.mock import patch
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 import build_candidate as bc
 
