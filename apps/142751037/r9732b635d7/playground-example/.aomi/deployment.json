@@ -1,8 +1,8 @@
 {
   "id": "dep_142751037_r9732b635d7_53e3b00afb6b",
   "status": "",
-  "sdk_version": "3.0.1",
-  "deployed_at": 1783093428,
+  "sdk_version": "3.0.4",
+  "deployed_at": 1785511524,
   "source": {
     "installation_id": 142751037,
     "repository_id": 1284174783,
@@ -30,7 +30,7 @@
         "path": "apps/142751037/r9732b635d7/playground-example",
         "aomi_toml_path": "aomi.toml",
         "release_tag": "apps-142751037-r9732b635d7-playground-example-53e3b00afb6b",
-        "sdk_version": "3.0.1",
+        "sdk_version": "3.0.4",
         "target": "x86_64-unknown-linux-gnu",
         "files": [
           {
