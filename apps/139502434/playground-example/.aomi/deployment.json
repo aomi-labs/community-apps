@@ -4,8 +4,8 @@
   "source": {
     "installation_id": 139502434,
     "repository_id": 1265392924,
-    "repository_link": "phoebe-aomi/my-playground-2",
-    "owner_repo_name": "phoebe-aomi/my-playground-2",
+    "repository_link": "phoebe-aomi/my-playground-3",
+    "owner_repo_name": "phoebe-aomi/my-playground-3",
     "ref": {
       "kind": "branch",
       "value": "main"
@@ -19,7 +19,7 @@
     "platform": "community",
     "repository": "aomi-labs/community-apps",
     "deploy_branch": "publish",
-    "source_branch": "phoebe-aomi/my-playground-2/139502434/00cc85f3d33e",
+    "source_branch": "phoebe-aomi/my-playground-3/139502434/00cc85f3d33e",
     "commit_hash": null,
     "pr_number": null,
     "pr_url": null,
