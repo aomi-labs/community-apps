@@ -24,7 +24,7 @@ use crate::tool::{require_svm_wallet, summarize_quote};
 #[derive(Debug, Clone, Deserialize, JsonSchema)]
 pub(crate) struct StageSolBuyArgs {
     /// Dollars of USDC to spend on SOL. Must be inside the per-action envelope
-    /// (at most 50). This app only ever buys SOL with USDC.
+    /// (at most 20). This app only ever buys SOL with USDC.
     pub usdc_amount: f64,
 }
 

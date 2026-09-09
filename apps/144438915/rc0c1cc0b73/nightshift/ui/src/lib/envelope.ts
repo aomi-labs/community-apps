@@ -41,8 +41,8 @@ export type SigningPolicy = {
 export const DEFAULT_ENVELOPE: Envelope = {
   namespaces: ["svm-reads", "svm-tx-quote", "svm-tx-stage"],
   allowedTokens: [USDC, SOL],
-  maxPerActionUsd: 50,
-  maxDailyUsd: 150,
+  maxPerActionUsd: 20,
+  maxDailyUsd: 60,
   allowedVenues: ["Jupiter aggregator"],
   maxSlippageBps: 50,
 };

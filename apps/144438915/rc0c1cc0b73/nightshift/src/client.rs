@@ -23,7 +23,7 @@ pub const USDC_DECIMALS: u32 = 6;
 
 /// Hard ceiling on the value of any single action, in USDC. The agent was
 /// built to buy at most this much SOL per action and cannot exceed it.
-pub const MAX_PER_ACTION_USDC: f64 = 50.0;
+pub const MAX_PER_ACTION_USDC: f64 = 20.0;
 /// Slippage the app will accept, in basis points.
 pub const MAX_SLIPPAGE_BPS: u32 = 50;
 /// The only venue the app routes through.
