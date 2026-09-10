@@ -1,0 +1,4 @@
+[app]
+name = "hoodit"
+display_name = "Hoodit"
+public = true
