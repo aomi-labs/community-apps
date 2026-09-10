@@ -30,23 +30,34 @@ on:
       - "apps/**"
       - ".github/scripts/build_candidate_legacy.py"
       - ".github/workflows/build-candidate.yml"
+  # Recovery lever for candidates pushed while this workflow was absent. A
+  # redeploy of an unchanged source commit produces no new commit, so nothing
+  # re-triggers the push path for a deployment already stuck at `releasing`.
+  # Dispatch this from `publish` with the candidate branch name.
+  workflow_dispatch:
+    inputs:
+      candidate_branch:
+        description: Candidate branch to build, e.g. owner/repo/<installation-id>/<short-commit>
+        required: true
+        type: string
 
 permissions:
   contents: write
 
 concurrency:
-  group: candidate-release-${{ github.ref }}
+  group: candidate-release-${{ inputs.candidate_branch || github.ref }}
   cancel-in-progress: false
 
 jobs:
   build:
     name: Build candidate release
-    if: github.actor == 'aomi-build[bot]'
+    if: github.event_name == 'workflow_dispatch' || github.actor == 'aomi-build[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0
+          ref: ${{ inputs.candidate_branch || github.ref }}
 
       - name: Fetch publish baseline
         run: git fetch origin publish:refs/remotes/origin/publish
@@ -54,11 +65,12 @@ jobs:
       - name: Detect candidate apps
         id: detect
         env:
-          HEAD_SHA: ${{ github.sha }}
+          CANDIDATE_BRANCH: ${{ inputs.candidate_branch || github.ref_name }}
         run: |
           python3 .github/scripts/build_candidate_legacy.py detect \
             --base origin/publish \
-            --head "$HEAD_SHA" \
+            --head HEAD \
+            --branch "$CANDIDATE_BRANCH" \
             --github-output "$GITHUB_OUTPUT"
 
       - name: Install Rust
@@ -77,10 +89,11 @@ jobs:
         if: steps.detect.outputs.apps != '[]'
         env:
           GH_TOKEN: ${{ github.token }}
-          HEAD_SHA: ${{ github.sha }}
+          CANDIDATE_BRANCH: ${{ inputs.candidate_branch || github.ref_name }}
         run: |
           python3 .github/scripts/build_candidate_legacy.py release \
             --base origin/publish \
-            --head "$HEAD_SHA" \
+            --head HEAD \
+            --branch "$CANDIDATE_BRANCH" \
             --target x86_64-unknown-linux-gnu \
             --dist-dir dist

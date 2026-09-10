@@ -129,8 +129,11 @@ def relpath(path: pathlib.Path) -> str:
     return path.relative_to(REPO_ROOT).as_posix()
 
 
-def branch_context() -> dict[str, str]:
-    branch = current_branch()
+def branch_context(branch: str | None = None) -> dict[str, str]:
+    # `branch` is the manual-recovery override: a workflow_dispatch runs from
+    # `publish`, so GITHUB_REF_NAME names the wrong branch and the candidate
+    # has to be passed in explicitly.
+    branch = (branch or "").strip() or current_branch()
     match = BRANCH_RE.match(branch)
     if not match:
         fail(
@@ -644,8 +647,9 @@ def verify_tarball(tarball: pathlib.Path, expected_manifest: dict[str, Any]) -> 
                 fail(f"tarball plugin checksum mismatch for {name}")
 
 
-def publish_release(bundle: dict[str, str]) -> None:
+def publish_release(bundle: dict[str, str], target_commit: str | None = None) -> None:
     release_tag = bundle["release_tag"]
+    target_commit = target_commit or current_commit()
     if not os.environ.get("GH_TOKEN"):
         fail("GH_TOKEN is required to publish candidate releases")
     assets = [bundle["tarball"], bundle["manifest"], bundle["metadata"]]
@@ -666,7 +670,7 @@ def publish_release(bundle: dict[str, str]) -> None:
                 "create",
                 release_tag,
                 "--target",
-                current_commit(),
+                target_commit,
                 "--title",
                 release_tag,
                 "--notes-file",
@@ -678,7 +682,7 @@ def publish_release(bundle: dict[str, str]) -> None:
 
 
 def command_detect(args: argparse.Namespace) -> None:
-    branch_context()
+    branch_context(args.branch)
     dirs = changed_app_dirs(args.base, args.head)
     value = json.dumps(dirs)
     print(value)
@@ -688,7 +692,7 @@ def command_detect(args: argparse.Namespace) -> None:
 
 
 def command_release(args: argparse.Namespace) -> None:
-    ctx = branch_context()
+    ctx = branch_context(args.branch)
     dirs = changed_app_dirs(args.base, args.head)
     if not dirs:
         print("No candidate app directories changed.")
@@ -699,7 +703,7 @@ def command_release(args: argparse.Namespace) -> None:
     dist_root.mkdir(parents=True)
     for app_dir in dirs:
         bundle = build_release(REPO_ROOT / app_dir, ctx, args.target, dist_root)
-        publish_release(bundle)
+        publish_release(bundle, git(["rev-parse", "HEAD"]))
         print(f"published {bundle['release_tag']}")
 
 
@@ -711,6 +715,7 @@ def main() -> None:
     detect.add_argument("--base", required=True)
     detect.add_argument("--head", default="HEAD")
     detect.add_argument("--github-output")
+    detect.add_argument("--branch", default="")
     detect.set_defaults(func=command_detect)
 
     release = subparsers.add_parser("release")
@@ -718,6 +723,7 @@ def main() -> None:
     release.add_argument("--head", default="HEAD")
     release.add_argument("--target", default="x86_64-unknown-linux-gnu")
     release.add_argument("--dist-dir", default="dist")
+    release.add_argument("--branch", default="")
     release.set_defaults(func=command_release)
 
     args = parser.parse_args()
