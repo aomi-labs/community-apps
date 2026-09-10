@@ -1,0 +1,167 @@
+{
+  "id": "dep_141232970_r7b97ce1826_3139c9223dac",
+  "status": "",
+  "sdk_version": "5.0.0",
+  "deployed_at": 1789041137,
+  "source": {
+    "project_id": 1663,
+    "installation_id": 141232970,
+    "repository_id": 1347024739,
+    "repository_link": "aomi-labs/liqsteward",
+    "ref": "3139c9223dac7375c90c04dd979def82e8813962",
+    "commit_hash": "3139c9223dac7375c90c04dd979def82e8813962",
+    "applications": [
+      "aomi-app/liqsteward/aomi.toml",
+      "aomi-app/nav-oracle/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "aomi-labs/liqsteward/141232970/3139c9223dac",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "liqsteward",
+        "path": "apps/141232970/r7b97ce1826/liqsteward",
+        "aomi_toml_path": "aomi-app/liqsteward/aomi.toml",
+        "release_tag": "apps-141232970-r7b97ce1826-liqsteward-3139c9223dac",
+        "sdk_version": "5.0.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "LiqSteward",
+        "is_public": true,
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:3259233e806c5bb629cee1d16d9790ea79fd21d3951eaff9b5e5324a05c231ec",
+            "bytes": 448
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:8f47f25f92421eed443987f4e7510d5927dca6a7cce52b5da1e65c85e21c4c47",
+            "bytes": 68
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:c78589bfcaee2b8e9568ab264be3969872b27c3e1f6b39d20f2568f7ed4b7e81",
+            "bytes": 6864
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:186cda768338682cdf515348c7e53ff1c9978854c5de9249fd76f49a83db8a0b",
+            "bytes": 5932
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:032c812ee59e7c8ca31dfc145756d8ea995ddc186e39fbf4ed79ddcf6bdbe63b",
+            "bytes": 73548
+          }
+        ],
+        "secret_slots": []
+      },
+      {
+        "name": "nav-oracle",
+        "path": "apps/141232970/r7b97ce1826/nav-oracle",
+        "aomi_toml_path": "aomi-app/nav-oracle/aomi.toml",
+        "release_tag": "apps-141232970-r7b97ce1826-nav-oracle-3139c9223dac",
+        "sdk_version": "5.0.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "NAV Oracle",
+        "is_public": true,
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:ed986aac4ff409ef8a5d7d0e49c029f7efd3723e3e52fa2ed6b5819e945be745",
+            "bytes": 435
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:0981bf009ce38dff5d44534f2fb1cc387a0266768ad8a0d73120432df28b2cb9",
+            "bytes": 68
+          },
+          {
+            "path": "src/adapters/erc20.rs",
+            "sha256": "sha256:f815a943fb94a0c22733ca2e3b0c28cb0a6c221d223c6f7cb538dd6069781009",
+            "bytes": 2032
+          },
+          {
+            "path": "src/adapters/erc4626.rs",
+            "sha256": "sha256:92e06b3ed04cef7bf225492f0771d744f677582048a478b2da0a19f595ba2cfc",
+            "bytes": 3855
+          },
+          {
+            "path": "src/adapters/metamorpho.rs",
+            "sha256": "sha256:026fa8e1d5d516835cb192110d1c7c3f9b7bedd81d83aa413610736caebbe92a",
+            "bytes": 5598
+          },
+          {
+            "path": "src/adapters/mod.rs",
+            "sha256": "sha256:24a0b351574b651bc48ff2f85dc4bb0410e68c0857ab60e4eda29f4b645746af",
+            "bytes": 5132
+          },
+          {
+            "path": "src/adapters/morpho_market.rs",
+            "sha256": "sha256:a2058dfd7382443fe3ced5b4c63f347480adaa2bc234c880d5f8458bef9f7fda",
+            "bytes": 5320
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:847c91742023e74a6d3e4369aa028ea8a90fba1fea1d0a6b5b930b4392870e5b",
+            "bytes": 5812
+          },
+          {
+            "path": "src/model.rs",
+            "sha256": "sha256:646043bb20f8693e1a7b5bf04e1a94ea853b25c4a2c2b9610e9024178f3a5919",
+            "bytes": 3801
+          },
+          {
+            "path": "src/server.rs",
+            "sha256": "sha256:0d49667394ba621d3f888a1c85ac220b4aa510b52647ba739a8edbf463715ed1",
+            "bytes": 4071
+          },
+          {
+            "path": "src/skill/accounting.md",
+            "sha256": "sha256:d1f6fd7f574f6d4aa54ac865ef709e005e0d05278cdbc41553dba091b9f4e52f",
+            "bytes": 2044
+          },
+          {
+            "path": "src/skill/postconditions.guard.json",
+            "sha256": "sha256:a7e774facae5d1a72bcf77991a0e7030d0f81edf7f2591ebe59c3982f6b7c230",
+            "bytes": 254
+          },
+          {
+            "path": "src/skill/postconditions.md",
+            "sha256": "sha256:25728d9d3edd5bab2b466aab1950d9d2102d64b9877f48d8db33af16a6a0645e",
+            "bytes": 1879
+          },
+          {
+            "path": "src/skill/traversal.md",
+            "sha256": "sha256:d0cec64fbfd5f2f9b3df99dbe50cc0ed04cccda77de17ae363105054bdaaa027",
+            "bytes": 2380
+          },
+          {
+            "path": "src/tools.rs",
+            "sha256": "sha256:8ef51ae125c9ac048c43d9f57f529ba162c5cabb5018c3be232380f3bb4e376f",
+            "bytes": 29964
+          },
+          {
+            "path": "tests/dylib_manifest.rs",
+            "sha256": "sha256:e11c8ce189476ab339378f342f87bcb2a5b50b44e4768c4f51c69eede43a22eb",
+            "bytes": 1259
+          },
+          {
+            "path": "tests/e2e_pinned.rs",
+            "sha256": "sha256:4a83fcbd21ed8cf3561c0f3ef68fe9c38deebf753d3678a1a13660446277eb5b",
+            "bytes": 10745
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
