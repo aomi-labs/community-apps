@@ -1,0 +1,86 @@
+# TEMPORARY production bridge -- delete once the Manager dispatcher ships to prod.
+#
+# `deploy-project.yml` replaced this push trigger, but the Manager half that
+# dispatches it (product-mono #1055) is only on `main`. Production runs
+# `prod-v3`, which has no dispatcher, so a production candidate branch lands
+# here and nothing ever builds it: the only run is the repo's own PR test
+# workflow, the Manager reads CI as passed, no release is published, and the
+# deployment pins at `releasing` until the Build UI times out.
+#
+# This restores the pre-#151 build for production candidates ONLY. The actor
+# gate is `aomi-build[bot]` (production); staging pushes as
+# `aomi-build-staging[bot]` and keeps using the dispatch path, so no candidate
+# is ever built twice.
+#
+# It runs `build_candidate_legacy.py`, a verbatim copy of the build script as
+# of 3d8f600d -- the code that last published a production release on
+# 2026-09-08. It is deliberately self-contained: `build_candidate.py` is now a
+# library for `deploy_project.py`, and its `cargo build --locked` requires a
+# `Cargo.lock` that candidate branches do not carry.
+#
+# Removal: delete this file and `.github/scripts/build_candidate_legacy.py`,
+# and drop this workflow from the actionlint list in `test-candidate.yml`.
+name: Build Candidate App Release
+
+on:
+  push:
+    branches:
+      - "*/*/*/*"
+    paths:
+      - "apps/**"
+      - ".github/scripts/build_candidate_legacy.py"
+      - ".github/workflows/build-candidate.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: candidate-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build candidate release
+    if: github.actor == 'aomi-build[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch publish baseline
+        run: git fetch origin publish:refs/remotes/origin/publish
+
+      - name: Detect candidate apps
+        id: detect
+        env:
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          python3 .github/scripts/build_candidate_legacy.py detect \
+            --base origin/publish \
+            --head "$HEAD_SHA" \
+            --github-output "$GITHUB_OUTPUT"
+
+      - name: Install Rust
+        if: steps.detect.outputs.apps != '[]'
+        uses: dtolnay/rust-toolchain@6bed0761d98439e5a578e2877258200ad565ba87 # stable
+        with:
+          toolchain: "1.91"
+          targets: x86_64-unknown-linux-gnu
+
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2
+        if: steps.detect.outputs.apps != '[]'
+        with:
+          key: candidate-${{ github.ref_name }}-x86_64-unknown-linux-gnu
+
+      - name: Build and publish candidate releases
+        if: steps.detect.outputs.apps != '[]'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          python3 .github/scripts/build_candidate_legacy.py release \
+            --base origin/publish \
+            --head "$HEAD_SHA" \
+            --target x86_64-unknown-linux-gnu \
+            --dist-dir dist
