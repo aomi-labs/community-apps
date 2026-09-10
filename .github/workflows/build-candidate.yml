@@ -62,6 +62,14 @@ jobs:
       - name: Fetch publish baseline
         run: git fetch origin publish:refs/remotes/origin/publish
 
+      # Always build with the script from `publish`, never the candidate's own
+      # copy. A candidate branch snapshots `.github/` at the moment the Manager
+      # cut it, so one cut before this workflow landed does not carry the
+      # script at all -- which is exactly the case for every deployment
+      # stranded by the gap this bridge exists to close.
+      - name: Restore trusted build script from publish
+        run: git checkout origin/publish -- .github/scripts/build_candidate_legacy.py
+
       - name: Detect candidate apps
         id: detect
         env:
