@@ -1,0 +1,73 @@
+{
+  "id": "dep_162207273_rff4cf0103f_606b3aba19f2",
+  "status": "",
+  "sdk_version": "5.1.0",
+  "deployed_at": 1789566881,
+  "source": {
+    "project_id": 1664,
+    "installation_id": 162207273,
+    "repository_id": 1371307524,
+    "repository_link": "arixoneth/hoodit-apps",
+    "ref": "606b3aba19f2ed1c6e0500e70d2660bf28b7a21a",
+    "commit_hash": "606b3aba19f2ed1c6e0500e70d2660bf28b7a21a",
+    "applications": [
+      "apps/hoodit/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "arixoneth/hoodit-apps/162207273/606b3aba19f2",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "hoodit",
+        "path": "apps/162207273/rff4cf0103f/hoodit",
+        "aomi_toml_path": "apps/hoodit/aomi.toml",
+        "release_tag": "apps-162207273-rff4cf0103f-hoodit-606b3aba19f2",
+        "sdk_version": "5.1.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Hoodit",
+        "is_public": true,
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:98c55f5a6556125cc445a6e5d245370f4ef72ce10a1e86a72f57a3936555d472",
+            "bytes": 338
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:0371bfff36ec96612b2f007ef8959eeb4e2b75472c538275fc079e89acabc945",
+            "bytes": 60
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:2b668ba0428de05ac5e61805476d3b696487be55883af0ea572eac88ce49f467",
+            "bytes": 12528
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:1cc107fe060bb5924a97d3228e8d8ffe282a6001efe045c229c6a675a5de30e9",
+            "bytes": 6337
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:db18ba8bfee3c792868e839e0fba4a61800895dfcb1032969bfa02a9f97bd3c4",
+            "bytes": 13517
+          },
+          {
+            "path": "test.json",
+            "sha256": "sha256:e0f4d64cb9e31d7606bab99a1bcb06dfff4cffe0d838eeca250797f11822cf2b",
+            "bytes": 1708
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
