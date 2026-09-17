@@ -1,0 +1,118 @@
+{
+  "id": "dep_162207273_rff4cf0103f_badb03efc5f1",
+  "status": "",
+  "sdk_version": "5.1.0",
+  "deployed_at": 1789626907,
+  "source": {
+    "project_id": 1664,
+    "installation_id": 162207273,
+    "repository_id": 1371307524,
+    "repository_link": "arixoneth/hoodit-apps",
+    "ref": "badb03efc5f171f1b8f43f0593f6600cca291d0a",
+    "commit_hash": "badb03efc5f171f1b8f43f0593f6600cca291d0a",
+    "applications": [
+      "apps/hoodit/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "arixoneth/hoodit-apps/162207273/badb03efc5f1",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "hoodit",
+        "path": "apps/162207273/rff4cf0103f/hoodit",
+        "aomi_toml_path": "apps/hoodit/aomi.toml",
+        "release_tag": "apps-162207273-rff4cf0103f-hoodit-badb03efc5f1",
+        "sdk_version": "5.1.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Hoodit",
+        "is_public": true,
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:9439e3f31cb5efc657d275023500fbb29ba2251736442382b54f50b8b19c91ef",
+            "bytes": 568
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:0371bfff36ec96612b2f007ef8959eeb4e2b75472c538275fc079e89acabc945",
+            "bytes": 60
+          },
+          {
+            "path": "src/amount.rs",
+            "sha256": "sha256:6600cea71d12690b9682f79804c6d0cd424635bd18048e45801c01ce22a8187d",
+            "bytes": 3438
+          },
+          {
+            "path": "src/app.rs",
+            "sha256": "sha256:7ad8d0adc659cf7fb5ed935808ee86dbccd9cc8bae32872912d88cb6a60dcc64",
+            "bytes": 8552
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:a71c3a88c8450d1ef9e1150cfbc5a85d327620c794c2954dcce778985bf1d9c4",
+            "bytes": 2264
+          },
+          {
+            "path": "src/model.rs",
+            "sha256": "sha256:00135c87fe0b7870dfa3f2517b83f5a6d480f94c83fca3b58d47da38587dccda",
+            "bytes": 3720
+          },
+          {
+            "path": "src/preamble.md",
+            "sha256": "sha256:056d115128a4e794f9e87dafd6ee23421c47bdfd7136c7a9d6195e26804a9556",
+            "bytes": 1306
+          },
+          {
+            "path": "src/providers.rs",
+            "sha256": "sha256:577ffe15caee7233bebe4c0792c04125ca1f76787205aaa1bdcf106891964674",
+            "bytes": 35646
+          },
+          {
+            "path": "src/skills/markets.md",
+            "sha256": "sha256:f93bac645738be70447ef12c1d6079d9da2473298e99cfb77998e08a13856409",
+            "bytes": 313
+          },
+          {
+            "path": "src/skills/portfolio.md",
+            "sha256": "sha256:c556bd85bf382f80a38f4c057153d141642c5ecb19a279aaa963744d95590024",
+            "bytes": 362
+          },
+          {
+            "path": "src/tools.rs",
+            "sha256": "sha256:4c11e5df01ff6c1323d6ed23141fdd88c21b25a2560f3d0de513bcb4850faef3",
+            "bytes": 29392
+          },
+          {
+            "path": "src/tools/portfolio.rs",
+            "sha256": "sha256:228cd032c3f37fdc022f82a96bcdfd5af14c3b060ee0d4271b8324e0baeca8d5",
+            "bytes": 23784
+          },
+          {
+            "path": "test.json",
+            "sha256": "sha256:1b3a7e55d090a2b779280d110e125b03d1ca9f266ff6fa6e818b186b242f826c",
+            "bytes": 1417
+          },
+          {
+            "path": "tests/contracts.rs",
+            "sha256": "sha256:a0110902e4ebd6a8956277b64148557e1c94259738923bbc45e18d6f6912c364",
+            "bytes": 17338
+          },
+          {
+            "path": "tests/live_read_smoke.rs",
+            "sha256": "sha256:9cbda41d518202a931adf8935e70f605362f87c860d186a75612376ef1148d0f",
+            "bytes": 5243
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
