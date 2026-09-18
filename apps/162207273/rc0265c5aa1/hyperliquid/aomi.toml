@@ -1,0 +1,4 @@
+[app]
+name = "hyperliquid"
+display_name = "Hyperliquid"
+public = false
