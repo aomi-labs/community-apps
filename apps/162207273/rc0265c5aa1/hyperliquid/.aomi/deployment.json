@@ -1,0 +1,488 @@
+{
+  "id": "dep_162207273_rc0265c5aa1_5a11183bcb31",
+  "status": "",
+  "sdk_version": "5.1.0",
+  "deployed_at": 1789734349,
+  "source": {
+    "project_id": 1665,
+    "installation_id": 162207273,
+    "repository_id": 1375668172,
+    "repository_link": "arixoneth/hyperliquid-app",
+    "ref": "5a11183bcb31c32d14d1aa9921211220abe01d01",
+    "commit_hash": "5a11183bcb31c32d14d1aa9921211220abe01d01",
+    "applications": [
+      "apps/hyperliquid/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "arixoneth/hyperliquid-app/162207273/5a11183bcb31",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "hyperliquid",
+        "path": "apps/162207273/rc0265c5aa1/hyperliquid",
+        "aomi_toml_path": "apps/hyperliquid/aomi.toml",
+        "release_tag": "apps-162207273-rc0265c5aa1-hyperliquid-5a11183bcb31",
+        "sdk_version": "5.1.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Hyperliquid",
+        "is_public": true,
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:a78d51169df68e75a4a7af216369b4ebfbd96563b4594bf707834d04098370a7",
+            "bytes": 682
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:ce03dcd60e17e1958c6022a00942582f101433acc34807ad177866fdbec94f1b",
+            "bytes": 619
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:1e90a34669c15830d55151da72a6b267a4aa3cdb6d4f09fd9dace4cf5cac0344",
+            "bytes": 70
+          },
+          {
+            "path": "examples/testnet.rs",
+            "sha256": "sha256:e1b6c685b4e028e18a819b88b175758858dd9c75ed5e04092cb0cd37ec3939e2",
+            "bytes": 16484
+          },
+          {
+            "path": "src/client/hypersdk.rs",
+            "sha256": "sha256:768edbcb19fd02ecf9e434e9508f01a90ba6f6f652bf50f2e103df65d4ca6bfe",
+            "bytes": 2785
+          },
+          {
+            "path": "src/client/mod.rs",
+            "sha256": "sha256:5438a2aa88130fc5dc0e5284a13e9fc2c9934dfb3ecd3fe80c6ede10e2e48eee",
+            "bytes": 1120
+          },
+          {
+            "path": "src/domain/account.rs",
+            "sha256": "sha256:5fca68bfa9347dedd001c517ab4ad28b324f346577b507111b49e399a53e71f9",
+            "bytes": 1425
+          },
+          {
+            "path": "src/domain/funding.rs",
+            "sha256": "sha256:2e7244b8cc82e25e3be007ba72b338b7a18d633a08ab66ebc21c429be574f645",
+            "bytes": 27611
+          },
+          {
+            "path": "src/domain/market.rs",
+            "sha256": "sha256:0b95e9017c533d9835b93666623adca66adf7284446889cf54739a112d35768a",
+            "bytes": 8417
+          },
+          {
+            "path": "src/domain/mod.rs",
+            "sha256": "sha256:78ca9b82123c7e6e4a8f4e6bcb78df07869420d5a17d0965afb6b403ff19d12f",
+            "bytes": 82
+          },
+          {
+            "path": "src/domain/order.rs",
+            "sha256": "sha256:ebdcb8b3368fa464a3c8c72e8aa728e4480d5d8f921d415a2f3d08090e5ca56f",
+            "bytes": 10104
+          },
+          {
+            "path": "src/domain/signing.rs",
+            "sha256": "sha256:905443f4e3af4a0eedd87cbe2ccdd1e5efed6779615cc6fcba3b50c921aa81c2",
+            "bytes": 16156
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:1cd4ba6772f93be3941d79fc1896a50d398cae16d0c35c117f5c7853258f8586",
+            "bytes": 1986
+          },
+          {
+            "path": "src/preamble.md",
+            "sha256": "sha256:c3dae27261fb65ba165cc4d7a9b2c085539de93b491b4d47959b8f74437ea260",
+            "bytes": 516
+          },
+          {
+            "path": "src/skills/hip3.md",
+            "sha256": "sha256:874f3cc3fba5cefce4727e5d4d1b8816cd77a0c5870cbbaffcf0fd49f707d4d3",
+            "bytes": 508
+          },
+          {
+            "path": "src/skills/order-strategies.md",
+            "sha256": "sha256:df3d110feb3a132b3af665eabee6f1d7c57a89894ad717d6a8e5d47188cdc8ec",
+            "bytes": 736
+          },
+          {
+            "path": "src/skills/portfolio/instructions.md",
+            "sha256": "sha256:81a9c9632c2993ffd8bc41aef7ff6cc346e934f725c1b0930814244c2da40af3",
+            "bytes": 552
+          },
+          {
+            "path": "src/skills/portfolio/safety.md",
+            "sha256": "sha256:9bc90bd122e16d1e770d24287c8dbcb456c7672adb2e828a60148c356ebb87c5",
+            "bytes": 489
+          },
+          {
+            "path": "src/skills/portfolio/workflows.md",
+            "sha256": "sha256:4a512f7e1cc52ee7778b215c49f4ac485844265f82df4488914270c9a8b143d9",
+            "bytes": 669
+          },
+          {
+            "path": "src/skills/risk.md",
+            "sha256": "sha256:0248370f081d74c54c6fd6adc17d88fea3be88930b6cacc0cfe81b4cff652745",
+            "bytes": 667
+          },
+          {
+            "path": "src/skills/rwa.md",
+            "sha256": "sha256:b7e64f5b1e40fb9f3ed71de56fd53e8d891458aee22ba00e268e9a24442eaf6d",
+            "bytes": 522
+          },
+          {
+            "path": "src/skills/trading/execution.md",
+            "sha256": "sha256:e9672154d9a20a303d83e29d77224f265800df2538ae69462d6a244bb5769b72",
+            "bytes": 731
+          },
+          {
+            "path": "src/skills/trading/instructions.md",
+            "sha256": "sha256:bf9f78163522acdd509a5cdd442892727122d0b4217c3cef378818e7ff63b15a",
+            "bytes": 536
+          },
+          {
+            "path": "src/skills/trading/safety.md",
+            "sha256": "sha256:6fb3fe13c889f8ddcbaa935f80b56f83cc1ebfd00c363b59544a38ad16582bfb",
+            "bytes": 551
+          },
+          {
+            "path": "src/tools/continuation/complete_funding.rs",
+            "sha256": "sha256:fd188040eadcd4d57cdf76a1258aac6b17aa64ffec7df8907f94cdfa1f7eb0b0",
+            "bytes": 13141
+          },
+          {
+            "path": "src/tools/continuation/mod.rs",
+            "sha256": "sha256:743a18cf4aaa40ddf6190e55047a5dd8de8f51734e4cb158db1381e4c52ab10f",
+            "bytes": 151
+          },
+          {
+            "path": "src/tools/continuation/submit_action.rs",
+            "sha256": "sha256:13ff096e719da43d611dfea39ade08c3e93227853edf76ecf4e8ddcc47205755",
+            "bytes": 18481
+          },
+          {
+            "path": "src/tools/mod.rs",
+            "sha256": "sha256:35200d99cff881405a89758340cd54f04464463241da0a42168bc63601858883",
+            "bytes": 685
+          },
+          {
+            "path": "src/tools/portfolio/account_view.rs",
+            "sha256": "sha256:99884fcc89a99be184f2ae2a4544edc36ab9ed49f955897ba7404eb2337283fe",
+            "bytes": 5727
+          },
+          {
+            "path": "src/tools/portfolio/activity.rs",
+            "sha256": "sha256:036ec9ddff8d965f770ce10fe7c7d802310034c315e000853751f0c8346ebefc",
+            "bytes": 4163
+          },
+          {
+            "path": "src/tools/portfolio/deposit.rs",
+            "sha256": "sha256:108fd1d9ed3364d29c9294e27dbd7a60e98981eaaf16ceb4921bd1f310d802b7",
+            "bytes": 6987
+          },
+          {
+            "path": "src/tools/portfolio/mod.rs",
+            "sha256": "sha256:39fe13a6d648d1de47830609062767b89df763353df326a271e287d5f9cf4519",
+            "bytes": 264
+          },
+          {
+            "path": "src/tools/portfolio/transfer.rs",
+            "sha256": "sha256:5917db6755213665144c2eda6b2bcf449b29db703dd9508cde2d0f98346b4077",
+            "bytes": 8210
+          },
+          {
+            "path": "src/tools/portfolio/withdraw.rs",
+            "sha256": "sha256:ad0b709919944c420483a5928ea9cb678c59c1352c069912ec5eeb971d84c77a",
+            "bytes": 4129
+          },
+          {
+            "path": "src/tools/trading/cancel.rs",
+            "sha256": "sha256:d1b82bd58318e1829e424b9566f399289672877e18ee8777ba772289290a1346",
+            "bytes": 9238
+          },
+          {
+            "path": "src/tools/trading/candles.rs",
+            "sha256": "sha256:1052acb8ba65f07fa0a7bde5d8d60131948a40385bef085ebf6b2836189f2ee8",
+            "bytes": 2447
+          },
+          {
+            "path": "src/tools/trading/close.rs",
+            "sha256": "sha256:2d5766682177e23fa2cf6373d64ada8b6410b9cd464c7f6888aaafc014c9b95c",
+            "bytes": 3850
+          },
+          {
+            "path": "src/tools/trading/funding.rs",
+            "sha256": "sha256:c941df5f8bd41130783921f79d6b9529793e7f772aaa59de275eec2d8c46e66d",
+            "bytes": 2279
+          },
+          {
+            "path": "src/tools/trading/markets.rs",
+            "sha256": "sha256:048ceee8c8db62b6a4e5f82c72a7937800f08e2c4281c9d63e66e051ef89c4e6",
+            "bytes": 1833
+          },
+          {
+            "path": "src/tools/trading/mod.rs",
+            "sha256": "sha256:3c5fef81bfcbb2da62f2d84e63101a8ec78fe2c2d7ebca5ef330177794715c7c",
+            "bytes": 550
+          },
+          {
+            "path": "src/tools/trading/modify.rs",
+            "sha256": "sha256:648d36dd342e32b15755efeaa80149737c80d51dc542c1cd341622cedc3ec7c4",
+            "bytes": 6242
+          },
+          {
+            "path": "src/tools/trading/orderbook.rs",
+            "sha256": "sha256:4e416fe6182b296bfde6d59c847de3d8153a6858891cea323064daad6ac5048a",
+            "bytes": 2009
+          },
+          {
+            "path": "src/tools/trading/orders.rs",
+            "sha256": "sha256:452b745c5180243af33a2fcf5c66375480f62367f1035dfaa3b158036c62a624",
+            "bytes": 3767
+          },
+          {
+            "path": "src/tools/trading/prepare_order.rs",
+            "sha256": "sha256:83a67d23dc865d9321475a39843fe1df32048c600d1fe56b0eb8b5ebc0aa7999",
+            "bytes": 20533
+          },
+          {
+            "path": "src/tools/trading/risk.rs",
+            "sha256": "sha256:fbc2ec2cf9c2f552ec7ae24121e5386bff91ddbac34669184fb5748b0440f79f",
+            "bytes": 6519
+          },
+          {
+            "path": "src/tools/trading/snapshot.rs",
+            "sha256": "sha256:3ecf85d51668459b40d824e43f8a026b06c8c2a43f4b66330469bbe1ddc6ec15",
+            "bytes": 1491
+          },
+          {
+            "path": "src/tools/trading/twap.rs",
+            "sha256": "sha256:b03ed56364dae058ebf84fd100e5669ef76f2dd83e9ab07e44b0cb5dfba20ea6",
+            "bytes": 3791
+          },
+          {
+            "path": "tests/funding.rs",
+            "sha256": "sha256:e13585f23298d08030752acc8d2cbb4fcc0aacd839e9edaf8cf1fa4cdf398d5c",
+            "bytes": 13355
+          },
+          {
+            "path": "tests/live_readonly.rs",
+            "sha256": "sha256:dfcb57873c97b6bd558e7607887df490c46baec90264d9abf0a4a86907050ea6",
+            "bytes": 5515
+          },
+          {
+            "path": "tests/market_resolution.rs",
+            "sha256": "sha256:81f338a8249633195c3870b5e35bd3241a592a883b8c4637d96d934facdf50f5",
+            "bytes": 3473
+          },
+          {
+            "path": "tests/read_tools.rs",
+            "sha256": "sha256:1d0122ad828a8e7ed9f3207144ddbffe8e39dd7c77acadbd4067f20097754a66",
+            "bytes": 5819
+          },
+          {
+            "path": "tests/signing_vectors.rs",
+            "sha256": "sha256:12f1c61f4b32a3bba0ed61423df11b60eff2ce73b60613700d9f3915e42eef66",
+            "bytes": 10583
+          },
+          {
+            "path": "tests/tool_contracts.rs",
+            "sha256": "sha256:9b26802a361e8b901a37421668a798694f21b0380ed82e761a08c7ee096939cc",
+            "bytes": 5396
+          },
+          {
+            "path": "tests/trading_writes.rs",
+            "sha256": "sha256:52f7d0cf0d44648777203adf21a125506619f9ad5c989685c2c3deae6464615c",
+            "bytes": 19523
+          },
+          {
+            "path": "vendor/hypersdk/Cargo.toml",
+            "sha256": "sha256:da2d610fea042d522832f4cf719187038701e00478e9f173221880f9d2c97765",
+            "bytes": 2087
+          },
+          {
+            "path": "vendor/hypersdk/LICENSE",
+            "sha256": "sha256:ed80414f1cc9baa2245a82b6c7fe99b4a4d619d6f2ac800e991dc7acb71d4f52",
+            "bytes": 14931
+          },
+          {
+            "path": "vendor/hypersdk/PATCHES.md",
+            "sha256": "sha256:7c8c1c9d2895e9bbe16d1b856ab603a99dae21cb40f614992b3d96700a7669b5",
+            "bytes": 1168
+          },
+          {
+            "path": "vendor/hypersdk/README.md",
+            "sha256": "sha256:c6e6094e138bc1931f6ab04003e6553ee0de7d679c3b1ca356f48194ebba305d",
+            "bytes": 14332
+          },
+          {
+            "path": "vendor/hypersdk/abi/ERC20.json",
+            "sha256": "sha256:1a7a33a10180df040ef2a7ab71748621bdaf6a819f0976bf57524ff4d1f496c6",
+            "bytes": 23314
+          },
+          {
+            "path": "vendor/hypersdk/abi/IERC4626.json",
+            "sha256": "sha256:10d3d06c62da13bf6ace0d1343a326da22b3953828bfd6cf37f3b66720c2b41f",
+            "bytes": 49559
+          },
+          {
+            "path": "vendor/hypersdk/abi/IERC777.json",
+            "sha256": "sha256:6c10da5142ab0f6ee515b598d32425f907c119f0e0f132548b5f0eb882bd4979",
+            "bytes": 25831
+          },
+          {
+            "path": "vendor/hypersdk/abi/IIrm.json",
+            "sha256": "sha256:5df68fd3ccc700f0e2c964b6c8dd40212d56d5251108de602ad7f8e992ec9ac9",
+            "bytes": 11837
+          },
+          {
+            "path": "vendor/hypersdk/abi/IMetaMorphoV1_1.json",
+            "sha256": "sha256:afa672c82b6f690be5bcac7e7fc77b1c30a618a3cd950f67febad371e223d376",
+            "bytes": 104846
+          },
+          {
+            "path": "vendor/hypersdk/abi/IMorpho.json",
+            "sha256": "sha256:c6e3a272644a3e7bc936a963c0b02126bf783de2a2912123965f6f5524ed8985",
+            "bytes": 72571
+          },
+          {
+            "path": "vendor/hypersdk/abi/INonfungiblePositionManager.json",
+            "sha256": "sha256:402bbc20d4f9538fdc1ad927cacc9f02db695caa1e96bad62f6f523475af94db",
+            "bytes": 22092
+          },
+          {
+            "path": "vendor/hypersdk/abi/INonfungibleTokenPositionDescriptor.json",
+            "sha256": "sha256:b94aac5add0b747e76d9d4bd2534417885109737eb11589fb71cfb41164ef862",
+            "bytes": 816
+          },
+          {
+            "path": "vendor/hypersdk/abi/IQuoterV2.json",
+            "sha256": "sha256:a22eed2010c75e5a3e98ef8c3eec2bdb00377a716ca7be86e8962b51a0fe3a13",
+            "bytes": 5081
+          },
+          {
+            "path": "vendor/hypersdk/abi/ISwapRouter.json",
+            "sha256": "sha256:29abb003382aa29e8130fefff87dcf1f2ed1eba55c6060d63369812da948fa77",
+            "bytes": 6136
+          },
+          {
+            "path": "vendor/hypersdk/abi/IUniswapV3Factory.json",
+            "sha256": "sha256:8b4b869fc2eb89821240f74fb741d3f559080c43ee4cbaf15197bb2a7dd969e3",
+            "bytes": 15207
+          },
+          {
+            "path": "vendor/hypersdk/abi/IUniswapV3Pool.json",
+            "sha256": "sha256:55f03b8415e0452f2e8f96fee2d9910297315b0f1b5bd346b180c74cb4e87f2b",
+            "bytes": 74182
+          },
+          {
+            "path": "vendor/hypersdk/abi/MorphoEventsLib.json",
+            "sha256": "sha256:b9045c0f1653535bc94acb4299ad67c7ed863bd0471322785ed0c94481a9adbf",
+            "bytes": 27784
+          },
+          {
+            "path": "vendor/hypersdk/abi/MorphoIOracle.json",
+            "sha256": "sha256:47a0bc7b673828d0d4c8deadb3f49ee61bffa4df92a6c5ec120ed811b459a5ca",
+            "bytes": 3438
+          },
+          {
+            "path": "vendor/hypersdk/src/hypercore/error.rs",
+            "sha256": "sha256:16b284d2e72f019798c12a2d9430888e347c05ccbd734fe007e3a7d59a3d5673",
+            "bytes": 779
+          },
+          {
+            "path": "vendor/hypersdk/src/hypercore/http.rs",
+            "sha256": "sha256:6583b05711625a17fc3f9f08f6d5b5d5177225c90ef44d8a08f404d2aebe8d72",
+            "bytes": 136042
+          },
+          {
+            "path": "vendor/hypersdk/src/hypercore/mod.rs",
+            "sha256": "sha256:a4fe40ccf958b57d63eec6c576812fb2180a91e71eda9f448b056d48ab5ff599",
+            "bytes": 74288
+          },
+          {
+            "path": "vendor/hypersdk/src/hypercore/signing.rs",
+            "sha256": "sha256:3429843fc07d02b47cf445724ea42ff04b0ff0cf2636190d0ac8aac212e3c443",
+            "bytes": 12305
+          },
+          {
+            "path": "vendor/hypersdk/src/hypercore/types/api.rs",
+            "sha256": "sha256:dcabf69f30878c597c11241131412ee85e6080554761af2f7349e47d927a4c0f",
+            "bytes": 102099
+          },
+          {
+            "path": "vendor/hypersdk/src/hypercore/types/deploy.rs",
+            "sha256": "sha256:7244723d1c949f7067f702fa18ac383f0c1b1f176a5df936aefc887e13a1ca3f",
+            "bytes": 46985
+          },
+          {
+            "path": "vendor/hypersdk/src/hypercore/types/mod.rs",
+            "sha256": "sha256:77d8e45559d8eb82af38425fefe99f37d1b110a8dc50ecaeef8bfe2fa19499f1",
+            "bytes": 217649
+          },
+          {
+            "path": "vendor/hypersdk/src/hypercore/types/solidity.rs",
+            "sha256": "sha256:71d7fec7a6d0f2e5edb6b9544b1b887f4edd40dfb112458d4cfbe3c1194ef4e8",
+            "bytes": 5073
+          },
+          {
+            "path": "vendor/hypersdk/src/hypercore/utils.rs",
+            "sha256": "sha256:4fca7dbb8b4fba2ffe4e531614e4b4c26b33c0badbab7bd3dc4e9451895aec84",
+            "bytes": 9869
+          },
+          {
+            "path": "vendor/hypersdk/src/hypercore/ws.rs",
+            "sha256": "sha256:b3870082a883fbc83d1702d6fde35807503dba282e6578e9db7dbf782b33018a",
+            "bytes": 27378
+          },
+          {
+            "path": "vendor/hypersdk/src/hyperevm/mod.rs",
+            "sha256": "sha256:5078aa7d10fd67e5ad121969927d7c5fa338ab9d29a80005821ec0a20d6feba4",
+            "bytes": 7747
+          },
+          {
+            "path": "vendor/hypersdk/src/hyperevm/morpho/contracts.rs",
+            "sha256": "sha256:33ddc6a18ee9824ac3496d731c4a2e3bf0a9a05def5d14d00a871745f74dc033",
+            "bytes": 1850
+          },
+          {
+            "path": "vendor/hypersdk/src/hyperevm/morpho/mod.rs",
+            "sha256": "sha256:28b68b987e9a570a4160af0b2d0c38c67b982759c476a783a56c6c9c1f9ee920",
+            "bytes": 16972
+          },
+          {
+            "path": "vendor/hypersdk/src/hyperevm/uniswap/contracts.rs",
+            "sha256": "sha256:680a81e564b211076c0ce85bb6c38945162d20ffcd2653df7487b220d89bf827",
+            "bytes": 657
+          },
+          {
+            "path": "vendor/hypersdk/src/hyperevm/uniswap/mod.rs",
+            "sha256": "sha256:1f55b7b6b87b25614636d6f771e771b553d352940e21842ed49bda9eb747f87f",
+            "bytes": 19187
+          },
+          {
+            "path": "vendor/hypersdk/src/hyperevm/uniswap/prjx/mod.rs",
+            "sha256": "sha256:c0e9d334ec05a956081ac6d9b423a698468fe96b9a56fc873099ff45825fb387",
+            "bytes": 2580
+          },
+          {
+            "path": "vendor/hypersdk/src/lib.rs",
+            "sha256": "sha256:dd805d44f0181ad5e38ccf8f28bdda4b1afc0d957628b9af6518772160746d4c",
+            "bytes": 8871
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
