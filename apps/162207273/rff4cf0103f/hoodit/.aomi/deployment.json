@@ -1,0 +1,183 @@
+{
+  "id": "dep_162207273_rff4cf0103f_da195d4fca33",
+  "status": "",
+  "sdk_version": "5.1.0",
+  "deployed_at": 1789719244,
+  "source": {
+    "project_id": 1664,
+    "installation_id": 162207273,
+    "repository_id": 1371307524,
+    "repository_link": "arixoneth/hoodit-apps",
+    "ref": "da195d4fca3390e00a1b47aea4f5b8f88f5a75fb",
+    "commit_hash": "da195d4fca3390e00a1b47aea4f5b8f88f5a75fb",
+    "applications": [
+      "apps/hoodit/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "arixoneth/hoodit-apps/162207273/da195d4fca33",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "hoodit",
+        "path": "apps/162207273/rff4cf0103f/hoodit",
+        "aomi_toml_path": "apps/hoodit/aomi.toml",
+        "release_tag": "apps-162207273-rff4cf0103f-hoodit-da195d4fca33",
+        "sdk_version": "5.1.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Hoodit",
+        "is_public": true,
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:53705b6f6b1491c05512b1b6cf15eda767ac88b90fab0528f4ac61a234503514",
+            "bytes": 568
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:0371bfff36ec96612b2f007ef8959eeb4e2b75472c538275fc079e89acabc945",
+            "bytes": 60
+          },
+          {
+            "path": "src/amount.rs",
+            "sha256": "sha256:6600cea71d12690b9682f79804c6d0cd424635bd18048e45801c01ce22a8187d",
+            "bytes": 3438
+          },
+          {
+            "path": "src/app.rs",
+            "sha256": "sha256:1f3c2673fce1efc3eea4e4909f9bbc4eb76229cf63b5c151139aef4ef2749e21",
+            "bytes": 8911
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:085a637d6a36f4647b0efe34da1de7b4543238e3314ff08c051e169ed284c235",
+            "bytes": 2607
+          },
+          {
+            "path": "src/model.rs",
+            "sha256": "sha256:1d9644658aa132f253a3b7d9a90bebef22a50633c7e2a5790b74f3e528971d58",
+            "bytes": 4108
+          },
+          {
+            "path": "src/preamble.md",
+            "sha256": "sha256:f912cd7c06bd68961404649e295a1cb9288fb6f988e7730004872cf12900d11c",
+            "bytes": 742
+          },
+          {
+            "path": "src/providers.rs",
+            "sha256": "sha256:7280b94d0bb7ebae407da00f4369d7948b2b908de999feb983c2ac9e39f60fd2",
+            "bytes": 41389
+          },
+          {
+            "path": "src/skills/markets.md",
+            "sha256": "sha256:8083991f83daebfbd5e46220159bca8d131c832c664619d7bae82c39315ce801",
+            "bytes": 7971
+          },
+          {
+            "path": "src/skills/portfolio.md",
+            "sha256": "sha256:27c00eb97602e59cd72d89f709e6a9982298c5f871bf98583d1d736b69989511",
+            "bytes": 6228
+          },
+          {
+            "path": "src/tools.rs",
+            "sha256": "sha256:88c3013ef5c1d9e8cc54b743efadd6958cd519d62c2ac550813b3e5cc578083f",
+            "bytes": 617
+          },
+          {
+            "path": "src/tools/markets/candles.rs",
+            "sha256": "sha256:0a7a94b8ae3f76f7f9575578b7cbec8f32194422576b883727bcf439ecd3b384",
+            "bytes": 9169
+          },
+          {
+            "path": "src/tools/markets/discovery.rs",
+            "sha256": "sha256:f450132b69a87a9342614f74df6ef618ad8b2997be27b36e73e587ad7a44357f",
+            "bytes": 34351
+          },
+          {
+            "path": "src/tools/markets/mod.rs",
+            "sha256": "sha256:569e207c34e6f0f5bb4e0ff7b4da147236b0315942e0b106163a55fa9849d42e",
+            "bytes": 500
+          },
+          {
+            "path": "src/tools/markets/normalization.rs",
+            "sha256": "sha256:01113a32beb2504c24ee6fbf32945557e508915b8e42bc48d1a5fc786e919be8",
+            "bytes": 4014
+          },
+          {
+            "path": "src/tools/markets/options.rs",
+            "sha256": "sha256:ac7be650fbc802f27e907ad5487c5f9104424a098c012110a3fae91321558f47",
+            "bytes": 2774
+          },
+          {
+            "path": "src/tools/markets/pools.rs",
+            "sha256": "sha256:061681201f12fc6b484f26378f8c2ad629d8f66ee4e2bb3d0ea1eb90e974a782",
+            "bytes": 5545
+          },
+          {
+            "path": "src/tools/markets/search.rs",
+            "sha256": "sha256:ebba13266e1ab88ac41cd30d60787a99f445c302e1ce8fca0dbd71bfa8cdab88",
+            "bytes": 5855
+          },
+          {
+            "path": "src/tools/markets/security.rs",
+            "sha256": "sha256:fbc278b6c8b371e80a7eac3da2baaabca1bb343960baa10215b75f722209e08a",
+            "bytes": 13573
+          },
+          {
+            "path": "src/tools/markets/token.rs",
+            "sha256": "sha256:d7ba243baf5bd93986eb66cbbada3417227deb2f1227e0bf9b09776cbbb17285",
+            "bytes": 11299
+          },
+          {
+            "path": "src/tools/markets/trades.rs",
+            "sha256": "sha256:0064b8d858358fa4660c9673547654fc7c7928648144494f52483cbb13097920",
+            "bytes": 8733
+          },
+          {
+            "path": "src/tools/portfolio/holding.rs",
+            "sha256": "sha256:eee81a7e53263659b597f5a85009a01e645550548986371969dda558601a9b72",
+            "bytes": 9248
+          },
+          {
+            "path": "src/tools/portfolio/inventory.rs",
+            "sha256": "sha256:f7d2416c175f2dd80e5f5219a6122ff6b0dd75cabba5a7e237091e7cf5280143",
+            "bytes": 16999
+          },
+          {
+            "path": "src/tools/portfolio/mod.rs",
+            "sha256": "sha256:6ee44268199c93c1e1074e139316bcf778eac85b2b111443440ed22ee7ab0bfd",
+            "bytes": 192
+          },
+          {
+            "path": "src/tools/portfolio/valuation.rs",
+            "sha256": "sha256:2463e067fa9b17c203034347d459a75c7ee9cdd2aaa9145270f9117d66d86063",
+            "bytes": 21960
+          },
+          {
+            "path": "test.json",
+            "sha256": "sha256:b49aa1f3a8a9dccc7f39fc24c4e831dcf7fc0c05b73e4ba407cc8f291d9e9018",
+            "bytes": 2116
+          },
+          {
+            "path": "tests/contracts.rs",
+            "sha256": "sha256:fce89b61118e57944a929f1cc9aae98ca15efe232ff44e1c08da6d9d6215f755",
+            "bytes": 24222
+          },
+          {
+            "path": "tests/live_read_smoke.rs",
+            "sha256": "sha256:1e10943f7b59e8903e8f8f6f39cea6ed1cf8dd8129133f4c634ecd08886329f5",
+            "bytes": 6971
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
