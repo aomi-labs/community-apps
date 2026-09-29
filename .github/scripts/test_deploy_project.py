@@ -99,6 +99,18 @@ class RetryAndPublication(unittest.TestCase):
         self.assertNotIn("example", result)
         self.assertNotIn("password", result)
 
+    def test_diagnostics_keep_actionable_errors_that_name_credentials(self):
+        message = "Configure AOMI_PLATFORM_TOKEN in this platform's GitHub environment before activation"
+        self.assertEqual(deploy.diagnostic(message), message)
+
+    def test_diagnostics_redact_secret_values_and_assignments(self):
+        with patch.dict(os.environ, {"AOMI_PLATFORM_TOKEN": "aomi_live_abcdef123"}):
+            result = deploy.diagnostic("rejected aomi_live_abcdef123 for activation\ntoken=hunter22\nsecret: s3cr3t-value")
+        self.assertNotIn("aomi_live_abcdef123", result)
+        self.assertIn("rejected [redacted] for activation", result)
+        self.assertNotIn("hunter22", result)
+        self.assertNotIn("s3cr3t-value", result)
+
     def test_trusted_jobs_never_execute_customer_build_outputs(self):
         workflow = (deploy.ROOT / ".github/workflows/deploy-project.yml").read_text()
         compile_job = workflow.split("  build:\n", 1)[1].split("  publish:\n", 1)[0]
