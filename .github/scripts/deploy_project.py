@@ -25,10 +25,17 @@ WORK = ROOT / ".deployment"
 TARGET = "x86_64-unknown-linux-gnu"
 
 
+SECRET_ENV = ("AOMI_PLATFORM_TOKEN", "GH_TOKEN", "GITHUB_TOKEN")
+CREDENTIAL_LINE = re.compile(r"authorization\s*:|bearer\s+\S|://[^/\s]*:[^/\s]*@|-----BEGIN|(token|secret|password|private.?key)\s*[:=]\s*\S", re.I)
+
+
 def diagnostic(message: str) -> str:
+    secrets = [value for value in (os.environ.get(name, "").strip() for name in SECRET_ENV) if len(value) >= 8]
     lines = []
     for line in message.splitlines():
-        if re.search(r"token|secret|password|authorization|private.?key|https?://|-----BEGIN", line, re.I):
+        for value in secrets:
+            line = line.replace(value, "[redacted]")
+        if CREDENTIAL_LINE.search(line):
             line = "[sensitive diagnostic line omitted]"
         line = re.sub(r"\S{81,}", "[redacted]", line)
         lines.append(line[:300])
