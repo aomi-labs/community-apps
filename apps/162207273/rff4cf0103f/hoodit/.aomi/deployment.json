@@ -1,0 +1,168 @@
+{
+  "id": "dep_162207273_rff4cf0103f_c34983e12348",
+  "status": "",
+  "sdk_version": "5.1.1",
+  "deployed_at": 1790888719,
+  "source": {
+    "project_id": 1664,
+    "installation_id": 162207273,
+    "repository_id": 1371307524,
+    "repository_link": "arixoneth/hoodit-apps",
+    "ref": "c34983e12348553e271e883b8f962cc01531637b",
+    "commit_hash": "c34983e12348553e271e883b8f962cc01531637b",
+    "applications": [
+      "apps/hoodit/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "arixoneth/hoodit-apps/162207273/c34983e12348",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "hoodit",
+        "path": "apps/162207273/rff4cf0103f/hoodit",
+        "aomi_toml_path": "apps/hoodit/aomi.toml",
+        "release_tag": "apps-162207273-rff4cf0103f-hoodit-c34983e12348",
+        "sdk_version": "5.1.1",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Hoodit",
+        "is_public": true,
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:7b7716997d513cea2b685edebaff686061e23010d31ff182f8149698a2a18ba9",
+            "bytes": 568
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:0371bfff36ec96612b2f007ef8959eeb4e2b75472c538275fc079e89acabc945",
+            "bytes": 60
+          },
+          {
+            "path": "src/amount.rs",
+            "sha256": "sha256:8796cbeccf1e07b67cc632961bcebd0dfeff70a683952c9df39f7d5c222cb955",
+            "bytes": 3115
+          },
+          {
+            "path": "src/app.rs",
+            "sha256": "sha256:4a2bed294daad1d496fc461e35790f6ec47f0bffe81368baed2ce727db8d8fd8",
+            "bytes": 9035
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:8f7d582c6be868b78bed707a0c92787286dd03bc2ec869ccb5f96a6eab21006e",
+            "bytes": 3572
+          },
+          {
+            "path": "src/model.rs",
+            "sha256": "sha256:4e7967b2c7a136c0dd33122e4564111fba2c1761cc0a5e235c07a8f469f00d09",
+            "bytes": 3933
+          },
+          {
+            "path": "src/preamble.md",
+            "sha256": "sha256:f63977086f6c66c5c5be1d0a26caf16358aa2d00a39c47164fc7a0b996df7bc1",
+            "bytes": 2178
+          },
+          {
+            "path": "src/providers.rs",
+            "sha256": "sha256:73804126c0063ddffe2d5ddfbd42aab256797d504c29cd53b218493971998519",
+            "bytes": 33345
+          },
+          {
+            "path": "src/skills/coin-scanner.md",
+            "sha256": "sha256:5077536337d100143caf0ba3445a85bc408ad9f009a78c3d896bdde364c35fab",
+            "bytes": 6723
+          },
+          {
+            "path": "src/skills/markets.md",
+            "sha256": "sha256:925245204c5697ac9ea172ad07fbe1606a8e2ae60588834b5a96779dfaa7d274",
+            "bytes": 7084
+          },
+          {
+            "path": "src/tools.rs",
+            "sha256": "sha256:01b95a8aa452da2756857480fdd46a1309d10c66c03cf446a04aacb7c9e243ee",
+            "bytes": 580
+          },
+          {
+            "path": "src/tools/markets/candles.rs",
+            "sha256": "sha256:18f8285d4a3749582838657dfe3496d4bf25d7887edb4e2ecb0a6eeeaef0fbc9",
+            "bytes": 9193
+          },
+          {
+            "path": "src/tools/markets/discovery.rs",
+            "sha256": "sha256:457b13e634de5fd167cc3788bc2ef89f85644f26224e88f69134237e017c8ea5",
+            "bytes": 45360
+          },
+          {
+            "path": "src/tools/markets/exit.rs",
+            "sha256": "sha256:9a8f3231fd3a8b63d5e4d6f4a0cd8896c58eb1615da5374fd6e60c6ec4cd9679",
+            "bytes": 16259
+          },
+          {
+            "path": "src/tools/markets/mod.rs",
+            "sha256": "sha256:5547eaad3903964fd2b4c77b5fbf954f43978b32531e91374296791b25234626",
+            "bytes": 547
+          },
+          {
+            "path": "src/tools/markets/normalization.rs",
+            "sha256": "sha256:5d2d39c07f35a04602ef9dc30b483a8054d3faf6e65cb2bfd5d2c776e988fe59",
+            "bytes": 8248
+          },
+          {
+            "path": "src/tools/markets/options.rs",
+            "sha256": "sha256:19f1bf24ca844df9bb15ace5c8f1678f57675b8d35671c3c24a6439180268278",
+            "bytes": 4095
+          },
+          {
+            "path": "src/tools/markets/pools.rs",
+            "sha256": "sha256:bb72a5ee157ce9e8328f6c3fdd2fa80ffa32dad69605dec5d80f52adad3fd2fc",
+            "bytes": 5561
+          },
+          {
+            "path": "src/tools/markets/search.rs",
+            "sha256": "sha256:9a43ed0c4493eddbc76ef0e9eb3cc34a76f46c06deadcc7653a6e38061ff53a7",
+            "bytes": 5869
+          },
+          {
+            "path": "src/tools/markets/security.rs",
+            "sha256": "sha256:fbc278b6c8b371e80a7eac3da2baaabca1bb343960baa10215b75f722209e08a",
+            "bytes": 13573
+          },
+          {
+            "path": "src/tools/markets/token.rs",
+            "sha256": "sha256:27285d637c882a9011e3b4b381abc88adbc3ccd14b614bb48624d58f0ac23853",
+            "bytes": 11953
+          },
+          {
+            "path": "src/tools/markets/trades.rs",
+            "sha256": "sha256:49c35f9f3e03ef737ca1a3378bfb6a27034e82245696dc0ad38bf1866f7b91f3",
+            "bytes": 11669
+          },
+          {
+            "path": "test.json",
+            "sha256": "sha256:89fc6ade660843869f493a9c5606f91bd7642e16f6a640bf5db95fe157d705c5",
+            "bytes": 807
+          },
+          {
+            "path": "tests/contracts.rs",
+            "sha256": "sha256:c5fc126cfa0b9eaccdfde149dc3e6839dd64d38499d9ee015cfd8b43191d69d1",
+            "bytes": 22464
+          },
+          {
+            "path": "tests/live_read_smoke.rs",
+            "sha256": "sha256:962a1653a7110b813e56fa835160de060999de49f18a03bd55162c9c76d0063b",
+            "bytes": 5935
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
