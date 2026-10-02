@@ -1,0 +1,168 @@
+{
+  "id": "dep_162207273_rff4cf0103f_c880c9d5e92d",
+  "status": "",
+  "sdk_version": "5.1.1",
+  "deployed_at": 1790947480,
+  "source": {
+    "project_id": 1664,
+    "installation_id": 162207273,
+    "repository_id": 1371307524,
+    "repository_link": "arixoneth/hoodit-apps",
+    "ref": "c880c9d5e92d0a7466fc9d4ad4980d1d35bcc0d6",
+    "commit_hash": "c880c9d5e92d0a7466fc9d4ad4980d1d35bcc0d6",
+    "applications": [
+      "apps/hoodit/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "arixoneth/hoodit-apps/162207273/c880c9d5e92d",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "hoodit",
+        "path": "apps/162207273/rff4cf0103f/hoodit",
+        "aomi_toml_path": "apps/hoodit/aomi.toml",
+        "release_tag": "apps-162207273-rff4cf0103f-hoodit-c880c9d5e92d",
+        "sdk_version": "5.1.1",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Hoodit",
+        "is_public": true,
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:f53af8e4a08c17c0f9e95947b0ed41edee83bb11ff01c2dc4247cba4faa2fe18",
+            "bytes": 568
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:0371bfff36ec96612b2f007ef8959eeb4e2b75472c538275fc079e89acabc945",
+            "bytes": 60
+          },
+          {
+            "path": "src/amount.rs",
+            "sha256": "sha256:8796cbeccf1e07b67cc632961bcebd0dfeff70a683952c9df39f7d5c222cb955",
+            "bytes": 3115
+          },
+          {
+            "path": "src/app.rs",
+            "sha256": "sha256:7820afd6a90181e8e7b7fcfefcc70a99605557902e2fcb187917b7fb27a18212",
+            "bytes": 6468
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:f2948b50fb581ab85d41bc2688b87547edd800b6a15c5c5415844b00d7559b92",
+            "bytes": 2232
+          },
+          {
+            "path": "src/market.rs",
+            "sha256": "sha256:ceeca8757620794cea700a1d830e163bb11909790e3c2177f8f22272090784ae",
+            "bytes": 10420
+          },
+          {
+            "path": "src/market/chart.rs",
+            "sha256": "sha256:75a1b77702ea948e3e22fefa398dee807ec732658d2934f3906ca0336bdcd5d2",
+            "bytes": 13699
+          },
+          {
+            "path": "src/market/swaps.rs",
+            "sha256": "sha256:dd94babc9e4efb7c0f8fc4a3e70181b63ab554d56d608399d525a233c8445fd8",
+            "bytes": 21279
+          },
+          {
+            "path": "src/model.rs",
+            "sha256": "sha256:fb73a82bf7869b4cf5d01b3c77ade526d5bc69f4883715f939a62a7385b8d08b",
+            "bytes": 5378
+          },
+          {
+            "path": "src/preamble.md",
+            "sha256": "sha256:f63977086f6c66c5c5be1d0a26caf16358aa2d00a39c47164fc7a0b996df7bc1",
+            "bytes": 2178
+          },
+          {
+            "path": "src/providers.rs",
+            "sha256": "sha256:fe0c5911a33d53180e78cab6cf2cd0a9b3ba85259477575105e02a430fcb29e0",
+            "bytes": 9039
+          },
+          {
+            "path": "src/providers/dex.rs",
+            "sha256": "sha256:53542e496ec85edc6cf79b5d1df931ac5d713599938679466df0397cb412e154",
+            "bytes": 7283
+          },
+          {
+            "path": "src/providers/gecko.rs",
+            "sha256": "sha256:6c2e1eff74794d633b640a7c293616a8de4235edc1c698e68d671d07ea4a08fa",
+            "bytes": 12088
+          },
+          {
+            "path": "src/providers/goplus.rs",
+            "sha256": "sha256:b192c9f2e465b23763ce5ae01822d9df46a6259ee9281345ba8af2cb96212a83",
+            "bytes": 6428
+          },
+          {
+            "path": "src/providers/lifi.rs",
+            "sha256": "sha256:f0edd01d429ea9b6d8214aae0f2e8c4b182985f357766582baf25c408ade62f9",
+            "bytes": 3442
+          },
+          {
+            "path": "src/providers/rpc.rs",
+            "sha256": "sha256:0c7454ff88f18af06252cb51d22b4ae84136f76ddd09ae208eb7ebb8271af507",
+            "bytes": 11817
+          },
+          {
+            "path": "src/skills/research.md",
+            "sha256": "sha256:fbe5f71e627a77a9eede340fb130f3c059778c092c61ed9cabfeede7c3014395",
+            "bytes": 7742
+          },
+          {
+            "path": "src/tools.rs",
+            "sha256": "sha256:d4e8c06edaf90e14ee0465bdaa475831f72196ebc1b19b80134f03e5faaa76b9",
+            "bytes": 1304
+          },
+          {
+            "path": "src/tools/chart.rs",
+            "sha256": "sha256:700b8af62a8fda997489f48621e56a031a5bb36035dc177a24a9d577a311f11e",
+            "bytes": 10111
+          },
+          {
+            "path": "src/tools/discover.rs",
+            "sha256": "sha256:6a8000ef8a687930ffa16614073034544f29dc3b8d0c6d18586cbea95dbd2ee8",
+            "bytes": 6734
+          },
+          {
+            "path": "src/tools/exit.rs",
+            "sha256": "sha256:c91813aadb61622171cb5bdcdda9606a0b4eefe5ec50c062804632baf51b04fd",
+            "bytes": 11916
+          },
+          {
+            "path": "src/tools/search.rs",
+            "sha256": "sha256:cef41efa04083e3ba475e16ddcc07052e07da19c87a547aad7e1beb451ab8089",
+            "bytes": 6436
+          },
+          {
+            "path": "src/tools/token.rs",
+            "sha256": "sha256:3dc0a54515cabb80a2ef8a6ecc8af62957d6182c4696878ea6b01c76a8ae3db6",
+            "bytes": 5778
+          },
+          {
+            "path": "test.json",
+            "sha256": "sha256:4fc715e2b9635a824a9d369f332dea1e3dc5454816335f01c44e9b1adc15f470",
+            "bytes": 801
+          },
+          {
+            "path": "tests/live_read_smoke.rs",
+            "sha256": "sha256:170a26d2971757ed6ea58fe8b5f68f7c9f7f3e8a268364c4bef556b89686e89f",
+            "bytes": 2552
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
