@@ -1,0 +1,65 @@
+{
+  "id": "dep_141779906_r5d6047e7e4_bf345d5e0b24",
+  "status": "",
+  "source": {
+    "installation_id": 141779906,
+    "repository_id": 1278670552,
+    "repository_link": "ceciliaz030/local-2",
+    "owner_repo_name": "ceciliaz030/local-2",
+    "ref": {
+      "kind": "commit",
+      "value": "bf345d5e0b244b51e848b0b74b7d2abab2465d72"
+    },
+    "commit_hash": "bf345d5e0b244b51e848b0b74b7d2abab2465d72",
+    "aomi_toml_paths": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "source_branch": "ceciliaz030/local-2/141779906/bf345d5e0b24",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "playground-example",
+        "path": "apps/141779906/r5d6047e7e4/playground-example",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-141779906-r5d6047e7e4-playground-example-bf345d5e0b24",
+        "target": "x86_64-unknown-linux-gnu",
+        "files": [
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:29a8546e056e0a047851c87ab1e48c7c06fdfcc71c8b5ff01fe9b9cc2e3e678d",
+            "bytes": 27
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:83414fe7ff9154729667c9832b72e210bc50698aee11b2ad3a8eb2a4832bb86b",
+            "bytes": 765
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:9843936f49e0521b5b935505c0714da7537de85933377f1738ee7c7423d946f0",
+            "bytes": 1759
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:7c9fa54a1f19d93c4f393cb6ea7d5274fe81eca2dae0da29758c20bc5cc80b49",
+            "bytes": 686
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:9486d3fd4a1a7c09f987ade29b2f7e5b4397fda0050cf0f70c4d1bc32528691e",
+            "bytes": 2825
+          }
+        ]
+      }
+    ]
+  }
+}
