@@ -1,0 +1,5 @@
+[app]
+name = "somm-agent"
+display_name = "Agentic Somm"
+public = true
+# server_tags = ["staging"]  # uncomment to pin to a staging runtime
