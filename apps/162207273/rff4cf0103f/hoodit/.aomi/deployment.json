@@ -1,0 +1,433 @@
+{
+  "id": "dep_162207273_rff4cf0103f_afcc1ca535fb",
+  "status": "",
+  "sdk_version": "5.1.1",
+  "deployed_at": 1791134269,
+  "source": {
+    "project_id": 1664,
+    "installation_id": 162207273,
+    "repository_id": 1371307524,
+    "repository_link": "arixoneth/hoodit-apps",
+    "ref": "afcc1ca535fbee3c58b9489379e487f16c923e50",
+    "commit_hash": "afcc1ca535fbee3c58b9489379e487f16c923e50",
+    "applications": [
+      "apps/hoodit/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "arixoneth/hoodit-apps/162207273/afcc1ca535fb",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "hoodit",
+        "path": "apps/162207273/rff4cf0103f/hoodit",
+        "aomi_toml_path": "apps/hoodit/aomi.toml",
+        "release_tag": "apps-162207273-rff4cf0103f-hoodit-afcc1ca535fb",
+        "sdk_version": "5.1.1",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Hoodit",
+        "is_public": true,
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:12d3eca0f8ce52fb20f8c2fb766459bfbf0eab035027488c6379a92a339f5d9c",
+            "bytes": 490
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:0371bfff36ec96612b2f007ef8959eeb4e2b75472c538275fc079e89acabc945",
+            "bytes": 60
+          },
+          {
+            "path": "examples/audit.rs",
+            "sha256": "sha256:d4a1499d0e19cd581a12ffc5ff5712ef3b26316f0417b18e755d16b79ffc94bc",
+            "bytes": 5109
+          },
+          {
+            "path": "examples/gql.rs",
+            "sha256": "sha256:212b747204bf2153ca415dbe14e98769b6f91bda0b30a0418428d996c85246b2",
+            "bytes": 1624
+          },
+          {
+            "path": "examples/live-plan.json",
+            "sha256": "sha256:dc455ef5acf9fb6bdf7f7d072dec3e456116c6ce93f37a73726e78f772481adc",
+            "bytes": 1764
+          },
+          {
+            "path": "examples/live.rs",
+            "sha256": "sha256:a2b850aff81eae0d0f0abe9eb06ac0672a1887fdaae5fd62cece8e00897bf926",
+            "bytes": 3150
+          },
+          {
+            "path": "src/domain/amount.rs",
+            "sha256": "sha256:fa78e6d430fb41ca7e846319bc228e8cf2c268e488d909d9697ab16a00f726d7",
+            "bytes": 2425
+          },
+          {
+            "path": "src/domain/boards.rs",
+            "sha256": "sha256:1ca81847ddafa7914fec6c2bbcd37a91113ad868c8d63537942042ec3f14c6ae",
+            "bytes": 17887
+          },
+          {
+            "path": "src/domain/chart.rs",
+            "sha256": "sha256:9ce09032feafb8deacabbea3cfad05dfc32b675b1b8f5a92527e24b222f81860",
+            "bytes": 12669
+          },
+          {
+            "path": "src/domain/exit.rs",
+            "sha256": "sha256:4a818dd99163e09b24eb68660d1e19f05a3ffc4616207367dcc057860afb7280",
+            "bytes": 13015
+          },
+          {
+            "path": "src/domain/find.rs",
+            "sha256": "sha256:ebd66aa6f07b954719cff3ad729a3c9290333e054e733736a1a173095afdeb5a",
+            "bytes": 4478
+          },
+          {
+            "path": "src/domain/holders.rs",
+            "sha256": "sha256:31fbbde93f411f8be8fffc4a7109ca8bf88ad816b8e14beed215350fef97d893",
+            "bytes": 10478
+          },
+          {
+            "path": "src/domain/market.rs",
+            "sha256": "sha256:787445922744598a81573c9c7d34ef7514b972884f018f9b87675c055d7e239a",
+            "bytes": 8925
+          },
+          {
+            "path": "src/domain/mod.rs",
+            "sha256": "sha256:192697f19189070523f2165ec24e8f6b94d37ff103592d35b03bfad0f511ec6b",
+            "bytes": 408
+          },
+          {
+            "path": "src/domain/pons.rs",
+            "sha256": "sha256:99bb4632426999502fc79ab090a78a665ee60b9567a31656b91b8d2e3ac714e9",
+            "bytes": 3903
+          },
+          {
+            "path": "src/domain/signals.rs",
+            "sha256": "sha256:7ad814c9f0b70b131693aa89ff69541ab8824c4a0448921d7f145911ef3114d4",
+            "bytes": 13590
+          },
+          {
+            "path": "src/domain/token.rs",
+            "sha256": "sha256:1a033adac577f29d72cbe5dc1cbf13659e74a980a77bc9e831719dbf6aa87297",
+            "bytes": 19474
+          },
+          {
+            "path": "src/domain/trades.rs",
+            "sha256": "sha256:bec0df481fd15cfb72428024d2c0f711d54a8bd91d247455ff856c0a7b8c0b1d",
+            "bytes": 8595
+          },
+          {
+            "path": "src/domain/wallet.rs",
+            "sha256": "sha256:ed834d7c9bcbe3985a3698d97f1ab05fb8dfaef1c01192f3ff846fe1015671ac",
+            "bytes": 5621
+          },
+          {
+            "path": "src/fixtures/filter-tokens.json",
+            "sha256": "sha256:971eace398a14d300cd6e2b1de2a0ade67afba41e3baa3675833f0284b305d1f",
+            "bytes": 28789
+          },
+          {
+            "path": "src/fixtures/gmgn/created_priors.json",
+            "sha256": "sha256:f6f5b8b24a91a2352a3cea1c11630860e73b933eb044bdfbef7ff13c3468bcc1",
+            "bytes": 1253
+          },
+          {
+            "path": "src/fixtures/gmgn/holders_vrax.json",
+            "sha256": "sha256:9fd028cda607111637cce018bb7ef5d5f1333be7dd559b0ad7a757bbc6eb53cf",
+            "bytes": 17522
+          },
+          {
+            "path": "src/fixtures/gmgn/holders_vrax_smart.json",
+            "sha256": "sha256:b559fbd5264036a5eff01d3a22ef1f41b287b369be031ec41c112f135d3c34f6",
+            "bytes": 12982
+          },
+          {
+            "path": "src/fixtures/gmgn/info_chfund.json",
+            "sha256": "sha256:2f8674313bdc74ee502803e594678b53f4d7375f6c39abb37b43d38fe2481306",
+            "bytes": 4701
+          },
+          {
+            "path": "src/fixtures/gmgn/info_priors.json",
+            "sha256": "sha256:5c5c52283dda78b150d29cba3e3909db738ee03a178d4e48d2f9689cbd32dbf3",
+            "bytes": 4913
+          },
+          {
+            "path": "src/fixtures/gmgn/info_vrax.json",
+            "sha256": "sha256:20846fb6d98484b2dfeccdb268fc4a1e503f0020b32196e1fc548f3307edf433",
+            "bytes": 4933
+          },
+          {
+            "path": "src/fixtures/gmgn/kline_vrax.json",
+            "sha256": "sha256:387d6a5a420100b470d4df1af6d50ee9c83ee294ae24015d33068e98a9da5418",
+            "bytes": 4379
+          },
+          {
+            "path": "src/fixtures/gmgn/kol.json",
+            "sha256": "sha256:e17f75c0c975ed14d2b89ba0379dcb16efb59e3175ae3def4066ba9d5911ff66",
+            "bytes": 34101
+          },
+          {
+            "path": "src/fixtures/gmgn/rank_1h.json",
+            "sha256": "sha256:b38be99c4311c1726dfcc5cc85f1eff039be10a596c02ed913be984a62674937",
+            "bytes": 18834
+          },
+          {
+            "path": "src/fixtures/gmgn/search.json",
+            "sha256": "sha256:1cf3c19620b3f6f31eb5d249f480315521e830b6861650b59edf04db86cf271f",
+            "bytes": 14876
+          },
+          {
+            "path": "src/fixtures/gmgn/security_chfund.json",
+            "sha256": "sha256:65630d0d264ba530465c10415a3c2aaa6455d4e9d08ed23955b24bac7521d2e7",
+            "bytes": 815
+          },
+          {
+            "path": "src/fixtures/gmgn/security_priors.json",
+            "sha256": "sha256:32af4e6e22ae3be1288582e97e8007417ea64a4201c2441dee98b62d9682d2b3",
+            "bytes": 799
+          },
+          {
+            "path": "src/fixtures/gmgn/security_vrax.json",
+            "sha256": "sha256:512d9d92c5a5de2a5f5c1aa87ed4cbb44e41647f7efce042fc9bbf666d6a2a70",
+            "bytes": 799
+          },
+          {
+            "path": "src/fixtures/gmgn/signal.json",
+            "sha256": "sha256:27d62295fb830f88ab8d7992812cccff950cbf0f3fec679cc939ac24a49c745f",
+            "bytes": 77026
+          },
+          {
+            "path": "src/fixtures/gmgn/smartmoney.json",
+            "sha256": "sha256:02f066f0a2dacb251ed7a8a1299cdc8b0193460205c795d498dfb21ce64afc30",
+            "bytes": 30833
+          },
+          {
+            "path": "src/fixtures/gmgn/traders_vrax.json",
+            "sha256": "sha256:e5d595316ae9009e25adf24ee8f38e0fd64f0a450345b64f56070e9ea416f292",
+            "bytes": 12571
+          },
+          {
+            "path": "src/fixtures/gmgn/trenches.json",
+            "sha256": "sha256:717c4aa8a93a5f29459cbb8877d1f6f4588808e7d94c23571397f5539ce16d72",
+            "bytes": 34918
+          },
+          {
+            "path": "src/fixtures/gmgn/wallet_activity.json",
+            "sha256": "sha256:782b660a9547c8e4ed3b80ae05d31fb589a5f498fe19143382d16cfc473e7093",
+            "bytes": 8983
+          },
+          {
+            "path": "src/fixtures/gmgn/wallet_stats.json",
+            "sha256": "sha256:8f9ac2b3f063b6c229ca5a076bc902837b978792426fec0906dcc9f2307519d5",
+            "bytes": 1262
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:77110e56b3688acfafcc718beeeb8281a959e1d4b446f450ae0d4e6304651440",
+            "bytes": 4948
+          },
+          {
+            "path": "src/preamble.md",
+            "sha256": "sha256:70d1259f3b710b0a12076e0e02ca094883d818be9bebbff4d4155620381b8fa1",
+            "bytes": 2678
+          },
+          {
+            "path": "src/providers/chain.rs",
+            "sha256": "sha256:fe209c1beb30dd8e5932a288b4d3448505db5a73efd9065dc463d9b780927974",
+            "bytes": 12374
+          },
+          {
+            "path": "src/providers/codex/mod.rs",
+            "sha256": "sha256:72911dc5ffdfc023753f71aad08dd078a49ebc3cff4524c684a5d9b63fa1ceeb",
+            "bytes": 9121
+          },
+          {
+            "path": "src/providers/codex/queries.rs",
+            "sha256": "sha256:20baaaeb706bd84548d0ea5685a6e45b112433c09332cd22ca7985af4d3d196c",
+            "bytes": 5155
+          },
+          {
+            "path": "src/providers/codex/types.rs",
+            "sha256": "sha256:741efd447b0db9fd0ee0c788f92186726f9c1b7dfb60af7e650032e8798bf261",
+            "bytes": 4044
+          },
+          {
+            "path": "src/providers/gmgn/mod.rs",
+            "sha256": "sha256:03916d300a51a63812e7b77a81f47508bd583af5ca51f6956ef13ca739900f02",
+            "bytes": 16344
+          },
+          {
+            "path": "src/providers/gmgn/types.rs",
+            "sha256": "sha256:d8fe29d33d4dc1035054c53da4824ca840dc1838963e7fae18e3eefb8e1313ff",
+            "bytes": 9649
+          },
+          {
+            "path": "src/providers/lifi.rs",
+            "sha256": "sha256:6449854de6d4120621c7d4030a6318f56450204475fcd64998eda144be02a943",
+            "bytes": 6493
+          },
+          {
+            "path": "src/providers/mod.rs",
+            "sha256": "sha256:eb3758954e47a07de6fff84799aa5ffdea65f266cb933dee744d08b2019e8538",
+            "bytes": 4638
+          },
+          {
+            "path": "src/runtime/cache.rs",
+            "sha256": "sha256:00d12e7c4ebf9f196d460f4beb742229d5364e1f9074cf89ab22f35d855bb231",
+            "bytes": 3441
+          },
+          {
+            "path": "src/runtime/error.rs",
+            "sha256": "sha256:240cc830b12cd50ddf516639ed6f34c3203b617b690ede857c47bb98a862d8bb",
+            "bytes": 5064
+          },
+          {
+            "path": "src/runtime/gate.rs",
+            "sha256": "sha256:9cb7e260bce013c4557f0ff641132000d25c9aff133a182927b5e2c827f1ff43",
+            "bytes": 12139
+          },
+          {
+            "path": "src/runtime/mod.rs",
+            "sha256": "sha256:b8dc1d9f8e44679866b945e64f225fedaf7dde076c7abd0f07903422c1c978c3",
+            "bytes": 12473
+          },
+          {
+            "path": "src/runtime/turn.rs",
+            "sha256": "sha256:48507ba160f758c2e4a1dceb17bd1bc6086dfef369ebd42b83697806105bfa9e",
+            "bytes": 3060
+          },
+          {
+            "path": "src/skills/research.md",
+            "sha256": "sha256:fb37954d32c28be1c72009d6fa5becb51ebd96a8acc7a6ffb0e31ea6566e9e35",
+            "bytes": 5304
+          },
+          {
+            "path": "src/skills/trade.md",
+            "sha256": "sha256:4afd91cf717b2166b10c03e129acc7a42e9b2d1aa640819769d262f6a009cf69",
+            "bytes": 2366
+          },
+          {
+            "path": "src/skills/watch.md",
+            "sha256": "sha256:6dfca88aa558ffc85cc08e565943379053da4ff113dfd3a33f19ffe23f525c12",
+            "bytes": 1955
+          },
+          {
+            "path": "src/tools/chart.rs",
+            "sha256": "sha256:a4f40af69ca5bfd62b3c7166895e7f954f8e7e56c96d88879a037b25caf5566b",
+            "bytes": 3423
+          },
+          {
+            "path": "src/tools/check.rs",
+            "sha256": "sha256:f671e32dd9ff07221ba6e9a58378ff9db8e9418ef04d216a7bfc919eacb7267a",
+            "bytes": 1364
+          },
+          {
+            "path": "src/tools/exit.rs",
+            "sha256": "sha256:f51b099c41bc9acd441e4f55a8e01beea1c43f8e532c0acebfd26ec7eb9fc5a9",
+            "bytes": 3293
+          },
+          {
+            "path": "src/tools/find.rs",
+            "sha256": "sha256:0d006525cd0a1f200694064454db751bad23b5a809506d4c943b6b8fe2852274",
+            "bytes": 2491
+          },
+          {
+            "path": "src/tools/holders.rs",
+            "sha256": "sha256:ea87ff1a6528a66b9db40c7ac454f291c591e0094a17a80020273df05e214610",
+            "bytes": 2692
+          },
+          {
+            "path": "src/tools/mod.rs",
+            "sha256": "sha256:4e92e41fb0ea47692f632e0e4be3ad6a6fc46d53f9d06b2a92c11f5dbb76ea28",
+            "bytes": 1400
+          },
+          {
+            "path": "src/tools/scan.rs",
+            "sha256": "sha256:86be6e71b17587126d2c8f5a2ccc3df912f10ee66517f2e139e34e592d2ff516",
+            "bytes": 5515
+          },
+          {
+            "path": "src/tools/signals.rs",
+            "sha256": "sha256:f0b9d645b92add36061bc4bf322ad9865160199add407aa1e2a8673115c05f81",
+            "bytes": 2017
+          },
+          {
+            "path": "src/tools/token.rs",
+            "sha256": "sha256:42e49e8c39c31abcf916b976c7e5484ef7b615cf2ef1c4a35998b4c3b7a8a518",
+            "bytes": 1665
+          },
+          {
+            "path": "src/tools/trades.rs",
+            "sha256": "sha256:2fb9e2bc7da3d276fd6d946cb23db8dcbefd270ba474605ed66913f6282ebf2d",
+            "bytes": 1986
+          },
+          {
+            "path": "src/tools/wallet.rs",
+            "sha256": "sha256:96ffdc701d5df18b5fbac69cc22cedcfeea7e6f64946f0a47a294ed345d7b8dc",
+            "bytes": 2133
+          },
+          {
+            "path": "src/view/envelope.rs",
+            "sha256": "sha256:2ecbdca29d2a71129959c3dbe06b6e9b74170d002f082a71bd7cb6ad837d99b0",
+            "bytes": 4719
+          },
+          {
+            "path": "src/view/format.rs",
+            "sha256": "sha256:5ee693312acd40e8c5de128219d57579e03116174a6827a0ac9cbbc684caaacc",
+            "bytes": 6694
+          },
+          {
+            "path": "src/view/market.rs",
+            "sha256": "sha256:d2bfe12a33334f531f488a59023c64a1b887d4dc5ac93dc07d978dcce050dcae",
+            "bytes": 6109
+          },
+          {
+            "path": "src/view/mod.rs",
+            "sha256": "sha256:9fd8a98b52a73748a869f731134d9af8fdd54d3d318dc3b8ab2b09e18736a5ba",
+            "bytes": 508
+          },
+          {
+            "path": "src/view/people.rs",
+            "sha256": "sha256:7412b39e65d48d4e9c1ec4361739151c468dfe07383fd81842403fac449cb9fc",
+            "bytes": 9039
+          },
+          {
+            "path": "src/view/token.rs",
+            "sha256": "sha256:8cb43d0a859e5da38bc107269596bc258739e7863c7daa432e030e821f7f4a69",
+            "bytes": 11609
+          },
+          {
+            "path": "test.json",
+            "sha256": "sha256:4cae648407feb669e954d7dbc608dc48a8162c5fb1f444ac2b063f4a6ffba6f5",
+            "bytes": 797
+          },
+          {
+            "path": "tests/fixtures/replay-plan.json",
+            "sha256": "sha256:8ddb3f4d30d01dfee0cbabda0d5ae21efeef295414b0c9437e7560eed56b950a",
+            "bytes": 685
+          },
+          {
+            "path": "tests/fixtures/replay.json",
+            "sha256": "sha256:ac3b8d4d2d28eb417a6c6f9f8090ce5c9afea1dbff505b7ca38f7b930895e949",
+            "bytes": 308242
+          },
+          {
+            "path": "tests/replay.rs",
+            "sha256": "sha256:ea99b82abaa39eacc9f95f5822c669f16647b6d95e949fa436ad49595f5bc034",
+            "bytes": 5085
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
