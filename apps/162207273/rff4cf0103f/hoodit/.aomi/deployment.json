@@ -1,0 +1,178 @@
+{
+  "id": "dep_162207273_rff4cf0103f_3e6b116aa821",
+  "status": "",
+  "sdk_version": "5.1.1",
+  "deployed_at": 1791101448,
+  "source": {
+    "project_id": 1664,
+    "installation_id": 162207273,
+    "repository_id": 1371307524,
+    "repository_link": "arixoneth/hoodit-apps",
+    "ref": "3e6b116aa821a1898aa6071d5c33820e4b0fe6d7",
+    "commit_hash": "3e6b116aa821a1898aa6071d5c33820e4b0fe6d7",
+    "applications": [
+      "apps/hoodit/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "arixoneth/hoodit-apps/162207273/3e6b116aa821",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "hoodit",
+        "path": "apps/162207273/rff4cf0103f/hoodit",
+        "aomi_toml_path": "apps/hoodit/aomi.toml",
+        "release_tag": "apps-162207273-rff4cf0103f-hoodit-3e6b116aa821",
+        "sdk_version": "5.1.1",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Hoodit",
+        "is_public": true,
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:278c7ab13ed718447e7d5ebbf43bf89c26b2d7716a1dc995c092abcf36a80a24",
+            "bytes": 482
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:0371bfff36ec96612b2f007ef8959eeb4e2b75472c538275fc079e89acabc945",
+            "bytes": 60
+          },
+          {
+            "path": "examples/gql.rs",
+            "sha256": "sha256:630f39a37c4e112c84e0fddd047074b5aefc94ee9c8f06487f73b519a3377855",
+            "bytes": 993
+          },
+          {
+            "path": "examples/live-plan.json",
+            "sha256": "sha256:7b8c27d81363e29c864aca8726a7803e5e451f9ee4b2add2b8dc297041935c03",
+            "bytes": 1340
+          },
+          {
+            "path": "examples/live.rs",
+            "sha256": "sha256:c283c5479c38f5662620f958fac408ca649367f234b1ed08be679010dd81cc53",
+            "bytes": 2779
+          },
+          {
+            "path": "src/amount.rs",
+            "sha256": "sha256:fa78e6d430fb41ca7e846319bc228e8cf2c268e488d909d9697ab16a00f726d7",
+            "bytes": 2425
+          },
+          {
+            "path": "src/app.rs",
+            "sha256": "sha256:25087f3703f7075486c00e0425f5fae0f2d35990bbae8546a7046b4cea9e6d2a",
+            "bytes": 8333
+          },
+          {
+            "path": "src/fixtures/filter-tokens.json",
+            "sha256": "sha256:971eace398a14d300cd6e2b1de2a0ade67afba41e3baa3675833f0284b305d1f",
+            "bytes": 28789
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:4dae9c85912e17b79e571b1b564ae9d4064e0513caa186347ed60f5b03415c69",
+            "bytes": 4046
+          },
+          {
+            "path": "src/market.rs",
+            "sha256": "sha256:89b8a3a97d130bce90285c7117c5d3fb269d726514100e331ea07d41ae691be3",
+            "bytes": 26047
+          },
+          {
+            "path": "src/preamble.md",
+            "sha256": "sha256:9d48f788ccce5ededd1b9eecbca1347392dd569f418026e1c0c720c7f768f1ab",
+            "bytes": 2070
+          },
+          {
+            "path": "src/providers.rs",
+            "sha256": "sha256:fdb766d387b61411f042128d637c2dc4bf44fc4bdebd83768a6d611590ce7c32",
+            "bytes": 18450
+          },
+          {
+            "path": "src/shape.rs",
+            "sha256": "sha256:9ef48d7631ff98f17116c50c3508f3627a55647db37cb692555f4d164b2bbc72",
+            "bytes": 10172
+          },
+          {
+            "path": "src/skills/research.md",
+            "sha256": "sha256:c20fff07bc7049a916cee61b11dafea09f0a5a24daa4d18858d6f2e19c29ca50",
+            "bytes": 5050
+          },
+          {
+            "path": "src/skills/trade.md",
+            "sha256": "sha256:a51f1c0969c5cc8e15811001ecb1d73ded8229d95191e47c9f88def9eba8488e",
+            "bytes": 2026
+          },
+          {
+            "path": "src/skills/watch.md",
+            "sha256": "sha256:0afb1efd6b1073bfeccb6587818842963bc236075603fae4cbb5f9c56bffafaa",
+            "bytes": 1729
+          },
+          {
+            "path": "src/tools.rs",
+            "sha256": "sha256:894af395b2c3d41796539882dc806be1d2234e76bf032bfd61607a0a9f46bb64",
+            "bytes": 1270
+          },
+          {
+            "path": "src/tools/chart.rs",
+            "sha256": "sha256:58ba5b29248e8340ec33ddae126bce2a5eb3a57b3f71480abb5e3cf955edf2fe",
+            "bytes": 12597
+          },
+          {
+            "path": "src/tools/check.rs",
+            "sha256": "sha256:579be40572b58209d327b454fbef68fa849e11c0919396d19d85a867aa020adc",
+            "bytes": 4232
+          },
+          {
+            "path": "src/tools/exit.rs",
+            "sha256": "sha256:94ad2068e3e33c4dc721ed723a9f366b061588a41003f6775022a740a4b54963",
+            "bytes": 12701
+          },
+          {
+            "path": "src/tools/find.rs",
+            "sha256": "sha256:098e6ae3b97dd79aef7d7299e9c33d79a93db18a340489fb9ed13d82d2174808",
+            "bytes": 4935
+          },
+          {
+            "path": "src/tools/holders.rs",
+            "sha256": "sha256:58f94b0cdee252aff1ae9c42b558547fd52fac59a183ea83a04ce3cbbf03f288",
+            "bytes": 10954
+          },
+          {
+            "path": "src/tools/scan.rs",
+            "sha256": "sha256:eece2da80d090a7c5f88946a97ad249ada9689f24e0187a62e4cef373fcb9953",
+            "bytes": 11357
+          },
+          {
+            "path": "src/tools/token.rs",
+            "sha256": "sha256:e0a9c4f91b4f59be6bdf48a06396d51251cc79f0a40b6ddb507f245dfa729544",
+            "bytes": 4887
+          },
+          {
+            "path": "src/tools/trades.rs",
+            "sha256": "sha256:c32cf33cdba34d212f9fed2a67c546f1f72334d425312bbef6b06095ca854ff3",
+            "bytes": 9046
+          },
+          {
+            "path": "src/tools/wallet.rs",
+            "sha256": "sha256:712d10e82a6c40d1131fe9d5d1d678ba1b72e004a82ef7f0f6eeab359c11f7ea",
+            "bytes": 5058
+          },
+          {
+            "path": "test.json",
+            "sha256": "sha256:4cae648407feb669e954d7dbc608dc48a8162c5fb1f444ac2b063f4a6ffba6f5",
+            "bytes": 797
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
