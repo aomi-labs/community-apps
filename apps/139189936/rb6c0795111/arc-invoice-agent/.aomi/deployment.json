@@ -1,0 +1,83 @@
+{
+  "id": "dep_139189936_rb6c0795111_dbe6670eb2cc",
+  "status": "",
+  "sdk_version": "5.1.1",
+  "deployed_at": 1791285270,
+  "source": {
+    "project_id": 1686,
+    "installation_id": 139189936,
+    "repository_id": 1398272262,
+    "repository_link": "aomi-labs/arc-canteen",
+    "ref": "dbe6670eb2cc016a875f6f35100bbf56fd9a8baa",
+    "commit_hash": "dbe6670eb2cc016a875f6f35100bbf56fd9a8baa",
+    "applications": [
+      "templates/invoice-agent/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "aomi-labs/arc-canteen/139189936/dbe6670eb2cc",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "arc-invoice-agent",
+        "path": "apps/139189936/rb6c0795111/arc-invoice-agent",
+        "aomi_toml_path": "templates/invoice-agent/aomi.toml",
+        "release_tag": "apps-139189936-rb6c0795111-arc-invoice-agent-dbe6670eb2cc",
+        "sdk_version": "5.1.1",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Arc Invoice Agent",
+        "is_public": true,
+        "files": [
+          {
+            "path": ".aomi/config.json",
+            "sha256": "sha256:ac4697be1d7032c27a48290abb93accc458658d05434ee10d3c313bf36e072c6",
+            "bytes": 79
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:de5a5528fe93c4001bd966ced0b42a7419c40821fc37c6097f689480ad64f61b",
+            "bytes": 37626
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:ec25e1d6a0abad508093c574e65f8f67a8351ea892313368fec7b6a2cd68f7d4",
+            "bytes": 348
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:bae39173338a1ef6a2f0a19c34610942f67ada4167459d69ba384d5d29825d0c",
+            "bytes": 622
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:593c26b358e9e5aba149004b3e16b854d0f7918b38010d82711a17fb40985b40",
+            "bytes": 108
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:6aeb97232ef8e249240adc4a759006c782b7533597ecb159a23ae3573872dd10",
+            "bytes": 9432
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:03a39ffdfcf275660ac86806cefbc8dcf0bc9687411bfcec176ed71eeb1d960a",
+            "bytes": 2595
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:30ce361faf3d44ca79dd6edf105bf7aa40b0ed4f6f4e82da5308945adca64d43",
+            "bytes": 5160
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}

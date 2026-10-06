@@ -1,0 +1,5 @@
+[app]
+name = "arc-invoice-agent"
+display_name = "Arc Invoice Agent"
+public = true
+server_tags = ["staging"]
