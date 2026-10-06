@@ -1,0 +1,4 @@
+[app]
+name = "arc-studio-fuzzer"
+display_name = "Arc Studio Fuzzer"
+public = true
