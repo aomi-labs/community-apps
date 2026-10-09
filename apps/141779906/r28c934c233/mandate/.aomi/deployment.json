@@ -1,0 +1,376 @@
+{
+  "id": "dep_141779906_r28c934c233_43bc3ae0be85",
+  "status": "",
+  "sdk_version": "5.1.1",
+  "deployed_at": 1791517100,
+  "source": {
+    "project_id": 1668,
+    "installation_id": 141779906,
+    "repository_id": 1410075449,
+    "repository_link": "ceciliaz030/mandate",
+    "ref": "43bc3ae0be8581442e21fd8a2714e5b2f2b5fd72",
+    "commit_hash": "43bc3ae0be8581442e21fd8a2714e5b2f2b5fd72",
+    "applications": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "ceciliaz030/mandate/141779906/43bc3ae0be85",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "mandate",
+        "path": "apps/141779906/r28c934c233/mandate",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-141779906-r28c934c233-mandate-43bc3ae0be85",
+        "sdk_version": "5.1.1",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Mandate Treasury Agent",
+        "is_public": true,
+        "bot": {
+          "show_tool_calls": false
+        },
+        "files": [
+          {
+            "path": ".aomi/config.json",
+            "sha256": "sha256:15859bbf86295110b21699346e556d9601bc030e08c26aad2ba9076dee841e6c",
+            "bytes": 87
+          },
+          {
+            "path": ".env.example",
+            "sha256": "sha256:bde57cb1b650c3938d63a26bcebe60f18a5c0917eca3ef5e6f005464816de558",
+            "bytes": 382
+          },
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:83634df454c81e009f5c874b99e644405d4a41d3c9d452dc50f0a7e6753e944e",
+            "bytes": 44
+          },
+          {
+            "path": ".gitmodules",
+            "sha256": "sha256:172e0d1d79e557e903f2d87805acade91d1186b07f54ff9992100d296e2c3117",
+            "bytes": 97
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:c3b31ea20eaf628f6d2efdf80a2c05b0a6f5b63dfc7c0f2f8288471e3f750a25",
+            "bytes": 37607
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:c42a30c1d874c01d8ef6af68342a839fbc40e252d37b7eb425c7fcc1da31944b",
+            "bytes": 388
+          },
+          {
+            "path": "LICENSE",
+            "sha256": "sha256:2fc673f34ad98f066738a7c712141c8acd9f5733becfcaa3c56a52edd356060e",
+            "bytes": 1065
+          },
+          {
+            "path": "Makefile",
+            "sha256": "sha256:0bfbeca4849299fb4fe0c5dd62eb438ac96d954573b180fb9173119a9715848a",
+            "bytes": 1023
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:11d1367ab16b9bc35e169648a998f8917745079dde3d1ede9021df9ed6c209ca",
+            "bytes": 11914
+          },
+          {
+            "path": "STUDIO.md",
+            "sha256": "sha256:3fdc4212be9e4fb99195725dfaf76e6b226fc83e59cf88209ce19237cf3254b0",
+            "bytes": 3144
+          },
+          {
+            "path": "SUBMISSION.md",
+            "sha256": "sha256:58b845c53b95fa56310275decc5bfde01e2ac7ab02e8cfcbdde17ba8b05587c8",
+            "bytes": 15325
+          },
+          {
+            "path": "abi/ERC4626Valuer.json",
+            "sha256": "sha256:3dbdd158d77ebeff74b25db43dec33536eea01349030e0ea6f9a25cf89229ad7",
+            "bytes": 809
+          },
+          {
+            "path": "abi/MandateAccount.json",
+            "sha256": "sha256:c690c1ae9a4596dccb172691155ff87de09f595a311d3dd294db34d8b383b988",
+            "bytes": 16657
+          },
+          {
+            "path": "abi/MandateFactory.json",
+            "sha256": "sha256:dd55771126bf8475b5a99e4a89b37b1693ee2821cf9acef8242961e33afd6781",
+            "bytes": 3468
+          },
+          {
+            "path": "agent/.env.example",
+            "sha256": "sha256:04c76c8ec1864b3aa6fbb6c4ab506a5b1e3f8739d26754517cf33f4a34f9aef7",
+            "bytes": 1946
+          },
+          {
+            "path": "agent/.gitignore",
+            "sha256": "sha256:9819c3d9a0c924b4d195d367df6f787f8d9f08d413b4f4a33b4327de3ecfd460",
+            "bytes": 39
+          },
+          {
+            "path": "agent/ecosystem.config.cjs",
+            "sha256": "sha256:afe2ca853023b08b3d670ea0e4ec9c7fd6d2134bdb53c2ad22afedf705532f1f",
+            "bytes": 351
+          },
+          {
+            "path": "agent/judge/run.js",
+            "sha256": "sha256:0f1063bdf8e3ffa5a2535534b71d5d368e07d472c1d0e9a16451568f1942c970",
+            "bytes": 6990
+          },
+          {
+            "path": "agent/package-lock.json",
+            "sha256": "sha256:850dfa960aaffb0e2073b4f32410f57cf8b5f46d8ef7e8c4adac4682dd5b2250",
+            "bytes": 12359
+          },
+          {
+            "path": "agent/package.json",
+            "sha256": "sha256:797bdb8efa885a3674bcffc1f2232dc0f8dfd4945bc4f72be9529c1e7286db5e",
+            "bytes": 447
+          },
+          {
+            "path": "agent/payables.example.json",
+            "sha256": "sha256:05d18c1ce1be9fb5111c9a4d2b5657a7cf46b078bf73c1fd649267f43073d88f",
+            "bytes": 286
+          },
+          {
+            "path": "agent/src/bills.js",
+            "sha256": "sha256:50fe91677738934358d8b2d150ffb9d9b5f679481057eb5b6c312b0c678af429",
+            "bytes": 6492
+          },
+          {
+            "path": "agent/src/chain.js",
+            "sha256": "sha256:30eb7c8c2d085186e8d4d2a205f8c67be5d9e7c292fb893887fe3e68866bb72d",
+            "bytes": 3232
+          },
+          {
+            "path": "agent/src/circle-wallet.js",
+            "sha256": "sha256:9c35645e2e39ef7903e594e940a4b25041e1d1719ba3cafec6ccc04a68f02244",
+            "bytes": 2441
+          },
+          {
+            "path": "agent/src/config.js",
+            "sha256": "sha256:c171ca3aaff78fb0e9b820d6e0e3850cf2a88f0958dae54b47da56cabd2f3874",
+            "bytes": 3707
+          },
+          {
+            "path": "agent/src/executor.js",
+            "sha256": "sha256:201cff492f9e7524bfe258480f496c79a92af42c98c9134ff0e4228be022a388",
+            "bytes": 7391
+          },
+          {
+            "path": "agent/src/index.js",
+            "sha256": "sha256:260e9b41097a4eec549d807348a525f574e46ab12649e7bdcf502ed100833de3",
+            "bytes": 8449
+          },
+          {
+            "path": "agent/src/indexer.js",
+            "sha256": "sha256:61b0d4b5de5777976720ba371ae0a4501098707a5736bc3d25c6377762575fcb",
+            "bytes": 4467
+          },
+          {
+            "path": "agent/src/llm.js",
+            "sha256": "sha256:cf1e6d3d1f4d6a769ae6f64b4953db251d1b04e37168edd7eda9ddf28067bce6",
+            "bytes": 4902
+          },
+          {
+            "path": "agent/src/policy.js",
+            "sha256": "sha256:eba5f8b2abe96eb8efadab22c13d8ba428b7ad61933421d1dfb697a5d9b8ec2b",
+            "bytes": 8951
+          },
+          {
+            "path": "agent/src/server.js",
+            "sha256": "sha256:13acae0c85163fa9c62152a80c4d650c8139b61b7334cc26b4a976a740c2b1f7",
+            "bytes": 6485
+          },
+          {
+            "path": "agent/src/snapshot.js",
+            "sha256": "sha256:0cc5b7c96918149c653a37c8eb1f89aaaf7650c0c4a1eb2ccaa36221bc3397b7",
+            "bytes": 3930
+          },
+          {
+            "path": "agent/test/bills-unit.mjs",
+            "sha256": "sha256:db86c8a67dc526011bc129d7203dea280f31ea4f7066b3d26d4e31e7d411ac8e",
+            "bytes": 4581
+          },
+          {
+            "path": "agent/test/circle-wallet.mjs",
+            "sha256": "sha256:38bd0f2f78c5b90c87956048a4865c9acf0691c9b4a0188cf30dc3ae97a7103f",
+            "bytes": 1960
+          },
+          {
+            "path": "agent/test/e2e-bills.sh",
+            "sha256": "sha256:e8380836469018c6bc515511e9134d5776fad41c3b9027b40cfe9a74febd11c7",
+            "bytes": 7943
+          },
+          {
+            "path": "agent/test/e2e-local.sh",
+            "sha256": "sha256:5ce3689269b50b44d3ec20602d13feef718f611b52c40b7f249e1007679dcd9a",
+            "bytes": 4267
+          },
+          {
+            "path": "agent/test/fake-llm.mjs",
+            "sha256": "sha256:2fa35d41f22d64868c6a54d11770b5c515e26fd1026f58f78555f9a5ec4bff34",
+            "bytes": 1525
+          },
+          {
+            "path": "agent/test/injection.mjs",
+            "sha256": "sha256:53e12bec87c609a680f7f69c342c6ac29411658514b94dd1d7c430667fdc8cfd",
+            "bytes": 15945
+          },
+          {
+            "path": "agent/test/results/injection-live.json",
+            "sha256": "sha256:17d58d8f810e465a875647bab37771b37129f5a594193b55ea6d6128e1ffe3ef",
+            "bytes": 54920
+          },
+          {
+            "path": "agent/test/results/injection-live.md",
+            "sha256": "sha256:812fed4f605766100a09a89aa3329b9c63105880c69bbb82cb64c5024e680745",
+            "bytes": 1996
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:e45949a49cca1795b07e2b5f02bc3c78e04f4f5e46e2ef04a14f9c6a4f597a89",
+            "bytes": 103
+          },
+          {
+            "path": "aomi/mandate-agent/.gitignore",
+            "sha256": "sha256:ba8abcf9a9db23d39350ea7d8eb9ef5c59641822b6bdb8f6ecf209a2ac795cbb",
+            "bytes": 19
+          },
+          {
+            "path": "aomi/mandate-agent/README.md",
+            "sha256": "sha256:a2ed78e69e8301ad22e37838448e7705960ec095ef8b0baf2154b12eea21d15d",
+            "bytes": 769
+          },
+          {
+            "path": "aomi/mandate-agent/src/client.rs",
+            "sha256": "sha256:1da31abea135d8dd01c62c9a637fad74b604b6cd0ec905475489ec22d42c09e7",
+            "bytes": 6667
+          },
+          {
+            "path": "aomi/mandate-agent/src/lib.rs",
+            "sha256": "sha256:9922a8e8d9a1a2ec08240fa228169c16daf5d63d84d8e71e8b5ec005b522530b",
+            "bytes": 2701
+          },
+          {
+            "path": "aomi/mandate-agent/src/tool.rs",
+            "sha256": "sha256:3dd15bde708418505defcd16d32df09fc433f525b4ff4a3e4c5bbffb4c3cddc8",
+            "bytes": 3071
+          },
+          {
+            "path": "app/.gitignore",
+            "sha256": "sha256:6fe16e5e5dad9408c6a9082604c816d8067641ae1b5e59aceb90eb51c1088c63",
+            "bytes": 14
+          },
+          {
+            "path": "app/index.html",
+            "sha256": "sha256:b0dc5984ac71c21557492f82ddb8fc50d3d15f27c68c210e5ec4aab1c18517b5",
+            "bytes": 52084
+          },
+          {
+            "path": "assets/banner.svg",
+            "sha256": "sha256:da9fbff93f9649fe26bba574a6aa65307c56443e466ae7544a72676ae30ec550",
+            "bytes": 1881
+          },
+          {
+            "path": "broadcast/CreateMandate.s.sol/5042/run-1790804211325.json",
+            "sha256": "sha256:3166d0afb5f87d62566b52eb08ee53df5dc3ce9423bee647e24c9674dfdf0aa4",
+            "bytes": 43789
+          },
+          {
+            "path": "broadcast/CreateMandate.s.sol/5042/run-latest.json",
+            "sha256": "sha256:3166d0afb5f87d62566b52eb08ee53df5dc3ce9423bee647e24c9674dfdf0aa4",
+            "bytes": 43789
+          },
+          {
+            "path": "broadcast/Deploy.s.sol/5042/run-1790804105207.json",
+            "sha256": "sha256:c9057b0e5b6ecc2fedde6452eab1695617620f3ec4660cb8bc1d9902fb71ce27",
+            "bytes": 27373
+          },
+          {
+            "path": "broadcast/Deploy.s.sol/5042/run-latest.json",
+            "sha256": "sha256:c9057b0e5b6ecc2fedde6452eab1695617620f3ec4660cb8bc1d9902fb71ce27",
+            "bytes": 27373
+          },
+          {
+            "path": "docs/DEPLOY.md",
+            "sha256": "sha256:71ee9fd77ae1c621ca25d1a938259812b8bef9522714b8f4a11dd26e5f4ac34a",
+            "bytes": 4773
+          },
+          {
+            "path": "foundry.lock",
+            "sha256": "sha256:6b182f57b5c5615131465941411dac80a778d554bd4a796bd28749b9b752d6f0",
+            "bytes": 128
+          },
+          {
+            "path": "foundry.toml",
+            "sha256": "sha256:26a9cf2c23b33b38ad8e095ea3f642008f852222fceab2fe88428cff63584f8c",
+            "bytes": 239
+          },
+          {
+            "path": "script/CreateMandate.s.sol",
+            "sha256": "sha256:fb3a6c37cb2903d1a6eeef5208b3152f6671842f631e6644bae4bd18d5fdb68f",
+            "bytes": 2385
+          },
+          {
+            "path": "script/Deploy.s.sol",
+            "sha256": "sha256:9f835044a548f096b8b1d8d7738c2e06bd55fd5ede62460f0d60048c07b83da7",
+            "bytes": 612
+          },
+          {
+            "path": "src/MandateAccount.sol",
+            "sha256": "sha256:c775a5f853bed4a5f6adb6c3bc2b84bd7c8378d16d4efec127b0300eabc10b50",
+            "bytes": 16307
+          },
+          {
+            "path": "src/MandateFactory.sol",
+            "sha256": "sha256:19642db84cc3f52a753a064c6811e2035d199e8e4328fde8848b5706fea46ede",
+            "bytes": 1366
+          },
+          {
+            "path": "src/interfaces/IERC20.sol",
+            "sha256": "sha256:fd2093857ec672cbeda4c276a287f4015201ab574feef714583a9dd1301cabe8",
+            "bytes": 478
+          },
+          {
+            "path": "src/interfaces/IValuer.sol",
+            "sha256": "sha256:d929ba1c39970da1498ece598778d69aee00eaa23ac721b1a634dc5f5a4af249",
+            "bytes": 310
+          },
+          {
+            "path": "src/valuers/BalanceValuer.sol",
+            "sha256": "sha256:0f2cb4e4d508b9e443cb9540f607955099a9189a4459ed8419b6ad6a663e9ec8",
+            "bytes": 581
+          },
+          {
+            "path": "src/valuers/ERC4626Valuer.sol",
+            "sha256": "sha256:f621340dbe3dfed39071cc64f279d7ecccac88d66bcf0b813ed1016a0d0a8f64",
+            "bytes": 820
+          },
+          {
+            "path": "test/MandateAccount.t.sol",
+            "sha256": "sha256:96cdde60a504f53bf00e7f5bb6ce309087f99f1d27e9ff9d3f35f7b30d750373",
+            "bytes": 9428
+          },
+          {
+            "path": "test/mocks/Mocks.sol",
+            "sha256": "sha256:2b8fb21781a745926d815596f457255be47e901c905a4e00a41a72be235ea120",
+            "bytes": 3744
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
