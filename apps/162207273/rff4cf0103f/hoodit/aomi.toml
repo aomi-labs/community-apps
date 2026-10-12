@@ -2,3 +2,8 @@
 name = "hoodit"
 display_name = "Hoodit"
 public = true
+
+# Telegram beta: the backend arms each user's Para agent wallet for this app
+# and signs DM trades on commit. The trade skill confirms before committing.
+[bot]
+signing = "custodial"
