@@ -1,0 +1,86 @@
+{
+  "id": "dep_170971520_r231b41456d_f7a9ba25bf81",
+  "status": "",
+  "sdk_version": "5.1.1",
+  "deployed_at": 1791894705,
+  "source": {
+    "project_id": 1688,
+    "installation_id": 170971520,
+    "repository_id": 1417007100,
+    "repository_link": "kanonagency/my-aomi-playground",
+    "ref": "f7a9ba25bf81ac6d59e7c58168c109cf811d704b",
+    "commit_hash": "f7a9ba25bf81ac6d59e7c58168c109cf811d704b",
+    "applications": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "kanonagency/my-aomi-playground/170971520/f7a9ba25bf81",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "playground-example",
+        "path": "apps/170971520/r231b41456d/playground-example",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-170971520-r231b41456d-playground-example-f7a9ba25bf81",
+        "sdk_version": "5.1.1",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Playground Example",
+        "is_public": true,
+        "bot": {
+          "show_tool_calls": false
+        },
+        "files": [
+          {
+            "path": ".aomi/config.json",
+            "sha256": "sha256:15859bbf86295110b21699346e556d9601bc030e08c26aad2ba9076dee841e6c",
+            "bytes": 87
+          },
+          {
+            "path": ".github/workflows/check.yml",
+            "sha256": "sha256:ae3e1dc636e029cf04ab502c0bf0a4dd48ca81750166af4bb6c538a230845843",
+            "bytes": 447
+          },
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:867bf05e5283438bc24e49d642c60762d7e749681eafe125ffc94859e99e825a",
+            "bytes": 31
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:105b1bb29c3118d356dd027d99d31c9fc6a2de2ef2c8d72687aaf5e9f732c42c",
+            "bytes": 10296
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:730b120f4cb0fc2ce0e2b554b4ea57179cf75257af4d8c89b982915c8b25b255",
+            "bytes": 701
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:3af6084ac81fcd419fe5c8ab034821fc69ef78dfae1b04c7cdef9c2bdf5544e6",
+            "bytes": 1826
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:0fc60545daaa80f93a1d8100022335062fa01d055585feea7981ab0bede29944",
+            "bytes": 531
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:9486d3fd4a1a7c09f987ade29b2f7e5b4397fda0050cf0f70c4d1bc32528691e",
+            "bytes": 2825
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
