@@ -1,0 +1,141 @@
+{
+  "id": "dep_170940716_r032180cd37_b710185a5cf7",
+  "status": "",
+  "sdk_version": "5.1.1",
+  "deployed_at": 1791970817,
+  "source": {
+    "project_id": 1687,
+    "installation_id": 170940716,
+    "repository_id": 1307841342,
+    "repository_link": "kaustubh76/acr---arc-compute-rate",
+    "ref": "b710185a5cf7bb5e384cd78a12b20277ce6cfa23",
+    "commit_hash": "b710185a5cf7bb5e384cd78a12b20277ce6cfa23",
+    "applications": [
+      "integrations/aomi/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "kaustubh76/acr---arc-compute-rate/170940716/b710185a5cf7",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "acr-compute-rate",
+        "path": "apps/170940716/r032180cd37/acr-compute-rate",
+        "aomi_toml_path": "integrations/aomi/aomi.toml",
+        "release_tag": "apps-170940716-r032180cd37-acr-compute-rate-b710185a5cf7",
+        "sdk_version": "5.1.1",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "ACR · Arc Compute Rate",
+        "is_public": true,
+        "bot": {
+          "show_tool_calls": false
+        },
+        "files": [
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:44c92e3a70ad3307b7056871c2bdb096d8bfa9373f5bf06a79bb6324a20ff2fb",
+            "bytes": 8
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:c5de677955222852caa60979b0a82f0c790160a1e528509a378598d42b024b69",
+            "bytes": 37605
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:3557de471d39c2e6158cf89fca37fa7c12fa0e326978b16de92d6f4958a4088a",
+            "bytes": 744
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:8054dd11bef378ebdd56380d825df4c795cf7650d1dff72ffd466ee74f16b1bb",
+            "bytes": 11383
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:de188aaa173b0c0a6aee5754a4d6faa5680312b7a38eeeec12b8194e68aa2a12",
+            "bytes": 651
+          },
+          {
+            "path": "fixtures/onchain_gpu.json",
+            "sha256": "sha256:8ac492775aa0b39b6440cdc0ab9c7353bb6634f141e11b54f260784dd7d043e7",
+            "bytes": 254
+          },
+          {
+            "path": "fixtures/onchain_inf.json",
+            "sha256": "sha256:78d0ddbebc2f3b7c70442d323fc0020ca7b85c472d61d82d6458f3b487f47206",
+            "bytes": 249
+          },
+          {
+            "path": "fixtures/par_fleet_vendor.json",
+            "sha256": "sha256:00b99b28e380a0d54334a2fe5c4dfae64b2e99c945da400be6296cdabdb95e8b",
+            "bytes": 965
+          },
+          {
+            "path": "fixtures/par_market.json",
+            "sha256": "sha256:2b4e920312dc2eccc50328713690ee37bbc894c5d17d7e1eae328f98b16b34e5",
+            "bytes": 2355
+          },
+          {
+            "path": "fixtures/rating.json",
+            "sha256": "sha256:0d7d1be4cb782cde3eedf4ed619531b8cc3216b94601a861cb4fcf20f4f1d411",
+            "bytes": 793
+          },
+          {
+            "path": "fixtures/receipts_testnet.json",
+            "sha256": "sha256:4a84e5165f3302316e6d3edc831d2ca754c6260cbc459db40bb1238e953dcf32",
+            "bytes": 4116
+          },
+          {
+            "path": "fixtures/tca_seen.json",
+            "sha256": "sha256:41c09ac8c8c5e892421ae1f59038943f46a708d16e35655d14d3150cbb4d67a5",
+            "bytes": 416
+          },
+          {
+            "path": "fixtures/tca_unseen.json",
+            "sha256": "sha256:de64b60a99ba14b63e1f84646cc751663b9b689bba926c8201fb2549a343090f",
+            "bytes": 563
+          },
+          {
+            "path": "live/check.mjs",
+            "sha256": "sha256:15b30fc54d5346e6ea557b9bcd6bd1ad67b5d700c9d1d0b6046cde6b78591bae",
+            "bytes": 5546
+          },
+          {
+            "path": "live/package-lock.json",
+            "sha256": "sha256:f6e0ed4a6b49eea8ed0744dfa1f6c562595c28e9a0c6229beead3088c734d9fe",
+            "bytes": 35471
+          },
+          {
+            "path": "live/package.json",
+            "sha256": "sha256:37765cb9388194a20fc36a8f2a277756e1cf8a3ad84548f2c68a8b68a4d22036",
+            "bytes": 278
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:604a8c50ad20f46eae5234eb137b10d7107349d7d448569d0cbc5e49c166f8fa",
+            "bytes": 11270
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:7f6cd234d7cb38cb168f1e28b3e369445cfa7310271d15da960cd34a56e75476",
+            "bytes": 5355
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:287706544228269d842cb30cb40d0c20d7c0e3450602a6f661a9add0ffc469d6",
+            "bytes": 37796
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
