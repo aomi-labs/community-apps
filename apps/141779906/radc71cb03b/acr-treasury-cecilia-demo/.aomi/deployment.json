@@ -1,0 +1,197 @@
+{
+  "id": "dep_141779906_radc71cb03b_9e892c7348e9",
+  "status": "",
+  "sdk_version": "5.1.1",
+  "deployed_at": 1792392666,
+  "source": {
+    "project_id": 1669,
+    "installation_id": 141779906,
+    "repository_id": 1420440348,
+    "repository_link": "ceciliaz030/acr---arc-compute-rate",
+    "ref": "9e892c7348e93aec3bdbba7f22e04f2cbc7b1e56",
+    "commit_hash": "9e892c7348e93aec3bdbba7f22e04f2cbc7b1e56",
+    "applications": [
+      "integrations/aomi/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "ceciliaz030/acr---arc-compute-rate/141779906/9e892c7348e9",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "acr-treasury-cecilia-demo",
+        "path": "apps/141779906/radc71cb03b/acr-treasury-cecilia-demo",
+        "aomi_toml_path": "integrations/aomi/aomi.toml",
+        "release_tag": "apps-141779906-radc71cb03b-acr-treasury-cecilia-demo-9e892c7348e9",
+        "sdk_version": "5.1.1",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "ACR · Isolated Treasury Demo",
+        "is_public": false,
+        "bot": {
+          "show_tool_calls": false,
+          "signing": null
+        },
+        "files": [
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:5eef2b5b73fb2b72a403aeffc473d21f73bd67c45b579db8a3ac3fa487832ce3",
+            "bytes": 34
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:6ea059fbc3da39796bda4e068bada46246286c1ffe0bb52124179e140ee86e64",
+            "bytes": 37605
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:80efe6cf696923a69c13243dae3b0c4e123be818af13d77ee4451bef75d7e602",
+            "bytes": 840
+          },
+          {
+            "path": "DEPLOYMENTS.md",
+            "sha256": "sha256:a9bbd862fa840eeebdc8ca27248b19b9fd7d129772ce2c0c2ef37164b3d22e16",
+            "bytes": 3797
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:4a297b689063ddffd2ca2f3c6b1e465f15189bba2f26abcbb444500a629722d0",
+            "bytes": 12574
+          },
+          {
+            "path": "TREASURY.md",
+            "sha256": "sha256:cae549eb45c4dd6bf684b83f81f21dd55e4ceac4dbd81574da50c45e4fddadb8",
+            "bytes": 9524
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:ef9ccefd764b189170e16149e9b687e3d5a8b97b2602e5d0caa8e2aea56af057",
+            "bytes": 753
+          },
+          {
+            "path": "build.rs",
+            "sha256": "sha256:c4e1a6ac3237909bcd4a5f9732e4673bf51148e7945d2a71e84cef8e29eee7f8",
+            "bytes": 2597
+          },
+          {
+            "path": "fixtures/onchain_gpu.json",
+            "sha256": "sha256:8ac492775aa0b39b6440cdc0ab9c7353bb6634f141e11b54f260784dd7d043e7",
+            "bytes": 254
+          },
+          {
+            "path": "fixtures/onchain_inf.json",
+            "sha256": "sha256:78d0ddbebc2f3b7c70442d323fc0020ca7b85c472d61d82d6458f3b487f47206",
+            "bytes": 249
+          },
+          {
+            "path": "fixtures/par_fleet_vendor.json",
+            "sha256": "sha256:00b99b28e380a0d54334a2fe5c4dfae64b2e99c945da400be6296cdabdb95e8b",
+            "bytes": 965
+          },
+          {
+            "path": "fixtures/par_market.json",
+            "sha256": "sha256:2b4e920312dc2eccc50328713690ee37bbc894c5d17d7e1eae328f98b16b34e5",
+            "bytes": 2355
+          },
+          {
+            "path": "fixtures/rating.json",
+            "sha256": "sha256:0d7d1be4cb782cde3eedf4ed619531b8cc3216b94601a861cb4fcf20f4f1d411",
+            "bytes": 793
+          },
+          {
+            "path": "fixtures/receipts_testnet.json",
+            "sha256": "sha256:4a84e5165f3302316e6d3edc831d2ca754c6260cbc459db40bb1238e953dcf32",
+            "bytes": 4116
+          },
+          {
+            "path": "fixtures/tca_seen.json",
+            "sha256": "sha256:41c09ac8c8c5e892421ae1f59038943f46a708d16e35655d14d3150cbb4d67a5",
+            "bytes": 416
+          },
+          {
+            "path": "fixtures/tca_unseen.json",
+            "sha256": "sha256:de64b60a99ba14b63e1f84646cc751663b9b689bba926c8201fb2549a343090f",
+            "bytes": 563
+          },
+          {
+            "path": "live/check.mjs",
+            "sha256": "sha256:15b30fc54d5346e6ea557b9bcd6bd1ad67b5d700c9d1d0b6046cde6b78591bae",
+            "bytes": 5546
+          },
+          {
+            "path": "live/package-lock.json",
+            "sha256": "sha256:f6e0ed4a6b49eea8ed0744dfa1f6c562595c28e9a0c6229beead3088c734d9fe",
+            "bytes": 35471
+          },
+          {
+            "path": "live/package.json",
+            "sha256": "sha256:37765cb9388194a20fc36a8f2a277756e1cf8a3ad84548f2c68a8b68a4d22036",
+            "bytes": 278
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:604a8c50ad20f46eae5234eb137b10d7107349d7d448569d0cbc5e49c166f8fa",
+            "bytes": 11270
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:cfa96a26e7c07b9e421102201c3824fc23ed431a01079547ff8231f7b06dff01",
+            "bytes": 6993
+          },
+          {
+            "path": "src/skill/action-rules.md",
+            "sha256": "sha256:839f41a0797fe7ae6d324927fa62a525526454a690f687227fb581cb36c08e47",
+            "bytes": 974
+          },
+          {
+            "path": "src/skill/instructions.md",
+            "sha256": "sha256:4fd71b7019ea64a8668e172490cb9f3b36f7dfb339e1a04ba520f73740f3aa82",
+            "bytes": 824
+          },
+          {
+            "path": "src/skill/safety.md",
+            "sha256": "sha256:bc9a2b13be01a371067645ad6bae0c0503dc545252c37299d5eb839af40f485a",
+            "bytes": 821
+          },
+          {
+            "path": "src/skill/workflows.md",
+            "sha256": "sha256:331ecd22650041ed87cb40c5f089e89aca387e9e9d4ba898d7c7f6b1b5fb1378",
+            "bytes": 1738
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:287706544228269d842cb30cb40d0c20d7c0e3450602a6f661a9add0ffc469d6",
+            "bytes": 37796
+          },
+          {
+            "path": "src/treasury.rs",
+            "sha256": "sha256:c74011ee982c6ef23574e15bc68e110055ffeff2ef4216cad3d89682e84d633b",
+            "bytes": 17287
+          },
+          {
+            "path": "tests/check_deployment.py",
+            "sha256": "sha256:80c443b3df1b575ba7d1aefec27b6d0af2275cf69c6d2fe2f811272f017339dc",
+            "bytes": 2128
+          },
+          {
+            "path": "treasury-deployment.demo.json",
+            "sha256": "sha256:5ef1458abadb774f906a838033f4a67875d322132401cb3f8e4e6d267284851e",
+            "bytes": 328
+          },
+          {
+            "path": "treasury-deployment.example.json",
+            "sha256": "sha256:5e827d602052966a11725b6a36aa67542d0f42e23611f1c496babb212fae6778",
+            "bytes": 193
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
