@@ -1,0 +1,97 @@
+{
+  "id": "dep_141232970_r65eb64f700_1c68e60ab02a",
+  "status": "",
+  "sdk_version": "5.1.1",
+  "deployed_at": 1792581556,
+  "source": {
+    "project_id": 1667,
+    "installation_id": 141232970,
+    "repository_id": 1406840351,
+    "repository_link": "aomi-labs/arc-studio-fuzz",
+    "ref": "1c68e60ab02a12273f940ac9ed4830bbab59ef3e",
+    "commit_hash": "1c68e60ab02a12273f940ac9ed4830bbab59ef3e",
+    "applications": [
+      "apps/arc-studio-fuzzer/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "aomi-labs/arc-studio-fuzz/141232970/1c68e60ab02a",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "arc-studio-fuzzer",
+        "path": "apps/141232970/r65eb64f700/arc-studio-fuzzer",
+        "aomi_toml_path": "apps/arc-studio-fuzzer/aomi.toml",
+        "release_tag": "apps-141232970-r65eb64f700-arc-studio-fuzzer-1c68e60ab02a",
+        "sdk_version": "5.1.1",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Arc Studio Fuzzer",
+        "is_public": true,
+        "bot": {
+          "show_tool_calls": false,
+          "signing": null
+        },
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:ff680aa1f7a6a226176c5835940c6f02cf8295d5e698fbfa2c467c5fc80d5f19",
+            "bytes": 481
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:62ea7c1eb2908151bcbffd8756c75c2d83a184177ea8cfda6531f15e587ac728",
+            "bytes": 82
+          },
+          {
+            "path": "src/abi.rs",
+            "sha256": "sha256:216251322bdee819925027a5699ab25bd61592c00cec130352453810e11cb045",
+            "bytes": 11560
+          },
+          {
+            "path": "src/campaign.rs",
+            "sha256": "sha256:7fc1c971fb4ecbd2325d42f8aafb4d066f0805f60be6a065a4f1e37dda6fdae2",
+            "bytes": 36200
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:08ce34e4b1b2445213f368544122ab4069253ee50a22e3a9a2cb426b70fd50f0",
+            "bytes": 26371
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:acbfa47280909e1edcd09150bc6225dfc3535143574d8e963e29339ce58deeef",
+            "bytes": 10122
+          },
+          {
+            "path": "src/plan.rs",
+            "sha256": "sha256:6f29d6ad509985824d9b3e180faee41e4adb77b73c52b8c24ee6f90d479a2146",
+            "bytes": 17079
+          },
+          {
+            "path": "src/replay.rs",
+            "sha256": "sha256:765f9ed7d9aa340d7ce518cd94d5bf33608846a58e9214e48144568363112e0d",
+            "bytes": 3421
+          },
+          {
+            "path": "src/tests.rs",
+            "sha256": "sha256:fc625e6d3b3f62184a0c8aa3c233fcc3a267d22da94992270e5b379ff12e4a52",
+            "bytes": 58763
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:116a8c98bef24df4b933fa5f42491cb9f371175cf58c9c4faf2531a6a3b13cc7",
+            "bytes": 6947
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
