@@ -1,0 +1,113 @@
+{
+  "id": "dep_153405839_r41ae5e782d_f4a9e4f324dc",
+  "status": "",
+  "sdk_version": "3.1.0",
+  "deployed_at": 1786614583,
+  "source": {
+    "project_id": 1672,
+    "installation_id": 153405839,
+    "repository_id": 1332935052,
+    "repository_link": "zmanian/somm-agent",
+    "ref": "f4a9e4f324dc76dc7682409ac29d06734b5d7880",
+    "commit_hash": "f4a9e4f324dc76dc7682409ac29d06734b5d7880",
+    "applications": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "zmanian/somm-agent/153405839/f4a9e4f324dc",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "somm-agent",
+        "path": "apps/153405839/r41ae5e782d/somm-agent",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-153405839-r41ae5e782d-somm-agent-f4a9e4f324dc",
+        "sdk_version": "3.1.0",
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Agentic Somm",
+        "is_public": true,
+        "files": [
+          {
+            "path": ".aomi/config.json",
+            "sha256": "sha256:15859bbf86295110b21699346e556d9601bc030e08c26aad2ba9076dee841e6c",
+            "bytes": 87
+          },
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:44c92e3a70ad3307b7056871c2bdb096d8bfa9373f5bf06a79bb6324a20ff2fb",
+            "bytes": 8
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:d2057925fe413f38ff49ee65e13deb6a35bf8364b8f7778bc40db55fad5568ee",
+            "bytes": 40464
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:be9ce7fc06272c5d0f685072219df296347231e16ebcbaaafa8b968326eedee9",
+            "bytes": 393
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:04abfc272daa42c2e1ab2b84e6de87aa3c0b0603a7a762238497d73449ecc6fc",
+            "bytes": 2507
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:0b318aba93f6769d68044352e0d7d04dfda4fdca0d8455e7e0aebf193754e95c",
+            "bytes": 139
+          },
+          {
+            "path": "somm-agent.pricing.toml",
+            "sha256": "sha256:87a87cab056386a940a195d91e4dcf7d373eb5befeb3010f3ae43c1c0b14d559",
+            "bytes": 3730
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:2bb049a0e4f5cc2b6eab9faeb5c41901f8072b647f5c0cd0144f43579e4e5275",
+            "bytes": 6012
+          },
+          {
+            "path": "src/discovery.rs",
+            "sha256": "sha256:f1a37b21269c51e87c25e502eeb272f38fe72224b6cdb0921b11054bb39b83fe",
+            "bytes": 6353
+          },
+          {
+            "path": "src/execution.rs",
+            "sha256": "sha256:196edc31eede9e8eb88727a5e3ca94795aa715ddd04444d9aebdb6100a05ec92",
+            "bytes": 20524
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:a9850eb30c15d1a0162c097932f68a95c7226f87e040449c7ae3a39d38530c20",
+            "bytes": 11332
+          },
+          {
+            "path": "src/session.rs",
+            "sha256": "sha256:e79061d19a18952d25a7b3fc822d1bfae991b62f0c23f5a2f492063b14dd2a6c",
+            "bytes": 10939
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:1acc1c5a198abf8d8ea3ab4c15a5be18df9d6784246b363ccf871f4629dd7456",
+            "bytes": 16273
+          },
+          {
+            "path": "tests/pricing_sidecar.rs",
+            "sha256": "sha256:23ea63fd942970b409f802be687689e8975575423cb83705c6bbbf1a2a339590",
+            "bytes": 6292
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
