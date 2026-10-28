@@ -1,0 +1,625 @@
+{
+  "id": "dep_162207273_rff4cf0103f_3a24f40b08c8",
+  "status": "",
+  "ffi_version": 1,
+  "deployed_at": 1793220781,
+  "source": {
+    "project_id": 1664,
+    "installation_id": 162207273,
+    "repository_id": 1371307524,
+    "repository_link": "arixoneth/hoodit-apps",
+    "ref": "3a24f40b08c8a7899101a85a2295768b4fc8590c",
+    "commit_hash": "3a24f40b08c8a7899101a85a2295768b4fc8590c",
+    "applications": [
+      "apps/hoodit/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "arixoneth/hoodit-apps/162207273/3a24f40b08c8",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "hoodit",
+        "path": "apps/162207273/rff4cf0103f/hoodit",
+        "aomi_toml_path": "apps/hoodit/aomi.toml",
+        "release_tag": "apps-162207273-rff4cf0103f-hoodit-3a24f40b08c8",
+        "ffi_version": 1,
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Hoodit",
+        "is_public": true,
+        "funded_model_only": false,
+        "bot": {
+          "show_tool_calls": false
+        },
+        "wallets": {
+          "agent": true,
+          "create": true,
+          "suggest": "instant",
+          "families": [
+            "evm"
+          ]
+        },
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:6ee7685e9d98373c0e562b0b5c0fa29d0c100dac4dd9a0c7eb702d06b75cfc90",
+            "bytes": 603
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:32e0a050f4b6999fd7241ac1cdfad3720b4982b0b03502e496e517dc28a4a600",
+            "bytes": 345
+          },
+          {
+            "path": "assets/card/art/hero.jpg",
+            "sha256": "sha256:5108ff6216cd6443bddc4c5ab871091b3a079046928053048d86a21723c1a729",
+            "bytes": 86465
+          },
+          {
+            "path": "assets/card/art/hero_sad.jpg",
+            "sha256": "sha256:5cf14b766611b9e89ada4acf5c9d09d4f30935cd43b9da9ae9158bf99ff8b6b9",
+            "bytes": 68928
+          },
+          {
+            "path": "assets/card/art/logo.jpg",
+            "sha256": "sha256:49258641dd0fc755161e48d4707e1bc7646e289e0d527571ed6461ecbb546463",
+            "bytes": 10579
+          },
+          {
+            "path": "assets/card/art/money.svg",
+            "sha256": "sha256:45a1fd6d237b07d85eade6dc358b9167b9b16e663f6a772651a21e1c6aeadc09",
+            "bytes": 3491
+          },
+          {
+            "path": "assets/card/art/sword.jpg",
+            "sha256": "sha256:b649c1f044bcb0c941b94d52c36a51c778519a479732863918b071e857f5d3fb",
+            "bytes": 86289
+          },
+          {
+            "path": "assets/card/fonts/ArchivoBlack-Regular.ttf",
+            "sha256": "sha256:355b89d43e95edd50a58dad2029689c56027ef19cf9f2f03c9d3605e87ee182e",
+            "bytes": 87996
+          },
+          {
+            "path": "assets/card/fonts/OFL-ArchivoBlack.txt",
+            "sha256": "sha256:3173acd82f8c6159b5b1037b539fcbd4edff68e65c2ea8b9412b5a5ca97b08ff",
+            "bytes": 4492
+          },
+          {
+            "path": "assets/card/fonts/OFL-SpaceMono.txt",
+            "sha256": "sha256:8e4ee42b2553e1e01504e61cb0d46d148cd8c9e5eacaa3622a7df2d4f2955b9f",
+            "bytes": 4392
+          },
+          {
+            "path": "assets/card/fonts/OFL-WorkSans.txt",
+            "sha256": "sha256:749aca05078664ce682dce1b1b10096ac397cb088c1a6df4e1bb56f0092a9272",
+            "bytes": 4396
+          },
+          {
+            "path": "assets/card/fonts/SpaceMono-Bold.ttf",
+            "sha256": "sha256:5be2b984cdb8befc8ad1871d10f1aa8337f7d2bae3c6bf0ce720d0745ac1a8ec",
+            "bytes": 79904
+          },
+          {
+            "path": "assets/card/fonts/SpaceMono-Regular.ttf",
+            "sha256": "sha256:829aad32ab9525358de2a7ebc718d05a6b335e67421aad5e1e09cd1fa796af4e",
+            "bytes": 81124
+          },
+          {
+            "path": "assets/card/fonts/WorkSans-Bold.ttf",
+            "sha256": "sha256:e8398b22225a1f971df9bb12fa8fb9dd4c76e80aa4d67d45bde60ebbc6c5ad81",
+            "bytes": 115632
+          },
+          {
+            "path": "assets/card/fonts/WorkSans-MediumItalic.ttf",
+            "sha256": "sha256:71c586c2b31948e4aa8117cc5f80642a403af12e50db10dfadf87673df58833a",
+            "bytes": 109764
+          },
+          {
+            "path": "assets/card/fonts/WorkSans-SemiBoldItalic.ttf",
+            "sha256": "sha256:7239b7f079bbb67948c4b64f2ee5e0dfcedbf796f673efadda1dc7a700170d10",
+            "bytes": 110144
+          },
+          {
+            "path": "examples/audit.rs",
+            "sha256": "sha256:d4a1499d0e19cd581a12ffc5ff5712ef3b26316f0417b18e755d16b79ffc94bc",
+            "bytes": 5109
+          },
+          {
+            "path": "examples/cards.rs",
+            "sha256": "sha256:f8efbdad4643479ab0b000ea88096f5b871674a7d5ae1a346df6f9cc7de54c78",
+            "bytes": 1203
+          },
+          {
+            "path": "examples/gql.rs",
+            "sha256": "sha256:212b747204bf2153ca415dbe14e98769b6f91bda0b30a0418428d996c85246b2",
+            "bytes": 1624
+          },
+          {
+            "path": "examples/live-plan.json",
+            "sha256": "sha256:dc455ef5acf9fb6bdf7f7d072dec3e456116c6ce93f37a73726e78f772481adc",
+            "bytes": 1764
+          },
+          {
+            "path": "examples/live.rs",
+            "sha256": "sha256:75d70b40987448f3da16a04b200c229fd2e20f714fd76705e48aae32c906bfa5",
+            "bytes": 3218
+          },
+          {
+            "path": "src/card/art.rs",
+            "sha256": "sha256:6c7bda134e7b872c5b74ff7591780b35a31fd7b3b32b9b34b2b749d5ff3ad952",
+            "bytes": 13167
+          },
+          {
+            "path": "src/card/format.rs",
+            "sha256": "sha256:716955c7c8dbfcadb0e2476379b6198289bf35dcf1064001cb8962298f7acc4f",
+            "bytes": 8330
+          },
+          {
+            "path": "src/card/layout.rs",
+            "sha256": "sha256:ac7f5430ea60b70b6e16318fe56b508041da15c64ff71daa9c6f782d1ee0305e",
+            "bytes": 17292
+          },
+          {
+            "path": "src/card/mod.rs",
+            "sha256": "sha256:208ef314e14bed02c294365dea1ba9fe8e5cfb92748043beeddfb353e18f4501",
+            "bytes": 16929
+          },
+          {
+            "path": "src/card/styles.rs",
+            "sha256": "sha256:881c3b9225f259a434b98d912038a08068cd4ac75617fbbf9c3ec4454afad36c",
+            "bytes": 33378
+          },
+          {
+            "path": "src/card/text.rs",
+            "sha256": "sha256:91c2e47e9065d009fde35044f286221cad9330c362097c2209fd786901545cf4",
+            "bytes": 4209
+          },
+          {
+            "path": "src/domain/amount.rs",
+            "sha256": "sha256:fa78e6d430fb41ca7e846319bc228e8cf2c268e488d909d9697ab16a00f726d7",
+            "bytes": 2425
+          },
+          {
+            "path": "src/domain/boards.rs",
+            "sha256": "sha256:2b8e4fb6a8c633bfc4d4069bb9384f4f6d1a7ad35ab0aab4cec7e8a30d1f93ac",
+            "bytes": 17694
+          },
+          {
+            "path": "src/domain/chart.rs",
+            "sha256": "sha256:9ce09032feafb8deacabbea3cfad05dfc32b675b1b8f5a92527e24b222f81860",
+            "bytes": 12669
+          },
+          {
+            "path": "src/domain/exit.rs",
+            "sha256": "sha256:81bd0f48ed039d50b7c43003607798a03483678b5cd67e26e9289f2f80b525ee",
+            "bytes": 13145
+          },
+          {
+            "path": "src/domain/find.rs",
+            "sha256": "sha256:bca97eadba2512f90a64adb2061f80d78781b2535b8ea49bb04e4904c38659eb",
+            "bytes": 4773
+          },
+          {
+            "path": "src/domain/holders.rs",
+            "sha256": "sha256:31fbbde93f411f8be8fffc4a7109ca8bf88ad816b8e14beed215350fef97d893",
+            "bytes": 10478
+          },
+          {
+            "path": "src/domain/market.rs",
+            "sha256": "sha256:b75435adb046b3b3232dd77f29261ea98d627e2945894256534cdcb2b355899d",
+            "bytes": 8176
+          },
+          {
+            "path": "src/domain/mod.rs",
+            "sha256": "sha256:a6364b332e6691123a994df2a1f96ac032e9e9ba41c29bceead1091a0f80db63",
+            "bytes": 440
+          },
+          {
+            "path": "src/domain/pnl.rs",
+            "sha256": "sha256:0a435d1165761d8d7c8f3d56c31baec9d43106f0a1d4cb517729c9788a310c00",
+            "bytes": 12404
+          },
+          {
+            "path": "src/domain/pnl/settlement.rs",
+            "sha256": "sha256:b55020a534ac80f071c9cad86d9ca09005f6ae29241a35c0a1183b29d5e907a1",
+            "bytes": 7618
+          },
+          {
+            "path": "src/domain/pons.rs",
+            "sha256": "sha256:99bb4632426999502fc79ab090a78a665ee60b9567a31656b91b8d2e3ac714e9",
+            "bytes": 3903
+          },
+          {
+            "path": "src/domain/portfolio.rs",
+            "sha256": "sha256:4eda525d54406613fcad62065c13240ec9fdb632eded6cbd30b0505586d54abc",
+            "bytes": 10994
+          },
+          {
+            "path": "src/domain/signals.rs",
+            "sha256": "sha256:7ad814c9f0b70b131693aa89ff69541ab8824c4a0448921d7f145911ef3114d4",
+            "bytes": 13590
+          },
+          {
+            "path": "src/domain/token.rs",
+            "sha256": "sha256:a824854cfcf10db85688a3a5f28393e048e7f035920854e973cc766246c9a0ab",
+            "bytes": 20017
+          },
+          {
+            "path": "src/domain/trades.rs",
+            "sha256": "sha256:bec0df481fd15cfb72428024d2c0f711d54a8bd91d247455ff856c0a7b8c0b1d",
+            "bytes": 8595
+          },
+          {
+            "path": "src/domain/wallet.rs",
+            "sha256": "sha256:69099f3627bc3edb89f90efb8586ff6f93419daeebed09d5f2bef5e9dbbe8261",
+            "bytes": 5673
+          },
+          {
+            "path": "src/fixtures/filter-tokens.json",
+            "sha256": "sha256:971eace398a14d300cd6e2b1de2a0ade67afba41e3baa3675833f0284b305d1f",
+            "bytes": 28789
+          },
+          {
+            "path": "src/fixtures/gmgn/created_priors.json",
+            "sha256": "sha256:f6f5b8b24a91a2352a3cea1c11630860e73b933eb044bdfbef7ff13c3468bcc1",
+            "bytes": 1253
+          },
+          {
+            "path": "src/fixtures/gmgn/holders_vrax.json",
+            "sha256": "sha256:9fd028cda607111637cce018bb7ef5d5f1333be7dd559b0ad7a757bbc6eb53cf",
+            "bytes": 17522
+          },
+          {
+            "path": "src/fixtures/gmgn/holders_vrax_smart.json",
+            "sha256": "sha256:b559fbd5264036a5eff01d3a22ef1f41b287b369be031ec41c112f135d3c34f6",
+            "bytes": 12982
+          },
+          {
+            "path": "src/fixtures/gmgn/info_chfund.json",
+            "sha256": "sha256:2f8674313bdc74ee502803e594678b53f4d7375f6c39abb37b43d38fe2481306",
+            "bytes": 4701
+          },
+          {
+            "path": "src/fixtures/gmgn/info_priors.json",
+            "sha256": "sha256:5c5c52283dda78b150d29cba3e3909db738ee03a178d4e48d2f9689cbd32dbf3",
+            "bytes": 4913
+          },
+          {
+            "path": "src/fixtures/gmgn/info_vrax.json",
+            "sha256": "sha256:20846fb6d98484b2dfeccdb268fc4a1e503f0020b32196e1fc548f3307edf433",
+            "bytes": 4933
+          },
+          {
+            "path": "src/fixtures/gmgn/kline_vrax.json",
+            "sha256": "sha256:387d6a5a420100b470d4df1af6d50ee9c83ee294ae24015d33068e98a9da5418",
+            "bytes": 4379
+          },
+          {
+            "path": "src/fixtures/gmgn/kol.json",
+            "sha256": "sha256:e17f75c0c975ed14d2b89ba0379dcb16efb59e3175ae3def4066ba9d5911ff66",
+            "bytes": 34101
+          },
+          {
+            "path": "src/fixtures/gmgn/rank_1h.json",
+            "sha256": "sha256:b38be99c4311c1726dfcc5cc85f1eff039be10a596c02ed913be984a62674937",
+            "bytes": 18834
+          },
+          {
+            "path": "src/fixtures/gmgn/search.json",
+            "sha256": "sha256:1cf3c19620b3f6f31eb5d249f480315521e830b6861650b59edf04db86cf271f",
+            "bytes": 14876
+          },
+          {
+            "path": "src/fixtures/gmgn/security_chfund.json",
+            "sha256": "sha256:65630d0d264ba530465c10415a3c2aaa6455d4e9d08ed23955b24bac7521d2e7",
+            "bytes": 815
+          },
+          {
+            "path": "src/fixtures/gmgn/security_priors.json",
+            "sha256": "sha256:32af4e6e22ae3be1288582e97e8007417ea64a4201c2441dee98b62d9682d2b3",
+            "bytes": 799
+          },
+          {
+            "path": "src/fixtures/gmgn/security_vrax.json",
+            "sha256": "sha256:512d9d92c5a5de2a5f5c1aa87ed4cbb44e41647f7efce042fc9bbf666d6a2a70",
+            "bytes": 799
+          },
+          {
+            "path": "src/fixtures/gmgn/signal.json",
+            "sha256": "sha256:27d62295fb830f88ab8d7992812cccff950cbf0f3fec679cc939ac24a49c745f",
+            "bytes": 77026
+          },
+          {
+            "path": "src/fixtures/gmgn/smartmoney.json",
+            "sha256": "sha256:02f066f0a2dacb251ed7a8a1299cdc8b0193460205c795d498dfb21ce64afc30",
+            "bytes": 30833
+          },
+          {
+            "path": "src/fixtures/gmgn/traders_vrax.json",
+            "sha256": "sha256:e5d595316ae9009e25adf24ee8f38e0fd64f0a450345b64f56070e9ea416f292",
+            "bytes": 12571
+          },
+          {
+            "path": "src/fixtures/gmgn/trenches.json",
+            "sha256": "sha256:717c4aa8a93a5f29459cbb8877d1f6f4588808e7d94c23571397f5539ce16d72",
+            "bytes": 34918
+          },
+          {
+            "path": "src/fixtures/gmgn/wallet_activity.json",
+            "sha256": "sha256:782b660a9547c8e4ed3b80ae05d31fb589a5f498fe19143382d16cfc473e7093",
+            "bytes": 8983
+          },
+          {
+            "path": "src/fixtures/gmgn/wallet_stats.json",
+            "sha256": "sha256:8f9ac2b3f063b6c229ca5a076bc902837b978792426fec0906dcc9f2307519d5",
+            "bytes": 1262
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:3746b9fb27e71684ada65ff6dcee3ba8c74dcb774466d9883458b1b5e9cba4e8",
+            "bytes": 5995
+          },
+          {
+            "path": "src/preamble.md",
+            "sha256": "sha256:715ed7ba902f5b83fd6ff1a0fa4573444522fe5fa92bf746343b9240edfaebe7",
+            "bytes": 2984
+          },
+          {
+            "path": "src/providers/chain.rs",
+            "sha256": "sha256:6958f0f9d8f5696e66f1429e706efd882fabc204461d9701371c784c3c7aaa7b",
+            "bytes": 14314
+          },
+          {
+            "path": "src/providers/chain/explorer.rs",
+            "sha256": "sha256:0f6a814298e8f4526e4a6bae802b47f1d98eb6d59d30a0a616b1fadfb99ba259",
+            "bytes": 4974
+          },
+          {
+            "path": "src/providers/chain/receipts.rs",
+            "sha256": "sha256:ad0da228f31b36eaa9f315de0cc399df31ed85e5fd9cad94c4833c1415972c93",
+            "bytes": 12153
+          },
+          {
+            "path": "src/providers/chain/traces.rs",
+            "sha256": "sha256:c32f7af095bd9d1a1bed13a591d8189eea0e1a80f0ec875abbd2e49a9ca43c7a",
+            "bytes": 7161
+          },
+          {
+            "path": "src/providers/codex/mod.rs",
+            "sha256": "sha256:833a527eb3d4566ccbf57822a13b785bf7e156f13f9ac5efb9964cc22826eb80",
+            "bytes": 11229
+          },
+          {
+            "path": "src/providers/codex/queries.rs",
+            "sha256": "sha256:20baaaeb706bd84548d0ea5685a6e45b112433c09332cd22ca7985af4d3d196c",
+            "bytes": 5155
+          },
+          {
+            "path": "src/providers/codex/types.rs",
+            "sha256": "sha256:741efd447b0db9fd0ee0c788f92186726f9c1b7dfb60af7e650032e8798bf261",
+            "bytes": 4044
+          },
+          {
+            "path": "src/providers/gmgn/mod.rs",
+            "sha256": "sha256:030f658a61a78b47067e3fc9619b762fe161e8a4929cf64ba6aff6fc757206d6",
+            "bytes": 18764
+          },
+          {
+            "path": "src/providers/gmgn/types.rs",
+            "sha256": "sha256:21b752162d50b2a4e0330bf31c7f96346e0bc1ac0753d436e40669d923fc21f0",
+            "bytes": 10126
+          },
+          {
+            "path": "src/providers/lifi.rs",
+            "sha256": "sha256:6449854de6d4120621c7d4030a6318f56450204475fcd64998eda144be02a943",
+            "bytes": 6493
+          },
+          {
+            "path": "src/providers/mod.rs",
+            "sha256": "sha256:eb3758954e47a07de6fff84799aa5ffdea65f266cb933dee744d08b2019e8538",
+            "bytes": 4638
+          },
+          {
+            "path": "src/runtime/cache.rs",
+            "sha256": "sha256:00d12e7c4ebf9f196d460f4beb742229d5364e1f9074cf89ab22f35d855bb231",
+            "bytes": 3441
+          },
+          {
+            "path": "src/runtime/error.rs",
+            "sha256": "sha256:240cc830b12cd50ddf516639ed6f34c3203b617b690ede857c47bb98a862d8bb",
+            "bytes": 5064
+          },
+          {
+            "path": "src/runtime/gate.rs",
+            "sha256": "sha256:9cb7e260bce013c4557f0ff641132000d25c9aff133a182927b5e2c827f1ff43",
+            "bytes": 12139
+          },
+          {
+            "path": "src/runtime/mod.rs",
+            "sha256": "sha256:5ddcf9b6c258f781cbc9a19b0df16263551ae791afeecb1e7d2f4d601cab44a1",
+            "bytes": 14236
+          },
+          {
+            "path": "src/runtime/turn.rs",
+            "sha256": "sha256:8ce28d1225bd4023a57116800525b43e782a1b423d150e84533cae162df09a10",
+            "bytes": 4111
+          },
+          {
+            "path": "src/skills/card.md",
+            "sha256": "sha256:8facd73540d423f193de99fe997f2320735cf3ab3921be912a75f2c6133959b0",
+            "bytes": 2535
+          },
+          {
+            "path": "src/skills/research.md",
+            "sha256": "sha256:16fd7efdf646924a2b4f761d12acd81037c3d39be78fc74960903a60b662ec80",
+            "bytes": 6954
+          },
+          {
+            "path": "src/skills/trade.md",
+            "sha256": "sha256:f5632909837ca49a62465e97e0b55bf61b2644c7e2ccfafbe8c9b8fc9ab68958",
+            "bytes": 6904
+          },
+          {
+            "path": "src/skills/watch.md",
+            "sha256": "sha256:6dfca88aa558ffc85cc08e565943379053da4ff113dfd3a33f19ffe23f525c12",
+            "bytes": 1955
+          },
+          {
+            "path": "src/tools/card.rs",
+            "sha256": "sha256:2599eb002bfb27fed15de1c875d03e06f44262e12c933a148b1da5696f900d39",
+            "bytes": 10347
+          },
+          {
+            "path": "src/tools/chart.rs",
+            "sha256": "sha256:a4f40af69ca5bfd62b3c7166895e7f954f8e7e56c96d88879a037b25caf5566b",
+            "bytes": 3423
+          },
+          {
+            "path": "src/tools/check.rs",
+            "sha256": "sha256:f671e32dd9ff07221ba6e9a58378ff9db8e9418ef04d216a7bfc919eacb7267a",
+            "bytes": 1364
+          },
+          {
+            "path": "src/tools/exit.rs",
+            "sha256": "sha256:f51b099c41bc9acd441e4f55a8e01beea1c43f8e532c0acebfd26ec7eb9fc5a9",
+            "bytes": 3293
+          },
+          {
+            "path": "src/tools/find.rs",
+            "sha256": "sha256:643b63243af74ab04bbd70a17380b10b918140a70439a20429ffd020072ff98a",
+            "bytes": 4269
+          },
+          {
+            "path": "src/tools/holders.rs",
+            "sha256": "sha256:ea87ff1a6528a66b9db40c7ac454f291c591e0094a17a80020273df05e214610",
+            "bytes": 2692
+          },
+          {
+            "path": "src/tools/mod.rs",
+            "sha256": "sha256:d94066050bde2d9216e7718dc5e358cc37e5bdc261408ed4bc16d59aa267a944",
+            "bytes": 1495
+          },
+          {
+            "path": "src/tools/portfolio.rs",
+            "sha256": "sha256:3afbc02df30a2e40537dea60399eac94788ccc039469d2439089692dc38a1bf6",
+            "bytes": 6315
+          },
+          {
+            "path": "src/tools/scan.rs",
+            "sha256": "sha256:074bc48cd69ed9c26082fe29ccf399703b69e633ef2cdb4882ae15d982dff8a6",
+            "bytes": 5497
+          },
+          {
+            "path": "src/tools/signals.rs",
+            "sha256": "sha256:162da51a1eb6ae0154c0a3a5308f61b7b84f7dd2e9792d5fdee103b220240652",
+            "bytes": 1986
+          },
+          {
+            "path": "src/tools/token.rs",
+            "sha256": "sha256:4ee35cf534a2dabce969abda3457c350902341a628c9e4a92f4b13378383e47d",
+            "bytes": 5711
+          },
+          {
+            "path": "src/tools/trades.rs",
+            "sha256": "sha256:2fb9e2bc7da3d276fd6d946cb23db8dcbefd270ba474605ed66913f6282ebf2d",
+            "bytes": 1986
+          },
+          {
+            "path": "src/tools/wallet.rs",
+            "sha256": "sha256:96ffdc701d5df18b5fbac69cc22cedcfeea7e6f64946f0a47a294ed345d7b8dc",
+            "bytes": 2133
+          },
+          {
+            "path": "src/view/envelope.rs",
+            "sha256": "sha256:2ecbdca29d2a71129959c3dbe06b6e9b74170d002f082a71bd7cb6ad837d99b0",
+            "bytes": 4719
+          },
+          {
+            "path": "src/view/format.rs",
+            "sha256": "sha256:5ee693312acd40e8c5de128219d57579e03116174a6827a0ac9cbbc684caaacc",
+            "bytes": 6694
+          },
+          {
+            "path": "src/view/market.rs",
+            "sha256": "sha256:d2bfe12a33334f531f488a59023c64a1b887d4dc5ac93dc07d978dcce050dcae",
+            "bytes": 6109
+          },
+          {
+            "path": "src/view/mod.rs",
+            "sha256": "sha256:9fd8a98b52a73748a869f731134d9af8fdd54d3d318dc3b8ab2b09e18736a5ba",
+            "bytes": 508
+          },
+          {
+            "path": "src/view/people.rs",
+            "sha256": "sha256:7412b39e65d48d4e9c1ec4361739151c468dfe07383fd81842403fac449cb9fc",
+            "bytes": 9039
+          },
+          {
+            "path": "src/view/token.rs",
+            "sha256": "sha256:c986a31ce7b02ce0813c97519e6dbbcf739b2fdca5abe4da4032436cbfc3f381",
+            "bytes": 13977
+          },
+          {
+            "path": "test.json",
+            "sha256": "sha256:4cae648407feb669e954d7dbc608dc48a8162c5fb1f444ac2b063f4a6ffba6f5",
+            "bytes": 797
+          },
+          {
+            "path": "tests/fixtures/pnl-native-provenance.md",
+            "sha256": "sha256:09fbe48ea03459f59c83388bb93936951dd6915248f2974bfc06adff845202a5",
+            "bytes": 1269
+          },
+          {
+            "path": "tests/fixtures/pnl-native.json",
+            "sha256": "sha256:2f6176cdedf740b44193b68160414f0e0b5c6075047854e5937bd2d11ef6316a",
+            "bytes": 117486
+          },
+          {
+            "path": "tests/fixtures/pnl-tada-provenance.md",
+            "sha256": "sha256:8ed2dcdb94e6598e174ddfe6bcb88a4a5764158e3eb35ab6b6a7f54bc44f5832",
+            "bytes": 1475
+          },
+          {
+            "path": "tests/fixtures/pnl-tada.json",
+            "sha256": "sha256:1ab27a50ee9ca048374d911846147e26b4b5b3e6c58a3f21a532a9a8fe5e1c1b",
+            "bytes": 55007
+          },
+          {
+            "path": "tests/fixtures/replay-plan.json",
+            "sha256": "sha256:8ddb3f4d30d01dfee0cbabda0d5ae21efeef295414b0c9437e7560eed56b950a",
+            "bytes": 685
+          },
+          {
+            "path": "tests/fixtures/replay.json",
+            "sha256": "sha256:ac3b8d4d2d28eb417a6c6f9f8090ce5c9afea1dbff505b7ca38f7b930895e949",
+            "bytes": 308242
+          },
+          {
+            "path": "tests/pnl_card.rs",
+            "sha256": "sha256:1690158a03839cc081ff595bb28b30cb675d74d89767d4778553ef359f83ca95",
+            "bytes": 15382
+          },
+          {
+            "path": "tests/portfolio.rs",
+            "sha256": "sha256:7aba713448894440fae9ed9b2e9dc8c36d1e7c22bbcffed9daa4cc372496b179",
+            "bytes": 7440
+          },
+          {
+            "path": "tests/replay.rs",
+            "sha256": "sha256:7ba3ff089f90ca5587fe0abd232a1577f2fee2a17a63ba051d1fbb5a637a1d2d",
+            "bytes": 9611
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
