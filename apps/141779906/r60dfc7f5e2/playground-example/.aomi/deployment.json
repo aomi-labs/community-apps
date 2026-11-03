@@ -1,0 +1,197 @@
+{
+  "id": "dep_141779906_r60dfc7f5e2_66a63cac3972",
+  "status": "",
+  "ffi_version": 1,
+  "deployed_at": 1793701280,
+  "source": {
+    "project_id": 1670,
+    "installation_id": 141779906,
+    "repository_id": 1444123874,
+    "repository_link": "ceciliaz030/aomi-template-staging",
+    "ref": "66a63cac39729d013665571e10e298b79b005f77",
+    "commit_hash": "66a63cac39729d013665571e10e298b79b005f77",
+    "applications": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "ceciliaz030/aomi-template-staging/141779906/66a63cac3972",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "playground-example",
+        "path": "apps/141779906/r60dfc7f5e2/playground-example",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-141779906-r60dfc7f5e2-playground-example-66a63cac3972",
+        "ffi_version": 1,
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Playground",
+        "is_public": true,
+        "funded_model_only": false,
+        "bot": {
+          "show_tool_calls": false
+        },
+        "files": [
+          {
+            "path": ".aomi/config.json",
+            "sha256": "sha256:15859bbf86295110b21699346e556d9601bc030e08c26aad2ba9076dee841e6c",
+            "bytes": 87
+          },
+          {
+            "path": ".github/workflows/check.yml",
+            "sha256": "sha256:6e69f3c45348e4c2e33011424d2d88ef4835487ecae11df34df545a49bc6dfc0",
+            "bytes": 867
+          },
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:07d282d133b95b5383fba27e93ac75fd48b6b4a875a38eaf6033c948b4053803",
+            "bytes": 79
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:eba048e9a07b666fa99fe938458f7672f86b60a92659fc0bcec3458cbf4450ab",
+            "bytes": 10296
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:64beb6788c9a2e9e8131de14bf9e4dce8f0a225b965aa442c1ca2fda52d570d3",
+            "bytes": 799
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:ce5a439d6eabfcf3c6250c20286adbc4a3e019d44b11694e2ddc527490bd8c8b",
+            "bytes": 1824
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:817c846135273fad43c91cb5b14dae04ea16ac03ce337731e901b2a4a46077f0",
+            "bytes": 531
+          },
+          {
+            "path": "client/.env.example",
+            "sha256": "sha256:692bdcbddde2e72e0476f0698b3fe1a9db1f89cbefc75ccc93202d2e6974cabb",
+            "bytes": 67
+          },
+          {
+            "path": "client/package.json",
+            "sha256": "sha256:9e72154f0250cb9e83f231bb90bdbebded6de651dc997537df0e826ee8b19d93",
+            "bytes": 391
+          },
+          {
+            "path": "client/src/run.ts",
+            "sha256": "sha256:55c36cd6c7f5b37a269d5be7e73a2b8900f83180786894364542d6670075c501",
+            "bytes": 307
+          },
+          {
+            "path": "client/src/tour.ts",
+            "sha256": "sha256:f5c27a6dfb2573ea8734d2d168a2f30edabd9c56bad9874ad37d5fae7d7bb63c",
+            "bytes": 500
+          },
+          {
+            "path": "client/src/turn.ts",
+            "sha256": "sha256:27983603d9c8b0c9e4a16d610dccf0e69d7887be7e9636dd000eedf5160f57e6",
+            "bytes": 1723
+          },
+          {
+            "path": "client/tsconfig.json",
+            "sha256": "sha256:f14eb4e5a131ccacbf5478ebeedb05e8b063749d24fa9997aa665c47c4c9ead8",
+            "bytes": 298
+          },
+          {
+            "path": "package.json",
+            "sha256": "sha256:0b72ef780d7402dc246fcdc22d6fa5c818e87ce04760c0ac7795207ac8c889d8",
+            "bytes": 185
+          },
+          {
+            "path": "pnpm-lock.yaml",
+            "sha256": "sha256:ac26c2794e05435bd9cffa1b0e7e51ba98d0a3d91f54d8a08b50b30e93c9d754",
+            "bytes": 513773
+          },
+          {
+            "path": "pnpm-workspace.yaml",
+            "sha256": "sha256:64d2fd26b78c5535acd6b1af4ae678d6da9aa52eb163eaa9aa256eac0348b81b",
+            "bytes": 195
+          },
+          {
+            "path": "rust-toolchain.toml",
+            "sha256": "sha256:92b454c1ccf330de9b94242f73bc3214370fb420d5152baeec12dc82ceef9dcc",
+            "bytes": 31
+          },
+          {
+            "path": "src/cafe.rs",
+            "sha256": "sha256:2d90d83d90cf287ab7f2d12f07fcf6cb249d6bcf8f18ac2bacfec227e7f016f1",
+            "bytes": 3634
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:d9de29763e35e5bc84374caa32e848eee84a6bffe44c701ea61545e8dc543ce7",
+            "bytes": 1418
+          },
+          {
+            "path": "src/menu.json",
+            "sha256": "sha256:edc8745d9105c711de9ed9fcc4f5e964f9bc4cc5bca3c3832c3e5829bc6d64bf",
+            "bytes": 595
+          },
+          {
+            "path": "src/skill/cafe.md",
+            "sha256": "sha256:2d2fa3c8a2095e1c3a97ad1b7511f6a9ae6c65bd1502c05f50ccaec1a593ef60",
+            "bytes": 595
+          },
+          {
+            "path": "src/tools.rs",
+            "sha256": "sha256:362728b843bee01491f8c71013f6f7ec6cf4bc4bf1590f35f65f8530942314cc",
+            "bytes": 1669
+          },
+          {
+            "path": "tests/tools.rs",
+            "sha256": "sha256:caca363a676709e25f717e19c4896aa3a9d2653208fbf54f47ebf917f20a1856",
+            "bytes": 3941
+          },
+          {
+            "path": "web/.env.example",
+            "sha256": "sha256:a6bb1181ea6e764f8b1e8d4db6b0408352257a47e3fdc2843870f889805d5430",
+            "bytes": 77
+          },
+          {
+            "path": "web/index.html",
+            "sha256": "sha256:73d19e12e54464bbdba42df822467abb9c9563c55635eb6b974691ec56de5f5b",
+            "bytes": 302
+          },
+          {
+            "path": "web/package.json",
+            "sha256": "sha256:d8573ea5b5cdc02ad300b233a7606fb0d0e0da111a4be3b0a67ef07ba8ae6e44",
+            "bytes": 441
+          },
+          {
+            "path": "web/src/main.tsx",
+            "sha256": "sha256:5d5621b4e482aac9226481af630ae0fec83738c5e6af13f664f59101b7c04587",
+            "bytes": 1011
+          },
+          {
+            "path": "web/src/vite-env.d.ts",
+            "sha256": "sha256:65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+            "bytes": 38
+          },
+          {
+            "path": "web/tsconfig.json",
+            "sha256": "sha256:fdcb4d989f3a31fea58386bb77b11c5bc257b58118f16999f85bfcf06bc1e03f",
+            "bytes": 348
+          },
+          {
+            "path": "web/vite.config.ts",
+            "sha256": "sha256:23ccfdc62a166532ddfdbf8fbf538ebc6ca39d1865589d666364db1fb3dea46a",
+            "bytes": 133
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
