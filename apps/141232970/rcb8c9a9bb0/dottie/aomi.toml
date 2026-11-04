@@ -10,3 +10,9 @@ agent = true
 create = true
 families = ["svm"]
 suggest = "instant"
+
+# A pasted Solana mint opens its risk report directly, without a model turn.
+[[shortcuts]]
+pattern = '^\s*([1-9A-HJ-NP-Za-km-z]{32,44})\s*$'
+tool = "dottie_token_check"
+arg = "mint"
