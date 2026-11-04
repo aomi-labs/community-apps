@@ -2,3 +2,10 @@
 name = "dottie"
 display_name = "Sol Dottie"
 public = true
+
+# Provision a managed Solana wallet per user on first use. The bot's
+# own connection starts Instant; users can switch to Ask in /wallet.
+[wallets]
+agent = true
+families = ["svm"]
+suggest = "instant"

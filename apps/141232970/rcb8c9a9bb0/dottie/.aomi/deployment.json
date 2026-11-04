@@ -1,0 +1,164 @@
+{
+  "id": "dep_141232970_rcb8c9a9bb0_898b9afbd676",
+  "status": "",
+  "ffi_version": 1,
+  "deployed_at": 1793793539,
+  "source": {
+    "project_id": 1672,
+    "installation_id": 141232970,
+    "repository_id": 1444904495,
+    "repository_link": "aomi-labs/sol-dottie-playground",
+    "ref": "898b9afbd6768e83656d26c06016cc73a028a6f9",
+    "commit_hash": "898b9afbd6768e83656d26c06016cc73a028a6f9",
+    "applications": [
+      "apps/dottie/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "aomi-labs/sol-dottie-playground/141232970/898b9afbd676",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "dottie",
+        "path": "apps/141232970/rcb8c9a9bb0/dottie",
+        "aomi_toml_path": "apps/dottie/aomi.toml",
+        "release_tag": "apps-141232970-rcb8c9a9bb0-dottie-898b9afbd676",
+        "ffi_version": 1,
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Sol Dottie",
+        "is_public": true,
+        "funded_model_only": false,
+        "bot": {
+          "show_tool_calls": false
+        },
+        "wallets": {
+          "agent": true,
+          "suggest": "instant",
+          "families": [
+            "svm"
+          ]
+        },
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:bdde459faeb3bb57cb98d88d22b9102e41bbf26b152ee78f638d7a2de0fbfbad",
+            "bytes": 409
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:73dd8f5e288da59924eee7a795262d7f1b8fe5b0afa800705d72b9ed2e32c83c",
+            "bytes": 265
+          },
+          {
+            "path": "examples/read.rs",
+            "sha256": "sha256:6ef7bdcc3ebc9e000cd8809d5d94024b273d99e76d61b8e901d25c3741cb83aa",
+            "bytes": 1520
+          },
+          {
+            "path": "src/domain/assets.json",
+            "sha256": "sha256:21f2925f535bbc5302b07845ab35a23735f02c79b52e23a92549ae3a3415ab4a",
+            "bytes": 1857
+          },
+          {
+            "path": "src/domain/mod.rs",
+            "sha256": "sha256:cedf2195fa5f369fa986f3f1c8c00dcee8c1bf422f1596c2c76a5f81092dff13",
+            "bytes": 1673
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:393165c3c44c770bf908de4f7e4f869eae98a977d709f5e01b73a70e3c175152",
+            "bytes": 1311
+          },
+          {
+            "path": "src/preamble.md",
+            "sha256": "sha256:c6a08241eaf6c35c76235ef361e2805198bb5c082d19887b1c0e2a89e01e0367",
+            "bytes": 2239
+          },
+          {
+            "path": "src/providers/fluxbeam.rs",
+            "sha256": "sha256:0604e8e1c10c0fb51904956728cf842d280ad92c37d115276f8eea1ce898a385",
+            "bytes": 5353
+          },
+          {
+            "path": "src/providers/mod.rs",
+            "sha256": "sha256:8a14ed158e6c2b8c9e248fb0eb5fa8e893907de7574f35b14f0740b012d228fc",
+            "bytes": 53
+          },
+          {
+            "path": "src/providers/rugcheck.rs",
+            "sha256": "sha256:da514b724f664afa41f20bb560b5ee8a92858ee93631cc576f733e8e838b8393",
+            "bytes": 1955
+          },
+          {
+            "path": "src/providers/solomon.rs",
+            "sha256": "sha256:7173b8fd76c52c93949998dd5de904910e5365837c2900dee60e4b752e47b82b",
+            "bytes": 3000
+          },
+          {
+            "path": "src/runtime/mod.rs",
+            "sha256": "sha256:c9bac480a80a1b0a114bb0c289bdd94b95015b2dabe6512722140661b10d4ef6",
+            "bytes": 5599
+          },
+          {
+            "path": "src/skills/earn.md",
+            "sha256": "sha256:67dfc27a99e3e031aefa56bc423e02761b6d9810c8190e172242d45bdb833f4f",
+            "bytes": 672
+          },
+          {
+            "path": "src/skills/research.md",
+            "sha256": "sha256:fea9bb95ca1e6c1aeed2b7562d9036d9e18a5c9d93ebe611b6a638f69ba7a434",
+            "bytes": 373
+          },
+          {
+            "path": "src/skills/trade.md",
+            "sha256": "sha256:f88718b8e8475b60f9768f4cd490c3901ebe228ae4196247a04677ed637827a3",
+            "bytes": 1240
+          },
+          {
+            "path": "src/tools/mod.rs",
+            "sha256": "sha256:5757fa9583aceb12d2b74b124ca45123543ba1d8f384cfd3db81905da0d8bd77",
+            "bytes": 6842
+          },
+          {
+            "path": "src/view/mod.rs",
+            "sha256": "sha256:2690da2ffcf1c37a1194d3f832b77ab312986e039775a921a8a4e5c6d0d5e0d8",
+            "bytes": 597
+          },
+          {
+            "path": "tests/fixtures/fluxbeam-instruction.json",
+            "sha256": "sha256:b20cf19bb5c0250b6b652416156c90a8d5295f3f7bc7f3cf55854ddfcba55ea8",
+            "bytes": 1457
+          },
+          {
+            "path": "tests/fixtures/fluxbeam-quote.json",
+            "sha256": "sha256:493f4e71880783fbf62a6c4f635f4c5d4c159689e0f504631651826ea32f69e9",
+            "bytes": 354
+          },
+          {
+            "path": "tests/fixtures/rugcheck-report.json",
+            "sha256": "sha256:e3b09837756c01334fabf1f59e58879ebdae611725d391df5fd33db6511c17cd",
+            "bytes": 7989
+          },
+          {
+            "path": "tests/fixtures/solomon-position.json",
+            "sha256": "sha256:91daa471d791b33c6f9c4c0e5113d09567b006318b3719e2311f56a16c4b5a16",
+            "bytes": 1202
+          },
+          {
+            "path": "tests/providers.rs",
+            "sha256": "sha256:261ea2ba5aab62d5a86ed1c1619f51845bb2fab3adf08e3a1df7b4a025904620",
+            "bytes": 7562
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
