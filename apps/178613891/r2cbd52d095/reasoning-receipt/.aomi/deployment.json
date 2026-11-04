@@ -1,0 +1,205 @@
+{
+  "id": "dep_178613891_r2cbd52d095_eb3b760ba8ba",
+  "status": "",
+  "ffi_version": 1,
+  "deployed_at": 1793808519,
+  "source": {
+    "project_id": 1691,
+    "installation_id": 178613891,
+    "repository_id": 1235708408,
+    "repository_link": "tang-vu/reasoning-receipt",
+    "ref": "eb3b760ba8ba6b16a6e53ce71dad682f9def3d49",
+    "commit_hash": "eb3b760ba8ba6b16a6e53ce71dad682f9def3d49",
+    "applications": [
+      "integrations/aomi-audit/aomi.toml",
+      "integrations/aomi/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "tang-vu/reasoning-receipt/178613891/eb3b760ba8ba",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "reasoning-receipt-audit",
+        "path": "apps/178613891/r2cbd52d095/reasoning-receipt-audit",
+        "aomi_toml_path": "integrations/aomi-audit/aomi.toml",
+        "release_tag": "apps-178613891-r2cbd52d095-reasoning-receipt-audit-eb3b760ba8ba",
+        "ffi_version": 1,
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "ReasoningReceipt · Auditor",
+        "is_public": false,
+        "funded_model_only": false,
+        "bot": {
+          "show_tool_calls": false
+        },
+        "files": [
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:1c288d459881832a0f43fd4caacb6d4a54631fcf26b8179b888e8cc11cdf864c",
+            "bytes": 31
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:365ed269915189feefeeb3a8629caa80e468156ab800b8a86d4724af2b62e749",
+            "bytes": 37865
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:16391d2fe1dac3b7bad70056aa8a801628f0aa28a411527025be1736ff2fbe64",
+            "bytes": 663
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:02c93b16c453bec2d6cdcf955737b9d5f94fdd8885a683724c28e4601d2a33bc",
+            "bytes": 7750
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:9d59ac3c023b60b8c934901f820f8ea486870abc0064067628b30a4ba93385f1",
+            "bytes": 369
+          },
+          {
+            "path": "audit-deployment.example.json",
+            "sha256": "sha256:bf9a34b1327df184b31b810cc7a6cb464544686f49e906b2b5de4d536d53e64a",
+            "bytes": 187
+          },
+          {
+            "path": "build.rs",
+            "sha256": "sha256:857c5c5dc75db838bd29de5683c2d7a90254af50cd3917ffb19d68a7c6c94f2a",
+            "bytes": 3762
+          },
+          {
+            "path": "deployment.arc-testnet.json",
+            "sha256": "sha256:2c574c09050279b69457159b7e16642bca012602d1a04361c96547d855856e5b",
+            "bytes": 204
+          },
+          {
+            "path": "src/audit.rs",
+            "sha256": "sha256:b03c39460a99a647ba6719714cc9db59a1e8037838226fb56811923194c7c574",
+            "bytes": 40562
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:5849d18c011d829ae9fc4d0e37b4ade0ce73a80debe476cf4d0653c0de1262e8",
+            "bytes": 3944
+          },
+          {
+            "path": "src/skill/action-rules.md",
+            "sha256": "sha256:a293ab231dddfbe239644ad43d3210d0d97f2fb30c75774c91cb261300a782e8",
+            "bytes": 354
+          },
+          {
+            "path": "src/skill/instructions.md",
+            "sha256": "sha256:79668b45d035ba32c0a2bf1d821bbc9c28b3a89a0cbfd52b7b0cd2dd6f61e49b",
+            "bytes": 592
+          },
+          {
+            "path": "src/skill/safety.md",
+            "sha256": "sha256:3892d08c4eab887fc166e0c2aa244d0a002073a8e0865ef7146d1906872a22a3",
+            "bytes": 1186
+          },
+          {
+            "path": "src/skill/workflows.md",
+            "sha256": "sha256:df1d1924650e5d2dfe069b7e47971e047243a383e60bd4ea6552bd233f34fbd1",
+            "bytes": 2176
+          }
+        ],
+        "secret_slots": []
+      },
+      {
+        "name": "reasoning-receipt",
+        "path": "apps/178613891/r2cbd52d095/reasoning-receipt",
+        "aomi_toml_path": "integrations/aomi/aomi.toml",
+        "release_tag": "apps-178613891-r2cbd52d095-reasoning-receipt-eb3b760ba8ba",
+        "ffi_version": 1,
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "ReasoningReceipt · Settlement",
+        "is_public": false,
+        "funded_model_only": false,
+        "bot": {
+          "show_tool_calls": false
+        },
+        "files": [
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:99bcfd6e4d168b2b9ffa57867f1a5a506c1abb01218b727883cb9836c279d5c6",
+            "bytes": 36
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:4c06d295d457ff068f4edb2efd91c1ced3ef42f920d556305c76867f888f4978",
+            "bytes": 37611
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:23829496c3b8cc449271bfef259e493d5d7e710bb7a137c6cb407d6627b47d00",
+            "bytes": 617
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:a436935fba1e4a2aad41050d064d30e8ef5c35af752cbf41a4ea4207db873f43",
+            "bytes": 7497
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:78a13cf28ee040f7c8564870c29d9f2dc73390a6c0171304be7cb0e696b5c936",
+            "bytes": 366
+          },
+          {
+            "path": "build.rs",
+            "sha256": "sha256:09230255881a7d59648e811eb7ea7f2050727a5f350231ac05da265cf7bc17bf",
+            "bytes": 4081
+          },
+          {
+            "path": "deployment.arc-testnet.json",
+            "sha256": "sha256:f28c602d2b8a49db877963c8819db4a2dc2a9ef7822b2af38a415bf40d05bcca",
+            "bytes": 230
+          },
+          {
+            "path": "settlement-deployment.example.json",
+            "sha256": "sha256:7bc23401bdbeeba80d8d95e31f117584cddfddae2c0028a438a2e866d8581b34",
+            "bytes": 208
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:9527fb30f72213c8ca676d327daa9b1a11cb6fd3d6d6be9c23918a94ce4613c7",
+            "bytes": 3885
+          },
+          {
+            "path": "src/settlement.rs",
+            "sha256": "sha256:9533da880f37ceb844d8a2dbe8a35e89deed756cc2bb30b925e948dbd1298eb9",
+            "bytes": 15687
+          },
+          {
+            "path": "src/skill/action-rules.md",
+            "sha256": "sha256:76515f005abe72fd7bd642e811ac6797cbc1ce099f82294080335aa9b9661669",
+            "bytes": 440
+          },
+          {
+            "path": "src/skill/instructions.md",
+            "sha256": "sha256:006c66f1b740550bd69b349268f8ed928563cabf2714b0b44c3228f455698853",
+            "bytes": 680
+          },
+          {
+            "path": "src/skill/safety.md",
+            "sha256": "sha256:c9727ad3fa12a23a2f52b89887407b23d07062ec8857193b7b9531c6fdb3fecd",
+            "bytes": 1138
+          },
+          {
+            "path": "src/skill/workflows.md",
+            "sha256": "sha256:e649a284c9ad880e85e77d0ae8fe312c8c8cd20be4a39e678eb0a287237d3bdf",
+            "bytes": 1376
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
