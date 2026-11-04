@@ -7,5 +7,6 @@ public = true
 # own connection starts Instant; users can switch to Ask in /wallet.
 [wallets]
 agent = true
+create = true
 families = ["svm"]
 suggest = "instant"
