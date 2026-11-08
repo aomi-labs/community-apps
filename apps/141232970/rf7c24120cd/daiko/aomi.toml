@@ -3,6 +3,16 @@ name = "daiko"
 display_name = "Daiko Helper"
 public = true
 
+# Public group turns may use only these research tools. Host wallet, signing,
+# simulation, scheduling and account operations remain private.
+[bot.group]
+enabled = true
+tools = [
+  "daiko_about", "daiko_token", "daiko_x_pulse", "daiko_tiktok",
+  "daiko_thesis", "daiko_wallets", "daiko_trending",
+  "daiko_fomo_page", "daiko_gmgn_page"
+]
+
 # Same managed-wallet onboarding as Hoodit, scoped to Solana. The bot's
 # own connection starts Instant; users can switch to Ask in /wallet.
 [wallets]
