@@ -1,0 +1,97 @@
+{
+  "id": "dep_141779906_r4d3b93e9d2_ac0be1020b56",
+  "status": "",
+  "ffi_version": 1,
+  "deployed_at": 1794138921,
+  "source": {
+    "project_id": 1676,
+    "installation_id": 141779906,
+    "repository_id": 1450222982,
+    "repository_link": "ceciliaz030/clikk-app",
+    "ref": "ac0be1020b56abe767d5566b57134123f59c301c",
+    "commit_hash": "ac0be1020b56abe767d5566b57134123f59c301c",
+    "applications": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "ceciliaz030/clikk-app/141779906/ac0be1020b56",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "clikk",
+        "path": "apps/141779906/r4d3b93e9d2/clikk",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-141779906-r4d3b93e9d2-clikk-ac0be1020b56",
+        "ffi_version": 1,
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Clikk",
+        "is_public": true,
+        "funded_model_only": false,
+        "bot": {
+          "show_tool_calls": false
+        },
+        "files": [
+          {
+            "path": ".aomi/config.json",
+            "sha256": "sha256:ac4697be1d7032c27a48290abb93accc458658d05434ee10d3c313bf36e072c6",
+            "bytes": 79
+          },
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:56fc692d36769419be1fc64fd21fbf3310c9a87308c65cc1f49ee67720bd72ac",
+            "bytes": 42
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:817095f02974b6f752f106b267c77b497d2dba3508f6eec1ca5bf8c542663dbe",
+            "bytes": 44060
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:043cfd4ec35d177d4068093ae12d754116ac22a90b12ee47dc90b175f959b495",
+            "bytes": 426
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:f6a97f8fdeb5278fff0b79ab8dda0da3333ad788f3ccea6dc1c0d1dc45a7b827",
+            "bytes": 1136
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:0b486c33bd5c209c30acc0df127f0101a81d068588a80520fb6ed549de0ac9c7",
+            "bytes": 58
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:99fba43d0450dbb09343fa915d6aee9d7d8d86a60b8e8e5ef5207f5b71f75273",
+            "bytes": 8420
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:78ea609a9c9083808bf523289fab900412dfee3cd87a01196b6ba8d0b0f9576f",
+            "bytes": 2375
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:0f8fedec047ccf7fbce77b8e75c022483536ebe6b27ed00471e5c8421335a60f",
+            "bytes": 5753
+          },
+          {
+            "path": "test.json",
+            "sha256": "sha256:b653e638fac99981605a3220d5c4ab31fc7fdbb1166132daaf504ce8bd828404",
+            "bytes": 761
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
