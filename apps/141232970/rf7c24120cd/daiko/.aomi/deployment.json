@@ -1,0 +1,109 @@
+{
+  "id": "dep_141232970_rf7c24120cd_468241db3fbd",
+  "status": "",
+  "ffi_version": 1,
+  "deployed_at": 1794143801,
+  "source": {
+    "project_id": 1675,
+    "installation_id": 141232970,
+    "repository_id": 1447234702,
+    "repository_link": "aomi-labs/daiko-bot",
+    "ref": "468241db3fbd0cd36f8747bcfb4df5568058fa63",
+    "commit_hash": "468241db3fbd0cd36f8747bcfb4df5568058fa63",
+    "applications": [
+      "apps/daiko/aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "aomi-labs/daiko-bot/141232970/468241db3fbd",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "daiko",
+        "path": "apps/141232970/rf7c24120cd/daiko",
+        "aomi_toml_path": "apps/daiko/aomi.toml",
+        "release_tag": "apps-141232970-rf7c24120cd-daiko-468241db3fbd",
+        "ffi_version": 1,
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Daiko Helper",
+        "is_public": true,
+        "funded_model_only": false,
+        "bot": {
+          "show_tool_calls": false
+        },
+        "wallets": {
+          "agent": true,
+          "suggest": "instant",
+          "families": [
+            "svm"
+          ]
+        },
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:7ffb2df49a5a17003fcbe4e19c441c514c6e0d22dfe333215c89b7a82a831a72",
+            "bytes": 324
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:96bf9153317311ac619d62ed994ab86770159712e2c7f1f1f5ad0e7402a9a1a9",
+            "bytes": 269
+          },
+          {
+            "path": "examples/read.rs",
+            "sha256": "sha256:3db9ee282c145244e9a34899734584681171be3c5d3589ce267247624da54338",
+            "bytes": 1514
+          },
+          {
+            "path": "src/client.rs",
+            "sha256": "sha256:37c1df4251a727bc30842fd64c0a01d36f285b6ca4cfae8c56630d6841ee70db",
+            "bytes": 10273
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:9aa568fde4a9573bf3317e79d406b6bc5757d3cd7ceefcefcd8b52d7fb34eae7",
+            "bytes": 1947
+          },
+          {
+            "path": "src/page.rs",
+            "sha256": "sha256:2b9bf56385a44b484e0a1c5232871d0a6dac08ae9346f57de7777754f904adec",
+            "bytes": 4604
+          },
+          {
+            "path": "src/preamble.md",
+            "sha256": "sha256:82325c6d875fe1f8c3bd241e0e0a5164b7acb47b90b9fe291a3002aedd4c8833",
+            "bytes": 6159
+          },
+          {
+            "path": "src/skills/fomo.md",
+            "sha256": "sha256:98d7d411f762d6f9d2871f24c542d5614bcde2f66fe52cf5d0596c675173bab2",
+            "bytes": 1808
+          },
+          {
+            "path": "src/skills/gmgn.md",
+            "sha256": "sha256:7a25209e7b4179e71732a241c6f0d6973ac3f54758bb0ce00888e80fcbc98efa",
+            "bytes": 1421
+          },
+          {
+            "path": "src/tool.rs",
+            "sha256": "sha256:9efbae4965ada7b387fe2edf7efe137e1817064962fd49a613532d15cd1a4675",
+            "bytes": 12184
+          },
+          {
+            "path": "tests/manifest.rs",
+            "sha256": "sha256:e109eaf0f356fce9b78ace33c7d528d320860ff9635ae3249a9cb34cd26a6c58",
+            "bytes": 1835
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
