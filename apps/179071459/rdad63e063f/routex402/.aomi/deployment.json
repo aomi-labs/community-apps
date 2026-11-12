@@ -1,0 +1,542 @@
+{
+  "id": "dep_179071459_rdad63e063f_d50af31f4b13",
+  "status": "",
+  "ffi_version": 1,
+  "deployed_at": 1794526426,
+  "source": {
+    "project_id": 1694,
+    "installation_id": 179071459,
+    "repository_id": 1286455295,
+    "repository_link": "msurfx/route402",
+    "ref": "d50af31f4b135568529a4b19cc581f7832adc19e",
+    "commit_hash": "d50af31f4b135568529a4b19cc581f7832adc19e",
+    "applications": [
+      "aomi.toml"
+    ]
+  },
+  "platform": {
+    "platform": "community",
+    "repository": "aomi-labs/community-apps",
+    "deploy_branch": "publish",
+    "platform_branch": "msurfx/route402/179071459/d50af31f4b13",
+    "commit_hash": null,
+    "pr_number": null,
+    "pr_url": null,
+    "ci_status": null,
+    "ci_url": null,
+    "apps": [
+      {
+        "name": "routex402",
+        "path": "apps/179071459/rdad63e063f/routex402",
+        "aomi_toml_path": "aomi.toml",
+        "release_tag": "apps-179071459-rdad63e063f-routex402-d50af31f4b13",
+        "ffi_version": 1,
+        "target": "x86_64-unknown-linux-gnu",
+        "label": "Routex402",
+        "is_public": true,
+        "funded_model_only": false,
+        "bot": {
+          "show_tool_calls": false
+        },
+        "files": [
+          {
+            "path": ".aomi/config.json",
+            "sha256": "sha256:b0bdc08d0a93706d368400a12540524e217c6f51e7e2a312fdff6ec16c7f5895",
+            "bytes": 73
+          },
+          {
+            "path": ".gitignore",
+            "sha256": "sha256:e475a4bc599ccf0a49c9a3f842c978c2f798181243b1c1400c4fc5f0f128a53c",
+            "bytes": 183
+          },
+          {
+            "path": "CLAUDE.md",
+            "sha256": "sha256:83cb95b82ea364fc2d80534a7f51a12e2dbbaed3f461b545af0e5dbc959e9c9f",
+            "bytes": 9330
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "sha256:c36b93b9ef41fda4d8a08be3c0dc5edba4892b2ab9cedf0b036608e631be1a4a",
+            "bytes": 153
+          },
+          {
+            "path": "Cargo.toml",
+            "sha256": "sha256:1e12922085fb7e1f5650193b365c914a057a989d911c819c644de3b98f36d4b5",
+            "bytes": 111
+          },
+          {
+            "path": "README.md",
+            "sha256": "sha256:b2bc9cb89dd2b97254f723a1d2be92526d807bf72728e055cf4a42706c7575ec",
+            "bytes": 7743
+          },
+          {
+            "path": "SECURITY_ROADMAP.md",
+            "sha256": "sha256:0783958d085770dd2e96645d3196cb6ec7a839abaac803ba311bba0354350d3d",
+            "bytes": 10233
+          },
+          {
+            "path": "SUMMARY.md",
+            "sha256": "sha256:1db6e2295019e851f2112eb9187fb7eeca67864a59d9326764d7e862c0c2fbca",
+            "bytes": 11967
+          },
+          {
+            "path": "agent-chain-demo.patch",
+            "sha256": "sha256:69f68f54c3604c5ef9efb967437e0c1be0e8b6276d320e31c606162b29794795",
+            "bytes": 15606
+          },
+          {
+            "path": "all-unpushed-v2.patch",
+            "sha256": "sha256:ff4428d6cfac07cbc66ce69fe59e5a7e689d2997145c20877b15a82aa572fa46",
+            "bytes": 22358
+          },
+          {
+            "path": "aomi.toml",
+            "sha256": "sha256:6bc46484870abbd59046a6d5e49479a5a3317e209ba9dc5c3d21dd696e3ef940",
+            "bytes": 66
+          },
+          {
+            "path": "auto-attestation.patch",
+            "sha256": "sha256:31121be53362ec2c07a7c315a1e14231c3c7996a66217bfbebf6792c0a729181",
+            "bytes": 13871
+          },
+          {
+            "path": "backend/buyer/package-lock.json",
+            "sha256": "sha256:4bcfb9356e5d0f14a778d6c4a315b0982c8d5452b347b45fc1462939b2ea7f16",
+            "bytes": 89340
+          },
+          {
+            "path": "backend/buyer/package.json",
+            "sha256": "sha256:17d02693ad2484cefd67007c52a7f210bcb7ea6fb1b711c809bd6da08a375880",
+            "bytes": 624
+          },
+          {
+            "path": "backend/buyer/src/idl/agent_economy.json",
+            "sha256": "sha256:f852e839866dd777db463beac5beb52b6af0b36533b5ef56ab4e0f292b4e462b",
+            "bytes": 16505
+          },
+          {
+            "path": "backend/buyer/src/index.ts",
+            "sha256": "sha256:65972885ef1e62ee306e410ee64d02df0a4a03abd0fb5e137c663cf4659de7c6",
+            "bytes": 698
+          },
+          {
+            "path": "backend/buyer/src/purchase.ts",
+            "sha256": "sha256:5f229ecd15cb4ec0da002eb1fd749c03dc15ba5a26c3b3057a45b7fa73ead108",
+            "bytes": 7685
+          },
+          {
+            "path": "backend/buyer/src/seed-buyers-slow.ts",
+            "sha256": "sha256:66cc95998967850ddaf0c02c7b2b66f4822c313b79482d8f04abb30dba097136",
+            "bytes": 9858
+          },
+          {
+            "path": "backend/buyer/src/seed-buyers.ts",
+            "sha256": "sha256:d6a10d069e8d9543d0af6d562495987dc7b8d1e7be2e1dddab61e89b55d64d7b",
+            "bytes": 9783
+          },
+          {
+            "path": "backend/buyer/src/server.ts",
+            "sha256": "sha256:803be8e1cc1af6efd388daa30202cda68c65d0fe2eefea6b7d41e2b0f15a8085",
+            "bytes": 5709
+          },
+          {
+            "path": "backend/buyer/src/transfer-funds.ts",
+            "sha256": "sha256:758d329e01111f6fd52b96b8cc1436501efed82bedf0382417a6e1ade20563f4",
+            "bytes": 3633
+          },
+          {
+            "path": "backend/buyer/src/validate.ts",
+            "sha256": "sha256:f2fb90f2c2b6e7ffaffa6ad738d26795a823719c27aafc23fc23d0bee0998673",
+            "bytes": 5688
+          },
+          {
+            "path": "backend/buyer/tsconfig.json",
+            "sha256": "sha256:395a60bd89d1733b1f165b1540c33d060835c05db19f42a6f5084971e4ea229b",
+            "bytes": 263
+          },
+          {
+            "path": "backend/seller/dist/anchorClient.js",
+            "sha256": "sha256:75d20dea89851bee86952490435ecaefdf8b1e5a2815a96b9d3184ec266abb6e",
+            "bytes": 6452
+          },
+          {
+            "path": "backend/seller/dist/aomi.js",
+            "sha256": "sha256:75a5e7181b2e25f59f084250ff0187d30e85a14cac6a7344950218b3d44f36fe",
+            "bytes": 7087
+          },
+          {
+            "path": "backend/seller/dist/api-v1.js",
+            "sha256": "sha256:b5eea041df2192e66c809a568bd0c5eeae5dd8bd3df4acd1ab085829fcb3754b",
+            "bytes": 14856
+          },
+          {
+            "path": "backend/seller/dist/config.js",
+            "sha256": "sha256:17b94b7c3576b99db38b1942dc4cec696021c17644aad5225b38a774b45b63bd",
+            "bytes": 637
+          },
+          {
+            "path": "backend/seller/dist/idl/agent_economy.json",
+            "sha256": "sha256:fe10f0ae8cf540676d3b9a9fc0c4e66dcd825ef1f70cc4c5b1b525f6007b1dc1",
+            "bytes": 23401
+          },
+          {
+            "path": "backend/seller/dist/index.js",
+            "sha256": "sha256:d0b31236e3b7334663af63540f3365eb7f6b30dc5bd3451d577c6ab843703096",
+            "bytes": 7602
+          },
+          {
+            "path": "backend/seller/dist/service.js",
+            "sha256": "sha256:5d4f18ae6cf5867b638e4d91252621099859a4cf96d96efadfaedac8b63b0d72",
+            "bytes": 2260
+          },
+          {
+            "path": "backend/seller/dist/x402.js",
+            "sha256": "sha256:6e3ab5c6f50d322a576aebc399522735253f0a68417434f7369fdb63b2a61c7a",
+            "bytes": 2495
+          },
+          {
+            "path": "backend/seller/init-seller.ts",
+            "sha256": "sha256:79941ed9f64b38440751b0125acd8e0b0137e6467c1aeb92ce8cadc0fbd52710",
+            "bytes": 1857
+          },
+          {
+            "path": "backend/seller/package-lock.json",
+            "sha256": "sha256:4e6a60d4825edc545c24dae8e712df3dab66a0fbcc8fcf99b59a3b51b6182a64",
+            "bytes": 89872
+          },
+          {
+            "path": "backend/seller/package.json",
+            "sha256": "sha256:a0c9bc9bc7555d40d567222b60baf10c25b2b31c7682ae0621fe4213953201e5",
+            "bytes": 623
+          },
+          {
+            "path": "backend/seller/scripts/init-config.ts",
+            "sha256": "sha256:7be8489c9b8633a834baa5abd6f05bc8bc45111234597f6262cc584a17dd0d97",
+            "bytes": 3187
+          },
+          {
+            "path": "backend/seller/scripts/seed-agent.ts",
+            "sha256": "sha256:5d2d59b8c2d98ee185ddde09da2e6635911160c545f1b4437bdd1b6636560339",
+            "bytes": 5444
+          },
+          {
+            "path": "backend/seller/src/anchorClient.ts",
+            "sha256": "sha256:faefd9122fc14d389bdad3a92a105637e378a4c65f9a0cab740c83a08da882ee",
+            "bytes": 6552
+          },
+          {
+            "path": "backend/seller/src/aomi.ts",
+            "sha256": "sha256:b6bf6ebc19fbe6f36fd52cd17f1951d3748c7dfb8e43dea57467ff49f39d21d2",
+            "bytes": 7826
+          },
+          {
+            "path": "backend/seller/src/api-v1.ts",
+            "sha256": "sha256:b1374cf32e4e21033232473bc9bb9c555833d0da5d1e457c78157cb609031974",
+            "bytes": 14879
+          },
+          {
+            "path": "backend/seller/src/config.ts",
+            "sha256": "sha256:8b534da576ac48972f0a26218e05d92e8d6ab1a5bb8d63a9034c5c04f63f8e59",
+            "bytes": 642
+          },
+          {
+            "path": "backend/seller/src/idl/agent_economy.json",
+            "sha256": "sha256:f852e839866dd777db463beac5beb52b6af0b36533b5ef56ab4e0f292b4e462b",
+            "bytes": 16505
+          },
+          {
+            "path": "backend/seller/src/index.ts",
+            "sha256": "sha256:27d556eb97f94fd66eff4fda1243e9bec48627147769d2bb7d4f9509daa26bae",
+            "bytes": 17598
+          },
+          {
+            "path": "backend/seller/src/service.ts",
+            "sha256": "sha256:71be7c60ceff5d5192708c4572655e6d6aa0435298a1b69e642416cf7a952476",
+            "bytes": 10951
+          },
+          {
+            "path": "backend/seller/src/x402.ts",
+            "sha256": "sha256:8b221e78cc0ff49038e28e3cdabf002d8291fda8552cbc80b916a51f52a9ab38",
+            "bytes": 3411
+          },
+          {
+            "path": "backend/seller/tsconfig.json",
+            "sha256": "sha256:395a60bd89d1733b1f165b1540c33d060835c05db19f42a6f5084971e4ea229b",
+            "bytes": 263
+          },
+          {
+            "path": "branding/BRAND.md",
+            "sha256": "sha256:ae94525f9cb7d26376499e2fce8a1f6575ac15eb7f1a8755c6666e02ffe20a87",
+            "bytes": 2528
+          },
+          {
+            "path": "branding/favicon.svg",
+            "sha256": "sha256:3ea4e3030de79663cafbd1aff0bba10c7f3ac328758d5ba1983ed86c18959bff",
+            "bytes": 321
+          },
+          {
+            "path": "branding/og-image.svg",
+            "sha256": "sha256:8ae2d5c1961cc0d0f2124bd1fd630f0aaeb50d586f0f3656bed001d86a2d959b",
+            "bytes": 1753
+          },
+          {
+            "path": "branding/x-banner.png",
+            "sha256": "sha256:8509dfe7fbd20c7e036865a5a7d4eb5dd61a409d5ed9835065650faeb3829e51",
+            "bytes": 25421
+          },
+          {
+            "path": "branding/x-banner.svg",
+            "sha256": "sha256:f52f61d3f72eb06b688072cb228556a7848fc6b807e97d4c750e908fcd07a922",
+            "bytes": 1339
+          },
+          {
+            "path": "branding/x-profile-picture.png",
+            "sha256": "sha256:b6b11754f900269b3ae53fc2994246b88aa9e9677fcf1885ae42b5105fddfaa4",
+            "bytes": 9632
+          },
+          {
+            "path": "feed-and-reputation.patch",
+            "sha256": "sha256:145ae335b977d66756ea00f469387f7b33042a975c87e1cc425b40ebeacafef2",
+            "bytes": 6848
+          },
+          {
+            "path": "feed-upgrade.patch",
+            "sha256": "sha256:de25098062f4c2390e44cb16fa531639e653e5b37dce773723e1adc658c5357b",
+            "bytes": 15157
+          },
+          {
+            "path": "feed-v2.patch",
+            "sha256": "sha256:0cfd1bec79f0400a8b579f6cc7d62a59f632cea6287c026f7d9d7d501f4d4548",
+            "bytes": 5006
+          },
+          {
+            "path": "fix-icons.patch",
+            "sha256": "sha256:4da4a1ddb44dbf1dbdbf173a61bac9fc52731caa8942ddab6a29bc8730bb7dca",
+            "bytes": 6519
+          },
+          {
+            "path": "frontend-observability.patch",
+            "sha256": "sha256:51412bc7a83bd7b3feef4b4f8d245d0be533cfe8f37667d87905a996e162399e",
+            "bytes": 23471
+          },
+          {
+            "path": "frontend/aomi.css",
+            "sha256": "sha256:cfc27cce0a70e8aa4b334449f83a87892fd0f1f227161233b21b5c5464dfd20a",
+            "bytes": 5043
+          },
+          {
+            "path": "frontend/aomi.js",
+            "sha256": "sha256:109472f82e094f309c0d934f29f99ec77b7fc7bd4aa4ec7e25a61800035c0eaf",
+            "bytes": 15733
+          },
+          {
+            "path": "frontend/app.js",
+            "sha256": "sha256:102d495406298d05b33a147a28f2b9b48fc790ac2e9d36addce4d21c9a2e0fad",
+            "bytes": 40027
+          },
+          {
+            "path": "frontend/app.js.save",
+            "sha256": "sha256:33f015f32febafa27443cd697b08d50a319d0fdc91e864e81def39346805dfd1",
+            "bytes": 27160
+          },
+          {
+            "path": "frontend/apple-touch-icon.png",
+            "sha256": "sha256:f5b466ce3685a31357c20fdd500174c5e93c2122d52774ce6928e67fd2d30f4d",
+            "bytes": 6606
+          },
+          {
+            "path": "frontend/brief.html",
+            "sha256": "sha256:75e78fb207fc61036989176b4f952cccccc94559c19cb6a81791e01676168cfe",
+            "bytes": 7488
+          },
+          {
+            "path": "frontend/dashboard.css",
+            "sha256": "sha256:fcfed8fb4eeb98b04f0fd18cbe16f769ba170515fd89ef11b0670a1d69c2a1c7",
+            "bytes": 43641
+          },
+          {
+            "path": "frontend/demo.css",
+            "sha256": "sha256:308c7a74bd43e937a54bd22c1bb49ce25e9ee52f808e7b4d22aa34b9c61a530c",
+            "bytes": 1643
+          },
+          {
+            "path": "frontend/demo.html",
+            "sha256": "sha256:aaa5e43f6de0f032a53ac59fb58f561362c6096330590fa0b528600a4fdde338",
+            "bytes": 3071
+          },
+          {
+            "path": "frontend/demo.js",
+            "sha256": "sha256:d88e24c3f2ced04e092d65642e2e839dfe5a426c4e64ef525cb66cd17b9b0b2d",
+            "bytes": 9240
+          },
+          {
+            "path": "frontend/docs-old.html",
+            "sha256": "sha256:8982178b0edaf9e2c929d64170964fda40b4b08c05b22479a59ed64fd8166795",
+            "bytes": 6151
+          },
+          {
+            "path": "frontend/docs.html",
+            "sha256": "sha256:3ed832a0c5b546940af9256c246a11f88f8e3bab9e2332cb9321417701d0e8df",
+            "bytes": 15667
+          },
+          {
+            "path": "frontend/favicon-16.png",
+            "sha256": "sha256:05dda5f84365e84b19147ca33847faf4358c05239dc544cd17f7367995367636",
+            "bytes": 418
+          },
+          {
+            "path": "frontend/favicon-32.png",
+            "sha256": "sha256:1ee65f8d9419cbf29cd23052756342bec232ef23530172a86c282dd3cf409de8",
+            "bytes": 797
+          },
+          {
+            "path": "frontend/favicon.ico",
+            "sha256": "sha256:4da4f665af00b5f5ccf7261eb5d1f17b666a123d9890f07b6f55fdfeceb7c2fb",
+            "bytes": 5430
+          },
+          {
+            "path": "frontend/favicon.svg",
+            "sha256": "sha256:3ea4e3030de79663cafbd1aff0bba10c7f3ac328758d5ba1983ed86c18959bff",
+            "bytes": 321
+          },
+          {
+            "path": "frontend/index.html",
+            "sha256": "sha256:e878a653d3cc7e4f947f694273338782eb8c15065997ee4462a65ce0d8082cad",
+            "bytes": 21110
+          },
+          {
+            "path": "frontend/integrate.html",
+            "sha256": "sha256:19bb66ec562733be0565e2e7d99ceaeefaa4968bc5c8063896e0778867a239b0",
+            "bytes": 5722
+          },
+          {
+            "path": "frontend/routex402-integration-brief.pdf",
+            "sha256": "sha256:31c8470486c4df33d273e0007c1489e96666059889d0cac8f1a19c72f685619d",
+            "bytes": 165331
+          },
+          {
+            "path": "frontend/style.css",
+            "sha256": "sha256:890a59eb50bbef11a787785fba35c4c7bfaf50bf66e86d2d52a5067fbcd714de",
+            "bytes": 10966
+          },
+          {
+            "path": "frontend/vetting.js",
+            "sha256": "sha256:a62df05bf2f7f37853176cb59e1d044882fef62ed68c264a48639bfde823b98b",
+            "bytes": 2876
+          },
+          {
+            "path": "move-feed-html-only.patch",
+            "sha256": "sha256:1f5c2f20c1de85be55d472a15b05385b6ffb735caeef735180be29d12525aa8e",
+            "bytes": 2074
+          },
+          {
+            "path": "oracle.patch",
+            "sha256": "sha256:a400f0e7e46b412849c90287bc93a7a80b4b1d16038024a03cbcef6d93edcf51",
+            "bytes": 10786
+          },
+          {
+            "path": "price-oracle.patch",
+            "sha256": "sha256:35c88480758b8493d50ac24a3b077d1db737b72e99d29d2b4cc17fd9a1fea194",
+            "bytes": 11431
+          },
+          {
+            "path": "program/Anchor.toml",
+            "sha256": "sha256:32398c2eddcfa563dbd0d04c7e011cc721f84fe7141027c83e583747f864c003",
+            "bytes": 331
+          },
+          {
+            "path": "program/programs/agent_economy/Cargo.lock",
+            "sha256": "sha256:e02476a4b9ede1a938d4279776272a0410d5b65ef9c93c4c61ff93dfd83a604c",
+            "bytes": 48872
+          },
+          {
+            "path": "program/programs/agent_economy/Cargo.toml",
+            "sha256": "sha256:ded322057631371bb72b6ad8416873bfe7a25cde3ee042ae0128314e4d659930",
+            "bytes": 386
+          },
+          {
+            "path": "program/programs/agent_economy/src/lib.rs",
+            "sha256": "sha256:fde53a2f5cd1d5111bc9fb13ade1772964487df10ae57b794d133c3b2c391319",
+            "bytes": 16324
+          },
+          {
+            "path": "reputation-endpoint.patch",
+            "sha256": "sha256:02b3186c64aeb70abfea7ea59e9de9f7cfd2846b52a0640d6354bde92bb8e531",
+            "bytes": 2125
+          },
+          {
+            "path": "sdk-and-reputation.tar.gz",
+            "sha256": "sha256:1b5bb18baabdaecafe62b188d9e9aeb51166c152fbb63375748870f4abaf79df",
+            "bytes": 4868
+          },
+          {
+            "path": "sdk/README.md",
+            "sha256": "sha256:8d754e3b5d04e2a05095e138eead4410a9517bf00da9d048706c731883a3a349",
+            "bytes": 3548
+          },
+          {
+            "path": "sdk/dist/index.d.ts",
+            "sha256": "sha256:df1419db2a8b745d8d75f1817daddc53c52e060294c26aa3fd1d8ab421a4aa46",
+            "bytes": 3997
+          },
+          {
+            "path": "sdk/dist/index.js",
+            "sha256": "sha256:8b3d70033ebb57a3a4cbc7d911372827ffb6cfeee01ad8f17b9052e938fc5519",
+            "bytes": 3788
+          },
+          {
+            "path": "sdk/package-lock.json",
+            "sha256": "sha256:63646e031328e295091118b1bb165612f227671719ff724e7d2fd3ca5064fdfb",
+            "bytes": 726
+          },
+          {
+            "path": "sdk/package.json",
+            "sha256": "sha256:dc5d965771eb0fc4c19699b7735f42975550f47e80a556a8396c123a54b1c4ac",
+            "bytes": 807
+          },
+          {
+            "path": "sdk/src/index.ts",
+            "sha256": "sha256:f6b6a490163650aad20f83d1139be1040180b5d77df63e30f08094ff1fd0f3f8",
+            "bytes": 5800
+          },
+          {
+            "path": "sdk/tsconfig.json",
+            "sha256": "sha256:6808f806e3369e70040576e745b11c90d440165f930f4c3008a23b8c78327db4",
+            "bytes": 325
+          },
+          {
+            "path": "seed-agent-WITH-DELAYS-v2.ts",
+            "sha256": "sha256:4a16f85981c3d3203740cbd5666cf72b190d49d458a5a0a8f4664f850118a914",
+            "bytes": 5042
+          },
+          {
+            "path": "seed-agent-v2.ts",
+            "sha256": "sha256:4a16f85981c3d3203740cbd5666cf72b190d49d458a5a0a8f4664f850118a914",
+            "bytes": 5042
+          },
+          {
+            "path": "src/lib.rs",
+            "sha256": "sha256:be8254fc652c6c793853ac52cb07a8baa371d6690e29ab09f58a8b63f0645749",
+            "bytes": 17
+          },
+          {
+            "path": "src/main.rs",
+            "sha256": "sha256:536e506bb90914c243a12b397b9a998f85ae2cbd9ba02dfd03a9e155ca5ca0f4",
+            "bytes": 13
+          },
+          {
+            "path": "test-bourse.mjs",
+            "sha256": "sha256:fdafafc6faa97a440ad8215128149567d27fe06846e389a18e183cd364caa78d",
+            "bytes": 2606
+          },
+          {
+            "path": "test-routex402.mjs",
+            "sha256": "sha256:abb3ac99b83a35edcf95a7fd46b45159f94f47301eb361b1c8de5ea5f3e79817",
+            "bytes": 2214
+          }
+        ],
+        "secret_slots": []
+      }
+    ]
+  }
+}
