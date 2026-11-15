@@ -1,0 +1,7 @@
+[app]
+name         = "bitagents"            # must match dyn_aomi_app! name
+display_name = "BIT Agents"
+public       = true
+
+# Omitted server_tags means only staging backends load this release.
+# server_tags = ["prod"]
